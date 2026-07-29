@@ -119,13 +119,13 @@
     <footer class="bg-white border-t border-[#f2a7b5]/10 py-16 text-center mt-20">
         <h2 class="text-3xl font-black tracking-tighter text-[#f2a7b5] italic mb-4">Glow Makeup.</h2>
         <div class="flex justify-center items-center gap-6 mb-6">
-            <button onclick="location.href='mailto:contact@glowmakeup.test'" class="px-6 py-2 bg-[#f2a7b5] text-white font-bold rounded-full hover:bg-[#d88a99] transition-colors shadow-sm">聯絡我們</button>
-            <a href="#" class="text-gray-500 font-bold hover:text-[#f2a7b5] transition-colors">安全政策</a>
+            <button onclick="location.href='mailto:maggiechang@maxora.ai'" class="px-6 py-2 bg-[#f2a7b5] text-white font-bold rounded-full hover:bg-[#d88a99] transition-colors shadow-sm">聯絡我們</button>
+            <a href="privacy-policy.html" class="text-gray-500 font-bold hover:text-[#f2a7b5] transition-colors">安全政策</a>
         </div>
         <p class="text-gray-400 text-sm">© 2026 美妝生活誌 - 妳的最美應援團</p>
     </footer>
 
-    <script src="script.js?v=34"></script>
+    <script src="script.js?v=36"></script>
     <script>
         const indicatorDescriptions = {
             // 底妝 / 彩妝
@@ -242,7 +242,7 @@
         window.SCORES_DATA = {};
         async function loadScoresData() {
             try {
-                const res = await fetch('scores-data.json?v=34');
+                const res = await fetch('scores-data.json?v=36');
                 window.SCORES_DATA = await res.json();
             } catch (e) {
                 console.error('scores-data.json 載入失敗', e);
@@ -331,7 +331,7 @@
 
             try {
                 await loadScoresData();
-                const response = await fetch('site-data.json?v=34');
+                const response = await fetch('site-data.json?v=36');
                 const data = await response.json();
 
                 const details = data.subcategoryDetails?.[sub];

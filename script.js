@@ -321,6 +321,10 @@ function nextSlide() {
 
 // 2. Quiz Logic (首頁「今天需要什麼美妝協助嗎」— 3 類別各自接不同的第二步追問，
 //    第二步選項與最終建議都串真實資料 articles.json / scores-data.json，不使用假造內容)
+// 底妝品項 hashtags（site-data.json）裡實際會出現的膚質標籤，用來判斷第三題要不要問膚質、
+// 以及依膚質篩選品項；只挑這幾個明確的膚質詞，避免跟「控油」「不卡紋」等其他屬性標籤混在一起
+const SKIN_TYPE_TAGS = ['油肌', '乾肌', '混合肌', '中性肌', '敏感肌'];
+
 const HOME_QUIZ_CONFIG = {
     '缺乏保養知識': {
         question: '妳最想了解哪個保養主題？',
@@ -358,12 +362,34 @@ const HOME_QUIZ_CONFIG = {
         async hasData(value) {
             return (await topItemsForSubcat(value, 1)).length > 0;
         },
-        async buildResult(value) {
-            const items = await topItemsForSubcat(value, 2);
+        // 第三題：該子分類底下的品項若涵蓋 ≥2 種真實膚質標籤（來自 site-data.json 的
+        // item.hashtags，不是憑感覺編的選項），才追問膚質，幫忙篩到更貼合的品項
+        async step3(value) {
+            const [scores, siteData] = await Promise.all([getScoresData(), getSiteData()]);
+            if (!scores) return null;
+            const items = Object.values(scores).filter(e => e.subcat === value && e.composite != null);
+            const present = new Set();
+            items.forEach(e => {
+                findItemHashtags(siteData, value, e.brand, e.name).forEach(tag => {
+                    if (SKIN_TYPE_TAGS.includes(tag)) present.add(tag);
+                });
+            });
+            if (present.size < 2) return null;
+            return { question: '妳的膚質是？', options: SKIN_TYPE_TAGS.filter(t => present.has(t)) };
+        },
+        async buildResult(value, skinType) {
+            const [scores, siteData] = await Promise.all([getScoresData(), getSiteData()]);
+            let candidates = scores ? Object.values(scores).filter(e => e.subcat === value && e.composite != null) : [];
+            if (skinType) {
+                candidates = candidates.filter(e => findItemHashtags(siteData, value, e.brand, e.name).includes(skinType));
+            }
+            candidates.sort((a, b) => b.composite - a.composite);
+            const items = candidates.slice(0, 2).map(e => ({ ...e, img: findItemImage(siteData, value, e.brand, e.name) }));
             const list = items.length
                 ? items.map(e => `<a href="item-detail.html?item=${encodeURIComponent(e.name)}&from=board" class="text-[#f2a7b5] font-bold block mt-2">${e.brand} ${e.name}（★${e.composite.toFixed(1)}）➔</a>`).join('')
                 : '<p class="text-gray-400 text-sm mt-2">此分類評分資料建置中</p>';
-            return { title: `為妳推薦：社群高分「${value}」`, html: `依真實社群評分，這幾款最受好評：${list}` };
+            const label = skinType ? `${skinType}適用「${value}」` : `社群高分「${value}」`;
+            return { title: `為妳推薦：${label}`, html: `依真實社群評分，這幾款最受好評：${list}` };
         }
     },
     '美妝工具選擇': {
@@ -563,6 +589,12 @@ function findItemImage(siteData, subcategory, brand, name) {
     const items = siteData?.subcategoryDetails?.[subcategory]?.items || [];
     const found = items.find(it => it.brand === brand && it.name === name);
     return (found && (found.image || found.img)) || '';
+}
+
+function findItemHashtags(siteData, subcategory, brand, name) {
+    const items = siteData?.subcategoryDetails?.[subcategory]?.items || [];
+    const found = items.find(it => it.brand === brand && it.name === name);
+    return (found && found.hashtags) || [];
 }
 
 // 取該子分類真實綜合分前 N 名，各自帶上圖片
