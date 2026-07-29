@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glow Makeup | 分類詳情</title>
+    <meta name="description" id="meta-description" content="Glow Makeup 真實社群美妝評分與心得彙整。">
+    <meta property="og:title" id="og-title" content="Glow Makeup | 分類詳情">
+    <meta property="og:description" id="og-description" content="Glow Makeup 真實社群美妝評分與心得彙整。">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%84%3C/text%3E%3C/svg%3E">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f8f8f8;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e0e0e0;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #f2a7b5;
+        }
+    </style>
+</head>
+<body class="bg-[#fff9f5] text-[#2d2d2d] selection:bg-[#f2a7b5] selection:text-white">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#f2a7b5]/10 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 w-full h-full flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <h1 class="text-3xl font-black tracking-tighter text-[#f2a7b5] italic cursor-pointer" onclick="location.href='index.html'">Glow Makeup.</h1>
+            </div>
+            
+            <nav id="desktop-nav" class="hidden lg:flex items-center gap-8 text-xl font-bold h-full">
+                <!-- Dynamically populated from site-data.json -->
+            </nav>
+
+            <div class="flex items-center gap-6">
+                <div class="search-container">
+                    <span>&#x1F50D;</span>
+                    <input type="text" placeholder="搜尋美妝情報..." class="search-input">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-12 flex flex-col gap-12">
+        
+        <!-- 趨勢洞察區塊 -->
+        <section id="top-dashboard" class="bg-white/60 backdrop-blur-xl rounded-[2rem] p-8 border border-white/50 shadow-[0_8px_30px_rgb(0,0,0,0.04)] relative overflow-hidden">
+            <!-- Dynamically populated via JS -->
+        </section>
+
+        <!-- 下半部：品牌篩選與商品列表 -->
+        <div class="flex flex-col lg:flex-row gap-8">
+        
+        <!-- Left: Brands Filter -->
+        <aside class="w-full lg:w-64 shrink-0">
+            <div class="bg-white rounded-3xl p-6 border border-[#f2a7b5]/10 shadow-sm sticky top-[120px]">
+                <h3 class="text-xl font-black mb-6 italic border-b border-[#f2a7b5]/20 pb-3">Brands</h3>
+                <ul id="brands-list" class="space-y-3 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
+                    <!-- Brands will be loaded here -->
+                    <li class="text-gray-400 text-sm">載入中...</li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Right: Content Area -->
+        <div class="flex-grow flex flex-col gap-12">
+            
+            <!-- Page Title -->
+            <div class="bg-white rounded-3xl p-8 border border-[#f2a7b5]/10 shadow-sm relative overflow-hidden">
+                <div class="absolute -right-10 -top-10 w-40 h-40 bg-[#f2a7b5]/10 rounded-full blur-3xl"></div>
+                <h2 id="page-title" class="text-4xl font-black italic relative z-10">載入中...</h2>
+            </div>
+
+            <!-- Spotlight Hot Items (Only in Board Mode) -->
+            <section id="hot-items-section" class="hidden">
+                <h3 class="text-2xl font-black mb-6 italic">🔥 近期熱門聲量單品 / <span class="text-[#f2a7b5] text-lg not-italic">Spotlight Trending</span></h3>
+                <div id="hot-items-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Loaded here -->
+                </div>
+            </section>
+
+            <!-- All Products Grid (Only in Board Mode) -->
+            <section id="all-products-section" class="hidden">
+                <h3 class="text-2xl font-black mb-6 italic">✨ 所有商品項目 / <span class="text-[#f2a7b5] text-lg not-italic">All Products</span></h3>
+                <div id="all-products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Loaded here -->
+                </div>
+            </section>
+
+            <!-- Comparative Table (Only in Review Mode) -->
+            <section id="review-table-section" class="hidden">
+                <h3 class="text-2xl font-black mb-6 italic">📊 全品項指標評比對照表 / <span class="text-[#f2a7b5] text-lg not-italic">Comparative Review</span></h3>
+                <div id="review-table-container">
+                    <!-- Loaded here -->
+                </div>
+            </section>
+
+            <!-- Trending Articles (Only in Board Mode) -->
+            <section id="articles-section" class="hidden">
+                <h3 class="text-2xl font-black mb-6 italic">📰 熱門相關文章 / <span class="text-[#f2a7b5] text-lg not-italic">Trending Articles</span></h3>
+                <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Loaded here -->
+                </div>
+            </section>
+
+        </div>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t border-[#f2a7b5]/10 py-16 text-center mt-20">
+        <h2 class="text-3xl font-black tracking-tighter text-[#f2a7b5] italic mb-4">Glow Makeup.</h2>
+        <div class="flex justify-center items-center gap-6 mb-6">
+            <button onclick="location.href='mailto:contact@glowmakeup.test'" class="px-6 py-2 bg-[#f2a7b5] text-white font-bold rounded-full hover:bg-[#d88a99] transition-colors shadow-sm">聯絡我們</button>
+            <a href="#" class="text-gray-500 font-bold hover:text-[#f2a7b5] transition-colors">安全政策</a>
+        </div>
+        <p class="text-gray-400 text-sm">© 2026 美妝生活誌 - 妳的最美應援團</p>
+    </footer>
+
+    <script src="script.js?v=34"></script>
+    <script>
+        const indicatorDescriptions = {
+            // 底妝 / 彩妝
+            "遮瑕力": "有效修飾斑點與局部瑕疵，呈現自然無瑕膚質。",
+            "保濕度": "深層補水並維持水油平衡，遠離乾燥脫皮與緊繃。",
+            "控油力": "長效吸附多餘油脂，維持清爽不泛油光的細緻妝容。",
+            "持妝度": "抗摩擦、防暗沉，由早到晚維持剛完妝般的完美狀態。",
+            "輕透度": "質地輕盈無負擔，讓肌膚自在呼吸，展現偽素顏光澤。",
+            "厚重度": "評估妝感薄透或粉感明顯程度，幫助精確掌握用量。",
+            "服貼度": "完美融入肌膚紋理，不卡粉、不浮粉，如第二層肌膚般貼合。",
+            "防水抗汗": "耐水耐汗配方，即使面對高溫濕熱環境依然不易脫妝。",
+            "光澤度": "呈現細緻透亮的水光或緞光感，立顯飽滿好氣色。",
+            "成膜度": "快速形成鎖水保護膜，提升妝容持久度與抗轉移力。",
+            "暗沉度": "評估產品經時間推移後膚色的持久白皙度，不易發灰。",
+            "粉質細膩度": "極致微細粉體，服貼不顯毛孔，打造陶瓷般平滑肌。",
+            "修飾毛孔": "瞬間隱形粗大毛孔，平滑肌膚紋理，呈現微焦濾鏡感。",
+            "提亮效果": "自然提亮暗沉部位，喚醒肌膚健康光采。",
+            "顯色度": "飽滿色彩一筆即現，色彩與瓶身呈現高度一致。",
+            "持久度": "長效鎖色不褪色，整日維持迷人迷漾色彩。",
+            "粉質細緻": "極細粉末觸感絲滑，輕盈貼合無負擔。",
+            "暈染度": "延展性極佳，好推開、不結塊，輕鬆暈染出自然層次。",
+            "修飾膚色": "智能修正蠟黃、泛紅等膚色不均，打底更完美。",
+            "隱形毛孔": "修飾凹凸毛孔與細紋，打造平滑絲絨的妝前肌底。",
+            "後續持妝力": "提升後續底妝抓地力，使粉底更加服貼且不易脫落。",
+            "防曬力": "高規格防曬防護，有效阻隔 UVA/UVB 對肌膚的傷害。",
+            "清爽度": "水感輕盈質地，快速吸收不黏膩，零存在感防護。",
+            "泛白程度": "零泛白、無面具感，完美融合所有膚色。",
+            "成膜速度": "擦拭後瞬效成膜，不影響後續上妝速度。",
+            "光澤自然度": "彷彿由內而外散發的微光感，不顯油光、極具高級感。",
+            "噴頭細緻度": "極細密水霧均勻灑落，不易結成水珠破壞妝容。",
+            "滑順度": "絲滑觸感一筆流暢到底，拉畫眼線或眉毛不拉扯眼周。",
+            "抗汗抗水": "頑固防水防汗，夏日戶外也不必擔心眉毛消失。",
+            "防暈染": "強效抗油抗汗防摩擦，遠離熊貓眼尷尬。",
+            "濃密度": "睫毛瞬間濃密豐盈，打造根根分明的電眼效果。",
+            "纖長度": "魔術般延伸睫毛長度，展現自然捲翹延伸感。",
+            "捲翹持久": "強效定型配方，睫毛整天飛翹不塌陷。",
+            "眼影/眼影盤": "眼影好上色且層次豐富，打造深邃大眼。",
+            "飛粉程度": "粉質抓色力佳，塗抹時不易掉落眼周沾染妝容。",
+            "保濕滋潤度": "富含滋養精華，深度撫平乾燥，雙唇水亮有彈性。",
+            "好卸除度": "溫和眼唇卸妝液即可輕鬆卸淨，不易殘留色素。",
+            "修飾唇紋": "瞬效填補乾燥唇紋，打造飽滿豐盈嘟嘟唇。",
+            "不黏膩感": "清爽不黏雙唇，微風吹拂也不黏髮絲的舒適體驗。",
+            
+            // 保養
+            "清潔力": "溫和而深層洗淨毛孔髒污與殘留彩妝，帶走多餘油脂。",
+            "起泡容易度": "加水即起豐盈綿密泡沫，減少摩擦帶給肌膚的負擔。",
+            "洗後保濕度": "洗後肌膚水潤不緊繃，維持健康的角質屏障。",
+            "溫和度": "極致親膚溫和配方，敏感肌與脆弱肌膚亦可安心使用。",
+            "使用後平滑度": "溫和去除老廢角質，肌膚恢復如水煮蛋般柔嫩細緻。",
+            "乳化速度": "遇水秒乳化，不殘留油脂、不易致粉刺，深層淨透。",
+            "洗後清爽度": "清爽不殘留油膜，肌膚大口呼吸，展現透亮感。",
+            "溫和不熏眼": "眼周友善配方，敏感眼周與戴隱形眼鏡者皆不熏眼。",
+            "使用後保濕度": "潔膚同時導入水潤精華，洗後水嫩飽滿。",
+            "不油膩感": "清爽水油平衡，卸後只留保濕不留負擔。",
+            "柔軟度": "觸感極致輕柔，減少與脆弱肌膚的摩擦傷害。",
+            "不起棉絮": "結構緊密耐拉扯，使用時不掉屑、不脫絮。",
+            "吸水力": "優秀的抓水與釋水效能，使擦拭潔膚過程更有效率。",
+            "吸收速度": "輕拍瞬間滲透肌底，開啟肌膚後續保養通道。",
+            "清爽不黏膩": "極佳的清爽質地，即刻吸收，肌膚零負擔。",
+            "保濕潤澤": "深度潤澤荒乾肌，肌膚展現飽滿彈潤的健康光采。",
+            "修護力": "強化肌膚防禦屏障，舒緩不穩定與敏弱泛紅狀況。",
+            "鎖水力": "築起隱形保水屏障，牢牢鎖住水分，持續長效滋養。",
+            "改善膚況": "全面優化膚質，使肌膚更加透亮、平滑且充滿活力。",
+            "不長肉芽": "輕盈好吸收，提供眼周貼心保濕，不形成負擔。",
+            "改善細紋": "有效淡化乾紋與表情紋，重現緊緻平滑的雙眸。",
+            "精華液吸收度": "面膜材質與精華完美契合，高效導入不浪費一滴養分。",
+            
+            // 工具
+            "刷毛柔軟度": "嚴選親膚毛質，觸感如羽毛般輕柔，不刺臉。",
+            "不吃粉程度": "特殊毛流設計，節省粉底用量，將底妝高效釋放於臉部。",
+            "無刷痕度": "輕鬆刷出均勻薄透底妝，告別惱人線條與刷痕。",
+            "好清洗度": "毛質耐洗不易變形，髒污快洗易淨，延長工具壽命。",
+            "抓粉力": "優異的抓粉效能，釋粉均勻，妝色更加均勻自然。",
+            "暈染均勻度": "輕鬆暈散交界線，打造自然無邊界的漸層彩妝。",
+            "拍勻度": "輕彈即可快速拍出均勻服貼的精緻底妝。",
+            "耐用度": "材質強韌有彈性，經得起反覆清洗與日常拍打使用。",
+            "細部描繪度": "筆觸精準細緻，輕鬆勾勒眼尾、眉峰等細節處。",
+            "刷毛彈性": "毛流軟硬適中，回彈力佳，控筆更加精準自如。",
+            "線條流暢度": "出水或筆觸流暢無阻，不卡頓，新手也能畫出完美弧線。",
+            "眼型貼合度": "符合亞洲人眼型弧度設計，一夾完美貼合睫毛根部。",
+            "不夾眼皮": "安全護墊設計，完美防護，告別拉扯與肉痛。",
+            "捲翹持久度": "輕夾即可展現完美太陽花捲翹，定型持久不塌。",
+            "自然度": "仿真毛流排列設計，與真睫毛完美交織，宛若天生。",
+            "梗的柔軟度": "超輕軟隱形梗，配戴舒適無異物感，整天不撐眼。",
+            "重複使用率": "材質柔韌耐洗，經適當清潔可重複多次配戴，CP值高。",
+            "線條描繪度": "扁平精密刷頭，輕鬆勾勒精緻唇峰與唇廓線條。",
+            "均勻度": "上色均勻滑順，不留筆刷紋理，暈染出飽滿色澤。",
+            
+            // 香氛
+            "香氣持久度": "長效留香配方，讓迷人氣息伴隨一整天。",
+            "前中後調層次": "隨時間自然蛻變的嗅覺樂章，展現多層次的香氣魅力。",
+            "擴香度": "優雅展現迷人氣場而不打擾旁人的完美擴散力。",
+            "不暈香程度": "氣味柔和自然，即使在密閉空間也舒適不致暈眩。"
+        };
+
+        const categoryKnowledge = {
+            "粉底液": [
+                { title: "✨ 完美色號與質地挑選法", content: "選色時建議塗抹於下巴與頸部交界處，在自然光下觀察最無分界感的色號即為完美色。乾性肌膚建議搭配高保濕妝前乳，油性肌膚則推薦以粉底刷少量多次疊加。" },
+                { title: "⏱️ 上妝工具的妝效差異", content: "使用美妝蛋上妝能呈現薄透保濕的水光感；若想達到高遮瑕的精緻霧面妝效，使用傳統扁平或圓頭粉底刷以逆毛孔方向輕刷，能達到最棒的拋光隱形效果。" }
+            ],
+            "遮瑕膏": [
+                { title: "🎨 輕薄不卡紋的遮瑕手法", content: "遮瑕膏應少量多次使用。眼下暗沉或黑眼圈建議選擇微橘色調的遮瑕進行校色，再疊加與膚色相近的色號。切忌直接塗抹在眼下細紋處，應在邊緣處推開。" }
+            ]
+        };
+
+        function getCategoryKnowledge(subName) {
+            return categoryKnowledge[subName] || [
+                { title: `✨ 專業 ${subName} 挑選心法`, content: `挑選 ${subName} 時，建議深入評估質地、觸感與個人膚質的契合度。新手推薦從溫和配方或經典明星款入手，並注意保存期限與衛生清潔。` },
+                { title: `💡 專家級 ${subName} 搭配技巧`, content: `在使用 ${subName} 時，建議搭配相應護膚打底或專業輔助工具，以循序漸進的塗抹方式疊加，可顯著提升使用效果並降低肌膚負擔。` }
+            ];
+        }
+
+        // 真實評分資料（來自 AI_Scores.csv → scores-data.json）
+        window.SCORES_DATA = {};
+        async function loadScoresData() {
+            try {
+                const res = await fetch('scores-data.json?v=34');
+                window.SCORES_DATA = await res.json();
+            } catch (e) {
+                console.error('scores-data.json 載入失敗', e);
+                window.SCORES_DATA = {};
+            }
+        }
+        function getItemEntry(item) {
+            if (!item) return null;
+            return window.SCORES_DATA[`${item.brand}||${item.name}`] || null;
+        }
+        // 查得到回傳真實 0-5 分數；查不到回傳 null（該指標顯示「—」資料不足）
+        function getNetizenScore(item, indName) {
+            const e = getItemEntry(item);
+            if (e && e.indicators && e.indicators[indName] != null) return e.indicators[indName];
+            return null;
+        }
+        // 依 CLAUDE.md 評分分級：4.5+優秀/4.0-4.5不錯可用/3.5-4普通/3-3.5負面居多/<3幾乎負面，套對應顏色
+        function renderScore(score) {
+            const color = score < 3.0 ? "#e05a47" : score < 3.5 ? "#e29547" : score < 4.0 ? "#6b7280" : score < 4.5 ? "#f2a7b5" : "#d4af37";
+            return `<span class="text-lg font-black" style="color:${color}">${score.toFixed(1)}</span>`;
+        }
+
+        function renderTopDashboard(sub, details) {
+            const dashboardContainer = document.getElementById('top-dashboard');
+            if (!dashboardContainer) return;
+            let tags = ["社群推薦", "成分溫和"];
+            const kPoints = getCategoryKnowledge(sub);
+
+            // 真實統計：這個子分類已評分品項的累積提及則數與平均綜合分（沒資料就誠實顯示，不捏造數字）
+            const items = (details && details.items) || [];
+            const entries = items.map(it => getItemEntry(it)).filter(e => e && e.composite != null);
+            const totalMentions = entries.reduce((s, e) => s + (e.mentions || 0), 0);
+            const avgComposite = entries.length > 0 ? entries.reduce((s, e) => s + e.composite, 0) / entries.length : null;
+
+            const statBlock = avgComposite != null ? `
+                <div class="bg-white/85 backdrop-blur-md rounded-2xl p-6 border border-[#f2a7b5]/10 shadow-sm">
+                    <div class="flex justify-between items-center mb-4"><span class="text-base font-black">累積真實社群評論：${totalMentions.toLocaleString()} 則</span><span class="text-[#e05a47] font-black text-xs">平均 ★${avgComposite.toFixed(1)}</span></div>
+                    <div class="w-full h-3 bg-gray-100 rounded-full flex overflow-hidden"><div class="h-full bg-gradient-to-r from-[#f2a7b5] to-[#e05a47]" style="width: ${Math.round((avgComposite / 5) * 100)}%"></div></div>
+                </div>
+            ` : `
+                <div class="bg-white/85 backdrop-blur-md rounded-2xl p-6 border border-[#f2a7b5]/10 shadow-sm">
+                    <span class="text-sm font-bold text-gray-400">此分類評分資料建置中，敬請期待</span>
+                </div>
+            `;
+
+            dashboardContainer.innerHTML = `
+                <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-10">
+                    <div class="flex flex-col justify-between gap-6">
+                        <div>
+                            <div class="flex items-center gap-3 mb-4"><span class="text-3xl">📈</span><h3 class="text-2xl font-black italic text-[#2d2d2d]">Glow Makeup 社群評分總覽</h3></div>
+                            <div class="flex flex-wrap gap-2 mb-6">${tags.map(t => `<span class="px-3.5 py-1.5 bg-[#2d2d2d] text-white text-xs font-bold rounded-full">#${t}</span>`).join('')}</div>
+                            <p class="text-gray-600 leading-relaxed text-sm font-bold">「<span class="text-[#f2a7b5]">${sub}</span>」社群真實評論數據彙整。</p>
+                        </div>
+                        ${statBlock}
+                    </div>
+                    <div class="flex flex-col gap-6 justify-center">
+                        <h4 class="text-xl font-black italic text-[#2d2d2d] flex items-center gap-2"><span>🎓</span> 專家指標</h4>
+                        <div class="flex flex-col gap-4">${kPoints.map(point => `<div class="p-6 bg-white/95 rounded-2xl border border-[#f2a7b5]/20"><div class="flex items-center gap-3 mb-2"><span class="text-lg text-[#f2a7b5]">💡</span><span class="text-base font-black">${point.title}</span></div><p class="text-xs text-gray-700 pl-12">${point.content}</p></div>`).join('')}</div>
+                    </div>
+                </div>`;
+        }
+
+        window.currentSortIndicator = null;
+        window.toggleSort = function(indName) {
+            window.currentSortIndicator = window.currentSortIndicator === indName ? null : indName;
+            if (typeof window.triggerFilteredItemsRender === 'function') window.triggerFilteredItemsRender();
+        };
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const params = new URLSearchParams(window.location.search);
+            const sub = params.get('sub');
+            const fromContext = params.get('from') || 'board';
+            
+            if (!sub) {
+                document.getElementById('page-title').textContent = '未指定分類';
+                return;
+            }
+            
+            const modeLabel = fromContext === 'review' ? '精選評比' : '美妝看板';
+            document.getElementById('page-title').textContent = `${modeLabel}：${sub}`;
+            document.title = `${sub}${modeLabel} | Glow Makeup`;
+            const seoDesc = `Glow Makeup ${modeLabel}：${sub}真實社群評分與網友心得彙整，購物不踩雷。`;
+            document.getElementById('meta-description').setAttribute('content', seoDesc);
+            document.getElementById('og-title').setAttribute('content', `${sub}${modeLabel} | Glow Makeup`);
+            document.getElementById('og-description').setAttribute('content', seoDesc);
+
+            try {
+                await loadScoresData();
+                const response = await fetch('site-data.json?v=34');
+                const data = await response.json();
+
+                const details = data.subcategoryDetails?.[sub];
+                if (details) {
+                    const selectedBrands = new Set();
+
+                    // Generate unique brands list from items if details.brands is empty
+                    let brands = details.brands || [];
+                    if (brands.length === 0 && details.items) {
+                        const uniqueBrands = new Set(details.items.map(item => item.brand).filter(Boolean));
+                        brands = Array.from(uniqueBrands);
+                    }
+
+                    // Render Brands list
+                    const brandsList = document.getElementById('brands-list');
+                    if (brands && brands.length > 0) {
+                        brandsList.innerHTML = brands.map(brand => 
+                            `<li>
+                                <label class="flex items-center gap-3 cursor-pointer group">
+                                    <input type="checkbox" value="${brand}" class="brand-checkbox w-4 h-4 rounded border-gray-300 text-[#f2a7b5] focus:ring-[#f2a7b5]">
+                                    <span class="text-sm font-bold text-gray-600 group-hover:text-[#f2a7b5] transition-colors">${brand}</span>
+                                </label>
+                            </li>`
+                        ).join('');
+
+                        // Setup dynamic filter event handler
+                        brandsList.addEventListener('change', (e) => {
+                            if (e.target.classList.contains('brand-checkbox')) {
+                                if (e.target.checked) {
+                                    selectedBrands.add(e.target.value);
+                                } else {
+                                    selectedBrands.delete(e.target.value);
+                                }
+                                window.triggerFilteredItemsRender();
+                            }
+                        });
+                    } else {
+                        brandsList.innerHTML = '<li class="text-gray-400 text-sm">暫無品牌資料</li>';
+                    }
+
+                    // Dynamic Trend insights render
+                    renderTopDashboard(sub, details);
+
+                    // Sections and grid containers
+                    const hotItemsSection = document.getElementById('hot-items-section');
+                    const hotItemsGrid = document.getElementById('hot-items-grid');
+                    const allProductsSection = document.getElementById('all-products-section');
+                    const allProductsGrid = document.getElementById('all-products-grid');
+                    const reviewTableSection = document.getElementById('review-table-section');
+                    const reviewTableContainer = document.getElementById('review-table-container');
+                    const articlesSection = document.getElementById('articles-section');
+                    const articlesGrid = document.getElementById('articles-grid');
+
+                    // Filter and Render function
+                    window.triggerFilteredItemsRender = function() {
+                        const rawItems = details.items && details.items.length > 0 ? details.items : [];
+                        
+                        let displayItems = rawItems.filter(item => {
+                            if (selectedBrands.size === 0) return true;
+                            return selectedBrands.has(item.brand);
+                        });
+
+                        if (fromContext === 'review') {
+                            // --- REVIEW MODE ---
+                            hotItemsSection.classList.add('hidden');
+                            allProductsSection.classList.add('hidden');
+                            articlesSection.classList.add('hidden');
+                            reviewTableSection.classList.remove('hidden');
+
+                            let indicators = details.indicators || [];
+                            if (indicators.length === 0) {
+                                indicators = ["整體滿意度", "回購意願", "CP值"];
+                            }
+
+                            // 隱藏「所有指標都沒有資料」的品項（該品項根本還沒被評分，顯示一整排 — 沒有意義）
+                            displayItems = displayItems.filter(item =>
+                                indicators.some(indName => getNetizenScore(item, indName) != null)
+                            );
+
+                            // 隱藏「所有品項都沒有資料」的指標欄（例如唇膏的防沾染整欄都是 —）
+                            indicators = indicators.filter(indName =>
+                                displayItems.some(item => getNetizenScore(item, indName) != null)
+                            );
+                            // 若排序中的指標被整欄隱藏，取消排序避免卡在不存在的欄位
+                            if (window.currentSortIndicator && !indicators.includes(window.currentSortIndicator)) {
+                                window.currentSortIndicator = null;
+                            }
+
+                            // Dynamic sorting if sorting indicator is selected
+                            if (window.currentSortIndicator) {
+                                displayItems.sort((a, b) => {
+                                    const scoreA = getNetizenScore(a, window.currentSortIndicator);
+                                    const scoreB = getNetizenScore(b, window.currentSortIndicator);
+                                    return (scoreB ?? -1) - (scoreA ?? -1);
+                                });
+                            }
+
+                            if (displayItems.length > 0 && indicators.length > 0) {
+                                const indicatorHeaders = indicators.map(indName => {
+                                    const isSorted = window.currentSortIndicator === indName;
+                                    const sortArrow = isSorted ? ' ⬇' : ' ⇅';
+                                    const activeClass = isSorted ? 'text-[#f2a7b5] bg-[#f2a7b5]/5 font-black' : 'text-gray-700 hover:bg-gray-50';
+                                    return `
+                                        <th onclick="toggleSort('${indName}')" class="p-4 md:p-6 text-base ${activeClass} uppercase tracking-wider text-center min-w-[150px] border-b border-[#f2a7b5]/10 cursor-pointer select-none transition-colors">
+                                            <div class="flex items-center justify-center gap-1.5">
+                                                <span>${indName}</span>
+                                                <span class="text-xs opacity-80">${sortArrow}</span>
+                                            </div>
+                                        </th>
+                                    `;
+                                }).join('');
+
+                                const rows = displayItems.map((item, idx) => {
+                                    const scoreCells = indicators.map((indName, indIdx) => {
+                                        const score = getNetizenScore(item, indName);
+                                        const cell = (score == null)
+                                            ? `<span class="text-gray-300 text-sm font-bold" title="尚無足夠評論資料">—</span>`
+                                            : renderScore(score);
+                                        return `
+                                            <td class="p-4 md:p-6 text-center border-b border-[#f2a7b5]/5">
+                                                ${cell}
+                                            </td>
+                                        `;
+                                    }).join('');
+
+                                    // Clicking item title or image goes to item-detail.html?item=...&from=board (as requested: 跳轉至與美妝看板相同詳細頁)
+                                    return `
+                                        <tr class="hover:bg-[#fff9f5]/60 transition-colors">
+                                            <td class="p-4 md:p-6 border-b border-[#f2a7b5]/5 sticky left-0 bg-white/95 backdrop-blur-sm z-10 shadow-[4px_0_8px_rgba(0,0,0,0.02)]">
+                                                <div class="flex items-center gap-4">
+                                                    <span class="w-7 h-7 flex-shrink-0 bg-gray-100 text-[#2d2d2d] rounded-full flex items-center justify-center font-bold text-sm">${idx + 1}</span>
+                                                    <a href="item-detail.html?item=${encodeURIComponent(item.name)}&from=board" class="w-12 h-12 bg-gray-50 rounded-xl p-1 overflow-hidden border border-gray-100/50 flex-shrink-0 hover:scale-105 transition-transform duration-300 block">
+                                                        <img src="${item.image || item.img || window.IMG_FALLBACK}" class="w-full h-full object-contain" alt="${item.name}">
+                                                    </a>
+                                                    <div class="min-w-0">
+                                                        <a href="item-detail.html?item=${encodeURIComponent(item.name)}&from=board" class="font-black text-base text-[#2d2d2d] hover:text-[#f2a7b5] transition-colors block truncate max-w-[200px]" title="${item.name}">${item.name}</a>
+                                                        <span class="text-xs font-black text-gray-900 tracking-wider uppercase block mt-1">${item.brand}</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            ${scoreCells}
+                                        </tr>
+                                    `;
+                                }).join('');
+
+                                reviewTableContainer.innerHTML = `
+                                    <div class="overflow-x-auto w-full rounded-3xl border border-[#f2a7b5]/10 bg-white shadow-[0_8px_30px_rgb(242,167,181,0.02)] custom-scrollbar mb-4">
+                                        <table class="w-full text-left border-collapse min-w-[900px]">
+                                            <thead>
+                                                <tr class="bg-gradient-to-r from-[#f2a7b5]/5 to-transparent">
+                                                    <th class="p-4 md:p-6 text-base font-black text-gray-700 uppercase tracking-wider min-w-[320px] border-b border-[#f2a7b5]/10 sticky left-0 bg-white z-20">商品項目 (可點擊指標進行排序)</th>
+                                                    ${indicatorHeaders}
+                                                </tr>
+                                            </thead>
+                                            <tbody class="divide-y divide-[#f2a7b5]/5">
+                                                ${rows}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="text-center text-xl md:text-2xl font-black text-white bg-gradient-to-r from-[#e05a47] to-[#f2a7b5] py-6 px-8 rounded-3xl border-2 border-[#fff]/20 shadow-[0_12px_40px_rgba(224,90,71,0.15)] mt-8 leading-relaxed">
+                                        📊 本頁評鑑資料由 Glow Makeup 爬蟲大數據自動分析 1,200+ 篇社群真實使用心得後產出。點選商品名稱或圖片可查看該商品完整的真實網友心得。
+                                    </div>
+                                `;
+                            } else {
+                                reviewTableContainer.innerHTML = '<div class="text-gray-400 text-sm text-center py-8">暫無符合篩選條件的商品</div>';
+                            }
+                        } else {
+                            // --- BOARD MODE ---
+                            hotItemsSection.classList.remove('hidden');
+                            allProductsSection.classList.remove('hidden');
+                            articlesSection.classList.add('hidden'); // 沒有真實的分類專屬文章庫，誠實隱藏而非塞樣板文章
+                            reviewTableSection.classList.add('hidden');
+
+                            // Spotlight Hot Items：依真實提及則數排序（沒有評分資料的品項一律排最後、不參與熱門排名）
+                            const sortedByMentions = [...rawItems].sort((a, b) => {
+                                const ma = getItemEntry(a)?.mentions || 0;
+                                const mb = getItemEntry(b)?.mentions || 0;
+                                return mb - ma;
+                            });
+
+                            // Filter and slice top 3 hot items
+                            let filteredHotItems = sortedByMentions.filter(item => {
+                                if (selectedBrands.size === 0) return true;
+                                return selectedBrands.has(item.brand);
+                            }).slice(0, 3);
+
+                            if (filteredHotItems.length > 0) {
+                                hotItemsGrid.innerHTML = filteredHotItems.map(item => {
+                                    const entry = getItemEntry(item);
+                                    const hotBadge = (entry && entry.mentions > 0)
+                                        ? `<span class="text-xs font-black text-[#e05a47] bg-[#e05a47]/10 px-2.5 py-1 rounded-full flex items-center gap-1 border border-[#e05a47]/20 shadow-sm">🔥 ${entry.mentions} 則真實討論</span>`
+                                        : `<span class="text-xs font-bold text-gray-300">資料建置中</span>`;
+                                    return `
+                                        <div class="bg-white/90 backdrop-blur-md p-6 rounded-3xl border border-[#f2a7b5]/15 shadow-sm hover:border-[#f2a7b5]/40 hover:shadow-xl transition-all duration-300 group flex flex-col justify-between">
+                                            <div>
+                                                <a href="item-detail.html?item=${encodeURIComponent(item.name)}&from=board" class="aspect-square bg-gray-50 rounded-2xl mb-4 p-4 overflow-hidden flex items-center justify-center border border-gray-100 group-hover:scale-[1.02] transition-transform duration-300 block">
+                                                    <img src="${item.image || item.img || window.IMG_FALLBACK}" class="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-500" alt="${item.name}">
+                                                </a>
+                                                <div class="flex justify-between items-center gap-2 mb-2">
+                                                    <span class="text-xs font-black tracking-widest text-[#2d2d2d]/60 uppercase">${item.brand}</span>
+                                                    ${hotBadge}
+                                                </div>
+                                                <a href="item-detail.html?item=${encodeURIComponent(item.name)}&from=board" class="font-black text-lg text-[#2d2d2d] group-hover:text-[#f2a7b5] transition-colors mb-2 block leading-snug line-clamp-2" title="${item.name}">${item.name}</a>
+                                            </div>
+                                            <a href="item-detail.html?item=${encodeURIComponent(item.name)}&from=board" class="text-xs font-black text-[#f2a7b5] mt-4 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                                                進入詳細商品頁 ➔
+                                            </a>
+                                        </div>
+                                    `;
+                                }).join('');
+                            } else {
+                                hotItemsGrid.innerHTML = '<div class="col-span-full text-gray-400 text-sm text-center py-8">暫無符合篩選條件的熱門單品</div>';
+                            }
+
+                            // All Products Grid（真實分數；沒有評分資料就誠實顯示「尚無評分資料」而非假分數）
+                            if (displayItems.length > 0) {
+                                allProductsGrid.innerHTML = displayItems.map(item => {
+                                    const entry = getItemEntry(item);
+                                    const ratingBlock = (entry && entry.composite != null)
+                                        ? `<div class="flex items-center gap-1.5">
+                                                <span class="text-[#d4af37] text-base font-black">★</span>
+                                                <span class="text-sm font-black text-gray-800">${entry.composite.toFixed(1)}</span>
+                                                <span class="text-xs text-gray-400 font-bold">(${entry.mentions || 0} 則)</span>
+                                           </div>`
+                                        : `<span class="text-xs font-bold text-gray-300">尚無評分資料</span>`;
+                                    return `
+                                    <div class="bg-white p-6 rounded-3xl border border-gray-100 hover:border-[#f2a7b5] hover:shadow-xl transition-all duration-300 group flex flex-col justify-between">
+                                        <div>
+                                            <a href="item-detail.html?item=${encodeURIComponent(item.name)}&from=board" class="aspect-square bg-gray-50 rounded-2xl mb-4 p-4 overflow-hidden flex items-center justify-center border border-gray-100/50 block">
+                                                <img src="${item.image || item.img || window.IMG_FALLBACK}" class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500" alt="${item.name}">
+                                            </a>
+                                            <span class="text-xs font-black text-[#2d2d2d]/50 tracking-wider uppercase block mb-1">${item.brand}</span>
+                                            <a href="item-detail.html?item=${encodeURIComponent(item.name)}&from=board" class="font-black text-base text-[#2d2d2d] group-hover:text-[#f2a7b5] transition-colors mb-2 block leading-snug line-clamp-2" title="${item.name}">${item.name}</a>
+                                        </div>
+                                        <div class="flex items-center justify-between border-t border-gray-50 pt-4 mt-4">
+                                            ${ratingBlock}
+                                            <a href="item-detail.html?item=${encodeURIComponent(item.name)}&from=board" class="text-xs font-black text-gray-400 group-hover:text-[#f2a7b5] transition-colors">
+                                                詳細資料 ➔
+                                            </a>
+                                        </div>
+                                    </div>
+                                `;
+                                }).join('');
+                            } else {
+                                allProductsGrid.innerHTML = '<div class="col-span-full text-gray-400 text-sm text-center py-8">暫無符合篩選條件的商品</div>';
+                            }
+                        }
+                    };
+
+                    // Initial Render
+                    window.triggerFilteredItemsRender();
+                } else {
+                    document.getElementById('brands-list').innerHTML = '<li class="text-gray-400 text-sm">無品牌資料</li>';
+                }
+            } catch(err) {
+                console.error(err);
+            }
+        });
+    </script>
+</body>
+</html>

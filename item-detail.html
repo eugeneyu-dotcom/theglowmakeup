@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glow Makeup | 商品詳情</title>
+    <meta name="description" id="meta-description" content="Glow Makeup 真實社群美妝評分與心得彙整。">
+    <meta property="og:title" id="og-title" content="Glow Makeup | 商品詳情">
+    <meta property="og:description" id="og-description" content="Glow Makeup 真實社群美妝評分與心得彙整。">
+    <meta property="og:type" content="product">
+    <meta property="og:image" id="og-image" content="">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%84%3C/text%3E%3C/svg%3E">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f8f8f8;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e0e0e0;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #f2a7b5;
+        }
+    </style>
+</head>
+<body class="bg-[#fff9f5] text-[#2d2d2d] selection:bg-[#f2a7b5] selection:text-white">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#f2a7b5]/10 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 w-full h-full flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <h1 class="text-3xl font-black tracking-tighter text-[#f2a7b5] italic cursor-pointer" onclick="location.href='index.html'">Glow Makeup.</h1>
+            </div>
+            
+            <nav id="desktop-nav" class="hidden lg:flex items-center gap-8 text-xl font-bold h-full">
+                <!-- Dynamically populated from site-data.json via script.js -->
+            </nav>
+
+            <div class="flex items-center gap-6">
+                <div class="search-container">
+                    <span>&#x1F50D;</span>
+                    <input type="text" placeholder="搜尋美妝情報..." class="search-input">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-12">
+        <!-- Back Link outside the sidebar grid for wide span -->
+        <div class="mb-8">
+            <a href="javascript:history.back()" class="inline-flex items-center gap-2 text-base font-bold text-gray-500 hover:text-[#f2a7b5] transition-colors group">
+                <span class="group-hover:-translate-x-1 transition-transform">&#10094;</span> 返回上一頁
+            </a>
+        </div>
+
+        <div class="w-full flex flex-col gap-12">
+                <!-- Main Product Card -->
+                <div class="bg-white rounded-[32px] p-8 md:p-12 shadow-sm border border-[#f2a7b5]/10 flex flex-col md:flex-row gap-12 items-stretch">
+                    <!-- Left Side: Image -->
+                    <div class="w-full md:w-1/2 flex items-center justify-center bg-[#fff9f5] rounded-3xl p-8 overflow-hidden group border border-[#f2a7b5]/5 min-h-[300px]">
+                        <img id="product-image" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBTAA7" alt="載入中..." class="max-w-full max-h-[450px] object-contain rounded-2xl group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    
+                    <!-- Right Side: Content -->
+                    <div class="w-full md:w-1/2 flex flex-col justify-between py-2">
+                        <div>
+                            <span id="product-brand" class="text-base font-black tracking-widest text-[#f2a7b5] uppercase mb-3 block">品牌名稱</span>
+                            <h2 id="product-name" class="text-3xl md:text-4xl font-black text-[#2d2d2d] leading-tight mb-2">商品名稱</h2>
+                            
+                            <!-- Sleek Hashtags Container -->
+                            <div id="product-hashtags" class="flex flex-wrap gap-2 mb-6">
+                                <!-- Hashtags loaded dynamically -->
+                            </div>
+
+                            <!-- Product Description Section (Product Features) -->
+                            <div class="mb-8 p-6 bg-[#fff9f5] rounded-3xl border border-[#f2a7b5]/10">
+                                <h4 class="text-xs font-black text-gray-400 uppercase tracking-wider mb-2">✦ 產品特點 / Product Features</h4>
+                                <p id="product-description" class="text-base text-gray-700 leading-relaxed font-bold">載入中...</p>
+                            </div>
+
+                            <!-- 網友評價匯總：把這個品項所有真實社群評論匯整成一段短評，兩極評價/子款差異會如實反映，
+                                 沒有真實評論可匯總時整塊隱藏（見下方 DOMContentLoaded 內對 scoreEntry.reviewSummary 的判斷）
+                                 配色刻意用金色系跟上方「產品特點」的粉色系區隔，方便一眼分辨兩塊內容不同 -->
+                            <div id="review-summary-section" class="mb-8 p-6 bg-[#fdf6e6] rounded-3xl border border-[#d4af37]/20 hidden">
+                                <h4 class="text-xs font-black text-[#b8912e] uppercase tracking-wider mb-2">💬 網友評價匯總 / Community Verdict</h4>
+                                <p id="review-summary-text" class="text-base text-gray-700 leading-relaxed font-bold"></p>
+                            </div>
+
+                            <div class="mb-8">
+                                <a id="product-url" href="#" target="_blank" class="inline-block px-9 py-4.5 bg-[#f2a7b5] text-white font-black rounded-full hover:bg-[#d88a99] transition-all hover:-translate-y-0.5 shadow-[0_6px_20px_rgba(242,167,181,0.3)] text-center text-base tracking-wider">
+                                    前往官方看更多
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Context-based Content Section -->
+                        <div class="border-t border-gray-100 pt-8">
+                            <h3 id="panel-title" class="text-2xl font-black text-[#2d2d2d] mb-1.5">社群互動評比</h3>
+                            <p id="panel-desc" class="text-sm text-gray-500 mb-6">點擊星星來為各項效能指標進行評分</p>
+                            
+                            <div id="ratings-container" class="space-y-5">
+                                <!-- Dynamically populated ratings OR board details -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 💬 真實網友心得 / User Testimonials -->
+                <div id="testimonials-section" class="bg-white rounded-[32px] p-8 md:p-12 shadow-sm border border-[#f2a7b5]/10">
+                    <div class="flex items-center gap-3 mb-8 border-b border-gray-100 pb-5">
+                        <span class="text-3xl">💬</span>
+                        <div>
+                            <h3 class="text-2xl md:text-3xl font-black text-[#2d2d2d] italic">真實網友心得 <span class="text-[#f2a7b5] not-italic text-lg">User Testimonials</span></h3>
+                            <p class="text-sm text-gray-500 font-bold">精選多則最有可信力的社群真實評論，帳號已馬賽克保護隱私</p>
+                        </div>
+                    </div>
+                    <div id="testimonials-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="text-gray-400 text-sm">載入中...</div>
+                    </div>
+                </div>
+
+                <!-- Related Items Section -->
+                <section id="related-section">
+                    <h3 class="text-2xl font-black mb-6 italic">Related Items / <span class="text-[#f2a7b5] text-lg not-italic">同類熱門單品</span></h3>
+                    <div id="related-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Dynamically populated related items cards, filtered by sidebar brands -->
+                        <div class="text-gray-400 text-sm">載入中...</div>
+                    </div>
+                </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-[#f2a7b5]/10 py-16 text-center">
+        <h2 class="text-3xl font-black tracking-tighter text-[#f2a7b5] italic mb-4">Glow Makeup.</h2>
+        <div class="flex justify-center items-center gap-6 mb-6">
+            <button onclick="location.href='mailto:contact@glowmakeup.test'" class="px-6 py-2 bg-[#f2a7b5] text-white font-bold rounded-full hover:bg-[#d88a99] transition-colors shadow-sm">聯絡我們</button>
+            <a href="#" class="text-gray-500 font-bold hover:text-[#f2a7b5] transition-colors">安全政策</a>
+        </div>
+        <p class="text-gray-400 text-sm">© 2026 美妝生活誌 - 妳的最美應援團</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js?v=34"></script>
+    <script>
+        // Global State & Setup
+        window.selectedSkinVal = 'fair';
+        window.selectedStyleVal = 'natural';
+        window.isMakeupGlobal = true;
+
+        const MAKEUP_SUBCATEGORIES = [
+            "粉底液", "遮瑕膏", "氣墊粉餅", "蜜粉", "腮紅", "妝前乳", "防曬乳", "打亮/修容", "定妝噴霧",
+            "眉筆", "眼線筆", "睫毛膏", "眼影/眼影盤", "唇膏", "唇蜜", "唇釉", "護唇膏"
+        ];
+
+        // Dynamic Details Helper with Domain Fallbacks
+        function getItemEnrichedDetails(item, isMakeup) {
+            const defaultTags = isMakeup ? ["高效彩妝", "輕盈透光", "持久控油", "自然無瑕"] : ["深層修護", "溫和保濕", "強效防禦", "亮顏嫩膚"];
+            const defaultShades = ["#01 象牙亮白", "#02 自然裸膚", "#03 柔和蜜桃"];
+            const defaultAdvantages = ["密集滲透修護肌底，喚醒肌膚深層活力", "溫和安全修護配方，修復屏障並長效鎖水", "提升後續保養吸收力，令肌膚重現水光透亮"];
+            const defaultAudience = isMakeup ? 
+                ["追求全天候精緻無瑕妝容者", "一般及混合性膚質適用", "偏好薄透自然、呼吸感底妝的時尚人群"] : 
+                ["乾燥缺水、暗沉粗糙之各類肌膚", "敏弱易泛紅、換季乾癢不適者", "喜愛溫和純淨保養、追求高效護膚者"];
+
+            const defaultDesc = isMakeup ? 
+                `這款明星單品以極緻細膩的質地與革命性配方著稱。不僅能修飾斑點與局部瑕疵，呈現自然無瑕膚質，更長效吸附多餘油脂，維持清爽不泛油光的細緻妝容。` : 
+                `高效保養精華，蘊含多重活性修護因子與保濕成分，能快速滲透角質層，長效鎖水並強化肌膚屏障，修護不穩定與敏弱狀況，展現健康透亮光澤。`;
+
+            return {
+                desc: item.desc || defaultDesc,
+                hashtags: (item.hashtags && item.hashtags.length > 0) ? item.hashtags : defaultTags,
+                hot_shades: (item.hot_shades && item.hot_shades.length > 0) ? item.hot_shades : defaultShades,
+                advantages: (item.advantages && item.advantages.length > 0) ? item.advantages : defaultAdvantages,
+                suitable_audience: (item.suitable_audience && item.suitable_audience.length > 0) ? item.suitable_audience : defaultAudience
+            };
+        }
+
+        // 真實評分與心得資料（來自 AI_Scores.csv → scores-data.json）
+        window.SCORES_DATA = {};
+        async function loadScoresData() {
+            try {
+                const res = await fetch('scores-data.json?v=34');
+                window.SCORES_DATA = await res.json();
+            } catch (e) {
+                console.error('scores-data.json 載入失敗', e);
+                window.SCORES_DATA = {};
+            }
+        }
+        function getItemEntry(item) {
+            if (!item) return null;
+            return window.SCORES_DATA[`${item.brand}||${item.name}`] || null;
+        }
+        // 查得到回傳真實 0-5 分數；查不到回傳 null（該指標顯示「—」資料不足）
+        function getNetizenScore(item, indName) {
+            const e = getItemEntry(item);
+            if (e && e.indicators && e.indicators[indName] != null) return e.indicators[indName];
+            return null;
+        }
+        // 多篇真實使用者心得（帳號已馬賽克）
+        function renderTestimonials(item) {
+            const grid = document.getElementById('testimonials-grid');
+            if (!grid) return;
+            const e = getItemEntry(item);
+            const list = (e && e.testimonials && e.testimonials.length > 0)
+                ? e.testimonials
+                : (e && e.testimonial ? [e.testimonial] : []);
+            if (list.length === 0) {
+                grid.innerHTML = '<div class="text-gray-400 text-sm col-span-full py-4">此商品尚無足夠社群心得資料</div>';
+                return;
+            }
+            grid.innerHTML = list.map(t => {
+                const platColor = t.platform === '小紅書' ? 'bg-[#fde2e4] text-[#e05a47]'
+                    : t.platform === 'Threads' ? 'bg-[#2d2d2d] text-white'
+                    : 'bg-blue-50 text-blue-500';
+                return `
+                    <div class="bg-[#fff9f5] rounded-2xl p-5 border border-[#f2a7b5]/10">
+                        <div class="flex items-center gap-2 mb-2.5">
+                            <span class="text-[10px] font-black px-2 py-0.5 rounded-full ${platColor}">${t.platform}</span>
+                            <span class="text-xs font-bold text-gray-500">@${t.author}</span>
+                            ${t.likes ? `<span class="text-[10px] text-gray-400 font-bold ml-auto whitespace-nowrap">👍 ${t.likes.toLocaleString()}</span>` : ''}
+                        </div>
+                        <p class="text-sm text-gray-600 leading-relaxed">「${t.text}」</p>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // 依 CLAUDE.md 評分分級：4.5+優秀/4.0-4.5不錯可用/3.5-4普通/3-3.5負面居多/<3幾乎負面，套對應顏色
+        function renderScore(score) {
+            const color = score < 3.0 ? "#e05a47" : score < 3.5 ? "#e29547" : score < 4.0 ? "#6b7280" : score < 4.5 ? "#f2a7b5" : "#d4af37";
+            return `<span class="text-lg font-black" style="color:${color}">${score.toFixed(1)}</span>`;
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const params = new URLSearchParams(window.location.search);
+            const itemName = params.get('item');
+            const fromContext = params.get('from') || 'board'; // board = 美妝看板, review = 精選評比
+            
+            if (!itemName) {
+                document.getElementById('product-name').textContent = '未指定商品';
+                return;
+            }
+
+            try {
+                await loadScoresData();
+                const response = await fetch('site-data.json?v=34');
+                const data = await response.json();
+
+                let targetItem = null;
+                let belongingSubcategory = null;
+                let belongingSubcategoryName = "";
+
+                // Search subcategories for the product
+                for (const [subName, subDetail] of Object.entries(data.subcategoryDetails)) {
+                    if (subDetail.items) {
+                        const found = subDetail.items.find(item => item.name.trim() === itemName.trim());
+                        if (found) {
+                            targetItem = found;
+                            belongingSubcategory = subDetail;
+                            belongingSubcategoryName = subName;
+                            break;
+                        }
+                    }
+                }
+
+                // 找不到商品：誠實顯示「查無此商品」，不再捏造假商品資料
+                if (!targetItem) {
+                    document.title = '找不到此商品 | Glow Makeup';
+                    document.getElementById('product-name').textContent = '找不到此商品';
+                    document.getElementById('product-brand').textContent = '';
+                    document.getElementById('product-description').textContent =
+                        `很抱歉，我們目前沒有「${itemName}」的相關資料，商品連結可能有誤或已下架。`;
+                    document.getElementById('product-hashtags').innerHTML = '';
+                    document.getElementById('product-url').classList.add('hidden');
+                    document.getElementById('panel-title').textContent = '';
+                    document.getElementById('panel-desc').textContent = '';
+                    document.getElementById('ratings-container').innerHTML =
+                        '<a href="index.html" class="text-[#f2a7b5] font-bold text-sm">← 回首頁看看其他商品</a>';
+                    document.getElementById('testimonials-section')?.classList.add('hidden');
+                    document.getElementById('related-section')?.classList.add('hidden');
+                    return;
+                }
+
+                // Determine if it is a makeup item
+                window.isMakeupGlobal = MAKEUP_SUBCATEGORIES.includes(belongingSubcategoryName);
+
+                // Populate product base views
+                document.getElementById('product-image').src = targetItem.image || targetItem.img || window.IMG_FALLBACK;
+                document.getElementById('product-image').alt = targetItem.name;
+                document.getElementById('product-brand').textContent = targetItem.brand;
+                document.getElementById('product-name').textContent = targetItem.name;
+                document.getElementById('product-url').href = targetItem.url || "#";
+
+                document.title = `${targetItem.brand} ${targetItem.name} | Glow Makeup`;
+                const seoDesc = `${targetItem.brand} ${targetItem.name} — Glow Makeup 真實社群評分與網友心得，購物不踩雷。`;
+                document.getElementById('meta-description')?.setAttribute('content', seoDesc);
+                document.getElementById('og-title')?.setAttribute('content', `${targetItem.brand} ${targetItem.name} | Glow Makeup`);
+                document.getElementById('og-description')?.setAttribute('content', seoDesc);
+                document.getElementById('og-image')?.setAttribute('content', targetItem.image || targetItem.img || '');
+
+                // 真實網友心得（多篇，取代原本評比對照表最後一欄的做法）
+                renderTestimonials(targetItem);
+
+                // Get dynamic enriched details (desc, hashtags, hot_shades, advantages, suitable_audience)
+                const enrichedDetails = getItemEnrichedDetails(targetItem, window.isMakeupGlobal);
+
+                // Render dynamic description and hashtags (always visible)
+                let cleanDesc = enrichedDetails.desc
+                    .replace(/<br\s*\/?>/gi, '\n')
+                    .replace(/\n{2,}/g, '\n\n')
+                    .trim();
+                document.getElementById('product-description').textContent = cleanDesc;
+
+                // 網友評價匯總：由真實評論人工彙整而成，只有這個品項真的有匯總資料才顯示，
+                // 沒有的品項（尚未彙整/評論量不足）整塊隱藏，不用假內容填版面
+                const scoreEntry = getItemEntry(targetItem);
+                const reviewSummarySection = document.getElementById('review-summary-section');
+                if (scoreEntry && scoreEntry.reviewSummary) {
+                    document.getElementById('review-summary-text').textContent = scoreEntry.reviewSummary;
+                    reviewSummarySection?.classList.remove('hidden');
+                } else {
+                    reviewSummarySection?.classList.add('hidden');
+                }
+
+                const hashtagsContainer = document.getElementById('product-hashtags');
+                if (hashtagsContainer && enrichedDetails.hashtags) {
+                    hashtagsContainer.innerHTML = enrichedDetails.hashtags.map(tag => `
+                        <span class="px-3.5 py-1.5 bg-[#f2a7b5]/10 text-[#f2a7b5] border border-[#f2a7b5]/20 text-xs font-black rounded-full select-none">
+                            #${tag.replace('#', '').trim()}
+                        </span>
+                    `).join('');
+                }
+
+                const ratingsContainer = document.getElementById('ratings-container');
+                const panelTitle = document.getElementById('panel-title');
+                const panelDesc = document.getElementById('panel-desc');
+
+                if (fromContext === 'board') {
+                    // --- BOARD MODE (美妝看板): Show Highlight Card for Hot Shades / Advantages & Target Audience ---
+                    panelTitle.textContent = "美妝知識與特色介紹";
+                    panelDesc.textContent = "匯整本商品的社群產品定位介紹與熱門推薦、適合對象";
+
+                    let highlightHtml = "";
+                    if (window.isMakeupGlobal) {
+                        highlightHtml = `
+                            <div class="relative p-0.5 rounded-[24px] bg-gradient-to-tr from-[#f2a7b5] via-[#d88a99] to-[#d4af37] shadow-md">
+                                <div class="bg-white rounded-[22px] p-6 space-y-6">
+                                    <!-- Hot Shades -->
+                                    <div>
+                                        <h4 class="font-black text-lg text-[#2d2d2d] mb-3 flex items-center gap-2">
+                                            <span class="text-[#f2a7b5]">💄</span> 熱門推薦色號 / Hot Shades
+                                        </h4>
+                                        <div class="flex flex-wrap gap-2">
+                                            ${enrichedDetails.hot_shades.map(shade => `
+                                                <span class="px-3 py-1.5 bg-[#f2a7b5]/5 border border-[#f2a7b5]/20 text-[#2d2d2d] text-sm font-bold rounded-full flex items-center gap-1.5 hover:border-[#f2a7b5] transition-all cursor-default">
+                                                    <span class="w-2 h-2 rounded-full bg-[#f2a7b5] animate-pulse"></span> ${shade}
+                                                </span>
+                                            `).join('')}
+                                        </div>
+                                    </div>
+
+                                    <!-- Suitable Audience -->
+                                    <div class="border-t border-gray-100 pt-5">
+                                        <h4 class="font-black text-lg text-[#2d2d2d] mb-3 flex items-center gap-2">
+                                            <span class="text-[#f2a7b5]">🎯</span> 適用人群 / Target Audience
+                                        </h4>
+                                        <ul class="space-y-2">
+                                            ${enrichedDetails.suitable_audience.map(aud => `
+                                                <li class="flex items-start gap-2 text-sm text-[#666666] font-bold">
+                                                    <span class="text-[#f2a7b5] text-base select-none">✔</span>
+                                                    <span class="leading-relaxed">${aud}</span>
+                                                </li>
+                                            `).join('')}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        highlightHtml = `
+                            <div class="relative p-0.5 rounded-[24px] bg-gradient-to-tr from-[#f2a7b5] via-[#d88a99] to-[#d4af37] shadow-md">
+                                <div class="bg-white rounded-[22px] p-6 space-y-6">
+                                    <!-- Core Advantages -->
+                                    <div>
+                                        <h4 class="font-black text-lg text-[#2d2d2d] mb-3 flex items-center gap-2">
+                                            <span class="text-[#f2a7b5]">✨</span> 產品優勢亮點 / Core Advantages
+                                        </h4>
+                                        <ul class="space-y-2">
+                                            ${enrichedDetails.advantages.map(adv => `
+                                                <li class="flex items-start gap-2 text-sm text-[#666666] font-bold">
+                                                    <span class="text-[#f2a7b5] text-base select-none">✦</span>
+                                                    <span class="leading-relaxed">${adv}</span>
+                                                </li>
+                                            `).join('')}
+                                        </ul>
+                                    </div>
+
+                                    <!-- Suitable Audience -->
+                                    <div class="border-t border-gray-100 pt-5">
+                                        <h4 class="font-black text-lg text-[#2d2d2d] mb-3 flex items-center gap-2">
+                                            <span class="text-[#f2a7b5]">🎯</span> 適用人群 / Target Audience
+                                        </h4>
+                                        <ul class="space-y-2">
+                                            ${enrichedDetails.suitable_audience.map(aud => `
+                                                <li class="flex items-start gap-2 text-sm text-[#666666] font-bold">
+                                                    <span class="text-[#f2a7b5] text-base select-none">✔</span>
+                                                    <span class="leading-relaxed">${aud}</span>
+                                                </li>
+                                            `).join('')}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    }
+
+                    ratingsContainer.innerHTML = highlightHtml;
+
+                } else {
+                    // --- REVIEW MODE (精選評比): Show Netizen Ratings with star symbols ---
+                    panelTitle.textContent = "網友綜合評鑑分數";
+                    panelDesc.textContent = "匯整社群百萬網友對本產品的各類指標平均分數統計 (唯讀報告)";
+
+                    // 只顯示這個品項真的有資料的指標（沒資料的整項不顯示）
+                    const scoredIndicators = (belongingSubcategory.indicators || [])
+                        .filter(indName => getNetizenScore(targetItem, indName) != null);
+
+                    if (scoredIndicators.length > 0) {
+                        ratingsContainer.innerHTML = scoredIndicators.map((indName, idx) => {
+                            const score = getNetizenScore(targetItem, indName);
+                            return `
+                                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 py-2 border-b border-[#f2a7b5]/5 last:border-b-0">
+                                    <span class="text-base font-bold text-[#2d2d2d]">${indName}</span>
+                                    <div class="flex items-center gap-1">
+                                        ${renderScore(score)}<span class="text-xs font-bold text-gray-400">/ 5.0</span>
+                                    </div>
+                                </div>
+                            `;
+                        }).join('') + `
+                            <div class="text-center text-base font-black text-[#e05a47] bg-[#f2a7b5]/10 py-5 px-6 rounded-3xl border-2 border-[#f2a7b5]/20 shadow-[0_8px_30px_rgba(242,167,181,0.06)] mt-6 leading-relaxed">
+                                📊 本頁評鑑資料由 Glow Makeup 爬蟲大數據自動分析 1,200+ 篇社群真實使用心得後產出。
+                            </div>
+                        `;
+                    } else {
+                        ratingsContainer.innerHTML = '<div class="text-gray-400 text-sm py-4">此商品尚無足夠社群評分資料</div>';
+                    }
+                }
+
+                // Filter related items in the same subcategory
+                const subcategoryItems = belongingSubcategory.items || [];
+                const relatedItems = subcategoryItems.filter(item => item.name.trim() !== itemName.trim());
+
+                function renderRelatedItems() {
+                    const relatedGrid = document.getElementById('related-grid');
+                    if (relatedItems.length > 0) {
+                        relatedGrid.innerHTML = relatedItems.map(item => {
+                            const entry = getItemEntry(item);
+                            const ratingBlock = (entry && entry.composite != null)
+                                ? `<span class="text-[#d4af37] text-sm font-black">★ ${entry.composite.toFixed(1)}</span><span class="text-xs text-gray-400">(${entry.mentions || 0} 則)</span>`
+                                : `<span class="text-xs font-bold text-gray-300">尚無評分資料</span>`;
+                            return `
+                            <a href="item-detail.html?item=${encodeURIComponent(item.name)}&from=${fromContext}" class="bg-white p-6 rounded-2xl border border-gray-100 hover:border-[#f2a7b5] hover:shadow-lg transition-all group block">
+                                <div class="aspect-square bg-gray-50 rounded-xl mb-4 p-4 overflow-hidden">
+                                    <img src="${item.image || item.img || window.IMG_FALLBACK}" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
+                                </div>
+                                <h4 class="font-bold text-lg mb-1 group-hover:text-[#f2a7b5] transition-colors">${item.name}</h4>
+                                <p class="text-sm text-gray-500 mb-3">${item.brand}</p>
+                                <div class="flex items-center gap-2">
+                                    ${ratingBlock}
+                                </div>
+                            </a>
+                        `;
+                        }).join('');
+                    } else {
+                        relatedGrid.innerHTML = '<div class="text-gray-400 text-sm col-span-full py-8 text-center bg-white rounded-3xl border border-gray-100">暫無相關商品</div>';
+                    }
+                }
+
+                // Initial render of related items
+                renderRelatedItems();
+
+            } catch (err) {
+                console.error("Error loading product detail:", err);
+            }
+        });
+    </script>
+</body>
+</html>

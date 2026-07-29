@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glow Makeup | 精選評比熱門頁面</title>
+    <meta name="description" content="收集網友真實口碑與深度實測，嚴選全台高評分美妝保養神物！Glow Makeup 直接解鎖精準客觀的社群效能均分數據。">
+    <meta property="og:title" content="Glow Makeup | 精選評比熱門頁面">
+    <meta property="og:description" content="真實社群評分排行榜，讓妳購物不踩雷、精準保養上妝。">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%84%3C/text%3E%3C/svg%3E">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-[#fff9f5] text-[#2d2d2d] selection:bg-[#f2a7b5] selection:text-white">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#f2a7b5]/10 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 w-full h-full flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <h1 class="text-3xl font-black tracking-tighter text-[#f2a7b5] italic cursor-pointer" onclick="location.href='index.html'">Glow Makeup.</h1>
+            </div>
+
+            <nav id="desktop-nav" class="hidden lg:flex items-center gap-8 text-xl font-bold h-full">
+                <!-- Dynamically populated from site-data.json -->
+            </nav>
+
+            <div class="flex items-center gap-6">
+                <div class="search-container">
+                    <span>&#x1F50D;</span>
+                    <input type="text" placeholder="搜尋美妝情報..." class="search-input">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 py-16">
+        <!-- Hero Section -->
+        <section class="text-center max-w-3xl mx-auto mb-16">
+            <span class="inline-block px-4 py-1.5 bg-[#f2a7b5]/10 text-[#f2a7b5] rounded-full text-xs font-black tracking-widest uppercase mb-4">Top Rated Reviews</span>
+            <h2 class="text-4xl md:text-5xl font-black tracking-tight mb-4 italic">熱門明星產品精選評比</h2>
+            <p class="text-sm md:text-base text-gray-500 leading-relaxed font-medium">收集網友真實口碑與深度實測，嚴選全台高評分美妝保養神物！直接解鎖精準客觀的效能均分數據，讓妳購物不踩雷、精準保養上妝。</p>
+        </section>
+
+        <!-- Hot Review Items Grid（由 script.js renderSpotlightCards() 依真實 scores-data.json 產生） -->
+        <section id="review-spotlight-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="col-span-full text-center text-gray-400 text-sm py-12">載入中...</div>
+        </section>
+    </main>
+
+    <footer class="bg-white border-t border-[#f2a7b5]/10 py-16 text-center">
+        <h2 class="text-3xl font-black tracking-tighter text-[#f2a7b5] italic mb-4">Glow Makeup.</h2>
+        <div class="flex justify-center items-center gap-6 mb-6">
+            <button onclick="location.href='mailto:contact@glowmakeup.test'" class="px-6 py-2 bg-[#f2a7b5] text-white font-bold rounded-full hover:bg-[#d88a99] transition-colors shadow-sm">聯絡我們</button>
+            <a href="#" class="text-gray-500 font-bold hover:text-[#f2a7b5] transition-colors">安全政策</a>
+        </div>
+        <p class="text-gray-400 text-sm">© 2026 美妝生活誌 - 妳的最美應援團</p>
+    </footer>
+
+    <script src="script.js?v=34"></script>
+</body>
+</html>

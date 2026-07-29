@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glow Makeup | 保養專欄</title>
+    <meta name="description" id="meta-description" content="Glow Makeup 保養專欄：美妝知識與實用技巧分享。">
+    <meta property="og:title" id="og-title" content="Glow Makeup | 保養專欄">
+    <meta property="og:description" id="og-description" content="Glow Makeup 保養專欄：美妝知識與實用技巧分享。">
+    <meta property="og:type" content="article">
+    <meta property="og:image" id="og-image" content="">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%84%3C/text%3E%3C/svg%3E">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-[#fff9f5] text-[#2d2d2d] selection:bg-[#f2a7b5] selection:text-white">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#f2a7b5]/10 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 w-full h-full flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <h1 class="text-3xl font-black tracking-tighter text-[#f2a7b5] italic cursor-pointer" onclick="location.href='index.html'">Glow Makeup.</h1>
+            </div>
+            <nav id="desktop-nav" class="hidden lg:flex items-center gap-8 text-xl font-bold h-full">
+                <!-- Dynamically populated from site-data.json via script.js -->
+            </nav>
+            <div class="flex items-center gap-6">
+                <div class="search-container">
+                    <span>&#x1F50D;</span>
+                    <input type="text" placeholder="搜尋美妝情報..." class="search-input">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="w-[92%] md:w-3/4 mx-auto px-4 py-12">
+        <div class="mb-8">
+            <a href="skincare-blog.html" class="inline-flex items-center gap-2 text-base font-bold text-gray-500 hover:text-[#f2a7b5] transition-colors group">
+                <span class="group-hover:-translate-x-1 transition-transform">&#10094;</span> 返回保養專欄
+            </a>
+        </div>
+
+        <div id="article-root">
+            <div class="text-gray-400 text-sm">載入中...</div>
+        </div>
+
+        <section id="more-section" class="mt-16 hidden">
+            <h3 class="text-2xl font-black mb-6 italic">More Articles / <span class="text-[#f2a7b5] text-lg not-italic">延伸閱讀</span></h3>
+            <div id="more-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5"></div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-[#f2a7b5]/10 py-16 text-center">
+        <h2 class="text-3xl font-black tracking-tighter text-[#f2a7b5] italic mb-4">Glow Makeup.</h2>
+        <div class="flex justify-center items-center gap-6 mb-6">
+            <button onclick="location.href='mailto:contact@glowmakeup.test'" class="px-6 py-2 bg-[#f2a7b5] text-white font-bold rounded-full hover:bg-[#d88a99] transition-colors shadow-sm">聯絡我們</button>
+            <a href="#" class="text-gray-500 font-bold hover:text-[#f2a7b5] transition-colors">安全政策</a>
+        </div>
+        <p class="text-gray-400 text-sm">© 2026 美妝生活誌 - 妳的最美應援團</p>
+    </footer>
+
+    <script src="script.js?v=34"></script>
+    <script>
+        function formatDate(d) {
+            return (d || '').replace(/-/g, '.');
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            const root = document.getElementById('article-root');
+
+            const articles = await getArticles();
+            const article = articles.find(a => a.id === id);
+
+            if (!article || !article.content) {
+                root.innerHTML = `
+                    <div class="bg-white rounded-[32px] p-12 shadow-sm border border-[#f2a7b5]/10 text-center">
+                        <p class="text-xl font-black text-gray-400 mb-2">找不到這篇文章</p>
+                        <p class="text-sm text-gray-400">可能已被移除，或連結不正確。</p>
+                    </div>`;
+                document.title = '找不到文章 | Glow Makeup';
+                return;
+            }
+
+            document.title = `${article.title} | Glow Makeup`;
+            document.getElementById('meta-description')?.setAttribute('content', article.excerpt || '');
+            document.getElementById('og-title')?.setAttribute('content', `${article.title} | Glow Makeup`);
+            document.getElementById('og-description')?.setAttribute('content', article.excerpt || '');
+            document.getElementById('og-image')?.setAttribute('content', article.image || '');
+
+            root.innerHTML = `
+                <article class="bg-white rounded-[32px] p-8 md:p-12 shadow-sm border border-[#f2a7b5]/10">
+                    <span class="bg-[#f2a7b5] text-white px-4 py-1 rounded-full text-xs font-bold tracking-widest">${article.tag ? '#' + article.tag : '保養專欄'}</span>
+                    <h1 class="text-2xl md:text-4xl font-black text-[#2d2d2d] leading-tight mt-4 mb-2">${article.title}</h1>
+                    <p class="text-sm text-gray-400 font-bold mb-8">${formatDate(article.date)}</p>
+                    <img src="${article.image}" alt="${article.title}" class="w-full rounded-3xl mb-8 object-cover max-h-[420px]" onerror="this.src=window.IMG_FALLBACK">
+                    <div class="article-body">${article.content}</div>
+                </article>`;
+
+            const more = articles.filter(a => a.id !== id).slice(0, 4);
+            if (more.length) {
+                document.getElementById('more-section').classList.remove('hidden');
+                document.getElementById('more-grid').innerHTML = more.map(a => `
+                    <a href="${a.url || 'skincare-blog.html'}" class="flex gap-4 bg-white p-4 rounded-3xl border border-[#f2a7b5]/10 shadow-sm hover:shadow-md transition-all">
+                        <img src="${a.image}" class="w-24 h-24 object-cover rounded-2xl shrink-0" alt="${a.title}" onerror="this.src=window.IMG_FALLBACK">
+                        <div class="min-w-0">
+                            <span class="text-xs font-black text-gray-400">${formatDate(a.date)}${a.tag ? ' · #' + a.tag : ''}</span>
+                            <h4 class="font-black text-sm leading-snug mt-1 line-clamp-2">${a.title}</h4>
+                        </div>
+                    </a>
+                `).join('');
+            }
+        });
+    </script>
+</body>
+</html>
