@@ -260,11 +260,11 @@ async function initRankings() {
                 </div>
                 <div class="flex-grow min-w-0">
                     <div class="flex items-center gap-2 mb-1">
-                        <span class="text-[10px] font-black text-[#f2a7b5] bg-[#f2a7b5]/10 px-2 py-0.5 rounded-full">${e.subcat}</span>
-                        <span class="text-[10px] font-bold text-gray-400">${e.mentions} 則提及</span>
+                        <span class="text-xs font-black text-[#f2a7b5] bg-[#f2a7b5]/10 px-2 py-0.5 rounded-full">${e.subcat}</span>
+                        <span class="text-xs font-bold text-gray-500">${e.mentions} 則提及</span>
                     </div>
                     <h4 class="font-black text-lg mb-1 truncate group-hover:text-[#f2a7b5] transition-colors" title="${e.name}">${e.name}</h4>
-                    <p class="text-xs font-black text-gray-400 uppercase tracking-wide mb-3">${e.brand}</p>
+                    <p class="text-sm font-black text-gray-500 uppercase tracking-wide mb-3">${e.brand}</p>
                     <div class="flex items-center gap-3">
                         <div class="flex-grow h-1.5 bg-gray-100 rounded-full overflow-hidden">
                             <div class="bg-[#f2a7b5] h-full" style="width: ${pct}%"></div>
@@ -635,7 +635,7 @@ async function renderSpotlightCards(containerId, mode) {
         const href = `item-detail.html?item=${encodeURIComponent(e.name)}&from=${mode}`;
         const badge = mode === 'board'
             ? `<span class="text-xs font-bold text-[#f2a7b5] bg-[#f2a7b5]/10 px-2.5 py-1 rounded-full">🔥 ${e.mentions} 則真實討論</span>`
-            : `<div class="flex items-center gap-1 bg-[#f2a7b5]/10 px-2 py-0.5 rounded-full text-xs font-bold text-[#f2a7b5]"><span>★ ${e.composite.toFixed(1)}</span><span class="text-[10px] text-gray-400 font-normal">(${e.mentions} 則提及)</span></div>`;
+            : `<div class="flex items-center gap-1 bg-[#f2a7b5]/10 px-2 py-0.5 rounded-full text-xs font-bold text-[#f2a7b5]"><span>★ ${e.composite.toFixed(1)}</span><span class="text-xs text-gray-500 font-normal">(${e.mentions} 則提及)</span></div>`;
         const cta = mode === 'board' ? '進入看詳細看板介紹與知識點 ➔' : '查看各項性能指標網友綜合得分 ➔';
         const quote = e.testimonial
             ? `「${e.testimonial.text.slice(0, 70)}${e.testimonial.text.length > 70 ? '…' : ''}」`
@@ -648,7 +648,7 @@ async function renderSpotlightCards(containerId, mode) {
                 <div class="flex flex-col justify-between py-2">
                     <div>
                         <div class="flex justify-between items-center gap-2 mb-2">
-                            <span class="text-xs font-black tracking-widest text-gray-400 uppercase">${e.brand}</span>
+                            <span class="text-xs font-black tracking-widest text-gray-500 uppercase">${e.brand}</span>
                             ${badge}
                         </div>
                         <h3 class="font-black text-xl text-[#2d2d2d] group-hover:text-[#f2a7b5] transition-colors mb-2">${e.name}</h3>
@@ -696,7 +696,7 @@ async function renderSubcatTop5(containerId, subcat) {
                     </div>
                     <div class="flex-grow w-full">
                         <div class="flex items-center justify-between mb-2">
-                            <span class="text-xs font-black text-gray-400 uppercase tracking-widest">${e.brand}</span>
+                            <span class="text-xs font-black text-gray-500 uppercase tracking-widest">${e.brand}</span>
                             <span class="text-sm font-black text-[#e05a47]">★ ${e.composite.toFixed(1)}（${e.mentions || 0} 則）</span>
                         </div>
                         <a href="${href}" class="block hover:text-[#f2a7b5] transition-colors"><h3 class="text-2xl font-black mb-6">${e.name}</h3></a>
@@ -771,11 +771,11 @@ function initSentimentAnalysis(side, item) {
 
     const chartUrl = `https://quickchart.io/chart?c={type:'pie',data:{labels:['好感度','其餘'],datasets:[{data:[${favorability},${unfavorability}],backgroundColor:['%23f2a7b5','%23eeeeee']}]},options:{legend:{display:false}}}`;
 
-    const quote = item.testimonial ? `<p class="text-[10px] text-gray-500 italic leading-snug px-1">「${item.testimonial.text.slice(0, 60)}${item.testimonial.text.length > 60 ? '…' : ''}」</p>` : '';
+    const quote = item.testimonial ? `<p class="text-[11px] text-gray-600 italic leading-snug px-1">「${item.testimonial.text.slice(0, 60)}${item.testimonial.text.length > 60 ? '…' : ''}」</p>` : '';
 
     panel.innerHTML = `
         <div class="animate-fade-in flex flex-col gap-4 h-full">
-            <h4 class="text-xs font-black text-gray-400 uppercase tracking-widest text-center border-b border-gray-50 pb-2">${label} 好感度</h4>
+            <h4 class="text-xs font-black text-gray-500 uppercase tracking-widest text-center border-b border-gray-50 pb-2">${label} 好感度</h4>
             <div class="py-4">
                 <img src="${chartUrl}" class="sentiment-chart" alt="Sentiment Chart">
                 <div class="flex justify-between mt-2 px-2">
@@ -784,7 +784,7 @@ function initSentimentAnalysis(side, item) {
                 </div>
             </div>
             <div>
-                <p class="text-[10px] font-black text-gray-400 mb-3 text-center uppercase tracking-tighter">真實指標強弱項</p>
+                <p class="text-[10px] font-black text-gray-500 mb-3 text-center uppercase tracking-tighter">真實指標強弱項</p>
                 <div class="tag-cloud">
                     ${pros.map(([name, s]) => `<span class="sentiment-tag tag-pro" style="font-size: ${Math.round(s * 7)}px">${name}</span>`).join('')}
                     ${cons.map(([name, s]) => `<span class="sentiment-tag tag-con" style="font-size: ${Math.round(s * 7)}px">${name}</span>`).join('')}
@@ -792,7 +792,7 @@ function initSentimentAnalysis(side, item) {
             </div>
             ${quote}
             <div class="mt-auto pt-4 text-center">
-                <p class="text-[9px] text-gray-300 italic">資料來源：Glow Makeup 真實社群評分數據</p>
+                <p class="text-[9px] text-gray-400 italic">資料來源：Glow Makeup 真實社群評分數據</p>
             </div>
         </div>
     `;

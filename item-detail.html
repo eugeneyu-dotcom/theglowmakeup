@@ -147,7 +147,7 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="script.js?v=37"></script>
+    <script src="script.js?v=38"></script>
     <script>
         // Global State & Setup
         window.selectedSkinVal = 'fair';
@@ -311,11 +311,23 @@
                 const enrichedDetails = getItemEnrichedDetails(targetItem, window.isMakeupGlobal);
 
                 // Render dynamic description and hashtags (always visible)
+                // 原始商品文案有些直接是官網 HTML（含 <p>、<br>、style 屬性等），
+                // 用 textContent 塞進去會把標籤原封不動當純文字顯示出來，
+                // 所以先把段落/換行標籤轉成真正的換行，再把其餘標籤整個剝掉；
+                // 部分來源文案在擷取時被截斷，會留下沒有 ">" 收尾的殘缺標籤（例如
+                // 結尾是 "<br..."），一般的標籤 regex 抓不到，所以最後再補一次
+                // 「字串結尾殘缺標籤」與「殘留刪節號」的清除
                 let cleanDesc = enrichedDetails.desc
                     .replace(/<br\s*\/?>/gi, '\n')
-                    .replace(/\n{2,}/g, '\n\n')
+                    .replace(/<\/p>/gi, '\n\n')
+                    .replace(/<[^>]+>/g, '')
+                    .replace(/<[a-zA-Z!/][^<]*$/, '')
+                    .replace(/\.{3,}\s*$/, '')
+                    .replace(/\n{3,}/g, '\n\n')
                     .trim();
-                document.getElementById('product-description').textContent = cleanDesc;
+                const descEl = document.getElementById('product-description');
+                descEl.textContent = cleanDesc;
+                descEl.classList.add('whitespace-pre-line');
 
                 // 網友評價匯總：由真實評論人工彙整而成，只有這個品項真的有匯總資料才顯示，
                 // 沒有的品項（尚未彙整/評論量不足）整塊隱藏，不用假內容填版面
