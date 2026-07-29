@@ -771,7 +771,7 @@ function initSentimentAnalysis(side, item) {
 
     const chartUrl = `https://quickchart.io/chart?c={type:'pie',data:{labels:['好感度','其餘'],datasets:[{data:[${favorability},${unfavorability}],backgroundColor:['%23f2a7b5','%23eeeeee']}]},options:{legend:{display:false}}}`;
 
-    const quote = item.testimonial ? `<p class="text-[11px] text-gray-600 italic leading-snug px-1">「${item.testimonial.text.slice(0, 60)}${item.testimonial.text.length > 60 ? '…' : ''}」</p>` : '';
+    const quote = item.testimonial ? `<p class="text-xs text-gray-700 italic leading-relaxed px-1">「${item.testimonial.text.slice(0, 60)}${item.testimonial.text.length > 60 ? '…' : ''}」</p>` : '';
 
     panel.innerHTML = `
         <div class="animate-fade-in flex flex-col gap-4 h-full">
@@ -846,7 +846,7 @@ async function updateBattleRadarChart(subcategory, leftItem, rightItem) {
         options: {
             legend: {
                 labels: {
-                    fontSize: 12,
+                    fontSize: 15,
                     fontStyle: 'bold'
                 }
             },
@@ -858,19 +858,19 @@ async function updateBattleRadarChart(subcategory, leftItem, rightItem) {
                     display: false
                 },
                 pointLabels: {
-                    fontSize: 12,
+                    fontSize: 16,
                     fontStyle: 'bold'
                 }
             }
         }
     };
 
-    const chartUrl = `https://quickchart.io/chart?c=${encodeURIComponent(JSON.stringify(chartConfig))}`;
+    const chartUrl = `https://quickchart.io/chart?width=560&height=460&c=${encodeURIComponent(JSON.stringify(chartConfig))}`;
 
     container.innerHTML = `
         <div class="animate-fade-in w-full flex flex-col items-center gap-4">
-            <h4 class="text-xs font-black text-gray-400 uppercase tracking-widest text-center border-b border-gray-50 pb-2 w-full">指標效能比較（真實分數）</h4>
-            <img src="${chartUrl}" class="w-full object-contain" style="max-height: 280px;" alt="Battle Radar Chart">
+            <h4 class="text-xs font-black text-gray-500 uppercase tracking-widest text-center border-b border-gray-50 pb-2 w-full">指標效能比較（真實分數）</h4>
+            <img src="${chartUrl}" class="w-full object-contain" style="max-height: 380px;" alt="Battle Radar Chart">
         </div>
     `;
 }
