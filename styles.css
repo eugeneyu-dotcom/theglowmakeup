@@ -175,6 +175,14 @@ nav {
     border: 1px solid rgba(242, 167, 181, 0.1);
 }
 
+/* 選中的問卷卡片：用 !important 蓋掉卡片本身的 border-gray-100，
+   避免跟 Tailwind CDN 動態產生的 border-[#f2a7b5] 同優先權互相蓋掉，
+   點擊後顏色沒有真的固定下來、使用者以為自己沒選到的問題 */
+.option-card.selected {
+    border-color: #f2a7b5 !important;
+    background-color: #fff5f7;
+}
+
 /* Sentiment Panels */
 .sentiment-panel {
     background: white;
