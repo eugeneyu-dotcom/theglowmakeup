@@ -9,7 +9,7 @@ from urllib.parse import quote
 from xml.sax.saxutils import escape
 
 BASE = os.path.dirname(os.path.abspath(__file__))
-SITE_URL = "https://theglowmakeup.vercel.app"  # Vercel 部署網域（gh repo view 查到的 homepageUrl）
+SITE_URL = "https://theglowmakeup.org"  # 正式網域（Vercel Domains 設定的自訂網域，www 會 redirect 到這個 apex）
 
 STATIC_PAGES = [
     "index.html", "news.html", "skincare-blog.html",
