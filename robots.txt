@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://REPLACE-WITH-REAL-DOMAIN.example/sitemap.xml
+Sitemap: https://theglowmakeup.vercel.app/sitemap.xml

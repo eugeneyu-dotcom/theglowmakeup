@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """產生 sitemap.xml（靜態頁 + 每個子分類的美妝看板/精選評比頁 + 每個商品頁）。
 
-⚠️ SITE_URL 目前是佔位網域，正式上線前必須換成真實網域再重跑。
 用法：/usr/bin/python3 generate_sitemap.py
 """
 import json
@@ -10,7 +9,7 @@ from urllib.parse import quote
 from xml.sax.saxutils import escape
 
 BASE = os.path.dirname(os.path.abspath(__file__))
-SITE_URL = "https://REPLACE-WITH-REAL-DOMAIN.example"  # 上線前務必替換成真實網域
+SITE_URL = "https://theglowmakeup.vercel.app"  # Vercel 部署網域（gh repo view 查到的 homepageUrl）
 
 STATIC_PAGES = [
     "index.html", "news.html", "skincare-blog.html",
@@ -50,8 +49,7 @@ def main():
     out_path = os.path.join(BASE, "sitemap.xml")
     with open(out_path, "w", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")
-    print(f"✅ sitemap.xml 已產生，共 {len(urls)} 個網址")
-    print(f"⚠️  網域目前是佔位字串 {SITE_URL}，正式網域確定後請改 SITE_URL 重跑此腳本")
+    print(f"✅ sitemap.xml 已產生，共 {len(urls)} 個網址（網域：{SITE_URL}）")
 
 
 if __name__ == "__main__":
