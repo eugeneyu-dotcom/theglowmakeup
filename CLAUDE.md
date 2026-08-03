@@ -56,8 +56,14 @@ Glow Up/
 ├── test_google.py              ← Google SerpAPI 爬蟲
 ├── test_xhs.py                 ← 小紅書 Apify 爬蟲（備用）
 ├── clean_data.py               ← 廣告過濾（送 Claude 評分前先跑）
-└── score_reviews.py            ← Claude 評分主程式
+├── score_reviews.py            ← Claude 評分主程式
+└── generate_article_image.py   ← 保養專欄文章封面圖生圖工具（見下方說明）
 ```
+
+**文章封面圖生成**：這個專案有自己的 Maxora 生圖 API 可用，憑證在 `.env` 的
+`CF_ID`/`CF_SECRET`，工具是根目錄的 `generate_article_image.py`（`/usr/bin/python3` 跑）。
+新增文章沒有封面圖時，**不要因為找不到圖片生成工具就卡住或叫使用者自己想辦法**——
+用法、prompt 風格慣例見 `.claude/skills/glowup-article-images/SKILL.md`。
 
 ---
 
