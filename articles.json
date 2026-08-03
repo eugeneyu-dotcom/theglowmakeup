@@ -3,6 +3,7 @@
  "articles": [
   {
    "id": "lotion-layering-pilling",
+   "concerns": ["搓泥卡粉厚重"],
    "date": "2026-07-24",
    "tag": "乳液",
    "category": "保養",
@@ -14,6 +15,7 @@
   },
   {
    "id": "cleansing-balm-emulsify-guide",
+   "concerns": ["新手不知道怎麼挑"],
    "date": "2026-07-24",
    "tag": "卸妝膏",
    "category": "清潔",
@@ -25,6 +27,7 @@
   },
   {
    "id": "exfoliation-beginner-guide",
+   "concerns": ["致痘毛孔粉刺", "新手不知道怎麼挑"],
    "date": "2026-07-24",
    "tag": "去角質",
    "category": "清潔",
@@ -36,6 +39,7 @@
   },
   {
    "id": "facial-cleanser-tightness-guide",
+   "concerns": ["脫皮乾燥‧刺激泛紅"],
    "date": "2026-07-24",
    "tag": "洗面乳",
    "category": "清潔",
@@ -47,6 +51,7 @@
   },
   {
    "id": "eye-lip-remover-irritation-guide",
+   "concerns": ["脫皮乾燥‧刺激泛紅"],
    "date": "2026-07-24",
    "tag": "眼唇卸妝液",
    "category": "清潔",
@@ -58,6 +63,7 @@
   },
   {
    "id": "lip-balm-peeling-myths-guide",
+   "concerns": ["脫皮乾燥‧刺激泛紅"],
    "date": "2026-07-24",
    "tag": "護唇膏",
    "category": "保養",
@@ -69,6 +75,7 @@
   },
   {
    "id": "face-cream-review-2026",
+   "concerns": ["搓泥卡粉厚重"],
    "date": "2026-07-24",
    "tag": "面霜",
    "category": "保養",
@@ -80,6 +87,7 @@
   },
   {
    "id": "cleansing-oil-emulsify",
+   "concerns": ["致痘毛孔粉刺"],
    "date": "2026-07-18",
    "tag": "清潔",
    "title": "卸妝油粉刺長不停？皮膚科醫師點出致痘關鍵，這樣乳化洗出乾淨毛孔",
@@ -91,6 +99,7 @@
   },
   {
    "id": "eyebrow-golden-ratio",
+   "concerns": ["新手不知道怎麼挑"],
    "date": "2026-07-15",
    "tag": "眉妝",
    "title": "手殘黨必看畫眉毛教學！掌握黃金比例與新手眉筆推薦，不對稱眉毛也有救",
@@ -102,6 +111,7 @@
   },
   {
    "id": "waterproof-summer-makeup",
+   "concerns": ["脫妝不持久‧暈染掉色"],
    "date": "2026-07-10",
    "tag": "底妝",
    "title": "拒絕土石流！夏天脫妝怎麼辦？從慘痛底妝危機經驗說起",
@@ -113,6 +123,7 @@
   },
   {
    "id": "tired-glam-makeup-trend",
+   "concerns": ["想學新妝容"],
    "date": "2026-07-05",
    "tag": "妝容趨勢",
    "title": "掌握aespa成員Winter的妝容精髓！解析爆紅倦怠感妝容怎麼畫",
@@ -124,6 +135,7 @@
   },
   {
    "id": "concealer-stick-vs-liquid",
+   "concerns": ["新手不知道怎麼挑"],
    "date": "2026-06-28",
    "tag": "遮瑕",
    "title": "搞不懂遮瑕膏和遮瑕液的差別？超詳細遮瑕種類與分區遮瑕全攻略",
@@ -135,6 +147,7 @@
   },
   {
    "id": "bare-faced-makeup-2026",
+   "concerns": ["想學新妝容"],
    "date": "2026-06-20",
    "tag": "妝容趨勢",
    "title": "擺脫厚重妝感！2026上半年妝容趨勢全解析，靠這幾招畫出高級感偽素顏",
@@ -146,6 +159,7 @@
   },
   {
    "id": "toner-guide-2026",
+   "concerns": ["新手不知道怎麼挑"],
    "date": "2026-07-21",
    "tag": "保養",
    "category": "保養",
@@ -157,6 +171,7 @@
   },
   {
    "id": "lip-makeup-comparison",
+   "concerns": ["脫妝不持久‧暈染掉色", "新手不知道怎麼挑"],
    "date": "2026-07-19",
    "tag": "唇妝",
    "category": "化妝",
@@ -168,6 +183,7 @@
   },
   {
    "id": "primer-caking-whitecast",
+   "concerns": ["搓泥卡粉厚重"],
    "date": "2026-07-17",
    "tag": "底妝",
    "category": "化妝",
@@ -179,6 +195,7 @@
   },
   {
    "id": "cushion-foundation-guide",
+   "concerns": ["搓泥卡粉厚重", "新手不知道怎麼挑"],
    "date": "2026-07-14",
    "tag": "底妝",
    "category": "化妝",
@@ -190,6 +207,7 @@
   },
   {
    "id": "eyeliner-beginner-guide",
+   "concerns": ["脫妝不持久‧暈染掉色", "新手不知道怎麼挑"],
    "date": "2026-07-12",
    "tag": "眼妝",
    "category": "化妝",
@@ -201,6 +219,7 @@
   },
   {
    "id": "mascara-selection-guide",
+   "concerns": ["脫妝不持久‧暈染掉色", "新手不知道怎麼挑"],
    "date": "2026-07-08",
    "tag": "眼妝",
    "category": "化妝",
@@ -212,6 +231,7 @@
   },
   {
    "id": "setting-method-comparison",
+   "concerns": ["脫妝不持久‧暈染掉色", "新手不知道怎麼挑"],
    "date": "2026-07-06",
    "tag": "底妝",
    "category": "化妝",
@@ -223,6 +243,7 @@
   },
   {
    "id": "sunscreen-pilling-guide",
+   "concerns": ["搓泥卡粉厚重"],
    "date": "2026-07-03",
    "tag": "防曬",
    "category": "保養",
@@ -234,6 +255,7 @@
   },
   {
    "id": "blush-contour-clean-glam",
+   "concerns": ["想學新妝容"],
    "date": "2026-07-31",
    "category": "化妝",
    "tag": "腮紅",
@@ -245,6 +267,7 @@
   },
   {
    "id": "serum-am-pm-guide",
+   "concerns": ["新手不知道怎麼挑"],
    "date": "2026-07-30",
    "category": "保養",
    "tag": "精華液",
@@ -256,6 +279,7 @@
   },
   {
    "id": "sunburn-mask-guide",
+   "concerns": ["脫皮乾燥‧刺激泛紅"],
    "date": "2026-07-29",
    "category": "保養",
    "tag": "面膜",
@@ -267,6 +291,7 @@
   },
   {
    "id": "eye-cream-dark-circle-guide",
+   "concerns": ["新手不知道怎麼挑"],
    "date": "2026-07-28",
    "category": "保養",
    "tag": "眼霜",

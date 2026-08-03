@@ -33,7 +33,7 @@ let articlesCache = null;
 async function getArticles() {
     if (articlesCache) return articlesCache;
     try {
-        const res = await fetch('articles.json?v=35');
+        const res = await fetch('articles.json?v=36');
         const data = await res.json();
         articlesCache = (data.articles || []).slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
         return articlesCache;
@@ -321,38 +321,55 @@ function nextSlide() {
 
 // 2. Quiz Logic (首頁「今天需要什麼美妝協助嗎」— 3 類別各自接不同的第二步追問，
 //    第二步選項與最終建議都串真實資料 articles.json / scores-data.json，不使用假造內容)
-// 底妝品項 hashtags（site-data.json）裡實際會出現的膚質標籤，用來判斷第三題要不要問膚質、
-// 以及依膚質篩選品項；只挑這幾個明確的膚質詞，避免跟「控油」「不卡紋」等其他屬性標籤混在一起
-const SKIN_TYPE_TAGS = ['油肌', '乾肌', '混合肌', '中性肌', '敏感肌'];
+
+// 「挑選底妝困難」分類的第三題：把「妳最在意的問題是？」對應到 scores-data.json 裡
+// 該子分類真實存在的指標鍵名（來源：csv/Indicator.csv，鍵名已核對過 scores-data.json 實際資料），
+// 並附上跟該痛點相關的文章 id（來自 articles.json，供結果頁下方「妳可能也想看」使用）
+const PAIN_POINT_CONFIG = {
+    '粉底液': [
+        { label: '容易出油脫妝', indicator: '控油力', articles: ['waterproof-summer-makeup', 'setting-method-comparison'] },
+        { label: '蓋不住痘疤瑕疵', indicator: '遮瑕力', articles: ['concealer-stick-vs-liquid'] },
+        { label: '感覺厚重不透氣', indicator: '輕透度', articles: ['bare-faced-makeup-2026'] },
+        { label: '一直卡粉飛粉', indicator: '成膜度', articles: ['primer-caking-whitecast', 'cushion-foundation-guide'] }
+    ],
+    '氣墊粉餅': [
+        { label: '容易出油脫妝', indicator: '控油力', articles: ['cushion-foundation-guide'] },
+        { label: '蓋不住痘疤瑕疵', indicator: '遮瑕力', articles: ['cushion-foundation-guide', 'concealer-stick-vs-liquid'] },
+        { label: '感覺厚重悶', indicator: '輕透度', articles: ['bare-faced-makeup-2026'] },
+        { label: '一直卡粉', indicator: '成膜度', articles: ['cushion-foundation-guide', 'setting-method-comparison'] }
+    ],
+    '遮瑕膏': [
+        { label: '蓋不住黑眼圈/痘疤', indicator: '遮蓋力', articles: ['concealer-stick-vs-liquid'] },
+        { label: '用一下就脫落', indicator: '持久度', articles: ['concealer-stick-vs-liquid'] },
+        { label: '顏色會變黃暗沉', indicator: '不暗沉變色', articles: ['concealer-stick-vs-liquid'] },
+        { label: '卡在細紋裡', indicator: '抗紋力', articles: ['concealer-stick-vs-liquid'] }
+    ],
+    '妝前乳': [
+        { label: '容易出油', indicator: '控油力', articles: ['primer-caking-whitecast'] },
+        { label: '毛孔還是很明顯', indicator: '毛孔隱形', articles: ['primer-caking-whitecast'] },
+        { label: '之後上妝會卡粉', indicator: '底妝相容性', articles: ['primer-caking-whitecast'] },
+        { label: '膚色不均暗沉', indicator: '抗暗沉', articles: ['primer-caking-whitecast'] }
+    ]
+};
+const PAIN_POINT_MIN_MENTIONS = 10;
 
 const HOME_QUIZ_CONFIG = {
     '缺乏保養知識': {
-        question: '妳最想了解哪個保養主題？',
-        options: ['保養', '清潔', '化妝'],
+        question: '妳最近的困擾是什麼？',
+        options: ['新手不知道怎麼挑', '搓泥卡粉厚重', '脫妝不持久‧暈染掉色', '脫皮乾燥‧刺激泛紅', '想學新妝容', '致痘毛孔粉刺'],
         async hasData(value) {
             const articles = await getArticles();
-            return articles.some(a => a.category === value);
+            return articles.some(a => (a.concerns || []).includes(value));
         },
-        // 第三題：該分類底下的文章標籤夠多元（≥2 個不同標籤）才追問，避免選項只有1個近似重複的假選擇
-        async step3(value) {
+        async buildResult(value) {
             const articles = await getArticles();
-            const tags = [...new Set(articles.filter(a => a.category === value).map(a => a.tag).filter(Boolean))];
-            if (tags.length < 2) return null;
-            return { question: '妳想更深入了解哪個主題？', options: tags };
-        },
-        async buildResult(value, tag) {
-            const articles = await getArticles();
-            let matched = articles.filter(a => a.category === value);
-            if (tag) matched = matched.filter(a => a.tag === tag);
-            matched = matched.slice(0, 2);
+            const matched = articles.filter(a => (a.concerns || []).includes(value)).slice(0, 3);
             const list = matched.length
                 ? matched.map(a => `<a href="${a.url}" class="text-[#f2a7b5] font-bold block mt-2">${a.title} ➔</a>`).join('')
                 : '<p class="text-gray-400 text-sm mt-2">此主題文章準備中</p>';
-            const label = tag || value;
-            const categoryParam = encodeURIComponent(value);
             return {
-                title: `為妳推薦：「${label}」主題文章`,
-                html: `${list}<br><a href="skincare-blog.html?category=${categoryParam}" class="text-[#f2a7b5] font-bold">查看全部「${value}」文章 ➔</a>`
+                title: `為妳推薦：「${value}」相關文章`,
+                html: `${list}<br><a href="skincare-blog.html" class="text-[#f2a7b5] font-bold">查看全部保養文章 ➔</a>`
             };
         }
     },
@@ -362,34 +379,42 @@ const HOME_QUIZ_CONFIG = {
         async hasData(value) {
             return (await topItemsForSubcat(value, 1)).length > 0;
         },
-        // 第三題：該子分類底下的品項若涵蓋 ≥2 種真實膚質標籤（來自 site-data.json 的
-        // item.hashtags，不是憑感覺編的選項），才追問膚質，幫忙篩到更貼合的品項
+        // 第三題：痛點清單是固定表（見上方 PAIN_POINT_CONFIG），4 個子分類都已定義完整選項，固定要問
         async step3(value) {
-            const [scores, siteData] = await Promise.all([getScoresData(), getSiteData()]);
-            if (!scores) return null;
-            const items = Object.values(scores).filter(e => e.subcat === value && e.composite != null);
-            const present = new Set();
-            items.forEach(e => {
-                findItemHashtags(siteData, value, e.brand, e.name).forEach(tag => {
-                    if (SKIN_TYPE_TAGS.includes(tag)) present.add(tag);
-                });
-            });
-            if (present.size < 2) return null;
-            return { question: '妳的膚質是？', options: SKIN_TYPE_TAGS.filter(t => present.has(t)) };
+            const painPoints = PAIN_POINT_CONFIG[value];
+            if (!painPoints) return null;
+            return { question: '妳最在意的問題是？', options: painPoints.map(p => p.label) };
         },
-        async buildResult(value, skinType) {
-            const [scores, siteData] = await Promise.all([getScoresData(), getSiteData()]);
-            let candidates = scores ? Object.values(scores).filter(e => e.subcat === value && e.composite != null) : [];
-            if (skinType) {
-                candidates = candidates.filter(e => findItemHashtags(siteData, value, e.brand, e.name).includes(skinType));
-            }
-            candidates.sort((a, b) => b.composite - a.composite);
-            const items = candidates.slice(0, 2).map(e => ({ ...e, img: findItemImage(siteData, value, e.brand, e.name) }));
+        async buildResult(value, painPointLabel) {
+            const conf = PAIN_POINT_CONFIG[value] || [];
+            const pp = conf.find(p => p.label === painPointLabel);
+
+            const items = pp ? await topItemsForSubcatByIndicator(value, pp.indicator, 2, PAIN_POINT_MIN_MENTIONS) : [];
             const list = items.length
-                ? items.map(e => `<a href="item-detail.html?item=${encodeURIComponent(e.name)}&from=board" class="text-[#f2a7b5] font-bold block mt-2">${e.brand} ${e.name}（★${e.composite.toFixed(1)}）➔</a>`).join('')
+                ? items.map(e => {
+                    const score = e.indicators[pp.indicator];
+                    return `<a href="item-detail.html?item=${encodeURIComponent(e.name)}&from=board" class="text-[#f2a7b5] font-bold block mt-2">${e.brand} ${e.name}（${pp.indicator} ${score.toFixed(1)} <span class="text-gray-400 font-normal text-xs">‧總分 ${e.composite.toFixed(1)}</span>）➔</a>`;
+                }).join('')
                 : '<p class="text-gray-400 text-sm mt-2">此分類評分資料建置中</p>';
-            const label = skinType ? `${skinType}適用「${value}」` : `社群高分「${value}」`;
-            return { title: `為妳推薦：${label}`, html: `依真實社群評分，這幾款最受好評：${list}` };
+
+            // 結果下方附相關文章，承接「還想多了解一點」的訪客；沒有可用文章的組合直接不顯示這區塊，
+            // 不放「準備中」佔位（商品推薦本身已是完整結果，不需要為了硬塞文章而顯得像未完成）
+            let articlesHtml = '';
+            if (pp && pp.articles && pp.articles.length) {
+                const allArticles = await getArticles();
+                const related = pp.articles.map(id => allArticles.find(a => a.id === id)).filter(Boolean).slice(0, 2);
+                if (related.length) {
+                    articlesHtml = `
+                        <div class="mt-6 pt-6 border-t border-gray-100 text-left">
+                            <p class="text-xs font-black text-gray-400 uppercase tracking-widest mb-2">📖 妳可能也想看</p>
+                            ${related.map(a => `<a href="${a.url}" class="text-[#f2a7b5] font-bold block mt-1 text-sm">${a.title} ➔</a>`).join('')}
+                        </div>
+                    `;
+                }
+            }
+
+            const label = pp ? `「${pp.indicator}」評價最好的${value}` : `社群高分「${value}」`;
+            return { title: `為妳推薦：${label}`, html: `依真實社群評分，這幾款最受好評：${list}${articlesHtml}` };
         }
     },
     '美妝工具選擇': {
@@ -591,12 +616,6 @@ function findItemImage(siteData, subcategory, brand, name) {
     return (found && (found.image || found.img)) || '';
 }
 
-function findItemHashtags(siteData, subcategory, brand, name) {
-    const items = siteData?.subcategoryDetails?.[subcategory]?.items || [];
-    const found = items.find(it => it.brand === brand && it.name === name);
-    return (found && found.hashtags) || [];
-}
-
 // 取該子分類真實綜合分前 N 名，各自帶上圖片
 async function topItemsForSubcat(subcategory, limit = 2) {
     const [scores, siteData] = await Promise.all([getScoresData(), getSiteData()]);
@@ -609,6 +628,24 @@ async function topItemsForSubcat(subcategory, limit = 2) {
     }));
 }
 async function topTwoForSubcat(subcategory) { return topItemsForSubcat(subcategory, 2); }
+
+// 依指定指標分數（而非總分）排序取前 N 名，用於首頁問卷「痛點→指標」推薦。
+// 強制套用最低樣本門檻：切到單一指標排序後，樣本量小的品項在該指標飆高分的風險比總分排序更高
+// （CLAUDE.md 已記錄過 Bobbi Brown 隔離霜 1 則評論卻顯示 5.0 分的問題），不能不設下限。
+async function topItemsForSubcatByIndicator(subcategory, indicatorKey, limit = 2, minMentions = 10) {
+    const [scores, siteData] = await Promise.all([getScoresData(), getSiteData()]);
+    if (!scores) return [];
+    const candidates = Object.values(scores).filter(e =>
+        e.subcat === subcategory &&
+        e.indicators && e.indicators[indicatorKey] != null &&
+        (e.mentions || 0) >= minMentions
+    );
+    candidates.sort((a, b) => b.indicators[indicatorKey] - a.indicators[indicatorKey]);
+    return candidates.slice(0, limit).map(e => ({
+        ...e,
+        img: findItemImage(siteData, subcategory, e.brand, e.name)
+    }));
+}
 
 // 取全站真實綜合分前 N 名（需評論量足夠，同首頁 Top5 榜單的門檻），跨子分類
 async function topItemsOverall(limit = 4, minMentions = RANKING_MIN_MENTIONS) {
