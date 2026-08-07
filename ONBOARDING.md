@@ -32,10 +32,15 @@ Glow Up 是一個美妝內容網站（**theglowmakeup.org**），從 Threads、G
 
 ### 需要交接的帳號存取權（我這邊沒辦法直接開，要你自己去後台加）
 
+跟 `Old_Content_Farm` 那 4 個站台的代班交接方式一致（見該專案 `Editor_SOP.md`）：
+**同事只需要 GitHub 協作者權限，Vercel 不用開**。Vercel 接 GitHub、推到 `main`
+就自動部署，同事 `git push` 完就算做完了，不需要碰 Vercel 後台。Vercel 帳號/專案
+權限留給 Eugene 自己管理即可。
+
 | 平台 | 需要做什麼 |
 |---|---|
-| GitHub (`eugeneyu-dotcom/theglowmakeup`) | Settings → Collaborators，加對方帳號 |
-| Vercel 專案 | Project Settings → Members，加對方帳號 |
+| GitHub (`eugeneyu-dotcom/theglowmakeup`) | Settings → Collaborators，加對方帳號（**唯一必要的一項**） |
+| Vercel 專案 | 不需要加，除非同事要直接管理環境變數、自訂網域設定，或要自己看部署 log／手動 rollback |
 | 網域註冊商（theglowmakeup.org） | 視需要加共同管理，或至少確保交接人知道到期日/續約方式 |
 
 ---
