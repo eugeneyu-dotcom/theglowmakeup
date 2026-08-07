@@ -24,18 +24,32 @@ Glow Up 是一個美妝內容網站（**theglowmakeup.org**），從 Threads、G
 ## 2. 部署現況（已確認存活，2026-08-06）
 
 - **正式網域**：https://theglowmakeup.org（`www` 是正式版，根網域 308 轉址過去）。
-- **GitHub**：`https://github.com/eugeneyu-dotcom/theglowmakeup`（**Private**）。只放
-  網站會直接讀取的檔案（html/js/css/json/py 腳本/assets 圖片），約 38MB。
+- **GitHub**：`https://github.com/eugeneyu-dotcom/theglowmakeup`（**2026-08-06 改為 Public**，
+  原因見下方說明）。只放網站會直接讀取的檔案（html/js/css/json/py 腳本/assets 圖片），約 38MB。
 - **Vercel**：接 GitHub，推到 `main` 就自動部署，不需要手動操作。剛才驗證過
   正式站的 `script.js?v=42` 跟本機最新 commit 完全一致，自動部署正常運作。
 - **DNS**：已指到 Vercel（A/CNAME 記錄），沒有另外用 nameserver 託管。
 
+### 為什麼 repo 是 Public（跟一開始的規劃不一樣）
+
+一開始把這個 repo 設成 Private，跟 `Old_Content_Farm` 那 4 個站台（GitHub repo 是 Public）
+不一樣。結果同事的帳號 push 進來後，Vercel 寄信說「不是 team 成員，不會自動部署」——
+這是 Vercel Hobby（免費）方案的實際限制：**Public repo 的話，任何有協作者權限的人 push
+都會自動觸發部署；但 Private repo 只有專案擁有者本人或真正的 Vercel team 成員（要付費
+升級 Pro 才能加）push 才會觸發部署，光有 GitHub 協作者權限不夠**。
+
+所以改成 Public，做法才跟 `Old_Content_Farm` 一致，同事只要有 GitHub 協作者權限，
+push 完 Vercel 就會自動部署，不需要額外開 Vercel 權限、也不用升級付費方案。改成 Public
+前已經確認過 repo 裡沒有任何真實憑證值（`.env`、session token 都不在 git 裡，程式碼裡
+只有環境變數「名稱」，沒有值）。
+
 ### 需要交接的帳號存取權（我這邊沒辦法直接開，要你自己去後台加）
 
-跟 `Old_Content_Farm` 那 4 個站台的代班交接方式一致（見該專案 `Editor_SOP.md`）：
-**同事只需要 GitHub 協作者權限，Vercel 不用開**。Vercel 接 GitHub、推到 `main`
-就自動部署，同事 `git push` 完就算做完了，不需要碰 Vercel 後台。Vercel 帳號/專案
-權限留給 Eugene 自己管理即可。
+| 平台 | 需要做什麼 |
+|---|---|
+| GitHub (`eugeneyu-dotcom/theglowmakeup`) | Settings → Collaborators，加對方帳號（**唯一必要的一項**） |
+| Vercel 專案 | 不需要加，除非同事要直接管理環境變數、自訂網域設定，或要自己看部署 log／手動 rollback |
+| 網域註冊商（theglowmakeup.org） | 視需要加共同管理，或至少確保交接人知道到期日/續約方式 |
 
 | 平台 | 需要做什麼 |
 |---|---|
