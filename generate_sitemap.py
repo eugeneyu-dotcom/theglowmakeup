@@ -12,7 +12,7 @@ BASE = os.path.dirname(os.path.abspath(__file__))
 SITE_URL = "https://theglowmakeup.org"  # 正式網域（Vercel Domains 設定的自訂網域，www 會 redirect 到這個 apex）
 
 STATIC_PAGES = [
-    "index.html", "news.html", "skincare-blog.html",
+    "news.html", "skincare-blog.html",
     "board-landing.html", "review-landing.html", "review-base.html",
 ]
 
@@ -22,7 +22,9 @@ def main():
     sd = data.get("subcategoryDetails", {})
     articles = json.load(open(os.path.join(BASE, "articles.json"), encoding="utf-8")).get("articles", [])
 
-    urls = [f"{SITE_URL}/{p}" for p in STATIC_PAGES]
+    # 根網址用 "/" 而不是 "/index.html"——兩者是同一頁，Google 會挑一個當標準網址，
+    # 之前 sitemap 送 index.html 反而跟 Google 自己選的標準網址（根網址）對不上，被判定重複。
+    urls = [f"{SITE_URL}/"] + [f"{SITE_URL}/{p}" for p in STATIC_PAGES]
     for a in articles:
         if a.get("content"):  # 只收有完整內文的文章頁，純連去 skincare-blog.html 的舊文章不用另建網址
             urls.append(f"{SITE_URL}/article.html?id={quote(a['id'])}")
@@ -31,8 +33,9 @@ def main():
         if not isinstance(det, dict):
             continue
         sub_q = quote(sub)
+        # 只送 from=board 這個標準網址進 sitemap，from=review 是同一頁內容的另一種呈現，
+        # 靠頁面自己的 canonical 標籤導回 from=board，不要兩個都送進 sitemap 製造重複網頁訊號。
         urls.append(f"{SITE_URL}/detail.html?sub={sub_q}&from=board")
-        urls.append(f"{SITE_URL}/detail.html?sub={sub_q}&from=review")
         for it in det.get("items", []):
             name = (it.get("name") or "").strip()
             if not name or name in seen_items:

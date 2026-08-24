@@ -33,7 +33,7 @@ let articlesCache = null;
 async function getArticles() {
     if (articlesCache) return articlesCache;
     try {
-        const res = await fetch('articles.json?v=41');
+        const res = await fetch('articles.json?v=46');
         const data = await res.json();
         articlesCache = (data.articles || []).slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
         return articlesCache;
@@ -577,8 +577,8 @@ async function initHomeQuizVisibility() {
 // 5. Cruel Battle 殘酷擂台（真實資料版：composite/indicators/testimonial 全部來自 scores-data.json）
 
 const battleData = {
-    'makeup': { title: '2026 年度持妝粉底爭霸戰', subcategory: '粉底液' },
-    'skincare': { title: '2026 年度防曬力巔峰對決', subcategory: '防曬乳' },
+    'makeup': { title: '2026 年度氣墊粉餅服貼大戰', subcategory: '氣墊粉餅' },
+    'skincare': { title: '2026 年度卸妝膏清潔力對決', subcategory: '卸妝膏' },
     'blush': { title: '2026 年度腮紅顯色大戰', subcategory: '腮紅' }
 };
 

@@ -12,6 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glow Makeup | 商品詳情</title>
+    <link rel="canonical" id="canonical-link" href="https://www.theglowmakeup.org/board-landing.html">
     <meta name="description" id="meta-description" content="Glow Makeup 真實社群美妝評分與心得彙整。">
     <meta property="og:title" id="og-title" content="Glow Makeup | 商品詳情">
     <meta property="og:description" id="og-description" content="Glow Makeup 真實社群美妝評分與心得彙整。">
@@ -155,7 +156,7 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="script.js?v=42"></script>
+    <script src="script.js?v=43"></script>
     <script>
         // Global State & Setup
         window.selectedSkinVal = 'fair';
@@ -311,6 +312,7 @@
                 document.getElementById('og-title')?.setAttribute('content', `${targetItem.brand} ${targetItem.name} | Glow Makeup`);
                 document.getElementById('og-description')?.setAttribute('content', seoDesc);
                 document.getElementById('og-image')?.setAttribute('content', targetItem.image || targetItem.img || '');
+                document.getElementById('canonical-link')?.setAttribute('href', `https://www.theglowmakeup.org/item-detail.html?item=${encodeURIComponent(targetItem.name)}&from=board`);
 
                 // 真實網友心得（多篇，取代原本評比對照表最後一欄的做法）
                 renderTestimonials(targetItem);

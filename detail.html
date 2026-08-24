@@ -12,6 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glow Makeup | 分類詳情</title>
+    <link rel="canonical" id="canonical-link" href="https://www.theglowmakeup.org/board-landing.html">
     <meta name="description" id="meta-description" content="Glow Makeup 真實社群美妝評分與心得彙整。">
     <meta property="og:title" id="og-title" content="Glow Makeup | 分類詳情">
     <meta property="og:description" id="og-description" content="Glow Makeup 真實社群美妝評分與心得彙整。">
@@ -133,7 +134,7 @@
         <p class="text-gray-400 text-sm">© 2026 美妝生活誌 - 妳的最美應援團</p>
     </footer>
 
-    <script src="script.js?v=42"></script>
+    <script src="script.js?v=43"></script>
     <script>
         const indicatorDescriptions = {
             // 底妝 / 彩妝
@@ -336,6 +337,7 @@
             document.getElementById('meta-description').setAttribute('content', seoDesc);
             document.getElementById('og-title').setAttribute('content', `${sub}${modeLabel} | Glow Makeup`);
             document.getElementById('og-description').setAttribute('content', seoDesc);
+            document.getElementById('canonical-link')?.setAttribute('href', `https://www.theglowmakeup.org/detail.html?sub=${encodeURIComponent(sub)}&from=board`);
 
             try {
                 await loadScoresData();

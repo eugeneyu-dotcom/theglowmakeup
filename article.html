@@ -12,6 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glow Makeup | 保養專欄</title>
+    <link rel="canonical" id="canonical-link" href="https://www.theglowmakeup.org/skincare-blog.html">
     <meta name="description" id="meta-description" content="Glow Makeup 保養專欄：美妝知識與實用技巧分享。">
     <meta property="og:title" id="og-title" content="Glow Makeup | 保養專欄">
     <meta property="og:description" id="og-description" content="Glow Makeup 保養專欄：美妝知識與實用技巧分享。">
@@ -68,7 +69,7 @@
         <p class="text-gray-400 text-sm">© 2026 美妝生活誌 - 妳的最美應援團</p>
     </footer>
 
-    <script src="script.js?v=42"></script>
+    <script src="script.js?v=43"></script>
     <script>
         function formatDate(d) {
             return (d || '').replace(/-/g, '.');
@@ -97,6 +98,7 @@
             document.getElementById('og-title')?.setAttribute('content', `${article.title} | Glow Makeup`);
             document.getElementById('og-description')?.setAttribute('content', article.excerpt || '');
             document.getElementById('og-image')?.setAttribute('content', article.image || '');
+            document.getElementById('canonical-link')?.setAttribute('href', `https://www.theglowmakeup.org/article.html?id=${encodeURIComponent(article.id)}`);
 
             root.innerHTML = `
                 <article class="bg-white rounded-[32px] p-8 md:p-12 shadow-sm border border-[#f2a7b5]/10">
