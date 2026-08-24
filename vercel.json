@@ -1,0 +1,10 @@
+{
+  "rewrites": [
+    { "source": "/article.html", "destination": "/api/article" }
+  ],
+  "functions": {
+    "api/article.js": {
+      "includeFiles": "{article.html,articles.json}"
+    }
+  }
+}

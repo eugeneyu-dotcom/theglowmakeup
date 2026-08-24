@@ -1,0 +1,101 @@
+{
+  "_comment": "首頁「美妝新品快報」資料來源：人工逐一開啟品牌官網頁面查證後手動整理（非自動抓取），品牌選定依 scores-data.json 裡評論最多的 10 個專櫃品牌。每次更新前務必重新開啟 source_url 核對品項是否還在架上，不要憑舊資料或記憶直接沿用。image 欄位是從官網頁面下載到本機 assets/new-products/ 的真實商品圖（非熱連結）；沒有 image 欄位的品牌是官網圖片有防盜鏈擋下載，卡片會顯示網站預設的品牌佔位圖，之後要補圖可以重新嘗試從瀏覽器裡另存或截圖。",
+  "_last_updated": "2026-08-24",
+  "products": [
+    {
+      "brand": "DIOR",
+      "name": "迪奧巨星持色唇膏－極霧",
+      "category": "彩妝",
+      "highlight": "24小時長效持色、不沾染，10色可選",
+      "source_url": "https://www.dior.com/zh_tw/beauty/page/all-new-arrivals.html",
+      "source_label": "DIOR 官網",
+      "verified_date": "2026-08-24"
+    },
+    {
+      "brand": "CHANEL",
+      "name": "香奈兒摩登COCO極致印記系列",
+      "category": "彩妝",
+      "highlight": "限量彩妝系列，含九色眼影#587極致摩登、COCO唇膏#165極致CRUSH限定",
+      "source_url": "https://www.chanel.com/tw/makeup/",
+      "source_label": "CHANEL 官網",
+      "verified_date": "2026-08-24"
+    },
+    {
+      "brand": "M.A.C",
+      "name": "超水感持色水唇膏",
+      "category": "彩妝",
+      "highlight": "唇膏的薄透顯色 ✕ 護唇膏的舒適滋潤，可自由疊擦",
+      "image": "assets/new-products/mac.png",
+      "source_url": "https://www.maccosmetics.com.tw/",
+      "source_label": "M.A.C 官網",
+      "verified_date": "2026-08-24"
+    },
+    {
+      "brand": "Bobbi Brown",
+      "name": "全新維他命超完美乳霜",
+      "category": "護膚",
+      "highlight": "妝前打底霜，獨家注入超級維他命亮膚精萃",
+      "source_url": "https://www.bobbibrown.com.tw/",
+      "source_label": "Bobbi Brown 官網",
+      "verified_date": "2026-08-24"
+    },
+    {
+      "brand": "YSL",
+      "name": "YSL恆久完美持久柔霧蜜粉",
+      "category": "彩妝",
+      "highlight": "高奢絲柔質地，主打徹夜持妝",
+      "image": "assets/new-products/ysl.jpg",
+      "source_url": "https://www.yslbeauty.com.tw/彩妝/ysl彩妝新品",
+      "source_label": "YSL Beauty 官網",
+      "verified_date": "2026-08-24"
+    },
+    {
+      "brand": "植村秀",
+      "name": "無色限玻光潤色嘟唇精華",
+      "category": "彩妝",
+      "highlight": "全新上市，玻光潤色嘟唇質地",
+      "image": "assets/new-products/shuuemura.webp",
+      "source_url": "https://www.shuuemura.com.tw/",
+      "source_label": "植村秀 官網",
+      "verified_date": "2026-08-24"
+    },
+    {
+      "brand": "MAKE UP FOR EVER",
+      "name": "官網新品專區整補中",
+      "category": "彩妝",
+      "highlight": "目前官網新品專區暫無上架商品，之後補上新品會再更新",
+      "source_url": "https://www.makeupforever.com.tw/v2/official/SalePageCategory/377906?lang=zh-TW",
+      "source_label": "MAKE UP FOR EVER 官網",
+      "verified_date": "2026-08-24"
+    },
+    {
+      "brand": "蘭蔻",
+      "name": "絕對閃耀水蜜光唇膏",
+      "category": "彩妝",
+      "highlight": "水潤彈嫩，蜜光乍現的唇妝新品",
+      "image": "assets/new-products/lancome.jpg",
+      "source_url": "https://www.lancome.com.tw/landing-page-whats-new.html",
+      "source_label": "蘭蔻 官網",
+      "verified_date": "2026-08-24"
+    },
+    {
+      "brand": "雅詩蘭黛",
+      "name": "Futurist Aqua Brilliance™ 粉保濕水啵啵妝前精華",
+      "category": "彩妝",
+      "highlight": "New Makeup 新品區主打妝前精華",
+      "source_url": "https://www.esteelauder.com.tw/products/26455/product-catalog/whats-new/new-makeup",
+      "source_label": "雅詩蘭黛 官網",
+      "verified_date": "2026-08-24"
+    },
+    {
+      "brand": "資生堂",
+      "name": "紅妍山茶花修護精華（NEW ULTIMUNE）",
+      "category": "護膚",
+      "highlight": "全新上市，延緩肌膚老化速度、啟動再生修護力",
+      "image": "assets/new-products/shiseido.webp",
+      "source_url": "https://www.global-shiseido.com.tw/",
+      "source_label": "資生堂國際櫃 官網",
+      "verified_date": "2026-08-24"
+    }
+  ]
+}

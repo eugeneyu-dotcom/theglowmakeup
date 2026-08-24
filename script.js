@@ -100,6 +100,55 @@ async function renderMarquee() {
     `).join('');
 }
 
+// 首頁「美妝新品快報」：10 大專櫃品牌官網新品（資料來源見 new-products.json，人工逐一開官網查證整理，非自動抓取）
+const BRAND_BADGE_COLORS = ['bg-[#2d2d2d]', 'bg-[#f2a7b5]', 'bg-[#d4af37]'];
+// 沒有真實商品圖的品牌（官網圖片有防盜鏈擋下載）統一用同一套「品牌卡」漸層+品牌字樣呈現，
+// 讓整排卡片視覺一致，不要一半真實照片、一半破圖感的預設佔位圖
+const PLACEHOLDER_GRADIENTS = [
+    'linear-gradient(135deg, #f2a7b5 0%, #d4af37 100%)',
+    'linear-gradient(135deg, #2d2d2d 0%, #6b6b6b 100%)',
+    'linear-gradient(135deg, #d4af37 0%, #f2a7b5 100%)'
+];
+function newProductImageBlock(p, i) {
+    if (p.image) {
+        return `
+            <div class="aspect-square bg-white p-4 flex items-center justify-center overflow-hidden">
+                <img src="${p.image}" alt="${p.brand} ${p.name}" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500">
+            </div>`;
+    }
+    return `
+        <div class="aspect-square flex items-center justify-center overflow-hidden" style="background:${PLACEHOLDER_GRADIENTS[i % PLACEHOLDER_GRADIENTS.length]}">
+            <span class="text-white text-2xl font-black italic tracking-tight text-center px-4 drop-shadow-sm">${p.brand}</span>
+        </div>`;
+}
+async function renderNewProducts() {
+    const grid = document.getElementById('new-products-grid');
+    if (!grid) return;
+    try {
+        const res = await fetch('new-products.json?v=2');
+        const data = await res.json();
+        const products = data.products || [];
+        if (products.length === 0) {
+            grid.innerHTML = '<div class="text-gray-400 text-sm">新品資訊整理中</div>';
+            return;
+        }
+        grid.innerHTML = products.map((p, i) => `
+            <a href="${p.source_url}" target="_blank" rel="noopener" class="bg-[#fff9f5] rounded-3xl overflow-hidden border border-[#f2a7b5]/10 hover:shadow-md hover:border-[#f2a7b5]/30 transition-all group flex flex-col">
+                ${newProductImageBlock(p, i)}
+                <div class="p-5 flex flex-col flex-grow">
+                    <span class="${BRAND_BADGE_COLORS[i % BRAND_BADGE_COLORS.length]} text-white text-[10px] font-black px-3 py-1 rounded-full self-start mb-3 tracking-wide">${p.brand}</span>
+                    <h4 class="font-black text-sm leading-snug mb-2 group-hover:text-[#f2a7b5] transition-colors line-clamp-2">${p.name}</h4>
+                    <p class="text-xs text-gray-500 leading-relaxed line-clamp-3 flex-grow">${p.highlight || ''}</p>
+                    <span class="text-[11px] font-bold text-[#f2a7b5] mt-4 flex items-center gap-1">查看${p.source_label || '官網'} ➔</span>
+                </div>
+            </a>
+        `).join('');
+    } catch (err) {
+        console.error('new-products.json 載入失敗', err);
+        grid.innerHTML = '<div class="text-gray-400 text-sm">新品資訊載入失敗</div>';
+    }
+}
+
 // 首頁「最新文章」卡片：真實 articles.json 最新 3 篇（取代原本連去錯誤頁面的樣板文章）
 async function renderLatestArticlesSection() {
     const grid = document.getElementById('latest-articles-grid');
@@ -1070,6 +1119,7 @@ window.addEventListener('DOMContentLoaded', () => {
     initRankings();
     initHomeQuizVisibility();
     renderMarquee();
+    renderNewProducts();
     renderLatestArticlesSection();
     renderSkincareArticles();
     renderSpotlightCards('board-spotlight-grid', 'board');
