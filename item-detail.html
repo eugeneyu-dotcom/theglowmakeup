@@ -18,6 +18,7 @@
     <meta property="og:description" id="og-description" content="Glow Makeup 真實社群美妝評分與心得彙整。">
     <meta property="og:type" content="product">
     <meta property="og:image" id="og-image" content="">
+    <script type="application/ld+json" id="schema-jsonld"></script>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%84%3C/text%3E%3C/svg%3E">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css?v=37">
@@ -348,6 +349,33 @@
                     reviewSummarySection?.classList.remove('hidden');
                 } else {
                     reviewSummarySection?.classList.add('hidden');
+                }
+
+                // Product schema：只在真的有真實評分資料時才加 aggregateRating，
+                // 沒有評分的品項不能捏造星等，寧可不加 schema 也不要塞假資料
+                const schemaEl = document.getElementById('schema-jsonld');
+                if (schemaEl) {
+                    const productSchema = {
+                        '@context': 'https://schema.org',
+                        '@type': 'Product',
+                        name: `${targetItem.brand} ${targetItem.name}`,
+                        image: (targetItem.image || targetItem.img)
+                            ? new URL(targetItem.image || targetItem.img, 'https://www.theglowmakeup.org/').href
+                            : undefined,
+                        brand: { '@type': 'Brand', name: targetItem.brand },
+                        url: `https://www.theglowmakeup.org/item-detail.html?item=${encodeURIComponent(targetItem.name)}&from=board`,
+                    };
+                    if (scoreEntry && scoreEntry.composite != null && scoreEntry.mentions) {
+                        productSchema.aggregateRating = {
+                            '@type': 'AggregateRating',
+                            ratingValue: scoreEntry.composite,
+                            reviewCount: scoreEntry.mentions,
+                            bestRating: 5,
+                            worstRating: 1,
+                        };
+                        schemaEl.textContent = JSON.stringify(productSchema);
+                    }
+                    // scoreEntry 沒有真實評分資料時，schema-jsonld 保持空白，不輸出 Product schema
                 }
 
                 const hashtagsContainer = document.getElementById('product-hashtags');

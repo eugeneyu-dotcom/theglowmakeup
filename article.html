@@ -18,6 +18,7 @@
     <meta property="og:description" id="og-description" content="Glow Makeup 保養專欄：美妝知識與實用技巧分享。">
     <meta property="og:type" content="article">
     <meta property="og:image" id="og-image" content="">
+    <script type="application/ld+json" id="schema-jsonld"></script>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%84%3C/text%3E%3C/svg%3E">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css?v=37">
@@ -99,6 +100,20 @@
             document.getElementById('og-description')?.setAttribute('content', article.excerpt || '');
             document.getElementById('og-image')?.setAttribute('content', article.image || '');
             document.getElementById('canonical-link')?.setAttribute('href', `https://www.theglowmakeup.org/article.html?id=${encodeURIComponent(article.id)}`);
+            const schemaEl = document.getElementById('schema-jsonld');
+            if (schemaEl) {
+                schemaEl.textContent = JSON.stringify({
+                    '@context': 'https://schema.org',
+                    '@type': 'Article',
+                    headline: article.title,
+                    description: article.excerpt || '',
+                    image: article.image ? `https://www.theglowmakeup.org/${article.image}` : undefined,
+                    datePublished: article.date || undefined,
+                    author: { '@type': 'Organization', name: 'Glow Makeup' },
+                    publisher: { '@type': 'Organization', name: 'Glow Makeup' },
+                    mainEntityOfPage: `https://www.theglowmakeup.org/article.html?id=${encodeURIComponent(article.id)}`,
+                });
+            }
 
             root.innerHTML = `
                 <article class="bg-white rounded-[32px] p-8 md:p-12 shadow-sm border border-[#f2a7b5]/10">
