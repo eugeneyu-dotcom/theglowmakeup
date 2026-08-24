@@ -125,7 +125,7 @@ async function renderNewProducts() {
     const grid = document.getElementById('new-products-grid');
     if (!grid) return;
     try {
-        const res = await fetch('new-products.json?v=2');
+        const res = await fetch('new-products.json?v=3');
         const data = await res.json();
         const products = data.products || [];
         if (products.length === 0) {

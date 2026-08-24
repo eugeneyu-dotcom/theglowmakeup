@@ -1,5 +1,5 @@
 {
-  "_comment": "首頁「美妝新品快報」資料來源：人工逐一開啟品牌官網頁面查證後手動整理（非自動抓取），品牌選定依 scores-data.json 裡評論最多的 10 個專櫃品牌。每次更新前務必重新開啟 source_url 核對品項是否還在架上，不要憑舊資料或記憶直接沿用。image 欄位是從官網頁面下載到本機 assets/new-products/ 的真實商品圖（非熱連結）；沒有 image 欄位的品牌是官網圖片有防盜鏈擋下載，卡片會顯示網站預設的品牌佔位圖，之後要補圖可以重新嘗試從瀏覽器裡另存或截圖。",
+  "_comment": "首頁「美妝新品快報」資料來源：人工逐一開啟品牌官網頁面查證後手動整理（非自動抓取），品牌選定依 scores-data.json 裡評論最多的 10 個專櫃品牌。每次更新前務必重新開啟 source_url 核對品項是否還在架上，不要憑舊資料或記憶直接沿用。image 欄位是從官網頁面下載到本機 assets/new-products/ 的真實商品圖（非熱連結）。DIOR/CHANEL/Bobbi Brown/雅詩蘭黛的圖是靠品牌官網有防盜鏈保護（直接下載會403），改用瀏覽器內 fetch+canvas 縮圖再逐字核對 checksum 正確才寫檔取得，非熱連結；M.A.C/YSL/植村秀/蘭蔻/資生堂/MAKE UP FOR EVER 是圖片伺服器沒防盜鏈，直接下載即可。",
   "_last_updated": "2026-08-24",
   "products": [
     {
@@ -7,6 +7,7 @@
       "name": "迪奧巨星持色唇膏－極霧",
       "category": "彩妝",
       "highlight": "24小時長效持色、不沾染，10色可選",
+      "image": "assets/new-products/dior.jpg",
       "source_url": "https://www.dior.com/zh_tw/beauty/page/all-new-arrivals.html",
       "source_label": "DIOR 官網",
       "verified_date": "2026-08-24"
@@ -16,6 +17,7 @@
       "name": "香奈兒摩登COCO極致印記系列",
       "category": "彩妝",
       "highlight": "限量彩妝系列，含九色眼影#587極致摩登、COCO唇膏#165極致CRUSH限定",
+      "image": "assets/new-products/chanel.jpg",
       "source_url": "https://www.chanel.com/tw/makeup/",
       "source_label": "CHANEL 官網",
       "verified_date": "2026-08-24"
@@ -35,6 +37,7 @@
       "name": "全新維他命超完美乳霜",
       "category": "護膚",
       "highlight": "妝前打底霜，獨家注入超級維他命亮膚精萃",
+      "image": "assets/new-products/bobbibrown.jpg",
       "source_url": "https://www.bobbibrown.com.tw/",
       "source_label": "Bobbi Brown 官網",
       "verified_date": "2026-08-24"
@@ -61,9 +64,10 @@
     },
     {
       "brand": "MAKE UP FOR EVER",
-      "name": "官網新品專區整補中",
+      "name": "超能量水嫩輕感美肌乳",
       "category": "彩妝",
-      "highlight": "目前官網新品專區暫無上架商品，之後補上新品會再更新",
+      "highlight": "官網新品專區上架，30ml 水嫩輕感美肌乳",
+      "image": "assets/new-products/mufe.jpg",
       "source_url": "https://www.makeupforever.com.tw/v2/official/SalePageCategory/377906?lang=zh-TW",
       "source_label": "MAKE UP FOR EVER 官網",
       "verified_date": "2026-08-24"
@@ -83,6 +87,7 @@
       "name": "Futurist Aqua Brilliance™ 粉保濕水啵啵妝前精華",
       "category": "彩妝",
       "highlight": "New Makeup 新品區主打妝前精華",
+      "image": "assets/new-products/esteelauder.jpg",
       "source_url": "https://www.esteelauder.com.tw/products/26455/product-catalog/whats-new/new-makeup",
       "source_label": "雅詩蘭黛 官網",
       "verified_date": "2026-08-24"
