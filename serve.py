@@ -7,7 +7,8 @@
 
 放行清單：
   - 根目錄的 .html/.htm/.css/.js/.map/.ico 與常見圖片、字型檔
-  - 根目錄的 site-data.json、scores-data.json、articles.json、new-products.json（僅這幾個 JSON）
+  - 根目錄的 site-data.json、scores-data.json、articles.json、new-products.json、
+    ingredients-data.json、ingredient_warnings.json（僅這幾個 JSON）
   - assets/ 底下的圖片、字型
 
 擋掉：.env、任何 dotfile/dotdir、*.py、其他 *.json（routed/cleaned/standardized/
@@ -29,7 +30,7 @@ PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8777
 SAFE_EXT = {".html", ".htm", ".css", ".js", ".map", ".ico",
             ".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp",
             ".woff", ".woff2", ".ttf"}
-ALLOW_JSON = {"site-data.json", "scores-data.json", "articles.json", "new-products.json"}   # 可對外的前端資料 JSON
+ALLOW_JSON = {"site-data.json", "scores-data.json", "articles.json", "new-products.json", "ingredients-data.json", "ingredient_warnings.json"}   # 可對外的前端資料 JSON
 ALLOW_DIRS = {"assets"}                                # 唯一可對外的子資料夾
 ALLOW_ROOT_FILES = {"robots.txt", "sitemap.xml"}       # 無副檔名白名單、根目錄放行的特例檔
 

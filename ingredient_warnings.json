@@ -1,0 +1,106 @@
+{
+  "_comment": "AI成分查詢功能第一階段：經查證的成分警示對照表。每一條的 sources 都是實際存在、已核實內容的真實文獻（醫院/醫學會衛教頁面或有醫師具名審核的醫療媒體），不是AI憑訓練資料推論。用途：使用者拍照OCR讀出成分名稱後，比對 aliases 找到命中項，顯示 warning 內容。之後新增條目務必先個別查證來源，不能省略。",
+  "_last_updated": "2026-08-24",
+  "_phase": "第一階段：孕婦／哺乳期 + 常見過敏原（酒精、香精）。特定疾病患者類別列為第二階段，尚未收錄。",
+  "entries": [
+    {
+      "id": "retinoids",
+      "name_zh": "A醇／A酸（維生素A酸類）",
+      "aliases": ["Retinol", "Retinoic Acid", "Tretinoin", "Retinyl Palmitate", "Adapalene", "維生素A酸", "A醇", "A酸", "視黃醇", "視黃醇棕櫚酸酯", "杏仁酸A醇"],
+      "avoid_groups": ["孕婦", "哺乳期"],
+      "warning": "孕婦應避免使用外用維生素A酸/A醇類成分，少數案例報告指出有導致出生缺陷的風險，且目前缺乏充分證據證明其孕期使用的安全性。",
+      "source_title": "懷孕期間孕婦10大保養品安全性全攻略",
+      "source_publisher": "MedPartner美的好朋友（醫師藥師營養師團隊）",
+      "source_url": "https://www.medpartner.club/pregnancy-cosmetics-safety-introduction/",
+      "verified_date": "2026-08-24"
+    },
+    {
+      "id": "salicylic-acid",
+      "name_zh": "水楊酸",
+      "aliases": ["Salicylic Acid", "BHA", "柳酸"],
+      "avoid_groups": ["孕婦"],
+      "warning": "低濃度外用水楊酸（如市售2%以下）皮膚吸收比例低，一般認為風險不高，但醫師通常不建議懷孕期間進行高濃度的果酸/水楊酸換膚，避免過度刺激。屬於「謹慎使用」而非絕對禁用，仍建議諮詢醫師。",
+      "source_title": "懷孕期間孕婦10大保養品安全性全攻略",
+      "source_publisher": "MedPartner美的好朋友（醫師藥師營養師團隊）",
+      "source_url": "https://www.medpartner.club/pregnancy-cosmetics-safety-introduction/",
+      "verified_date": "2026-08-24"
+    },
+    {
+      "id": "hydroquinone",
+      "name_zh": "對苯二酚",
+      "aliases": ["Hydroquinone", "氫醌", "去斑藥膏"],
+      "avoid_groups": ["孕婦"],
+      "warning": "醫師不建議孕婦使用任何含對苯二酚的產品或淡斑三合一藥膏，因其經皮吸收率極高（約35-45%），且缺乏充分的孕期安全性研究。",
+      "source_title": "懷孕期間孕婦10大保養品安全性全攻略",
+      "source_publisher": "MedPartner美的好朋友（醫師藥師營養師團隊）",
+      "source_url": "https://www.medpartner.club/pregnancy-cosmetics-safety-introduction/",
+      "verified_date": "2026-08-24"
+    },
+    {
+      "id": "parabens",
+      "name_zh": "對羥基苯甲酸酯類防腐劑",
+      "aliases": ["Paraben", "Methylparaben", "Ethylparaben", "Propylparaben", "Butylparaben", "尼泊金酯類"],
+      "avoid_groups": ["孕婦", "哺乳期"],
+      "warning": "常見於化妝品、防曬乳與口紅中，有研究指出與嬰兒發育、生殖、神經及免疫系統相關，孕婦建議避免。另外，皮膚科醫師指出小分子Paraben（如Methyl/Ethyl Paraben）脂溶性小、健康疑慮相對較低，歐盟已禁用其中五種較高風險型態；極少數人對Paraben本身過敏，皮膚已受損或已知對Paraben過敏者應避開含此成分產品。",
+      "source_title": "懷孕媽咪請注意！化妝品與保養品的使用禁忌（孕婦部分）；保養品中的防腐劑，醫師教你看清楚（過敏部分）",
+      "source_publisher": "Hello醫師（賴建翰醫師審核）／照護線上（游懿聖醫師，皮膚科專科醫師）",
+      "source_url": "https://helloyishi.com.tw/pregnancy/pregnancy-progression/prenatal-care/ingredients-cosmetic-pregnancy/ ; https://www.careonline.com.tw/2017/07/preservative.html",
+      "verified_date": "2026-08-24"
+    },
+    {
+      "id": "phthalates",
+      "name_zh": "苯二甲酸酯類",
+      "aliases": ["Phthalates", "DEP", "Diethyl Phthalate", "塑化劑"],
+      "avoid_groups": ["孕婦"],
+      "warning": "常見於香水、肥皂、洗髮精等具香味產品中，作為定香劑使用。研究指出可能影響血壓、與注意力不足過動症、糖尿病、性早熟等相關，也與胎兒發育異常有關聯性，孕婦建議避免含香精、標示不明的塑化劑成分產品。",
+      "source_title": "懷孕媽咪請注意！化妝品與保養品的使用禁忌",
+      "source_publisher": "Hello醫師（賴建翰醫師審核）",
+      "source_url": "https://helloyishi.com.tw/pregnancy/pregnancy-progression/prenatal-care/ingredients-cosmetic-pregnancy/",
+      "verified_date": "2026-08-24"
+    },
+    {
+      "id": "formaldehyde",
+      "name_zh": "甲醛",
+      "aliases": ["Formaldehyde", "Formalin", "福馬林"],
+      "avoid_groups": ["孕婦", "哺乳期"],
+      "warning": "常見於指甲油、睫毛膠、直髮膏等產品中做為防腐/固定劑，已被國際癌症研究機構列為人類致癌物，孕婦與哺乳期應避免長時間接觸含甲醛產品。",
+      "source_title": "懷孕媽咪請注意！化妝品與保養品的使用禁忌",
+      "source_publisher": "Hello醫師（賴建翰醫師審核）",
+      "source_url": "https://helloyishi.com.tw/pregnancy/pregnancy-progression/prenatal-care/ingredients-cosmetic-pregnancy/",
+      "verified_date": "2026-08-24"
+    },
+    {
+      "id": "oxybenzone-avobenzone",
+      "name_zh": "氧苯酮／阿伏苯宗（化學性防曬劑）",
+      "aliases": ["Oxybenzone", "Avobenzone", "Benzophenone-3", "二苯甲酮-3", "Butyl Methoxydibenzoylmethane"],
+      "avoid_groups": ["孕婦"],
+      "warning": "常見於防曬乳中的化學性防曬成分，研究指出可能影響體內荷爾蒙，與兒童肥胖、神經系統發育問題有關聯性，孕婦可考慮改用物理性防曬（氧化鋅、二氧化鈦）成分產品。",
+      "source_title": "懷孕媽咪請注意！化妝品與保養品的使用禁忌",
+      "source_publisher": "Hello醫師（賴建翰醫師審核）",
+      "source_url": "https://helloyishi.com.tw/pregnancy/pregnancy-progression/prenatal-care/ingredients-cosmetic-pregnancy/",
+      "verified_date": "2026-08-24"
+    },
+    {
+      "id": "alcohol",
+      "name_zh": "酒精（乙醇）",
+      "aliases": ["Alcohol", "Alcohol Denat.", "Ethanol", "乙醇", "變性酒精"],
+      "avoid_groups": ["敏感肌／容易過敏者"],
+      "warning": "酒精在配方中常用來幫助溶解原料、均勻油水相、產生清涼感，一般臉部保養品濃度多低於10%、最高不超過30%，低濃度使用一般不易造成問題。但皮膚科醫師指出酒精對敏感肌具刺激性，敏感肌或容易過敏族群建議選擇不含酒精的產品。",
+      "source_title": "【敏感肌】讓皮膚忘記敏感，皮膚科醫師破除各種敏感肌迷思！",
+      "source_publisher": "照護線上（王筱涵醫師，台北市立萬芳醫院皮膚科主治醫師）",
+      "source_url": "https://www.careonline.com.tw/2020/10/sensitive-skin.html",
+      "verified_date": "2026-08-24"
+    },
+    {
+      "id": "fragrance",
+      "name_zh": "香精",
+      "aliases": ["Fragrance", "Parfum", "Perfume", "香料"],
+      "avoid_groups": ["敏感肌／容易過敏者", "孕婦"],
+      "warning": "皮膚科醫師指出香精屬於「不需要添加」的成分，即使聞起來讓人感到舒適，肌膚實際上可能因此增加負擔，敏感肌或容易過敏族群建議挑選無香精產品；香精也常是苯二甲酸酯類定香劑的來源，孕婦一併留意。",
+      "source_title": "【敏感肌】讓皮膚忘記敏感，皮膚科醫師破除各種敏感肌迷思！",
+      "source_publisher": "照護線上（王筱涵醫師，台北市立萬芳醫院皮膚科主治醫師）",
+      "source_url": "https://www.careonline.com.tw/2020/10/sensitive-skin.html",
+      "verified_date": "2026-08-24"
+    }
+  ]
+}

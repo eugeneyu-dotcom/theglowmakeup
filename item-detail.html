@@ -121,6 +121,24 @@
                     </div>
                 </div>
 
+                <!-- 🧪 成分資訊 / Ingredient Info（資料來源見 ingredients-data.json，沒有資料的品項這整塊由 JS 隱藏，不硬塞內容） -->
+                <div id="ingredients-section" class="bg-white rounded-[32px] p-8 md:p-12 shadow-sm border border-[#f2a7b5]/10 hidden">
+                    <div class="flex items-center gap-3 mb-8 border-b border-gray-100 pb-5">
+                        <span class="text-3xl">🧪</span>
+                        <div>
+                            <h3 class="text-2xl md:text-3xl font-black text-[#2d2d2d] italic">成分資訊 <span class="text-[#f2a7b5] not-italic text-lg">Ingredient Info</span></h3>
+                            <p class="text-sm text-gray-500 font-bold">查證自第三方成分資料庫，並比對常見成分警示對照表</p>
+                        </div>
+                    </div>
+                    <div id="ingredients-warnings" class="space-y-3 mb-8"></div>
+                    <div>
+                        <h4 class="text-xs font-black text-gray-400 uppercase tracking-wider mb-3">完整成分列表 / Full Ingredient List</h4>
+                        <div id="ingredients-list" class="flex flex-wrap gap-2"></div>
+                    </div>
+                    <p id="ingredients-source" class="text-xs text-gray-400 mt-6 pt-6 border-t border-gray-100"></p>
+                    <p class="text-xs text-gray-400 mt-2">＊本頁成分警示僅供參考，非醫療建議；用量、濃度、個人體質皆會影響實際反應，如有疑慮請諮詢醫師或藥師。</p>
+                </div>
+
                 <!-- 💬 真實網友心得 / User Testimonials -->
                 <div id="testimonials-section" class="bg-white rounded-[32px] p-8 md:p-12 shadow-sm border border-[#f2a7b5]/10">
                     <div class="flex items-center gap-3 mb-8 border-b border-gray-100 pb-5">
@@ -191,6 +209,93 @@
             };
         }
 
+        // 成分資訊：ingredients-data.json 存各品項查證過的真實 INCI 成分表，
+        // ingredient_warnings.json 是已個別查證來源的成分警示對照表（孕婦/哺乳期/敏感肌等）。
+        // 比對邏輯純字串比對，不用 AI 臨場判斷風險——原則跟評分系統「LLM 做語言理解、
+        // 程式做計算」一致，風險比讓 AI 每次重新推論低很多。
+        window.INGREDIENTS_DATA = {};
+        window.INGREDIENT_WARNINGS = [];
+        async function loadIngredientsData() {
+            try {
+                const [dataRes, warningsRes] = await Promise.all([
+                    fetch('ingredients-data.json?v=1'),
+                    fetch('ingredient_warnings.json?v=1'),
+                ]);
+                const data = await dataRes.json();
+                const warnings = await warningsRes.json();
+                window.INGREDIENTS_DATA = data.items || {};
+                window.INGREDIENT_WARNINGS = warnings.entries || [];
+            } catch (e) {
+                console.error('成分資料載入失敗', e);
+                window.INGREDIENTS_DATA = {};
+                window.INGREDIENT_WARNINGS = [];
+            }
+        }
+        function getIngredientEntry(item) {
+            if (!item) return null;
+            return window.INGREDIENTS_DATA[`${item.brand}||${item.name}`] || null;
+        }
+        // 正規化：去除句點/多餘空白/大小寫差異，避免同一成分因寫法不同（如 "Alcohol Denat."
+        // vs "Alcohol Denat"）而比對不到
+        function normalizeIngredientName(s) {
+            return String(s).toLowerCase().replace(/[.,]/g, '').replace(/\s+/g, ' ').trim();
+        }
+        // 回傳這份成分表命中警示對照表的項目，每筆附上「是哪個實際成分字串命中的」
+        function matchIngredientWarnings(ingredients) {
+            const normalizedList = ingredients.map(i => ({ raw: i, norm: normalizeIngredientName(i) }));
+            const matched = [];
+            window.INGREDIENT_WARNINGS.forEach(entry => {
+                const aliasNorms = entry.aliases.map(normalizeIngredientName);
+                const hit = normalizedList.find(ing => aliasNorms.includes(ing.norm));
+                if (hit) matched.push({ ...entry, matchedIngredient: hit.raw });
+            });
+            return matched;
+        }
+        function renderIngredientsSection(item) {
+            const section = document.getElementById('ingredients-section');
+            if (!section) return;
+            const entry = getIngredientEntry(item);
+            if (!entry || !entry.ingredients || entry.ingredients.length === 0) {
+                section.classList.add('hidden');
+                return;
+            }
+            section.classList.remove('hidden');
+
+            const warnings = matchIngredientWarnings(entry.ingredients);
+            const warningsEl = document.getElementById('ingredients-warnings');
+            if (warnings.length > 0) {
+                warningsEl.innerHTML = warnings.map(w => `
+                    <div class="p-5 bg-[#fff4e0] border border-[#e2a03f]/30 rounded-2xl">
+                        <div class="flex items-start gap-3">
+                            <span class="text-xl shrink-0">⚠️</span>
+                            <div>
+                                <p class="font-black text-sm text-[#2d2d2d] mb-1">
+                                    ${w.name_zh}
+                                    <span class="text-xs font-bold text-gray-400">（成分表標示：${w.matchedIngredient}）</span>
+                                </p>
+                                <p class="text-xs font-black text-[#b8752e] mb-2">需注意族群：${w.avoid_groups.join('、')}</p>
+                                <p class="text-sm text-gray-600 leading-relaxed">${w.warning}</p>
+                                <p class="text-[11px] text-gray-400 mt-2">資料來源：${w.source_publisher}</p>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            } else {
+                warningsEl.innerHTML = `
+                    <div class="p-5 bg-[#f2f9f0] border border-[#7bb87a]/30 rounded-2xl">
+                        <p class="text-sm text-gray-600 leading-relaxed">✓ 這次沒有偵測到目前對照表裡的警示成分，但仍建議依個人膚況謹慎使用。</p>
+                    </div>
+                `;
+            }
+
+            document.getElementById('ingredients-list').innerHTML = entry.ingredients.map(ing => `
+                <span class="px-3 py-1 bg-[#fff9f5] border border-gray-100 text-gray-600 text-xs font-bold rounded-full">${ing}</span>
+            `).join('');
+
+            document.getElementById('ingredients-source').textContent =
+                `成分資料來源：${entry.source_label}（查證日期 ${entry.verified_date}）`;
+        }
+
         // 真實評分與心得資料（來自 AI_Scores.csv → scores-data.json）
         window.SCORES_DATA = {};
         async function loadScoresData() {
@@ -258,7 +363,7 @@
             }
 
             try {
-                await loadScoresData();
+                await Promise.all([loadScoresData(), loadIngredientsData()]);
                 const response = await fetch('site-data.json?v=36');
                 const data = await response.json();
 
@@ -293,6 +398,7 @@
                     document.getElementById('ratings-container').innerHTML =
                         '<a href="index.html" class="text-[#f2a7b5] font-bold text-sm">← 回首頁看看其他商品</a>';
                     document.getElementById('testimonials-section')?.classList.add('hidden');
+                    document.getElementById('ingredients-section')?.classList.add('hidden');
                     document.getElementById('related-section')?.classList.add('hidden');
                     return;
                 }
@@ -317,6 +423,9 @@
 
                 // 真實網友心得（多篇，取代原本評比對照表最後一欄的做法）
                 renderTestimonials(targetItem);
+
+                // 成分資訊（沒有查證過的成分資料就整塊隱藏，見 function 內判斷）
+                renderIngredientsSection(targetItem);
 
                 // Get dynamic enriched details (desc, hashtags, hot_shades, advantages, suitable_audience)
                 const enrichedDetails = getItemEnrichedDetails(targetItem, window.isMakeupGlobal);
