@@ -129,6 +129,10 @@ description: "判斷並實作 Glow Up 保養專欄文章（articles.json）的�
    `fetch('articles.json?v=NN')` 的 `NN`，這個專案的 `articles.json`／`site-data.json`／
    `scores-data.json`／`script.js` 各自有獨立的版本號軌道，只需要動 `articles.json` 對應
    的那個）。
-3. 開瀏覽器實際打開改過的文章頁，確認連結有正確渲染、可以點擊、導到正確頁面，再
-   commit + push。內鏈跟外鏈可以分開兩次 commit（內鏈已核准可先推，外鏈等使用者確認
+3. 開瀏覽器實際打開改過的文章頁，確認連結有正確渲染、可以點擊、導到正確頁面。
+4. **commit + push 前，把這批（含新文章）的標題列出來給使用者看，等明確同意才繼續**
+   （2026-08 使用者定案：標題要每篇客製化找獨特切角，不套固定公式——見
+   `beauty-seo-article-writer` skill 的標題規則，但客製化寫法品質比套公式風險更高，
+   所以要求 commit 前先人工把關，不能自己判斷「應該可以」就跳過）。使用者同意後才能
+   commit + push；內鏈跟外鏈可以分開兩次 commit（內鏈已核准可先推，外鏈等使用者確認
    後再推），方便回溯。

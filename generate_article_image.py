@@ -2,7 +2,7 @@
 Maxora 生圖 API 小工具 — 給文章封面圖用。
 
 用法：
-    /usr/bin/python3 generate_article_image.py "<英文 prompt>" <輸出路徑，例如 assets/articles/foo.webp> [--size 1:1]
+    /usr/bin/python3 generate_article_image.py "<英文 prompt>" <輸出路徑，例如 assets/articles/foo.webp> [--size 1:1] [--negative_prompt "text, logo, watermark"]
 
 憑證讀自本目錄 .env 的 CF_ID / CF_SECRET（Cloudflare Access service token，
 不是一般 API Key，別跟其他站台的憑證搞混）。詳細參數說明、非同步模式、錯誤碼
@@ -62,9 +62,12 @@ def main():
     parser.add_argument("--size", default="1:1", help="1:1 / 16:9 / 9:16 或自訂 寬x高（預設 1:1，跟 Glow Up 現有文章封面圖一致）")
     parser.add_argument("--format", default="webp", choices=["webp", "png", "jpeg"])
     parser.add_argument("--seed", type=int, default=None)
+    parser.add_argument("--negative_prompt", default=None, help="要排除的元素，例如 'text, logo, watermark, letters' 可降低瓶身出現亂碼假字的機率")
     args = parser.parse_args()
 
-    image_bytes = generate_image(args.prompt, size=args.size, fmt=args.format, seed=args.seed)
+    image_bytes = generate_image(
+        args.prompt, size=args.size, fmt=args.format, seed=args.seed, negative_prompt=args.negative_prompt
+    )
 
     out_path = args.output
     os.makedirs(os.path.dirname(os.path.abspath(out_path)) or ".", exist_ok=True)
