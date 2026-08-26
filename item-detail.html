@@ -123,7 +123,7 @@
 
                 <!-- 🧪 成分資訊 / Ingredient Info（資料來源見 ingredients-data.json，沒有資料的品項這整塊由 JS 隱藏，不硬塞內容） -->
                 <div id="ingredients-section" class="bg-white rounded-[32px] p-8 md:p-12 shadow-sm border border-[#f2a7b5]/10 hidden">
-                    <div class="flex items-center gap-3 mb-8 border-b border-gray-100 pb-5">
+                    <div class="flex items-center gap-3 mb-6 border-b border-gray-100 pb-5">
                         <span class="text-3xl">🧪</span>
                         <div>
                             <h3 class="text-2xl md:text-3xl font-black text-[#2d2d2d] italic">成分資訊 <span class="text-[#f2a7b5] not-italic text-lg">Ingredient Info</span></h3>
@@ -135,8 +135,6 @@
                         <h4 class="text-xs font-black text-gray-400 uppercase tracking-wider mb-3">完整成分列表 / Full Ingredient List</h4>
                         <div id="ingredients-list" class="flex flex-wrap gap-2"></div>
                     </div>
-                    <p id="ingredients-source" class="text-xs text-gray-400 mt-6 pt-6 border-t border-gray-100"></p>
-                    <p class="text-xs text-gray-400 mt-2">＊本頁成分警示僅供參考，非醫療建議；用量、濃度、個人體質皆會影響實際反應，如有疑慮請諮詢醫師或藥師。</p>
                 </div>
 
                 <!-- 💬 真實網友心得 / User Testimonials -->
@@ -261,6 +259,12 @@
             }
             section.classList.remove('hidden');
 
+            const sourceLinkHtml = entry.source_url
+                ? ` <a href="${entry.source_url}" target="_blank" rel="noopener" class="font-bold text-[#f2a7b5] underline decoration-[#f2a7b5]/40 hover:text-[#d88a99]">（查看原始頁面 ↗）</a>`
+                : '';
+            const productSourceLine = `成分資料來源：${entry.source_label}${sourceLinkHtml} ・查證日期 ${entry.verified_date}`;
+            const disclaimerLine = `＊本頁成分警示僅供參考，非醫療建議；用量、濃度、個人體質皆會影響實際反應，如有疑慮請諮詢醫師或藥師。`;
+
             const warnings = matchIngredientWarnings(entry.ingredients);
             const warningsEl = document.getElementById('ingredients-warnings');
             if (warnings.length > 0) {
@@ -269,13 +273,14 @@
                         <div class="flex items-start gap-3">
                             <span class="text-xl shrink-0">⚠️</span>
                             <div>
-                                <p class="font-black text-sm text-[#2d2d2d] mb-1">
-                                    ${w.name_zh}
-                                    <span class="text-xs font-bold text-gray-400">（成分表標示：${w.matchedIngredient}）</span>
-                                </p>
-                                <p class="text-xs font-black text-[#b8752e] mb-2">需注意族群：${w.avoid_groups.join('、')}</p>
+                                <p class="font-black text-sm text-[#2d2d2d] mb-1">${w.name_zh} <span class="font-bold">${w.matchedIngredient}</span></p>
+                                <p class="text-xs font-black text-[#e05a47] mb-2">需注意族群：${w.avoid_groups.join('、')}</p>
                                 <p class="text-sm text-gray-600 leading-relaxed">${w.warning}</p>
-                                <p class="text-[11px] text-gray-400 mt-2">資料來源：${w.source_publisher}</p>
+                                <div class="mt-3 pt-3 border-t border-[#e2a03f]/25 space-y-1">
+                                    <p class="text-xs font-bold text-[#b8752e]">資料來源：${w.source_publisher}</p>
+                                    <p class="text-xs font-bold text-[#b8752e]">${productSourceLine}</p>
+                                    <p class="text-xs text-gray-600">${disclaimerLine}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -284,6 +289,10 @@
                 warningsEl.innerHTML = `
                     <div class="p-5 bg-[#f2f9f0] border border-[#7bb87a]/30 rounded-2xl">
                         <p class="text-sm text-gray-600 leading-relaxed">✓ 這次沒有偵測到目前對照表裡的警示成分，但仍建議依個人膚況謹慎使用。</p>
+                        <div class="mt-3 pt-3 border-t border-[#7bb87a]/25 space-y-1">
+                            <p class="text-xs font-bold text-[#b8752e]">${productSourceLine}</p>
+                            <p class="text-xs text-gray-600">${disclaimerLine}</p>
+                        </div>
                     </div>
                 `;
             }
@@ -291,9 +300,6 @@
             document.getElementById('ingredients-list').innerHTML = entry.ingredients.map(ing => `
                 <span class="px-3 py-1 bg-[#fff9f5] border border-gray-100 text-gray-600 text-xs font-bold rounded-full">${ing}</span>
             `).join('');
-
-            document.getElementById('ingredients-source').textContent =
-                `成分資料來源：${entry.source_label}（查證日期 ${entry.verified_date}）`;
         }
 
         // 真實評分與心得資料（來自 AI_Scores.csv → scores-data.json）
