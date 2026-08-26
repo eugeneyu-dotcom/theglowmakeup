@@ -294,7 +294,8 @@
             }
 
             document.getElementById('ingredients-list').innerHTML = entry.ingredients.map(ing => `
-                <span class="px-3 py-1 bg-[#fff9f5] border border-gray-100 text-gray-600 text-xs font-bold rounded-full">${ing}</span>
+                <a href="https://en.wikipedia.org/w/index.php?title=Special:Search&search=${encodeURIComponent(ing)}" target="_blank" rel="noopener"
+                   class="px-3 py-1 bg-[#fff9f5] border border-gray-100 text-gray-600 text-xs font-bold rounded-full hover:border-[#f2a7b5] hover:text-[#f2a7b5] hover:bg-[#f2a7b5]/5 transition-colors">${ing}</a>
             `).join('');
         }
 
