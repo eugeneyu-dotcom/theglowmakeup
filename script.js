@@ -62,7 +62,7 @@ async function initSlider() {
         <a href="${a.url || 'skincare-blog.html'}" class="slide shrink-0 block" style="background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('${a.image}')">
             <div class="absolute inset-0 flex items-center justify-center text-center px-4">
                 <div class="max-w-4xl">
-                    <span class="${SLIDE_TAG_COLORS[i % SLIDE_TAG_COLORS.length]} text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-widest mb-4 inline-block">保養專欄${a.tag ? ' · #' + a.tag : ''}</span>
+                    <span class="${SLIDE_TAG_COLORS[i % SLIDE_TAG_COLORS.length]} text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-widest mb-4 inline-block">${a.category === '活動' ? '活動快訊' : '保養專欄'}${a.tag ? ' · #' + a.tag : ''}</span>
                     <h2 class="text-3xl md:text-5xl font-black text-white drop-shadow-lg">${a.title}</h2>
                     <p class="text-white/80 text-sm font-bold mt-3 drop-shadow">${formatArticleDate(a.date)}</p>
                 </div>
@@ -174,7 +174,7 @@ async function renderLatestArticlesSection() {
 }
 
 // 保養專欄分類/標籤篩選狀態。category: undefined=尚未從網址初始化, null=全部文章；tag: null=不篩選標籤
-window.blogFilterState = { category: undefined, tag: null };
+window.blogFilterState = { category: undefined, tag: undefined };
 
 // 保養專欄列表（與首頁輪播同一份 articles.json，確保「輪播＝專欄最新文章」不會不同步）
 // news.html 也共用這個 function，但沒有 category-tabs/tag-filters 容器，會自動略過分類/標籤篩選只顯示全部文章
@@ -198,13 +198,33 @@ async function renderSkincareArticles() {
             const params = new URLSearchParams(window.location.search);
             window.blogFilterState.category = params.get('category') || null;
         }
-        renderCategoryTabs(allArticles, tabsContainer);
+
+        // 「活動快訊」（週年慶/母親節/Olive Young促銷）跟保養專欄共用這個列表頁模板，
+        // 但不該一直掛著「Skincare Column / 保養專欄」的標題跟保養用的分類頁籤，
+        // 篩到 category=活動 時換成活動快訊自己的標題，分類頁籤也先隱藏（改用下面的
+        // tag-filters 在週年慶/母親節/Olive Young促銷之間切換就好，不需要再選一次分類）。
+        const heading = document.getElementById('blog-page-heading');
+        const isEventCategory = window.blogFilterState.category === '活動';
+        if (heading) {
+            heading.innerHTML = isEventCategory
+                ? 'Event Center / <span class="text-[#f2a7b5] text-2xl not-italic">活動快訊</span>'
+                : 'Skincare Column / <span class="text-[#f2a7b5] text-2xl not-italic">保養專欄</span>';
+        }
+        tabsContainer.style.display = isEventCategory ? 'none' : '';
+
+        if (!isEventCategory) {
+            renderCategoryTabs(allArticles, tabsContainer);
+        }
         if (window.blogFilterState.category) {
             filtered = filtered.filter(a => a.category === window.blogFilterState.category);
         }
     }
 
     if (tagContainer) {
+        if (window.blogFilterState.tag === undefined) {
+            const params = new URLSearchParams(window.location.search);
+            window.blogFilterState.tag = params.get('tag') || null;
+        }
         renderTagFilters(filtered, tagContainer);
         if (window.blogFilterState.tag) {
             filtered = filtered.filter(a => a.tag === window.blogFilterState.tag);
@@ -637,7 +657,7 @@ let scoresDataCache = null;
 async function getSiteData() {
     if (siteDataCache) return siteDataCache;
     try {
-        const response = await fetch('site-data.json?v=31');
+        const response = await fetch('site-data.json?v=33');
         siteDataCache = await response.json();
         return siteDataCache;
     } catch (err) {
@@ -984,7 +1004,7 @@ function filterTypesByScoredSubcats(types, scoredSubcats) {
 // Nav Logic (Mega Menu)
 async function initNav() {
     try {
-        const [response, scoredSubcats] = await Promise.all([fetch('site-data.json?v=31'), getScoredSubcats()]);
+        const [response, scoredSubcats] = await Promise.all([fetch('site-data.json?v=33'), getScoredSubcats()]);
         const data = await response.json();
         const navContainer = document.getElementById('desktop-nav');
         if (!navContainer) return;
@@ -1001,6 +1021,30 @@ async function initNav() {
                 a.className = 'nav-link hover:text-[#f2a7b5] h-full flex items-center';
                 a.textContent = target.name;
                 navContainer.appendChild(a);
+            } else if (target.tagCategories) {
+                // 活動快訊這類「同一個 category、用 tag 細分」的下拉選單：父層連結跟子項目都停在
+                // 同一個 category 底下，不會像保養專欄的父層連結那樣導去不分類的全部文章
+                const parent = document.createElement('div');
+                parent.className = 'dropdown-parent simple-dropdown h-full flex items-center';
+
+                const catParam = encodeURIComponent(target.category);
+                const a = document.createElement('a');
+                a.href = `skincare-blog.html?category=${catParam}`;
+                a.className = 'nav-link hover:text-[#f2a7b5] h-full flex items-center';
+                a.innerHTML = `${target.name} &#x25BE;`;
+
+                const menu = document.createElement('div');
+                menu.className = 'dropdown-menu';
+                menu.innerHTML = `
+                    <a href="skincare-blog.html?category=${catParam}" class="dropdown-item">全部${target.name}</a>
+                    ${target.tagCategories.map(tag =>
+                        `<a href="skincare-blog.html?category=${catParam}&amp;tag=${encodeURIComponent(tag)}" class="dropdown-item">${tag}</a>`
+                    ).join('')}
+                `;
+
+                parent.appendChild(a);
+                parent.appendChild(menu);
+                navContainer.appendChild(parent);
             } else if (target.articleCategories) {
                 // 保養專欄：簡單 3 項分類下拉（保養/清潔/化妝），跟商品目錄的大型 mega-menu 分開處理
                 const parent = document.createElement('div');

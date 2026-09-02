@@ -6,6 +6,13 @@
    "hasDropdown": false
   },
   {
+   "id": "t1b",
+   "name": "活動快訊",
+   "hasDropdown": true,
+   "category": "活動",
+   "tagCategories": ["週年慶", "母親節", "Olive Young促銷"]
+  },
+  {
    "id": "t2",
    "name": "美妝看板",
    "hasDropdown": true,
