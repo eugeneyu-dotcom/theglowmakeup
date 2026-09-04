@@ -33,7 +33,7 @@ let articlesCache = null;
 async function getArticles() {
     if (articlesCache) return articlesCache;
     try {
-        const res = await fetch('articles.json?v=56');
+        const res = await fetch('articles.json?v=57');
         const data = await res.json();
         articlesCache = (data.articles || []).slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
         return articlesCache;
@@ -52,7 +52,12 @@ async function initSlider() {
     const track = document.getElementById('mainSlider');
     if (!track) return;
 
-    const articles = (await getArticles()).slice(0, MAX_SLIDES);
+    // 置頂文章（pinned:true）固定排在輪播最前面，其餘維持日期新到舊；
+    // 只影響輪播本身，不動 getArticles() 共用排序，跑馬燈/最新文章卡片/文章列表頁都不受影響
+    const allArticles = await getArticles();
+    const pinnedArticles = allArticles.filter(a => a.pinned);
+    const restArticles = allArticles.filter(a => !a.pinned);
+    const articles = [...pinnedArticles, ...restArticles].slice(0, MAX_SLIDES);
     if (articles.length === 0) {
         track.innerHTML = '<div class="slide shrink-0 flex items-center justify-center bg-[#fdeef1]"><p class="font-black text-[#e6a0ad]">保養專欄尚無文章</p></div>';
         return;
