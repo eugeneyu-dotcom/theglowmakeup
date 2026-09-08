@@ -19,7 +19,7 @@
     <meta property="og:type" content="website">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%84%3C/text%3E%3C/svg%3E">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles.css?v=42">
+    <link rel="stylesheet" href="styles.css?v=43">
 </head>
 <body class="bg-[#fff9f5] text-[#2d2d2d] selection:bg-[#f2a7b5] selection:text-white">
 
@@ -229,11 +229,17 @@
             </div>
         </section>
 
-        <!-- 7. 最新文章 -->
+        <!-- 7. 最新文章（橫向滑動輪播：不管文章數多少，區塊高度固定，手機靠手勢滑動、桌機可點箭頭） -->
         <section class="py-24 bg-white">
             <div class="max-w-7xl mx-auto px-4">
-                <h3 class="text-3xl font-black mb-16 italic">Latest Articles / <span class="text-[#f2a7b5] text-xl not-italic">最新文章</span></h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="latest-articles-grid">
+                <div class="flex items-center justify-between mb-10 md:mb-16">
+                    <h3 class="text-3xl font-black italic">Latest Articles / <span class="text-[#f2a7b5] text-xl not-italic">最新文章</span></h3>
+                    <div class="hidden md:flex items-center gap-3">
+                        <button onclick="scrollArticleCarousel(-1)" aria-label="上一篇" class="w-11 h-11 rounded-full bg-[#f2a7b5] text-white hover:bg-[#e88fa0] shadow-md flex items-center justify-center transition-colors">&#10094;</button>
+                        <button onclick="scrollArticleCarousel(1)" aria-label="下一篇" class="w-11 h-11 rounded-full bg-[#f2a7b5] text-white hover:bg-[#e88fa0] shadow-md flex items-center justify-center transition-colors">&#10095;</button>
+                    </div>
+                </div>
+                <div class="article-carousel" id="latest-articles-grid">
                     <div class="text-gray-400 text-sm">載入中...</div>
                 </div>
             </div>
@@ -249,6 +255,6 @@
         <p class="text-gray-400 text-sm">© 2026 美妝生活誌 - 妳的最美應援團</p>
     </footer>
 
-    <script src="script.js?v=58"></script>
+    <script src="script.js?v=60"></script>
 </body>
 </html>

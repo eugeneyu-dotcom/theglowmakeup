@@ -158,7 +158,7 @@ async function renderNewProducts() {
 async function renderLatestArticlesSection() {
     const grid = document.getElementById('latest-articles-grid');
     if (!grid) return;
-    const articles = (await getArticles()).slice(0, 3);
+    const articles = (await getArticles()).slice(0, 8);
     if (articles.length === 0) {
         grid.innerHTML = '<div class="text-gray-400 text-sm">保養專欄尚無文章</div>';
         return;
@@ -176,6 +176,15 @@ async function renderLatestArticlesSection() {
             <h4 class="text-xl font-black mb-4 leading-tight group-hover:text-[#f2a7b5] transition-colors cursor-pointer" onclick="location.href='${a.url || 'skincare-blog.html'}'">${a.title}</h4>
         </div>
     `).join('');
+}
+
+// 最新文章橫向輪播：按一次箭頭滑動約一個卡片寬度（含間距），手機靠原生手勢滑動不需要箭頭
+function scrollArticleCarousel(direction) {
+    const track = document.getElementById('latest-articles-grid');
+    if (!track) return;
+    const card = track.querySelector('.article-card');
+    const delta = card ? card.getBoundingClientRect().width + 32 : track.clientWidth * 0.8;
+    track.scrollBy({ left: delta * direction, behavior: 'smooth' });
 }
 
 // 保養專欄分類/標籤篩選狀態。category: undefined=尚未從網址初始化, null=全部文章；tag: null=不篩選標籤
@@ -957,7 +966,7 @@ async function updateBattleRadarChart(subcategory, leftItem, rightItem) {
         options: {
             legend: {
                 labels: {
-                    fontSize: 15,
+                    fontSize: 18,
                     fontStyle: 'bold'
                 }
             },
@@ -969,14 +978,14 @@ async function updateBattleRadarChart(subcategory, leftItem, rightItem) {
                     display: false
                 },
                 pointLabels: {
-                    fontSize: 16,
+                    fontSize: 22,
                     fontStyle: 'bold'
                 }
             }
         }
     };
 
-    const chartUrl = `https://quickchart.io/chart?width=560&height=460&c=${encodeURIComponent(JSON.stringify(chartConfig))}`;
+    const chartUrl = `https://quickchart.io/chart?width=700&height=580&c=${encodeURIComponent(JSON.stringify(chartConfig))}`;
 
     container.innerHTML = `
         <div class="animate-fade-in w-full flex flex-col items-center gap-4">

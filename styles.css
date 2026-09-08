@@ -508,3 +508,38 @@ nav {
 body.mobile-nav-open {
     overflow: hidden;
 }
+
+/* 最新文章：橫向滑動輪播，卡片數量不影響區塊高度（手機用手勢滑，桌機可點箭頭） */
+.article-carousel {
+    display: flex;
+    gap: 32px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 4px;
+}
+
+.article-carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.article-carousel .article-card {
+    flex: 0 0 auto;
+    width: 78vw;
+    max-width: 320px;
+    scroll-snap-align: start;
+}
+
+@media (min-width: 640px) {
+    .article-carousel .article-card {
+        width: calc(50% - 16px);
+        max-width: none;
+    }
+}
+
+@media (min-width: 1024px) {
+    .article-carousel .article-card {
+        width: calc(33.333% - 22px);
+    }
+}
