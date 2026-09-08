@@ -19,7 +19,7 @@
     <meta property="og:type" content="website">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%84%3C/text%3E%3C/svg%3E">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles.css?v=39">
+    <link rel="stylesheet" href="styles.css?v=42">
 </head>
 <body class="bg-[#fff9f5] text-[#2d2d2d] selection:bg-[#f2a7b5] selection:text-white">
 
@@ -168,9 +168,9 @@
                     <button onclick="switchBattle('blush', this)" class="battle-btn px-6 py-2 rounded-full border-2 border-gray-100 text-gray-400 font-bold hover:border-[#f2a7b5] hover:text-[#f2a7b5] transition-all text-sm">腮紅對決</button>
                 </div>
 
-                <div class="max-w-6xl mx-auto flex flex-col lg:flex-row items-stretch gap-8">
+                <div class="max-w-6xl mx-auto battle-layout">
                     <!-- Left Sentiment Panel -->
-                    <div id="sentiment-left" class="sentiment-panel shrink-0 order-2 lg:order-1">
+                    <div id="sentiment-left" class="sentiment-panel">
                         <div class="sentiment-loading">
                             <div class="spinner mb-4"></div>
                             <p class="text-xs font-bold text-gray-400">AI 聲量分析中...</p>
@@ -178,7 +178,7 @@
                     </div>
 
                     <!-- Center Battle Cards -->
-                    <div id="battle-center" class="flex-grow bg-[#fff9f5] rounded-[32px] p-8 md:p-12 shadow-sm border border-[#f2a7b5]/10 relative order-1 lg:order-2">
+                    <div id="battle-center" class="bg-[#fff9f5] rounded-[32px] p-8 md:p-12 shadow-sm border border-[#f2a7b5]/10 relative">
                         <div class="flex justify-between items-center mb-10">
                             <h3 id="battle-title" class="text-xl font-bold italic">2026 年度持妝粉底爭霸戰</h3>
                             <span class="bg-[#2d2d2d] text-white text-[10px] px-3 py-1 rounded-full font-bold">LIVE DATA</span>
@@ -208,7 +208,7 @@
                     </div>
 
                     <!-- Right Sentiment Panel -->
-                    <div id="sentiment-right" class="sentiment-panel shrink-0 order-3">
+                    <div id="sentiment-right" class="sentiment-panel">
                         <div class="sentiment-loading">
                             <div class="spinner mb-4"></div>
                             <p class="text-xs font-bold text-gray-400">AI 聲量分析中...</p>
@@ -249,6 +249,6 @@
         <p class="text-gray-400 text-sm">© 2026 美妝生活誌 - 妳的最美應援團</p>
     </footer>
 
-    <script src="script.js?v=56"></script>
+    <script src="script.js?v=58"></script>
 </body>
 </html>

@@ -897,8 +897,8 @@ function initSentimentAnalysis(side, item) {
             <div>
                 <p class="text-[10px] font-black text-gray-500 mb-3 text-center uppercase tracking-tighter">真實指標強弱項</p>
                 <div class="tag-cloud">
-                    ${pros.map(([name, s]) => `<span class="sentiment-tag tag-pro" style="font-size: ${Math.round(s * 7)}px">${name}</span>`).join('')}
-                    ${cons.map(([name, s]) => `<span class="sentiment-tag tag-con" style="font-size: ${Math.round(s * 7)}px">${name}</span>`).join('')}
+                    ${pros.map(([name, s]) => `<span class="sentiment-tag tag-pro" style="font-size: ${Math.round(12 + s * 1.4)}px">${name}</span>`).join('')}
+                    ${cons.map(([name, s]) => `<span class="sentiment-tag tag-con" style="font-size: ${Math.round(12 + s * 1.4)}px">${name}</span>`).join('')}
                 </div>
             </div>
             ${quote}

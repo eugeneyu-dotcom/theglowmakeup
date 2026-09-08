@@ -187,15 +187,42 @@ nav {
 .sentiment-panel {
     background: white;
     border-radius: 24px;
-    padding: 20px;
-    width: 260px;
+    padding: 12px;
+    width: 100%;
     box-shadow: 0 4px 20px rgba(0,0,0,0.03);
     border: 1px solid rgba(242, 167, 181, 0.1);
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 12px;
     min-height: 400px;
     transition: all 0.3s ease;
+}
+
+/* 殘酷擂台版面：手機上「左/右指數分析」併排在中間對戰卡下方，桌機維持左-中-右三欄一排 */
+.battle-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "center center"
+        "left right";
+    gap: 12px;
+}
+
+.battle-layout > #sentiment-left { grid-area: left; }
+.battle-layout > #sentiment-right { grid-area: right; }
+.battle-layout > #battle-center { grid-area: center; }
+
+@media (min-width: 1024px) {
+    .battle-layout {
+        grid-template-columns: 260px 1fr 260px;
+        grid-template-areas: "left center right";
+        gap: 2rem;
+    }
+    .sentiment-panel {
+        width: 260px;
+        padding: 20px;
+        gap: 15px;
+    }
 }
 
 .sentiment-loading {
@@ -229,11 +256,16 @@ nav {
     justify-content: center;
 }
 
+.tag-cloud .sentiment-tag {
+    flex-shrink: 0;
+}
+
 .sentiment-tag {
     background: #f8f8f8;
-    padding: 4px 12px;
+    padding: 4px 10px;
     border-radius: 20px;
     font-weight: 700;
+    white-space: nowrap;
     transition: transform 0.2s ease;
 }
 
