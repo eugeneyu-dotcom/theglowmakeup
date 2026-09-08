@@ -540,6 +540,6 @@ body.mobile-nav-open {
 
 @media (min-width: 1024px) {
     .article-carousel .article-card {
-        width: calc(33.333% - 22px);
+        width: calc(20% - 26px);
     }
 }
