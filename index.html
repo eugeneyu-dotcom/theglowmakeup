@@ -19,7 +19,7 @@
     <meta property="og:type" content="website">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%84%3C/text%3E%3C/svg%3E">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles.css?v=37">
+    <link rel="stylesheet" href="styles.css?v=39">
 </head>
 <body class="bg-[#fff9f5] text-[#2d2d2d] selection:bg-[#f2a7b5] selection:text-white">
 
@@ -39,9 +39,25 @@
                     <span>&#x1F50D;</span>
                     <input type="text" placeholder="搜尋美妝情報..." class="search-input">
                 </div>
+                <button id="mobileMenuToggle" class="lg:hidden flex flex-col justify-center items-center w-9 h-9 gap-1.5 shrink-0" aria-label="開啟選單" aria-expanded="false">
+                    <span class="block w-6 h-0.5 bg-[#2d2d2d]"></span>
+                    <span class="block w-6 h-0.5 bg-[#2d2d2d]"></span>
+                    <span class="block w-6 h-0.5 bg-[#2d2d2d]"></span>
+                </button>
             </div>
         </div>
     </header>
+
+    <div id="mobileNavOverlay" class="mobile-nav-overlay"></div>
+    <aside id="mobileNav" class="mobile-nav" aria-hidden="true">
+        <div class="mobile-nav-header">
+            <span class="mobile-nav-title">選單</span>
+            <button id="mobileMenuClose" class="mobile-nav-close" aria-label="關閉選單">&times;</button>
+        </div>
+        <nav id="mobile-nav-list" class="mobile-nav-list">
+            <!-- Dynamically populated from site-data.json -->
+        </nav>
+    </aside>
 
     <main>
         <!-- 1. Slider（保養專欄最新文章，由 articles.json 動態產生） -->
@@ -233,6 +249,6 @@
         <p class="text-gray-400 text-sm">© 2026 美妝生活誌 - 妳的最美應援團</p>
     </footer>
 
-    <script src="script.js?v=55"></script>
+    <script src="script.js?v=56"></script>
 </body>
 </html>

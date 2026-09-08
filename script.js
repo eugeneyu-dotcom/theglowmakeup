@@ -1133,9 +1133,123 @@ async function initNav() {
                 navContainer.appendChild(parent);
             }
         });
+
+        renderMobileNav(data, scoredSubcats);
     } catch(err) {
         console.error('Error loading nav:', err);
     }
+}
+
+// 手機版選單：同一份 site-data.json，改成手風琴式展開（沒有滑鼠 hover，下拉選單全部改點擊展開）
+function renderMobileNav(data, scoredSubcats) {
+    const list = document.getElementById('mobile-nav-list');
+    if (!list) return;
+
+    list.innerHTML = '';
+
+    data.targets.forEach(target => {
+        if (!target.hasDropdown) {
+            const a = document.createElement('a');
+            if (target.name === '最新情報') a.href = 'news.html';
+            else if (target.name === '保養專欄') a.href = 'skincare-blog.html';
+            else a.href = '#';
+            a.className = 'mobile-nav-link';
+            a.textContent = target.name;
+            list.appendChild(a);
+            return;
+        }
+
+        const parent = document.createElement('div');
+        parent.className = 'mobile-nav-parent';
+        parent.innerHTML = `<span>${target.name}</span><span class="mobile-nav-caret">&#x25BE;</span>`;
+
+        const submenu = document.createElement('div');
+        submenu.className = 'mobile-nav-submenu';
+
+        if (target.tagCategories) {
+            const catParam = encodeURIComponent(target.category);
+            submenu.innerHTML = `
+                <a href="skincare-blog.html?category=${catParam}" class="mobile-nav-sub-item">全部${target.name}</a>
+                ${target.tagCategories.map(tag =>
+                    `<a href="skincare-blog.html?category=${catParam}&amp;tag=${encodeURIComponent(tag)}" class="mobile-nav-sub-item">${tag}</a>`
+                ).join('')}
+            `;
+        } else if (target.articleCategories) {
+            submenu.innerHTML = `
+                <a href="skincare-blog.html" class="mobile-nav-sub-item">全部文章</a>
+                ${target.articleCategories.map(cat =>
+                    `<a href="skincare-blog.html?category=${encodeURIComponent(cat)}" class="mobile-nav-sub-item">${cat}</a>`
+                ).join('')}
+            `;
+        } else {
+            let fromContext = target.name === '精選評比' ? 'review' : 'board';
+            const menuTypes = fromContext === 'review'
+                ? filterTypesByScoredSubcats(target.types, scoredSubcats)
+                : target.types;
+
+            menuTypes.forEach(type => {
+                const typeLabel = document.createElement('div');
+                typeLabel.className = 'mobile-nav-type-label';
+                typeLabel.textContent = type.name;
+                submenu.appendChild(typeLabel);
+
+                type.categories.forEach(cat => {
+                    const catLabel = document.createElement('div');
+                    catLabel.className = 'mobile-nav-cat-label';
+                    catLabel.textContent = cat.name;
+                    submenu.appendChild(catLabel);
+
+                    cat.subcategories.forEach(sub => {
+                        const subEl = document.createElement('a');
+                        subEl.href = `detail.html?sub=${encodeURIComponent(sub)}&from=${fromContext}`;
+                        subEl.className = 'mobile-nav-sub-item';
+                        subEl.textContent = sub;
+                        submenu.appendChild(subEl);
+                    });
+                });
+            });
+        }
+
+        parent.addEventListener('click', () => {
+            const isOpen = parent.classList.toggle('expanded');
+            submenu.classList.toggle('expanded', isOpen);
+        });
+
+        list.appendChild(parent);
+        list.appendChild(submenu);
+    });
+}
+
+// 手機版選單開關（漢堡按鈕 / 遮罩 / ESC 都能關閉，開啟時鎖住背景捲動）
+function initMobileMenuToggle() {
+    const toggleBtn = document.getElementById('mobileMenuToggle');
+    const closeBtn = document.getElementById('mobileMenuClose');
+    const overlay = document.getElementById('mobileNavOverlay');
+    const nav = document.getElementById('mobileNav');
+    if (!toggleBtn || !overlay || !nav) return;
+
+    function openMenu() {
+        overlay.classList.add('open');
+        nav.classList.add('open');
+        nav.setAttribute('aria-hidden', 'false');
+        toggleBtn.setAttribute('aria-expanded', 'true');
+        document.body.classList.add('mobile-nav-open');
+    }
+
+    function closeMenu() {
+        overlay.classList.remove('open');
+        nav.classList.remove('open');
+        nav.setAttribute('aria-hidden', 'true');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        document.body.classList.remove('mobile-nav-open');
+    }
+
+    toggleBtn.addEventListener('click', openMenu);
+    closeBtn?.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') closeMenu();
+    });
 }
 
 function renderCategories(categories, container, fromContext) {
@@ -1164,6 +1278,7 @@ function renderCategories(categories, container, fromContext) {
 // Initial Load
 window.addEventListener('DOMContentLoaded', () => {
     initNav();
+    initMobileMenuToggle();
     initSlider();
     initRankings();
     initHomeQuizVisibility();
