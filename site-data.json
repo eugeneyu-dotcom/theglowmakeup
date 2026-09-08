@@ -10,7 +10,9 @@
    "name": "活動快訊",
    "hasDropdown": true,
    "category": "活動",
-   "tagCategories": ["週年慶"]
+   "tagCategories": [
+    "週年慶"
+   ]
   },
   {
    "id": "t2",
@@ -275,7 +277,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -567,6 +571,27 @@
       "偏好 高遮瑕無瑕、霧面高級 質感妝容的彩妝愛好者",
       "追求簡單快速上妝、零技巧即可打造精緻妝效者"
      ]
+    },
+    {
+     "name": "裸光肌萃粉底精華",
+     "brand": "NARS",
+     "image": "assets/products/nars-02.jpg",
+     "url": "https://www.narscosmetics.com.tw/zh/%E8%A3%B8%E5%85%89%E8%82%8C%E8%90%83%E7%B2%89%E5%BA%95%E7%B2%BE%E8%8F%AF/999NAC0000141.html",
+     "desc": "【NARS 裸光肌萃粉底精華】暱稱小光瓶，獨特光萃水粉底質地蘊含70%植萃保養精華，運用獨家LRC聚光保濕複合物讓底妝呈現16小時持久水裸光，特別適合乾肌與混合偏乾肌，卸妝後肌膚透亮感依然持續。",
+     "hashtags": [
+      "乾肌",
+      "混合偏乾肌",
+      "水裸光感",
+      "保濕貼膚",
+      "不暗沉"
+     ],
+     "hot_shades": [],
+     "advantages": [],
+     "suitable_audience": [
+      "偏乾肌、混合偏乾肌想要水潤光澤底妝的人",
+      "追求裸妝感、不想要厚重遮瑕的彩妝愛好者",
+      "重視底妝同時兼顧保養成分的族群"
+     ]
     }
    ],
    "indicators": [
@@ -593,7 +618,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -887,7 +914,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -1101,6 +1130,26 @@
       "偏好 清透自然、光澤水透 質感妝容的彩妝愛好者",
       "追求簡單快速上妝、零技巧即可打造精緻妝效者"
      ]
+    },
+    {
+     "name": "水潤光采氣墊粉霜",
+     "brand": "肌膚之鑰",
+     "image": "assets/products/cledepeau-05.png",
+     "url": "https://www.cledepeau-beaute.com.tw/水潤光采氣墊粉霜-A19301set_tw.html",
+     "desc": "【肌膚之鑰 水潤光采氣墊粉霜】靈感源自鑽石光芒，添加獨家保加利亞玫瑰菁萃，能全天候為肌膚注入水分並深層滋潤，打造瞬間水潤透亮的鑽石級妝容，遮蓋力跟光澤感都能依需求疊加，適合喜歡水潤妝感的族群。",
+     "hashtags": [
+      "水潤光澤",
+      "可疊加遮瑕",
+      "玫瑰菁萃保濕",
+      "鑽石級妝感"
+     ],
+     "hot_shades": [],
+     "advantages": [],
+     "suitable_audience": [
+      "偏乾肌、想要水潤透亮妝感的人",
+      "喜歡可依需求疊加遮瑕力的氣墊粉餅使用者",
+      "願意投資頂級底妝、重視妝效跟質感的族群"
+     ]
     }
    ],
    "indicators": [
@@ -1128,7 +1177,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -1390,6 +1441,28 @@
       "偏好 高遮瑕無瑕、光澤水透 質感妝容的彩妝愛好者",
       "追求簡單快速上妝、零技巧即可打造精緻妝效者"
      ]
+    },
+    {
+     "name": "裸光蜜粉餅",
+     "brand": "NARS",
+     "image": "assets/products/nars-03.jpg",
+     "url": "https://www.narscosmetics.com.tw/zh/%E8%A3%B8%E5%85%89%E8%9C%9C%E7%B2%89%E9%A4%85/999NAC0000099.html",
+     "desc": "【NARS 裸光蜜粉餅】暱稱小白餅，蟬聯專櫃蜜粉餅銷售冠軍，獨家控光科技搭配LRC聚光保濕複合物，細緻粉質能隨光源自然調整妝效，一擦隱藏毛孔細紋並持續控油整天，質地輕盈不厚重。",
+     "hashtags": [
+      "16小時定妝",
+      "柔焦控油",
+      "銷售冠軍",
+      "保濕不乾燥"
+     ],
+     "hot_shades": [
+      "Crystal 透明色"
+     ],
+     "advantages": [],
+     "suitable_audience": [
+      "容易出油、需要長效控油定妝的人",
+      "想要毛孔柔焦、修飾細紋的彩妝愛好者",
+      "偏好透明蜜粉不影響底妝色調的族群"
+     ]
     }
    ],
    "indicators": [
@@ -1412,7 +1485,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -1652,6 +1727,31 @@
       "偏好 高遮瑕無瑕、光澤水透 質感妝容的彩妝愛好者",
       "追求簡單快速上妝、零技巧即可打造精緻妝效者"
      ]
+    },
+    {
+     "name": "炫色腮紅",
+     "brand": "NARS",
+     "image": "assets/products/nars-01.jpg",
+     "url": "https://www.narscosmetics.com.tw/zh/%E7%82%AB%E8%89%B2%E8%85%AE%E7%B4%85/999NAC0000192.html",
+     "desc": "【NARS 炫色腮紅】品牌經典代表作，運用純色顯彩技術打造16小時持色不斑駁，質地絲滑細緻好暈染，經典色號777 Orgasm是全球最具知名度的腮紅色號之一，自然透出蜜桃香檳金的好氣色。",
+     "hashtags": [
+      "高顯色",
+      "16小時持妝",
+      "好暈染",
+      "純素配方",
+      "經典必收"
+     ],
+     "hot_shades": [
+      "#777 Orgasm 蜜桃香檳金",
+      "#900 Behave",
+      "#920 Sex Appeal"
+     ],
+     "advantages": [],
+     "suitable_audience": [
+      "喜歡高顯色、想快速提氣色的彩妝愛好者",
+      "追求好暈染、不容易手殘畫失敗的新手",
+      "想收藏經典必買色號777 Orgasm的人"
+     ]
     }
    ],
    "indicators": [
@@ -1675,7 +1775,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -1955,7 +2057,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -2207,7 +2311,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -2384,6 +2490,28 @@
       "偏好 高遮瑕無瑕、光澤水透 質感妝容的彩妝愛好者",
       "追求簡單快速上妝、零技巧即可打造精緻妝效者"
      ]
+    },
+    {
+     "name": "立體小臉修容棒",
+     "brand": "NARS",
+     "image": "assets/products/nars-04.jpg",
+     "url": "https://www.narscosmetics.com.tw/zh/%E7%AB%8B%E9%AB%94%E5%B0%8F%E8%87%89%E4%BF%AE%E5%AE%B9%E6%A3%92/999NAC0000286.html",
+     "desc": "【NARS 立體小臉修容棒】獨特霜轉粉質地，觸膚即化開成細緻粉末，不結塊也不容易暈妝，一筆就能修飾臉型輪廓，16小時柔霧持妝效果適合修容新手快速上手，添加牡丹根萃取跟桃仁油，修容同時兼顧肌膚滋潤。",
+     "hashtags": [
+      "霜轉粉質地",
+      "修容新手首選",
+      "16小時持妝",
+      "不結塊"
+     ],
+     "hot_shades": [
+      "ISCHIA 冷灰棕"
+     ],
+     "advantages": [],
+     "suitable_audience": [
+      "修容新手、想要一筆到位不失手的人",
+      "追求立體輪廓但不想妝感厚重的彩妝愛好者",
+      "喜歡霜狀質地方便隨身補妝的族群"
+     ]
     }
    ],
    "indicators": [
@@ -2405,7 +2533,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -2562,7 +2692,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -2769,7 +2901,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -3011,7 +3145,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -3227,7 +3363,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -3477,7 +3615,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -3717,6 +3857,50 @@
       "偏好 清透自然、光澤水透 質感妝容的彩妝愛好者",
       "追求簡單快速上妝、零技巧即可打造精緻妝效者"
      ]
+    },
+    {
+     "name": "奢慾緞光唇膏",
+     "brand": "NARS",
+     "image": "assets/products/nars-05.jpg",
+     "url": "https://www.narscosmetics.com.tw/zh/%E5%A5%A2%E6%85%BE%E7%B7%9E%E5%85%89%E5%94%87%E8%86%8F/999NAC0000221.html",
+     "desc": "【NARS 奢慾緞光唇膏】高級緞光顯色唇膏，添加玫瑰籽油與玻尿酸讓唇部維持滋潤不乾燥，精準子彈頭刷頭方便描繪唇型，色號選擇多元，是不少彩妝愛好者心中的百搭必備色。",
+     "hashtags": [
+      "緞光顯色",
+      "滋潤不乾燥",
+      "精準唇型",
+      "色號齊全"
+     ],
+     "hot_shades": [],
+     "advantages": [],
+     "suitable_audience": [
+      "喜歡緞光唇膏、不想要死霧感的人",
+      "嘴唇容易乾燥、需要兼顧滋潤度的族群",
+      "想找百搭必備唇色的彩妝新手"
+     ]
+    },
+    {
+     "name": "奢華訂製粉漾潤唇膏",
+     "brand": "肌膚之鑰",
+     "image": "assets/products/cledepeau-03.png",
+     "url": "https://www.cledepeau-beaute.com.tw/奢華訂製粉漾潤唇膏-A16201_tw.html",
+     "desc": "【肌膚之鑰 奢華訂製粉漾潤唇膏】添加新型甘草酸配方跟4種濃縮天然植物油，隨時擦拭都能潤色兼顧護理，預防嘴唇乾燥粗糙，三種色調各有不同香氣與質地，自然光澤感讓唇彩疊擦後更顯閃耀動人。",
+     "hashtags": [
+      "潤色護唇",
+      "天然植物油",
+      "防止乾燥",
+      "自然光澤"
+     ],
+     "hot_shades": [
+      "玫瑰花苞粉",
+      "薄荷莓紅",
+      "蜜橙珊瑚"
+     ],
+     "advantages": [],
+     "suitable_audience": [
+      "嘴唇容易乾燥粗糙、想兼顧護理的人",
+      "喜歡自然光澤、不想要厚重顯色的族群",
+      "想要護唇膏跟潤色唇膏二合一的人"
+     ]
     }
    ],
    "indicators": [
@@ -3742,7 +3926,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -3985,7 +4171,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -4158,7 +4346,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -4404,7 +4594,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -4648,7 +4840,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -4746,7 +4940,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -4949,7 +5145,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -5128,7 +5326,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -5256,7 +5456,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -5381,7 +5583,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -5456,7 +5660,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -5662,6 +5868,26 @@
       "敏弱肌膚、換季易泛紅脫皮或急需強效屏障修護者",
       "喜愛溫和純淨保養、追求高效且清爽無負擔質地者"
      ]
+    },
+    {
+     "name": "精萃光采淨透保濕修護露II",
+     "brand": "肌膚之鑰",
+     "image": "assets/products/cledepeau-04.png",
+     "url": "https://www.cledepeau-beaute.com.tw/精萃光采淨透保濕修護露II-#激光修護露-A22607_tw.html",
+     "desc": "【肌膚之鑰 精萃光采淨透保濕修護露II】暱稱激光修護露，官網訴求「深層保濕，平衡膚況，重啟清透膚觸」，同樣添加南法珍稀光采百合精萃，能深度滋養同時鎖水，官網數據顯示7天即可提升保濕力並修護肌膚屏障，改善黏膩感、觸感更加清爽柔滑。",
+     "hashtags": [
+      "深層保濕",
+      "修護屏障",
+      "7天見效",
+      "清爽不黏膩"
+     ],
+     "hot_shades": [],
+     "advantages": [],
+     "suitable_audience": [
+      "膚況不穩定、想先從化妝水修護屏障的人",
+      "不喜歡黏膩感、偏好清爽保濕質地的族群",
+      "想搭配同系列激光瓶精華一起使用的人"
+     ]
     }
    ],
    "indicators": [
@@ -5684,7 +5910,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -5907,7 +6135,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -6138,6 +6368,26 @@
       "敏弱肌膚、換季易泛紅脫皮或急需強效屏障修護者",
       "喜愛溫和純淨保養、追求高效且清爽無負擔質地者"
      ]
+    },
+    {
+     "name": "精質乳霜",
+     "brand": "肌膚之鑰",
+     "image": "assets/products/cledepeau-01.png",
+     "url": "https://www.cledepeau-beaute.com.tw/精質乳霜-A15901_tw.html",
+     "desc": "【肌膚之鑰 精質乳霜 LA CRÈME】品牌頂級奢華經典之作，核心成分「光采智能複合物」蘊含超過60種珍稀成分，包含日本秋田縣白神山地頂級酵母萃取，透過夜間修護喚醒肌膚自我再生能力，持續使用能感受到肌膚彈性、緊緻度明顯提升。",
+     "hashtags": [
+      "熟齡肌",
+      "夜間修護",
+      "彈性緊緻",
+      "奢華頂級保養"
+     ],
+     "hot_shades": [],
+     "advantages": [],
+     "suitable_audience": [
+      "熟齡肌、重視抗老緊緻效果的人",
+      "願意投資頂級保養、追求極致膚質的族群",
+      "希望透過夜間修護喚醒肌膚彈性的人"
+     ]
     }
    ],
    "indicators": [
@@ -6162,7 +6412,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -6422,6 +6674,26 @@
       "敏弱肌膚、換季易泛紅脫皮或急需強效屏障修護者",
       "喜愛溫和純淨保養、追求高效且清爽無負擔質地者"
      ]
+    },
+    {
+     "name": "精萃光采激光晶露",
+     "brand": "肌膚之鑰",
+     "image": "assets/products/cledepeau-02.png",
+     "url": "https://www.cledepeau-beaute.com.tw/精萃光采激光晶露#激光瓶-A15306_tw.html",
+     "desc": "【肌膚之鑰 精萃光采激光晶露】暱稱激光瓶，官網形容為「你的第一瓶頂級修護精華」，添加南法塞文山脈珍稀光采百合濃萃與澳洲檸檬香桃精萃，能秒速滲透幫助修護肌膚屏障、延緩老化，同時兼具修護力與防禦力。",
+     "hashtags": [
+      "修護屏障",
+      "抗老精華",
+      "秒速滲透",
+      "激光瓶"
+     ],
+     "hot_shades": [],
+     "advantages": [],
+     "suitable_audience": [
+      "肌膚屏障較弱、需要加強修護的人",
+      "想從第一瓶精華液就選頂級保養的族群",
+      "重視抗老同時兼顧防禦力的熟齡肌"
+     ]
     }
    ],
    "indicators": [
@@ -6445,7 +6717,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -6673,7 +6947,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -6848,7 +7124,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -7035,7 +7313,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -7179,7 +7459,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -7268,7 +7550,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -7457,7 +7741,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -7618,7 +7904,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -7730,7 +8018,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -7777,7 +8067,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -7920,7 +8212,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -8015,7 +8309,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -8133,7 +8429,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -8205,7 +8503,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
@@ -8323,7 +8623,9 @@
     "MAKE UP FOREVER",
     "雅詩蘭黛",
     "蘭蔻",
-    "Bobbi Brown"
+    "Bobbi Brown",
+    "NARS",
+    "肌膚之鑰"
    ],
    "items": [
     {
