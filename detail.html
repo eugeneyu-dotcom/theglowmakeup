@@ -107,7 +107,12 @@
 
             <!-- All Products Grid (Only in Board Mode) -->
             <section id="all-products-section" class="hidden">
-                <h3 class="text-2xl font-black mb-6 italic">✨ 所有商品項目 / <span class="text-[#f2a7b5] text-lg not-italic">All Products</span></h3>
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+                    <h3 class="text-2xl font-black italic">✨ 所有商品項目 / <span class="text-[#f2a7b5] text-lg not-italic">All Products</span></h3>
+                    <div id="board-sort-buttons" class="flex gap-2">
+                        <!-- Loaded here -->
+                    </div>
+                </div>
                 <div id="all-products-grid" class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                     <!-- Loaded here -->
                 </div>
@@ -335,6 +340,13 @@
             if (typeof window.triggerFilteredItemsRender === 'function') window.triggerFilteredItemsRender();
         };
 
+        // 美妝看板「所有商品項目」排序按鈕：預設依熱門則數（近期熱門排最前面），可切換成依評分高低、依討論篇數排序
+        window.boardSortMode = 'hot';
+        window.setBoardSort = function(mode) {
+            window.boardSortMode = mode;
+            if (typeof window.triggerFilteredItemsRender === 'function') window.triggerFilteredItemsRender();
+        };
+
         document.addEventListener('DOMContentLoaded', async () => {
             const params = new URLSearchParams(window.location.search);
             const sub = params.get('sub');
@@ -403,6 +415,7 @@
                     // Sections and grid containers
                     const allProductsSection = document.getElementById('all-products-section');
                     const allProductsGrid = document.getElementById('all-products-grid');
+                    const boardSortButtons = document.getElementById('board-sort-buttons');
                     const reviewTableSection = document.getElementById('review-table-section');
                     const reviewTableContainer = document.getElementById('review-table-container');
                     const articlesSection = document.getElementById('articles-section');
@@ -581,12 +594,42 @@
                             }).slice(0, 3);
 
                             // All Products Grid（真實分數；沒有評分資料就誠實顯示「尚無評分資料」而非假分數）
-                            // 近期熱門的品項排到最前面（保留彼此依提及則數的排名順序），其餘品項維持原本順序接在後面
                             const topMentionNames = new Set(topMentionItems.map(it => it.name));
-                            const orderedDisplayItems = [
-                                ...topMentionItems.filter(it => displayItems.includes(it)),
-                                ...displayItems.filter(item => !topMentionNames.has(item.name))
-                            ];
+
+                            // 排序按鈕：預設「近期熱門」排最前面，也可以切換成依評分高低、依討論篇數排序
+                            if (boardSortButtons) {
+                                const sortOptions = [
+                                    { mode: 'hot', label: '🔥 近期熱門優先' },
+                                    { mode: 'score', label: '★ 評分高低' },
+                                    { mode: 'mentions', label: '💬 討論篇數' },
+                                ];
+                                boardSortButtons.innerHTML = sortOptions.map(opt => {
+                                    const isActive = window.boardSortMode === opt.mode;
+                                    const cls = isActive ? 'bg-[#f2a7b5] text-white' : 'bg-gray-50 text-gray-500 hover:bg-gray-100';
+                                    return `<button onclick="setBoardSort('${opt.mode}')" class="${cls} px-4 py-2 rounded-full text-xs md:text-sm font-bold whitespace-nowrap transition-colors">${opt.label}</button>`;
+                                }).join('');
+                            }
+
+                            let orderedDisplayItems;
+                            if (window.boardSortMode === 'score') {
+                                orderedDisplayItems = [...displayItems].sort((a, b) => {
+                                    const ca = getItemEntry(a)?.composite ?? -1;
+                                    const cb = getItemEntry(b)?.composite ?? -1;
+                                    return cb - ca;
+                                });
+                            } else if (window.boardSortMode === 'mentions') {
+                                orderedDisplayItems = [...displayItems].sort((a, b) => {
+                                    const ma = getItemEntry(a)?.mentions || 0;
+                                    const mb = getItemEntry(b)?.mentions || 0;
+                                    return mb - ma;
+                                });
+                            } else {
+                                // 'hot'：近期熱門的品項排到最前面（保留彼此依提及則數的排名順序），其餘品項維持原本順序接在後面
+                                orderedDisplayItems = [
+                                    ...topMentionItems.filter(it => displayItems.includes(it)),
+                                    ...displayItems.filter(item => !topMentionNames.has(item.name))
+                                ];
+                            }
                             if (displayItems.length > 0) {
                                 allProductsGrid.innerHTML = orderedDisplayItems.map(item => {
                                     const entry = getItemEntry(item);
