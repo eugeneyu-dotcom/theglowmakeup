@@ -159,9 +159,14 @@ nav {
 .battle-bar-a { background: var(--primary); transition: width 1s ease; }
 .battle-bar-b { background: var(--accent); transition: width 1s ease; }
 
-/* Article Feed */
-.article-list-item { display: flex; gap: 30px; padding: 30px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
-.article-list-img { width: 240px; height: 160px; border-radius: 20px; object-fit: cover; flex-shrink: 0; }
+/* Article Feed：手機直排、圖片全寬；平板以上才左右並排、圖片固定尺寸縮圖 */
+.article-list-item { display: flex; flex-direction: column; gap: 16px; padding: 24px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
+.article-list-img { width: 100%; height: auto; aspect-ratio: 3 / 2; border-radius: 20px; object-fit: cover; flex-shrink: 0; }
+
+@media (min-width: 640px) {
+    .article-list-item { flex-direction: row; gap: 30px; padding: 30px 0; }
+    .article-list-img { width: 240px; height: 160px; aspect-ratio: auto; }
+}
 
 /* Category Hero */
 .category-hero { padding: 100px 0; text-align: center; background: linear-gradient(135deg, #f2a7b5 0%, #d4af37 100%); color: white; margin-bottom: 50px; }

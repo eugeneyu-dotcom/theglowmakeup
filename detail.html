@@ -19,7 +19,7 @@
     <meta property="og:type" content="website">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%84%3C/text%3E%3C/svg%3E">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles.css?v=44">
+    <link rel="stylesheet" href="styles.css?v=45">
     <style>
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
@@ -336,6 +336,13 @@
             if (typeof window.triggerFilteredItemsRender === 'function') window.triggerFilteredItemsRender();
         };
 
+        // 手機版收合列表：預設只顯示商品名+綜合評分，點開才秀出全部指標細項
+        window.expandedMobileItem = null;
+        window.toggleMobileExpand = function(itemName) {
+            window.expandedMobileItem = window.expandedMobileItem === itemName ? null : itemName;
+            if (typeof window.triggerFilteredItemsRender === 'function') window.triggerFilteredItemsRender();
+        };
+
         document.addEventListener('DOMContentLoaded', async () => {
             const params = new URLSearchParams(window.location.search);
             const sub = params.get('sub');
@@ -503,8 +510,50 @@
                                     `;
                                 }).join('');
 
+                                // 手機版收合列表：預設只顯示商品名+綜合評分，點開才秀出這款商品全部指標細項
+                                const accordionRanked = [...displayItems].sort((a, b) => {
+                                    const ca = getItemEntry(a)?.composite ?? -1;
+                                    const cb = getItemEntry(b)?.composite ?? -1;
+                                    return cb - ca;
+                                });
+                                const accordionRows = accordionRanked.map((item, idx) => {
+                                    const entry = getItemEntry(item);
+                                    const composite = (entry && entry.composite != null) ? entry.composite.toFixed(1) : null;
+                                    const isExpanded = window.expandedMobileItem === item.name;
+                                    const detailRows = indicators.map(indName => {
+                                        const score = getNetizenScore(item, indName);
+                                        const cell = (score == null)
+                                            ? `<span class="text-gray-300 text-xs font-bold">—</span>`
+                                            : renderScore(score);
+                                        return `<div class="flex items-center justify-between py-2 border-b border-[#f2a7b5]/5 last:border-0"><span class="text-xs font-bold text-gray-500">${indName}</span>${cell}</div>`;
+                                    }).join('');
+                                    return `
+                                        <div class="border-b border-[#f2a7b5]/5">
+                                            <div onclick="toggleMobileExpand('${item.name.replace(/'/g, "\\'")}')" class="flex items-center gap-3 py-3 cursor-pointer">
+                                                <span class="w-6 h-6 flex-shrink-0 bg-gray-100 text-[#2d2d2d] rounded-full flex items-center justify-center font-bold text-xs">${idx + 1}</span>
+                                                <div class="w-11 h-11 bg-gray-50 rounded-xl p-1 overflow-hidden border border-gray-100/50 flex-shrink-0">
+                                                    <img src="${item.image || item.img || window.IMG_FALLBACK}" class="w-full h-full object-contain" alt="${item.name}">
+                                                </div>
+                                                <div class="min-w-0 flex-grow">
+                                                    <p class="font-black text-sm text-[#2d2d2d] truncate">${item.name}</p>
+                                                    <p class="text-[10px] font-black text-gray-500 tracking-wider uppercase">${item.brand}</p>
+                                                </div>
+                                                <div class="flex-shrink-0 flex items-center gap-2">
+                                                    <span class="text-lg font-black text-gray-800">${composite ?? '—'}</span>
+                                                    <span class="text-xs text-[#f2a7b5] transition-transform ${isExpanded ? 'rotate-180' : ''}">&#x25BE;</span>
+                                                </div>
+                                            </div>
+                                            ${isExpanded ? `<div class="bg-[#fff9f5] rounded-2xl p-4 mb-3 -mt-1">${detailRows}</div>` : ''}
+                                        </div>
+                                    `;
+                                }).join('');
+
                                 reviewTableContainer.innerHTML = `
-                                    <div class="overflow-x-auto w-full rounded-3xl border border-[#f2a7b5]/10 bg-white shadow-[0_8px_30px_rgb(242,167,181,0.02)] custom-scrollbar mb-4">
+                                    <div class="md:hidden bg-white rounded-3xl border border-[#f2a7b5]/10 p-4 mb-4">
+                                        <p class="text-xs font-black text-gray-500 mb-3">依綜合評分排序，點一列展開看全部指標</p>
+                                        <div>${accordionRows}</div>
+                                    </div>
+                                    <div class="hidden md:block overflow-x-auto w-full rounded-3xl border border-[#f2a7b5]/10 bg-white shadow-[0_8px_30px_rgb(242,167,181,0.02)] custom-scrollbar mb-4">
                                         <table class="w-full text-left border-collapse min-w-[900px]">
                                             <thead>
                                                 <tr class="bg-gradient-to-r from-[#f2a7b5]/5 to-transparent">
