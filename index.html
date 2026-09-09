@@ -101,62 +101,7 @@
             </div>
         </section>
 
-        <!-- 4. Homepage Quiz: Beauty Help -->
-        <section class="max-w-5xl mx-auto px-4 py-20">
-            <div class="home-quiz-container text-center">
-                <h3 class="text-3xl font-black mb-4">今天需要什麼美妝協助嗎？</h3>
-                <p class="text-gray-400 mb-12">告訴我們妳的困擾，讓 Glow Makeup 幫妳導航！</p>
-                <div id="quiz-flow">
-                    <div class="quiz-step active" data-step="1">
-                        <div class="flex flex-col md:flex-row flex-wrap justify-center gap-6">
-                            <div class="option-card w-full md:flex-1 md:max-w-sm border-2 border-gray-100 p-8 rounded-3xl cursor-pointer hover:border-[#f2a7b5] transition-all" onclick="selectOption(this)">
-                                <span class="text-3xl mb-4 block">&#x1F9D6;</span>
-                                <h4 class="font-bold text-lg mb-2">缺乏保養知識</h4>
-                                <p class="text-xs text-gray-500">想了解成分與步驟</p>
-                            </div>
-                            <div class="option-card w-full md:flex-1 md:max-w-sm border-2 border-gray-100 p-8 rounded-3xl cursor-pointer hover:border-[#f2a7b5] transition-all" onclick="selectOption(this)">
-                                <span class="text-3xl mb-4 block">&#x1F484;</span>
-                                <h4 class="font-bold text-lg mb-2">挑選底妝困難</h4>
-                                <p class="text-xs text-gray-500">想找命定色號與質地</p>
-                            </div>
-                            <div class="option-card w-full md:flex-1 md:max-w-sm border-2 border-gray-100 p-8 rounded-3xl cursor-pointer hover:border-[#f2a7b5] transition-all" onclick="selectOption(this)">
-                                <span class="text-3xl mb-4 block">&#x1F58C;</span>
-                                <h4 class="font-bold text-lg mb-2">美妝工具選擇</h4>
-                                <p class="text-xs text-gray-500">想知道刷具與海綿差異</p>
-                            </div>
-                        </div>
-                        <div class="mt-12">
-                            <button class="bg-[#f2a7b5] text-white font-bold py-4 px-12 rounded-full hover:scale-105 transition-transform" onclick="nextStep(1)">獲得建議</button>
-                        </div>
-                    </div>
-                    <div class="quiz-step hidden" data-step="2" id="quiz-step-2">
-                        <h4 class="text-xl font-bold mb-8" id="quiz-step2-question"></h4>
-                        <div class="flex flex-wrap justify-center gap-6" id="quiz-step2-options"></div>
-                        <div class="mt-12 flex justify-center gap-4">
-                            <button class="text-gray-400 font-bold py-4 px-8" onclick="quizBack(2)">← 返回上一步</button>
-                            <button class="bg-[#f2a7b5] text-white font-bold py-4 px-12 rounded-full hover:scale-105 transition-transform" onclick="nextStep(2)">獲得建議</button>
-                        </div>
-                    </div>
-                    <div class="quiz-step hidden" data-step="3" id="quiz-step-3">
-                        <h4 class="text-xl font-bold mb-8" id="quiz-step3-question"></h4>
-                        <div class="flex flex-wrap justify-center gap-6" id="quiz-step3-options"></div>
-                        <div class="mt-12 flex justify-center gap-4">
-                            <button class="text-gray-400 font-bold py-4 px-8" onclick="quizBack(3)">← 返回上一步</button>
-                            <button class="bg-[#f2a7b5] text-white font-bold py-4 px-12 rounded-full hover:scale-105 transition-transform" onclick="nextStep(3)">獲得建議</button>
-                        </div>
-                    </div>
-                    <div class="quiz-step hidden" id="quiz-result">
-                        <div class="py-6">
-                            <h4 class="text-xl font-bold mb-4" id="result-title">分析中...</h4>
-                            <p id="result-text" class="text-gray-500 mb-8"></p>
-                            <button class="bg-gray-100 text-gray-600 font-bold py-3 px-8 rounded-full" onclick="resetQuiz()">重新測驗</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. 殘酷擂台 -->
+        <!-- 4. 殘酷擂台 -->
         <section class="py-24 bg-white">
             <div class="max-w-7xl mx-auto px-4 text-center">
                 <h2 class="text-4xl font-black mb-4 italic">Cruel Battle / <span class="text-[#f2a7b5] text-xl font-bold not-italic">殘酷擂台</span></h2>
@@ -212,6 +157,61 @@
                         <div class="sentiment-loading">
                             <div class="spinner mb-4"></div>
                             <p class="text-xs font-bold text-gray-400">AI 聲量分析中...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Homepage Quiz: Beauty Help -->
+        <section class="max-w-5xl mx-auto px-4 py-20">
+            <div class="home-quiz-container text-center">
+                <h3 class="text-3xl font-black mb-4">今天需要什麼美妝協助嗎？</h3>
+                <p class="text-gray-400 mb-12">告訴我們妳的困擾，讓 Glow Makeup 幫妳導航！</p>
+                <div id="quiz-flow">
+                    <div class="quiz-step active" data-step="1">
+                        <div class="flex flex-col md:flex-row flex-wrap justify-center gap-6">
+                            <div class="option-card w-full md:flex-1 md:max-w-sm border-2 border-gray-100 p-8 rounded-3xl cursor-pointer hover:border-[#f2a7b5] transition-all" onclick="selectOption(this)">
+                                <span class="text-3xl mb-4 block">&#x1F9D6;</span>
+                                <h4 class="font-bold text-lg mb-2">缺乏保養知識</h4>
+                                <p class="text-xs text-gray-500">想了解成分與步驟</p>
+                            </div>
+                            <div class="option-card w-full md:flex-1 md:max-w-sm border-2 border-gray-100 p-8 rounded-3xl cursor-pointer hover:border-[#f2a7b5] transition-all" onclick="selectOption(this)">
+                                <span class="text-3xl mb-4 block">&#x1F484;</span>
+                                <h4 class="font-bold text-lg mb-2">挑選底妝困難</h4>
+                                <p class="text-xs text-gray-500">想找命定色號與質地</p>
+                            </div>
+                            <div class="option-card w-full md:flex-1 md:max-w-sm border-2 border-gray-100 p-8 rounded-3xl cursor-pointer hover:border-[#f2a7b5] transition-all" onclick="selectOption(this)">
+                                <span class="text-3xl mb-4 block">&#x1F58C;</span>
+                                <h4 class="font-bold text-lg mb-2">美妝工具選擇</h4>
+                                <p class="text-xs text-gray-500">想知道刷具與海綿差異</p>
+                            </div>
+                        </div>
+                        <div class="mt-12">
+                            <button class="bg-[#f2a7b5] text-white font-bold py-4 px-12 rounded-full hover:scale-105 transition-transform" onclick="nextStep(1)">獲得建議</button>
+                        </div>
+                    </div>
+                    <div class="quiz-step hidden" data-step="2" id="quiz-step-2">
+                        <h4 class="text-xl font-bold mb-8" id="quiz-step2-question"></h4>
+                        <div class="flex flex-wrap justify-center gap-6" id="quiz-step2-options"></div>
+                        <div class="mt-12 flex justify-center gap-4">
+                            <button class="text-gray-400 font-bold py-4 px-8" onclick="quizBack(2)">← 返回上一步</button>
+                            <button class="bg-[#f2a7b5] text-white font-bold py-4 px-12 rounded-full hover:scale-105 transition-transform" onclick="nextStep(2)">獲得建議</button>
+                        </div>
+                    </div>
+                    <div class="quiz-step hidden" data-step="3" id="quiz-step-3">
+                        <h4 class="text-xl font-bold mb-8" id="quiz-step3-question"></h4>
+                        <div class="flex flex-wrap justify-center gap-6" id="quiz-step3-options"></div>
+                        <div class="mt-12 flex justify-center gap-4">
+                            <button class="text-gray-400 font-bold py-4 px-8" onclick="quizBack(3)">← 返回上一步</button>
+                            <button class="bg-[#f2a7b5] text-white font-bold py-4 px-12 rounded-full hover:scale-105 transition-transform" onclick="nextStep(3)">獲得建議</button>
+                        </div>
+                    </div>
+                    <div class="quiz-step hidden" id="quiz-result">
+                        <div class="py-6">
+                            <h4 class="text-xl font-bold mb-4" id="result-title">分析中...</h4>
+                            <p id="result-text" class="text-gray-500 mb-8"></p>
+                            <button class="bg-gray-100 text-gray-600 font-bold py-3 px-8 rounded-full" onclick="resetQuiz()">重新測驗</button>
                         </div>
                     </div>
                 </div>
