@@ -105,18 +105,10 @@
                 <h2 id="page-title" class="text-4xl font-black italic relative z-10">載入中...</h2>
             </div>
 
-            <!-- Spotlight Hot Items (Only in Board Mode) -->
-            <section id="hot-items-section" class="hidden">
-                <h3 class="text-2xl font-black mb-6 italic">🔥 近期熱門聲量單品 / <span class="text-[#f2a7b5] text-lg not-italic">Spotlight Trending</span></h3>
-                <div id="hot-items-grid" class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-                    <!-- Loaded here -->
-                </div>
-            </section>
-
             <!-- All Products Grid (Only in Board Mode) -->
             <section id="all-products-section" class="hidden">
                 <h3 class="text-2xl font-black mb-6 italic">✨ 所有商品項目 / <span class="text-[#f2a7b5] text-lg not-italic">All Products</span></h3>
-                <div id="all-products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div id="all-products-grid" class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                     <!-- Loaded here -->
                 </div>
             </section>
@@ -409,8 +401,6 @@
                     renderTopDashboard(sub, details);
 
                     // Sections and grid containers
-                    const hotItemsSection = document.getElementById('hot-items-section');
-                    const hotItemsGrid = document.getElementById('hot-items-grid');
                     const allProductsSection = document.getElementById('all-products-section');
                     const allProductsGrid = document.getElementById('all-products-grid');
                     const reviewTableSection = document.getElementById('review-table-section');
@@ -429,7 +419,6 @@
 
                         if (fromContext === 'review') {
                             // --- REVIEW MODE ---
-                            hotItemsSection.classList.add('hidden');
                             allProductsSection.classList.add('hidden');
                             articlesSection.classList.add('hidden');
                             reviewTableSection.classList.remove('hidden');
@@ -575,55 +564,31 @@
                             }
                         } else {
                             // --- BOARD MODE ---
-                            hotItemsSection.classList.remove('hidden');
                             allProductsSection.classList.remove('hidden');
                             articlesSection.classList.add('hidden'); // 沒有真實的分類專屬文章庫，誠實隱藏而非塞樣板文章
                             reviewTableSection.classList.add('hidden');
 
-                            // Spotlight Hot Items：依真實提及則數排序（沒有評分資料的品項一律排最後、不參與熱門排名）
+                            // 依真實提及則數排序找出前 3 名（沒有評分資料的品項一律排最後、不參與熱門排名），
+                            // 不再另外開一個獨立區塊重複顯示，直接在下面「所有商品項目」對應卡片上標注即可
                             const sortedByMentions = [...rawItems].sort((a, b) => {
                                 const ma = getItemEntry(a)?.mentions || 0;
                                 const mb = getItemEntry(b)?.mentions || 0;
                                 return mb - ma;
                             });
-
-                            // Filter and slice top 3 hot items
-                            let filteredHotItems = sortedByMentions.filter(item => {
+                            const topMentionItems = sortedByMentions.filter(item => {
                                 if (selectedBrands.size === 0) return true;
                                 return selectedBrands.has(item.brand);
                             }).slice(0, 3);
 
-                            if (filteredHotItems.length > 0) {
-                                hotItemsGrid.innerHTML = filteredHotItems.map(item => {
-                                    const entry = getItemEntry(item);
-                                    const hotBadge = (entry && entry.mentions > 0)
-                                        ? `<span class="text-xs font-black text-[#e05a47] bg-[#e05a47]/10 px-2.5 py-1 rounded-full flex items-center gap-1 border border-[#e05a47]/20 shadow-sm">🔥 ${entry.mentions} 則真實討論</span>`
-                                        : `<span class="text-xs font-bold text-gray-300">資料建置中</span>`;
-                                    return `
-                                        <div class="bg-white/90 backdrop-blur-md p-4 md:p-6 rounded-3xl border border-[#f2a7b5]/15 shadow-sm hover:border-[#f2a7b5]/40 hover:shadow-xl transition-all duration-300 group flex flex-col justify-between">
-                                            <div>
-                                                <a href="item-detail.html?item=${encodeURIComponent(item.name)}&from=board" class="aspect-square bg-gray-50 rounded-2xl mb-3 md:mb-4 p-3 md:p-4 overflow-hidden flex items-center justify-center border border-gray-100 group-hover:scale-[1.02] transition-transform duration-300 block">
-                                                    <img src="${item.image || item.img || window.IMG_FALLBACK}" class="max-h-full max-w-full object-contain group-hover:scale-110 transition-transform duration-500" alt="${item.name}">
-                                                </a>
-                                                <div class="flex flex-wrap items-center gap-x-2 gap-y-1 mb-2">
-                                                    <span class="text-[10px] md:text-xs font-black tracking-widest text-[#2d2d2d]/60 uppercase">${item.brand}</span>
-                                                    ${hotBadge}
-                                                </div>
-                                                <a href="item-detail.html?item=${encodeURIComponent(item.name)}&from=board" class="font-black text-sm md:text-lg text-[#2d2d2d] group-hover:text-[#f2a7b5] transition-colors mb-2 block leading-snug line-clamp-2" title="${item.name}">${item.name}</a>
-                                            </div>
-                                            <a href="item-detail.html?item=${encodeURIComponent(item.name)}&from=board" class="text-[11px] md:text-xs font-black text-[#f2a7b5] mt-2 md:mt-4 flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                                                進入詳細商品頁 ➔
-                                            </a>
-                                        </div>
-                                    `;
-                                }).join('');
-                            } else {
-                                hotItemsGrid.innerHTML = '<div class="col-span-full text-gray-400 text-sm text-center py-8">暫無符合篩選條件的熱門單品</div>';
-                            }
-
                             // All Products Grid（真實分數；沒有評分資料就誠實顯示「尚無評分資料」而非假分數）
+                            // 近期熱門的品項排到最前面（保留彼此依提及則數的排名順序），其餘品項維持原本順序接在後面
+                            const topMentionNames = new Set(topMentionItems.map(it => it.name));
+                            const orderedDisplayItems = [
+                                ...topMentionItems.filter(it => displayItems.includes(it)),
+                                ...displayItems.filter(item => !topMentionNames.has(item.name))
+                            ];
                             if (displayItems.length > 0) {
-                                allProductsGrid.innerHTML = displayItems.map(item => {
+                                allProductsGrid.innerHTML = orderedDisplayItems.map(item => {
                                     const entry = getItemEntry(item);
                                     const ratingBlock = (entry && entry.composite != null)
                                         ? `<div class="flex items-center gap-1.5">
@@ -632,18 +597,24 @@
                                                 <span class="text-xs text-gray-400 font-bold">(${entry.mentions || 0} 則)</span>
                                            </div>`
                                         : `<span class="text-xs font-bold text-gray-300">尚無評分資料</span>`;
+                                    const isHot = topMentionNames.has(item.name);
+                                    const cardBorder = isHot ? 'border-[#e05a47]/40 hover:border-[#e05a47]' : 'border-gray-100 hover:border-[#f2a7b5]';
+                                    const hotRibbon = isHot
+                                        ? `<div class="absolute top-2 left-2 z-10 bg-[#e05a47] text-white text-[10px] md:text-xs font-black px-2.5 py-1 rounded-full flex items-center gap-1 shadow-md">🔥 近期熱門</div>`
+                                        : '';
                                     return `
-                                    <div class="bg-white p-6 rounded-3xl border border-gray-100 hover:border-[#f2a7b5] hover:shadow-xl transition-all duration-300 group flex flex-col justify-between">
+                                    <div class="bg-white p-4 md:p-6 rounded-3xl border-2 ${cardBorder} hover:shadow-xl transition-all duration-300 group flex flex-col justify-between">
                                         <div>
-                                            <a href="item-detail.html?item=${encodeURIComponent(item.name)}&from=board" class="aspect-square bg-gray-50 rounded-2xl mb-4 p-4 overflow-hidden flex items-center justify-center border border-gray-100/50 block">
+                                            <a href="item-detail.html?item=${encodeURIComponent(item.name)}&from=board" class="relative aspect-square bg-gray-50 rounded-2xl mb-3 md:mb-4 p-3 md:p-4 overflow-hidden flex items-center justify-center border border-gray-100/50 block">
+                                                ${hotRibbon}
                                                 <img src="${item.image || item.img || window.IMG_FALLBACK}" class="max-h-full max-w-full object-contain group-hover:scale-105 transition-transform duration-500" alt="${item.name}">
                                             </a>
-                                            <span class="text-xs font-black text-[#2d2d2d]/50 tracking-wider uppercase block mb-1">${item.brand}</span>
-                                            <a href="item-detail.html?item=${encodeURIComponent(item.name)}&from=board" class="font-black text-base text-[#2d2d2d] group-hover:text-[#f2a7b5] transition-colors mb-2 block leading-snug line-clamp-2" title="${item.name}">${item.name}</a>
+                                            <span class="text-[10px] md:text-xs font-black text-[#2d2d2d]/50 tracking-wider uppercase block mb-1">${item.brand}</span>
+                                            <a href="item-detail.html?item=${encodeURIComponent(item.name)}&from=board" class="font-black text-sm md:text-base text-[#2d2d2d] group-hover:text-[#f2a7b5] transition-colors mb-2 block leading-snug line-clamp-2" title="${item.name}">${item.name}</a>
                                         </div>
-                                        <div class="flex items-center justify-between border-t border-gray-50 pt-4 mt-4">
+                                        <div class="flex items-center justify-between border-t border-gray-50 pt-3 md:pt-4 mt-3 md:mt-4 flex-wrap gap-1">
                                             ${ratingBlock}
-                                            <a href="item-detail.html?item=${encodeURIComponent(item.name)}&from=board" class="text-xs font-black text-gray-400 group-hover:text-[#f2a7b5] transition-colors">
+                                            <a href="item-detail.html?item=${encodeURIComponent(item.name)}&from=board" class="text-[11px] md:text-xs font-black text-gray-400 group-hover:text-[#f2a7b5] transition-colors">
                                                 詳細資料 ➔
                                             </a>
                                         </div>
