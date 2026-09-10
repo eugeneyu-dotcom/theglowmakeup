@@ -90,13 +90,16 @@
             </div>
         </section>
 
-        <!-- 3. 美妝新品快報（10 大專櫃品牌官網新品，資料來源見 new-products.json） -->
+        <!-- 3. 美妝新品快報（12 大專櫃品牌官網新品，資料來源見 new-products.json） -->
         <section class="py-20 bg-white">
             <div class="max-w-7xl mx-auto px-4">
                 <h3 class="text-3xl font-black mb-2 italic">New Arrivals / <span class="text-[#f2a7b5] text-lg not-italic">美妝新品快報</span></h3>
-                <p class="text-sm text-gray-400 font-bold mb-12">精選 10 大專櫃品牌官網公告的最新品項，人工整理更新</p>
-                <div class="grid grid-cols-2 md:grid-cols-5 gap-5" id="new-products-grid">
+                <p class="text-sm text-gray-400 font-bold mb-12">精選 12 大專櫃品牌官網公告的最新品項，人工整理更新</p>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 md:gap-5 np-collapsed" id="new-products-grid">
                     <div class="text-gray-400 text-sm">載入中...</div>
+                </div>
+                <div class="text-center mt-6 md:hidden">
+                    <button onclick="toggleNewProductsExpand()" id="new-products-toggle-btn" class="px-6 py-2 rounded-full border-2 border-[#f2a7b5] text-[#f2a7b5] font-bold text-sm hover:bg-[#f2a7b5] hover:text-white transition-all"></button>
                 </div>
             </div>
         </section>

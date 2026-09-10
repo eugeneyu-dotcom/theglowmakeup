@@ -514,6 +514,16 @@ body.mobile-nav-open {
     overflow: hidden;
 }
 
+/* 新品快報：手機版預設只顯示前 6 個品牌，點「查看全部」才展開其餘品項 */
+#new-products-grid.np-collapsed .new-product-extra {
+    display: none;
+}
+@media (min-width: 768px) {
+    #new-products-grid.np-collapsed .new-product-extra {
+        display: flex;
+    }
+}
+
 /* 最新文章：橫向滑動輪播，卡片數量不影響區塊高度（手機用手勢滑，桌機可點箭頭） */
 .article-carousel {
     display: flex;

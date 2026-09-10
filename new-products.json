@@ -1,6 +1,6 @@
 {
-  "_comment": "首頁「美妝新品快報」資料來源：人工逐一開啟品牌官網頁面查證後手動整理（非自動抓取），品牌選定依 scores-data.json 裡評論最多的 10 個專櫃品牌。每次更新前務必重新開啟 source_url 核對品項是否還在架上，不要憑舊資料或記憶直接沿用。image 欄位是從官網頁面下載到本機 assets/new-products/ 的真實商品圖（非熱連結）。DIOR/CHANEL/Bobbi Brown/雅詩蘭黛的圖是靠品牌官網有防盜鏈保護（直接下載會403），改用瀏覽器內 fetch+canvas 縮圖再逐字核對 checksum 正確才寫檔取得，非熱連結；M.A.C/YSL/植村秀/蘭蔻/資生堂/MAKE UP FOR EVER 是圖片伺服器沒防盜鏈，直接下載即可。",
-  "_last_updated": "2026-09-07",
+  "_comment": "首頁「美妝新品快報」資料來源：人工逐一開啟品牌官網頁面查證後手動整理（非自動抓取）。原本品牌選定依 scores-data.json 裡評論最多的 10 個專櫃品牌，2026-09-10 起應使用者要求額外加入 NARS、肌膚之鑰共 12 個品牌（不分排名，純粹展示新品）。每次更新前務必重新開啟 source_url 核對品項是否還在架上，不要憑舊資料或記憶直接沿用。image 欄位是從官網頁面下載到本機 assets/new-products/ 的真實商品圖（非熱連結）。DIOR/CHANEL/Bobbi Brown/雅詩蘭黛的圖是靠品牌官網有防盜鏈保護（直接下載會403），改用瀏覽器內 fetch+canvas 縮圖再逐字核對 checksum 正確才寫檔取得，非熱連結；M.A.C/YSL/植村秀/蘭蔻/資生堂/MAKE UP FOR EVER/NARS/肌膚之鑰是圖片伺服器沒防盜鏈，直接下載即可。",
+  "_last_updated": "2026-09-10",
   "products": [
     {
       "brand": "DIOR",
@@ -10,7 +10,7 @@
       "image": "assets/new-products/dior.jpg",
       "source_url": "https://www.dior.com/zh_tw/beauty/page/all-new-arrivals.html",
       "source_label": "DIOR 官網",
-      "verified_date": "2026-09-07"
+      "verified_date": "2026-09-10"
     },
     {
       "brand": "CHANEL",
@@ -20,7 +20,7 @@
       "image": "assets/new-products/chanel.jpg",
       "source_url": "https://www.chanel.com/tw/makeup/",
       "source_label": "CHANEL 官網",
-      "verified_date": "2026-09-07"
+      "verified_date": "2026-09-10"
     },
     {
       "brand": "M.A.C",
@@ -28,29 +28,29 @@
       "category": "彩妝",
       "highlight": "SPF50+/PA+++長效持妝，融合氣墊輕透與精華級護膚感",
       "image": "assets/new-products/mac.png",
-      "source_url": "https://www.maccosmetics.com.tw/",
+      "source_url": "https://www.maccosmetics.com.tw/collections",
       "source_label": "M.A.C 官網",
-      "verified_date": "2026-09-07"
+      "verified_date": "2026-09-10"
     },
     {
       "brand": "Bobbi Brown",
-      "name": "全新維他命超完美乳霜",
-      "category": "護膚",
-      "highlight": "妝前打底霜，獨家注入超級維他命亮膚精萃",
+      "name": "冬蟲夏草緞光精萃粉底",
+      "category": "彩妝",
+      "highlight": "官方9月主打新品，精華般輕盈質地、24小時持妝透亮，可依需求疊擦調整遮瑕度",
       "image": "assets/new-products/bobbibrown.jpg",
-      "source_url": "https://www.bobbibrown.com.tw/",
+      "source_url": "https://www.bobbibrown.com.tw/product/2321/148107/makeup/serum-silk-foundation",
       "source_label": "Bobbi Brown 官網",
-      "verified_date": "2026-09-07"
+      "verified_date": "2026-09-10"
     },
     {
       "brand": "YSL",
-      "name": "YSL恆久完美持久柔霧蜜粉",
+      "name": "情挑裸吻煙霧持色唇萃",
       "category": "彩妝",
-      "highlight": "高奢絲柔質地，主打徹夜持妝",
+      "highlight": "92%精華配方，霧感質地可撫平唇紋，訴求16小時持色、12小時滋潤不脫妝，共8色",
       "image": "assets/new-products/ysl.jpg",
-      "source_url": "https://www.yslbeauty.com.tw/彩妝/ysl彩妝新品",
+      "source_url": "https://www.yslbeauty.com.tw/product/%E5%94%87%E8%86%8F/%E6%83%85%E6%8C%91%E8%A3%B8%E5%90%BB%E7%85%99%E9%9C%A7%E6%8C%81%E8%89%B2%E5%94%87%E8%90%83/WW-51595YSL.html",
       "source_label": "YSL Beauty 官網",
-      "verified_date": "2026-08-24"
+      "verified_date": "2026-09-10"
     },
     {
       "brand": "植村秀",
@@ -58,9 +58,9 @@
       "category": "彩妝",
       "highlight": "全新上市，玻光潤色嘟唇質地",
       "image": "assets/new-products/shuuemura.webp",
-      "source_url": "https://www.shuuemura.com.tw/",
+      "source_url": "https://www.shuuemura.com.tw/pages/makeup-landing?section=face",
       "source_label": "植村秀 官網",
-      "verified_date": "2026-08-24"
+      "verified_date": "2026-09-10"
     },
     {
       "brand": "MAKE UP FOR EVER",
@@ -70,27 +70,27 @@
       "image": "assets/new-products/mufe.jpg",
       "source_url": "https://www.makeupforever.com.tw/v2/official/SalePageCategory/377906?lang=zh-TW",
       "source_label": "MAKE UP FOR EVER 官網",
-      "verified_date": "2026-09-07"
+      "verified_date": "2026-09-10"
     },
     {
       "brand": "蘭蔻",
-      "name": "絕對閃耀水蜜光唇膏",
-      "category": "彩妝",
-      "highlight": "水潤彈嫩，蜜光乍現的唇妝新品",
+      "name": "超極限肌因賦活露（小黑瓶PRO）",
+      "category": "護膚",
+      "highlight": "新一代小黑瓶PRO主打修護型抗老，添加高濃度β-葡聚醣與經典8大益生菌／益生質，7天內可感受細紋撫平、毛孔緊緻",
       "image": "assets/new-products/lancome.jpg",
-      "source_url": "https://www.lancome.com.tw/landing-page-whats-new.html",
+      "source_url": "https://www.lancome.com.tw/%E4%BF%9D%E9%A4%8A/%E7%94%A2%E5%93%81%E7%B3%BB%E5%88%97/new%21%E8%B6%85%E6%A5%B5%E9%99%90%E8%82%8C%E5%9B%A0%E8%B3%A6%E6%B4%BB%E7%B3%BB%E5%88%97/A03611-LAC.html",
       "source_label": "蘭蔻 官網",
-      "verified_date": "2026-08-24"
+      "verified_date": "2026-09-10"
     },
     {
       "brand": "雅詩蘭黛",
-      "name": "Futurist Aqua Brilliance™ 粉保濕水啵啵妝前精華",
-      "category": "彩妝",
-      "highlight": "New Makeup 新品區主打妝前精華",
+      "name": "Advanced Night Repair 特潤超導修護精華水",
+      "category": "護膚",
+      "highlight": "速效植萃泌體科技，搭載500+活性胜肽與專利三胜肽成分，訴求快速修護、強韌屏障、水嫩透亮",
       "image": "assets/new-products/esteelauder.jpg",
-      "source_url": "https://www.esteelauder.com.tw/products/26455/product-catalog/whats-new/new-makeup",
+      "source_url": "https://www.esteelauder.com.tw/product/26389/146360/product-catalog/skin-care/toner-treatment-lotion/advanced-night-repair/recovery-treatment-essence",
       "source_label": "雅詩蘭黛 官網",
-      "verified_date": "2026-09-07"
+      "verified_date": "2026-09-10"
     },
     {
       "brand": "資生堂",
@@ -100,7 +100,27 @@
       "image": "assets/new-products/shiseido.webp",
       "source_url": "https://www.global-shiseido.com.tw/",
       "source_label": "資生堂國際櫃 官網",
-      "verified_date": "2026-09-07"
+      "verified_date": "2026-09-10"
+    },
+    {
+      "brand": "NARS",
+      "name": "超控輕霧粉底精華",
+      "category": "彩妝",
+      "highlight": "官網首頁主打全新上市，24H控油光．控毛孔．控脫妝，20色可選",
+      "image": "assets/new-products/nars.jpg",
+      "source_url": "https://www.narscosmetics.com.tw/zh/%E8%B6%85%E6%8E%A7%E8%BC%95%E9%9C%A7%E7%B2%89%E5%BA%95%E7%B2%BE%E8%8F%AF/999NAC0000285.html",
+      "source_label": "NARS 官網",
+      "verified_date": "2026-09-10"
+    },
+    {
+      "brand": "肌膚之鑰",
+      "name": "肌膚之鑰激光幻妍乳",
+      "category": "彩妝",
+      "highlight": "液態打亮×妝前修飾×保養潤澤三效合一，匯聚激光瓶與幻妍餅精髓，一抹綻放水光肌",
+      "image": "assets/new-products/cledepeau.jpg",
+      "source_url": "https://www.cledepeau-beaute.com.tw/%E8%82%8C%E8%86%9A%E4%B9%8B%E9%91%B0%E6%BF%80%E5%85%89%E5%B9%BB%E5%A6%8D%E4%B9%B3-22495_tw.html",
+      "source_label": "肌膚之鑰 官網",
+      "verified_date": "2026-09-10"
     }
   ]
 }

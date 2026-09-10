@@ -126,11 +126,13 @@ function newProductImageBlock(p, i) {
             <span class="text-white text-2xl font-black italic tracking-tight text-center px-4 drop-shadow-sm">${p.brand}</span>
         </div>`;
 }
+const NEW_PRODUCTS_MOBILE_VISIBLE = 6;
+
 async function renderNewProducts() {
     const grid = document.getElementById('new-products-grid');
     if (!grid) return;
     try {
-        const res = await fetch('new-products.json?v=4');
+        const res = await fetch('new-products.json?v=6');
         const data = await res.json();
         const products = data.products || [];
         if (products.length === 0) {
@@ -138,19 +140,39 @@ async function renderNewProducts() {
             return;
         }
         grid.innerHTML = products.map((p, i) => `
-            <a href="${p.source_url}" target="_blank" rel="noopener" class="bg-[#fff9f5] rounded-3xl overflow-hidden border border-[#f2a7b5]/10 hover:shadow-md hover:border-[#f2a7b5]/30 transition-all group flex flex-col">
+            <a href="${p.source_url}" target="_blank" rel="noopener" class="bg-[#fff9f5] rounded-2xl md:rounded-3xl overflow-hidden border border-[#f2a7b5]/10 hover:shadow-md hover:border-[#f2a7b5]/30 transition-all group flex flex-col${i >= NEW_PRODUCTS_MOBILE_VISIBLE ? ' new-product-extra' : ''}">
                 ${newProductImageBlock(p, i)}
-                <div class="p-5 flex flex-col flex-grow">
-                    <span class="${BRAND_BADGE_COLORS[i % BRAND_BADGE_COLORS.length]} text-white text-[10px] font-black px-3 py-1 rounded-full self-start mb-3 tracking-wide">${p.brand}</span>
-                    <h4 class="font-black text-sm leading-snug mb-2 group-hover:text-[#f2a7b5] transition-colors line-clamp-2">${p.name}</h4>
-                    <p class="text-xs text-gray-500 leading-relaxed line-clamp-3 flex-grow">${p.highlight || ''}</p>
-                    <span class="text-[11px] font-bold text-[#f2a7b5] mt-4 flex items-center gap-1">查看${p.source_label || '官網'} ➔</span>
+                <div class="p-3 md:p-5 flex flex-col flex-grow">
+                    <span class="${BRAND_BADGE_COLORS[i % BRAND_BADGE_COLORS.length]} text-white text-[9px] md:text-[10px] font-black px-2.5 md:px-3 py-1 rounded-full self-start mb-2 md:mb-3 tracking-wide">${p.brand}</span>
+                    <h4 class="font-black text-xs md:text-sm leading-snug mb-1 md:mb-2 group-hover:text-[#f2a7b5] transition-colors line-clamp-2">${p.name}</h4>
+                    <p class="hidden md:block text-xs text-gray-500 leading-relaxed line-clamp-3 flex-grow">${p.highlight || ''}</p>
+                    <span class="text-[10px] md:text-[11px] font-bold text-[#f2a7b5] mt-2 md:mt-4 flex items-center gap-1">查看${p.source_label || '官網'} ➔</span>
                 </div>
             </a>
         `).join('');
+        const toggleBtn = document.getElementById('new-products-toggle-btn');
+        if (toggleBtn) {
+            if (products.length <= NEW_PRODUCTS_MOBILE_VISIBLE) {
+                toggleBtn.parentElement.classList.add('hidden');
+            } else {
+                toggleBtn.textContent = `查看全部 ${products.length} 個新品 ➔`;
+                toggleBtn.dataset.collapsedLabel = toggleBtn.textContent;
+            }
+        }
     } catch (err) {
         console.error('new-products.json 載入失敗', err);
         grid.innerHTML = '<div class="text-gray-400 text-sm">新品資訊載入失敗</div>';
+    }
+}
+
+function toggleNewProductsExpand() {
+    const grid = document.getElementById('new-products-grid');
+    const btn = document.getElementById('new-products-toggle-btn');
+    if (!grid || !btn) return;
+    const collapsed = grid.classList.toggle('np-collapsed');
+    btn.textContent = collapsed ? btn.dataset.collapsedLabel : '收起 ➔';
+    if (collapsed) {
+        grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 }
 
