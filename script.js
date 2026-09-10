@@ -330,52 +330,107 @@ window.setBlogTag = function (tag) {
     renderSkincareArticles();
 };
 
-// 首頁 Top 5 熱門榜單（真實綜合分，需評論量足夠）
+// 首頁熱門榜單：依產品類別（subcat）分頁籤，各頁籤顯示該類別 Top5（真實綜合分，需評論量足夠）
 const RANKING_MIN_MENTIONS = 20;
+const RANKING_MIN_ITEMS_FOR_TAB = 3;
+const RANKING_TOP_N = 5;
 
 async function initRankings() {
+    const tabsEl = document.getElementById('ranking-tabs');
     const grid = document.getElementById('rankings-grid');
     if (!grid) return;
 
-    const [scores, siteData] = await Promise.all([getScoresData(), getSiteData()]);
+    let [scores, siteData] = await Promise.all([getScoresData(), getSiteData()]);
     if (!scores) {
         grid.innerHTML = '<div class="text-gray-400 text-sm">無法載入評分資料</div>';
         return;
     }
+    if (!siteData) {
+        siteDataCache = null; // 上一次抓取失敗不快取，重試一次再放棄（避免圖片全部退回佔位圖）
+        siteData = await getSiteData();
+    }
 
-    const ranked = Object.values(scores)
-        .filter(e => e.composite != null && (e.mentions || 0) >= RANKING_MIN_MENTIONS)
-        .sort((a, b) => (b.composite - a.composite) || (b.mentions - a.mentions))
-        .slice(0, 5);
+    const bySubcat = {};
+    Object.values(scores).forEach(e => {
+        if (e.composite != null && (e.mentions || 0) >= RANKING_MIN_MENTIONS) {
+            (bySubcat[e.subcat] = bySubcat[e.subcat] || []).push(e);
+        }
+    });
 
-    if (ranked.length === 0) {
+    const categories = Object.keys(bySubcat)
+        .filter(s => bySubcat[s].length >= RANKING_MIN_ITEMS_FOR_TAB)
+        .sort((a, b) => bySubcat[b].length - bySubcat[a].length);
+
+    if (categories.length === 0) {
         grid.innerHTML = '<div class="text-gray-400 text-sm">評分資料累積中，敬請期待</div>';
+        if (tabsEl) tabsEl.innerHTML = '';
         return;
     }
 
-    grid.innerHTML = ranked.map((e, i) => {
+    window.__rankingBySubcat = bySubcat;
+    window.__rankingSiteData = siteData;
+    window.__currentRankingSubcat = categories[0];
+
+    if (tabsEl) {
+        tabsEl.innerHTML = categories.map(s => {
+            const n = Math.min(RANKING_TOP_N, bySubcat[s].length);
+            return `<button onclick="switchRankingTab(this.dataset.subcat)" data-subcat="${s}" class="ranking-tab-btn shrink-0 pb-3 font-black text-sm md:text-base border-b-2 border-transparent text-gray-400 hover:text-[#f2a7b5] transition-colors whitespace-nowrap">${s} TOP${n}</button>`;
+        }).join('');
+    }
+
+    renderRankingGrid();
+}
+
+function switchRankingTab(subcat) {
+    window.__currentRankingSubcat = subcat;
+    renderRankingGrid();
+    const activeBtn = document.querySelector(`.ranking-tab-btn[data-subcat="${CSS.escape(subcat)}"]`);
+    if (activeBtn) activeBtn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+}
+
+function scrollRankingTabs(direction) {
+    const track = document.getElementById('ranking-tabs');
+    if (!track) return;
+    track.scrollBy({ left: track.clientWidth * 0.6 * direction, behavior: 'smooth' });
+}
+
+function renderRankingGrid() {
+    const grid = document.getElementById('rankings-grid');
+    const tabsEl = document.getElementById('ranking-tabs');
+    const bySubcat = window.__rankingBySubcat;
+    const currentSubcat = window.__currentRankingSubcat;
+    if (!grid || !bySubcat || !currentSubcat) return;
+
+    if (tabsEl) {
+        Array.from(tabsEl.children).forEach(btn => {
+            const active = btn.dataset.subcat === currentSubcat;
+            btn.classList.toggle('border-[#f2a7b5]', active);
+            btn.classList.toggle('text-[#2d2d2d]', active);
+            btn.classList.toggle('border-transparent', !active);
+            btn.classList.toggle('text-gray-400', !active);
+        });
+    }
+
+    const items = bySubcat[currentSubcat]
+        .slice()
+        .sort((a, b) => (b.composite - a.composite) || (b.mentions - a.mentions))
+        .slice(0, RANKING_TOP_N);
+
+    const siteData = window.__rankingSiteData;
+    grid.innerHTML = items.map((e, i) => {
         const img = findItemImage(siteData, e.subcat, e.brand, e.name);
-        const pct = Math.round((e.composite / 5) * 100);
-        const rankBg = i === 0 ? 'bg-[#2d2d2d] text-white' : 'bg-gray-200 text-[#2d2d2d]';
+        const rankBg = i === 0 ? 'bg-[#2d2d2d] text-white' : i < 3 ? 'bg-[#f2a7b5] text-white' : 'bg-gray-200 text-[#2d2d2d]';
         return `
-            <a href="item-detail.html?item=${encodeURIComponent(e.name)}&from=board" class="flex items-center gap-6 bg-white p-8 rounded-3xl border border-[#f2a7b5]/5 shadow-sm hover:shadow-md hover:border-[#f2a7b5]/30 transition-all group">
-                <div class="w-12 h-12 ${rankBg} rounded-full flex items-center justify-center font-black text-xl shrink-0 italic">${i + 1}</div>
-                <div class="w-24 h-24 bg-gray-50 rounded-2xl p-2 shrink-0 overflow-hidden">
-                    <img src="${img}" class="w-full h-full object-contain group-hover:scale-105 transition-transform" alt="${e.name}">
+            <a href="item-detail.html?item=${encodeURIComponent(e.name)}&from=board" class="relative bg-white border border-gray-100 rounded-2xl p-3 md:p-4 hover:border-[#f2a7b5]/50 hover:shadow-md transition-all group">
+                <div class="absolute top-2.5 left-2.5 md:top-3 md:left-3 z-10 w-6 h-6 md:w-7 md:h-7 ${rankBg} rounded-full flex items-center justify-center font-black text-xs italic">${i + 1}</div>
+                <div class="aspect-square bg-gray-50 rounded-xl overflow-hidden mb-3 flex items-center justify-center p-3 md:p-4">
+                    <img src="${img}" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform" alt="${e.name}">
                 </div>
-                <div class="flex-grow min-w-0">
-                    <div class="flex items-center gap-2 mb-1">
-                        <span class="text-xs font-black text-[#f2a7b5] bg-[#f2a7b5]/10 px-2 py-0.5 rounded-full">${e.subcat}</span>
-                        <span class="text-xs font-bold text-gray-500">${e.mentions} 則提及</span>
-                    </div>
-                    <h4 class="font-black text-lg mb-1 truncate group-hover:text-[#f2a7b5] transition-colors" title="${e.name}">${e.name}</h4>
-                    <p class="text-sm font-black text-gray-500 uppercase tracking-wide mb-3">${e.brand}</p>
-                    <div class="flex items-center gap-3">
-                        <div class="flex-grow h-1.5 bg-gray-100 rounded-full overflow-hidden">
-                            <div class="bg-[#f2a7b5] h-full" style="width: ${pct}%"></div>
-                        </div>
-                        <span class="text-sm font-black text-[#e05a47] shrink-0">★ ${e.composite.toFixed(1)}</span>
-                    </div>
+                <p class="text-[10px] font-black text-gray-400 uppercase tracking-wide mb-1 truncate">${e.brand}</p>
+                <h4 class="font-black text-xs md:text-sm leading-snug mb-2 line-clamp-2 group-hover:text-[#f2a7b5] transition-colors" title="${e.name}">${e.name}</h4>
+                <div class="flex items-center gap-1.5 text-xs">
+                    <span class="text-[#e05a47] font-black">★ ${e.composite.toFixed(1)}</span>
+                    <span class="text-gray-400 text-[11px]">(${e.mentions}則)</span>
                 </div>
             </a>
         `;

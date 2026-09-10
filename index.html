@@ -19,7 +19,7 @@
     <meta property="og:type" content="website">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%84%3C/text%3E%3C/svg%3E">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles.css?v=45">
+    <link rel="stylesheet" href="styles.css?v=46">
 </head>
 <body class="bg-[#fff9f5] text-[#2d2d2d] selection:bg-[#f2a7b5] selection:text-white">
 
@@ -221,12 +221,20 @@
             </div>
         </section>
 
-        <!-- 6. 排行榜 -->
+        <!-- 6. 排行榜（依產品類別分頁籤，各類別 Top10） -->
         <section class="py-24 bg-[#fff9f5]">
             <div class="max-w-7xl mx-auto px-4">
-                <h3 class="text-4xl font-black mb-4 italic">Top 5 Rankings / <span class="text-[#f2a7b5] text-xl font-bold not-italic">熱門榜單</span></h3>
-                <p class="text-sm text-gray-400 font-bold mb-12">依 Glow Makeup 社群真實評分排名，僅收錄評論量足夠（20 則以上提及）的品項</p>
-                <div id="rankings-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <h3 class="text-4xl font-black mb-4 italic">Top Rankings / <span class="text-[#f2a7b5] text-xl font-bold not-italic">熱門榜單</span></h3>
+                <p class="text-sm text-gray-400 font-bold mb-2">依 Glow Makeup 社群真實評分排名，僅收錄評論量足夠（20 則以上提及）的品項</p>
+                <p class="text-xs text-gray-400 mb-6 md:hidden">👉 左右滑動切換分類</p>
+                <div class="ranking-tabs-wrap relative mb-8">
+                    <button onclick="scrollRankingTabs(-1)" aria-label="上一組分類" class="ranking-tabs-arrow ranking-tabs-arrow-left hidden md:flex">&#10094;</button>
+                    <div id="ranking-tabs" class="ranking-tabs flex gap-6 overflow-x-auto border-b border-gray-200">
+                        <div class="text-gray-400 text-sm pb-3">載入中...</div>
+                    </div>
+                    <button onclick="scrollRankingTabs(1)" aria-label="下一組分類" class="ranking-tabs-arrow ranking-tabs-arrow-right hidden md:flex">&#10095;</button>
+                </div>
+                <div id="rankings-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-5">
                     <div class="text-gray-400 text-sm">載入中...</div>
                 </div>
             </div>
@@ -261,6 +269,6 @@
         <p class="text-gray-400 text-sm">© 2026 美妝生活誌 - 妳的最美應援團</p>
     </footer>
 
-    <script src="script.js?v=63"></script>
+    <script src="script.js?v=66"></script>
 </body>
 </html>

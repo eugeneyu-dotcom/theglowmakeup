@@ -514,6 +514,68 @@ body.mobile-nav-open {
     overflow: hidden;
 }
 
+/* 熱門榜單：類別分頁籤，橫向捲動並隱藏捲軸 */
+.ranking-tabs {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    scroll-behavior: smooth;
+}
+.ranking-tabs::-webkit-scrollbar {
+    display: none;
+}
+.ranking-tab-btn {
+    outline: none;
+}
+.ranking-tab-btn:focus-visible {
+    outline: 2px solid rgba(242, 167, 181, 0.5);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+/* 分頁籤數量多，桌機用左右箭頭捲動；左右加漸層淡出，暗示還有更多分類可滑 */
+.ranking-tabs-wrap::before,
+.ranking-tabs-wrap::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 12px;
+    width: 40px;
+    pointer-events: none;
+    z-index: 1;
+}
+.ranking-tabs-wrap::before {
+    left: 0;
+    background: linear-gradient(to right, #fff9f5, transparent);
+}
+.ranking-tabs-wrap::after {
+    right: 0;
+    background: linear-gradient(to left, #fff9f5, transparent);
+}
+.ranking-tabs-arrow {
+    position: absolute;
+    top: -6px;
+    bottom: 12px;
+    width: 36px;
+    z-index: 2;
+    align-items: center;
+    justify-content: center;
+    color: #f2a7b5;
+    font-size: 0.8rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+.ranking-tabs-arrow-left {
+    left: -8px;
+    justify-content: flex-start;
+}
+.ranking-tabs-arrow-right {
+    right: -8px;
+    justify-content: flex-end;
+}
+.ranking-tabs-arrow:hover {
+    color: #e05a47;
+}
+
 /* 新品快報：手機版預設只顯示前 6 個品牌，點「查看全部」才展開其餘品項 */
 #new-products-grid.np-collapsed .new-product-extra {
     display: none;
