@@ -373,8 +373,7 @@ async function initRankings() {
 
     if (tabsEl) {
         tabsEl.innerHTML = categories.map(s => {
-            const n = Math.min(RANKING_TOP_N, bySubcat[s].length);
-            return `<button onclick="switchRankingTab(this.dataset.subcat)" data-subcat="${s}" class="ranking-tab-btn shrink-0 pb-3 font-black text-sm md:text-base border-b-2 border-transparent text-gray-400 hover:text-[#f2a7b5] transition-colors whitespace-nowrap">${s} TOP${n}</button>`;
+            return `<button onclick="switchRankingTab(this.dataset.subcat)" data-subcat="${s}" class="ranking-tab-btn shrink-0 pb-3 font-black text-sm md:text-base border-b-2 border-transparent text-gray-400 hover:text-[#f2a7b5] transition-colors whitespace-nowrap">${s} TOP${RANKING_TOP_N}</button>`;
         }).join('');
     }
 
