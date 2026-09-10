@@ -1,6 +1,6 @@
 {
   "_comment": "首頁「美妝新品快報」資料來源：人工逐一開啟品牌官網頁面查證後手動整理（非自動抓取），品牌選定依 scores-data.json 裡評論最多的 10 個專櫃品牌。每次更新前務必重新開啟 source_url 核對品項是否還在架上，不要憑舊資料或記憶直接沿用。image 欄位是從官網頁面下載到本機 assets/new-products/ 的真實商品圖（非熱連結）。DIOR/CHANEL/Bobbi Brown/雅詩蘭黛的圖是靠品牌官網有防盜鏈保護（直接下載會403），改用瀏覽器內 fetch+canvas 縮圖再逐字核對 checksum 正確才寫檔取得，非熱連結；M.A.C/YSL/植村秀/蘭蔻/資生堂/MAKE UP FOR EVER 是圖片伺服器沒防盜鏈，直接下載即可。",
-  "_last_updated": "2026-08-24",
+  "_last_updated": "2026-09-07",
   "products": [
     {
       "brand": "DIOR",
@@ -10,7 +10,7 @@
       "image": "assets/new-products/dior.jpg",
       "source_url": "https://www.dior.com/zh_tw/beauty/page/all-new-arrivals.html",
       "source_label": "DIOR 官網",
-      "verified_date": "2026-08-24"
+      "verified_date": "2026-09-07"
     },
     {
       "brand": "CHANEL",
@@ -20,17 +20,17 @@
       "image": "assets/new-products/chanel.jpg",
       "source_url": "https://www.chanel.com/tw/makeup/",
       "source_label": "CHANEL 官網",
-      "verified_date": "2026-08-24"
+      "verified_date": "2026-09-07"
     },
     {
       "brand": "M.A.C",
-      "name": "超水感持色水唇膏",
+      "name": "超持妝奢緞氣墊精華",
       "category": "彩妝",
-      "highlight": "唇膏的薄透顯色 ✕ 護唇膏的舒適滋潤，可自由疊擦",
+      "highlight": "SPF50+/PA+++長效持妝，融合氣墊輕透與精華級護膚感",
       "image": "assets/new-products/mac.png",
       "source_url": "https://www.maccosmetics.com.tw/",
       "source_label": "M.A.C 官網",
-      "verified_date": "2026-08-24"
+      "verified_date": "2026-09-07"
     },
     {
       "brand": "Bobbi Brown",
@@ -40,7 +40,7 @@
       "image": "assets/new-products/bobbibrown.jpg",
       "source_url": "https://www.bobbibrown.com.tw/",
       "source_label": "Bobbi Brown 官網",
-      "verified_date": "2026-08-24"
+      "verified_date": "2026-09-07"
     },
     {
       "brand": "YSL",
@@ -70,7 +70,7 @@
       "image": "assets/new-products/mufe.jpg",
       "source_url": "https://www.makeupforever.com.tw/v2/official/SalePageCategory/377906?lang=zh-TW",
       "source_label": "MAKE UP FOR EVER 官網",
-      "verified_date": "2026-08-24"
+      "verified_date": "2026-09-07"
     },
     {
       "brand": "蘭蔻",
@@ -90,7 +90,7 @@
       "image": "assets/new-products/esteelauder.jpg",
       "source_url": "https://www.esteelauder.com.tw/products/26455/product-catalog/whats-new/new-makeup",
       "source_label": "雅詩蘭黛 官網",
-      "verified_date": "2026-08-24"
+      "verified_date": "2026-09-07"
     },
     {
       "brand": "資生堂",
@@ -100,7 +100,7 @@
       "image": "assets/new-products/shiseido.webp",
       "source_url": "https://www.global-shiseido.com.tw/",
       "source_label": "資生堂國際櫃 官網",
-      "verified_date": "2026-08-24"
+      "verified_date": "2026-09-07"
     }
   ]
 }
