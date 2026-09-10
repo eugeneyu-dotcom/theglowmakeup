@@ -759,7 +759,7 @@ async function getSiteData() {
 async function getScoresData() {
     if (scoresDataCache) return scoresDataCache;
     try {
-        const response = await fetch('scores-data.json?v=32');
+        const response = await fetch('scores-data.json?v=33');
         scoresDataCache = await response.json();
         return scoresDataCache;
     } catch (err) {

@@ -264,7 +264,7 @@
         window.SCORES_DATA = {};
         async function loadScoresData() {
             try {
-                const res = await fetch('scores-data.json?v=36');
+                const res = await fetch('scores-data.json?v=37');
                 window.SCORES_DATA = await res.json();
             } catch (e) {
                 console.error('scores-data.json 載入失敗', e);
