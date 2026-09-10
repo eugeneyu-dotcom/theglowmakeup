@@ -16,6 +16,7 @@
     <meta name="description" id="meta-description" content="Glow Makeup 真實社群美妝評分與心得彙整。">
     <meta property="og:title" id="og-title" content="Glow Makeup | 分類詳情">
     <meta property="og:description" id="og-description" content="Glow Makeup 真實社群美妝評分與心得彙整。">
+    <meta property="og:image" id="og-image" content="https://www.theglowmakeup.org/assets/hero-bg.jpg">
     <meta property="og:type" content="website">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%84%3C/text%3E%3C/svg%3E">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -373,6 +374,12 @@
 
                 const details = data.subcategoryDetails?.[sub];
                 if (details) {
+                    const ogImageItem = (details.items || []).find(it => it.image || it.img);
+                    if (ogImageItem) {
+                        const ogImageUrl = ogImageItem.image || ogImageItem.img;
+                        document.getElementById('og-image')?.setAttribute('content',
+                            ogImageUrl.startsWith('http') ? ogImageUrl : `https://www.theglowmakeup.org/${ogImageUrl}`);
+                    }
                     const selectedBrands = new Set();
 
                     // Generate unique brands list from items if details.brands is empty

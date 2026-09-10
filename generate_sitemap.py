@@ -9,7 +9,8 @@ from urllib.parse import quote
 from xml.sax.saxutils import escape
 
 BASE = os.path.dirname(os.path.abspath(__file__))
-SITE_URL = "https://theglowmakeup.org"  # 正式網域（Vercel Domains 設定的自訂網域，www 會 redirect 到這個 apex）
+SITE_URL = "https://www.theglowmakeup.org"  # 正式網域：實測 apex（無 www）會 308 導到 www，www 才是最終網址
+                                             # （2026-09-10 修正：舊註解寫反了，實際導向跟舊版剛好相反）
 
 STATIC_PAGES = [
     "news.html", "skincare-blog.html",
