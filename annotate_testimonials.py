@@ -74,6 +74,31 @@ def usable_as_testimonial(c):
     return 30 <= len(c) <= 400 and "【圖片內文】" not in c and _non_hashtag_len(c) >= 25
 
 
+_STOPWORDS = set("系列 版 限量 新款 全新 升級 專櫃 官方 正品 推薦".split())
+
+
+def distinctive_tokens(name, cn, alt):
+    """能辨識「是這一支」的詞：別稱優先，官網名切出的片段次之。
+
+    實測（2026-09-14）發現：靠讚數排序會把爆紅但與商品無關的貼文推到最前面
+    （搜「香奈兒去角質霜」撈到 17 萬讚的婆媳故事），真正可用的心得幾乎都是
+    內容裡直接寫出商品專屬名稱的那幾則。所以排序要先看有沒有命中專屬詞。
+    """
+    toks = set()
+    for a in re.split(r"[／/、,，]", alt or ""):
+        a = a.strip()
+        if len(a) >= 2:
+            toks.add(a)
+    for nm in (name, cn):
+        nm = re.sub(r"[【】()（）]", " ", _strip_spf(nm or ""))
+        for chunk in nm.split():
+            if len(chunk) >= 3:
+                toks.add(chunk.strip())
+        if len(nm.strip()) >= 4:
+            toks.add(nm.strip())
+    return set(t for t in toks if t and t not in _STOPWORDS)
+
+
 def load_items():
     with open(ITEMS, encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
@@ -91,6 +116,8 @@ def load_items():
             "alt": (r.get(altf) or "").strip(),
             "cn": (r.get(cnf) or "").strip(),
         }
+        meta[iid]["tokens"] = distinctive_tokens(meta[iid]["name"], meta[iid]["cn"],
+                                                 meta[iid]["alt"])
         for kw in build_search_keywords(meta[iid]["brand"], meta[iid]["name"],
                                         meta[iid]["cn"], meta[iid]["alt"]):
             kw_buckets.setdefault(kw, set()).add(iid)
@@ -143,23 +170,40 @@ def do_prepare(subcats, include_scored):
         bucket = out.setdefault(key, {
             "brand": m["brand"], "item_name": m["name"], "subcategory": m["subcat"],
             "product_aliases": [a for a in (m["alt"], m["cn"]) if a],
-            "reviews": [],
+            "reviews": [], "_seen_urls": set(), "_seen_text": set(),
         })
+        content = (r.get("content") or "").replace("\n", " ")
+        # routed_reviews.json 目前有大量同 url／同內容的重複列（2026-09-14 查出
+        # 36,985 筆裡有 23,542 筆是 1,399 個 url 的重複），不去重會把判讀名額吃光
+        if url in bucket["_seen_urls"] or content[:40] in bucket["_seen_text"]:
+            continue
+        bucket["_seen_urls"].add(url)
+        bucket["_seen_text"].add(content[:40])
         bucket["reviews"].append({
             "url": url, "platform": plat, "likes": _likes(r.get("likes")),
-            "content": (r.get("content") or "").replace("\n", " "),
+            "content": content,
+            "_hits": sorted((t for t in m["tokens"] if t in content), key=len, reverse=True)[:3],
         })
 
     for key in out:
-        out[key]["reviews"] = sorted(out[key]["reviews"],
-                                     key=lambda x: -x["likes"])[:MAX_CANDIDATES]
+        out[key].pop("_seen_urls", None)
+        out[key].pop("_seen_text", None)
+        out[key]["reviews"] = sorted(
+            out[key]["reviews"],
+            key=lambda x: (0 if x["_hits"] else 1, -x["likes"]),
+        )[:MAX_CANDIDATES]
+        # 一則都沒命中專屬詞的品項，幾乎不可能有可用心得，先標記出來
+        out[key]["has_named_mention"] = any(r["_hits"] for r in out[key]["reviews"])
 
     os.makedirs(LLM_IO, exist_ok=True)
     with open(REQ, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=1)
 
     total = sum(len(v["reviews"]) for v in out.values())
+    named = sum(1 for v in out.values() if v["has_named_mention"])
     print("🧾 待判讀：%d 個品項 / %d 則 → %s" % (len(out), total, REQ))
+    print("   其中 %d 個品項有評論直接寫出商品名（另 %d 個沒有，可用機率極低）"
+          % (named, len(out) - named))
     if total:
         print("   估計成本約 %.1f 萬 token（實測約 115 token/則）" % (total * 115 / 10000.0))
     print("   下一步：由 Claude Code 逐則判讀，寫出 %s" % RESP)

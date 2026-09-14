@@ -347,9 +347,16 @@ def main():
         iid = item_ids.get((e["brand"], e["name"]))
         pool = list(by_item_id.get(iid, [])) if iid else []
         if iid:
-            extra = [r for r in by_item_id_unrouted.get(iid, [])
-                     if annotation_allows_testimonial(ann_store, e["brand"], e["name"],
-                                                      r.get("url"))]
+            # routed_reviews.json 目前同一則貼文有多列重複（同 url），這裡順手去重，
+            # 免得統計數字把重複列也算成不同評論
+            extra, seen_extra = [], set()
+            for r in by_item_id_unrouted.get(iid, []):
+                url = (r.get("url") or "").strip()
+                if url in seen_extra:
+                    continue
+                if annotation_allows_testimonial(ann_store, e["brand"], e["name"], url):
+                    seen_extra.add(url)
+                    extra.append(r)
             if extra:
                 pool.extend(extra)
                 n_extra_items += 1

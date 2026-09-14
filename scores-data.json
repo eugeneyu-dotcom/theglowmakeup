@@ -6571,8 +6571,26 @@
    "功效顯著度": 4.94
   },
   "mentions": 2,
-  "testimonial": null,
-  "testimonials": []
+  "testimonial": {
+   "platform": "Threads",
+   "author": "_c***",
+   "likes": 552,
+   "text": "常常覺得酸類比水飛梭還厲害•︠ˍ•︡ 粉刺少了 粉底上起來也更順服貼到死⋯ 敏感肌不用怕 我自己也超敏感 目前是用YSL調皮水跟仙人掌精華✨ 溫和煥膚 比水飛梭值 💸也比較值 哈哈哈"
+  },
+  "testimonials": [
+   {
+    "platform": "Threads",
+    "author": "_c***",
+    "likes": 552,
+    "text": "常常覺得酸類比水飛梭還厲害•︠ˍ•︡ 粉刺少了 粉底上起來也更順服貼到死⋯ 敏感肌不用怕 我自己也超敏感 目前是用YSL調皮水跟仙人掌精華✨ 溫和煥膚 比水飛梭值 💸也比較值 哈哈哈"
+   },
+   {
+    "platform": "Threads",
+    "author": "an***",
+    "likes": 13,
+    "text": "YSL的調皮水有沒有平替啊 真的好好用但一罐要快三千真有點痛心 如果沒有的話就下個月去機場買了。。"
+   }
+  ]
  },
  "Bobbi Brown||高保濕化妝水": {
   "brand": "Bobbi Brown",
