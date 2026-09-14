@@ -41,6 +41,21 @@ Threads 約 57%、小紅書約 37%、Google（含 Dcard/IG/General）約 6%。
   `is_ad`、`credibility`）以**評論 url 為鍵**累積寫進 `llm_io/review_annotations.json`
   （跨輪合併，不覆蓋舊品項）。`build_scores_data.py` 用 `search_keyword` 回推 item_id 後，
   **只收在這份標記檔裡被判為 `product_match=match` 且非業配的評論**，沒有標記的一律不收。
+- **補卡片用 `annotate_testimonials.py`，不要重跑評分**：那些缺卡片的品項**都已經有分數，
+  而且 100% 是用 Threads 評論算出來的**（`score_reviews.py` 的評論池一直都同時吃
+  `reviews_by_item_id` 小紅書路由 + `reviews_by_keyword` Threads/Google）。所以重跑
+  `--prepare/--compute` 不會多出任何一則評論，只會因為 LLM 二次判讀讓已發布的分數漂移。
+  改用這支工具只補「這則是不是真的在講這個商品」的標記，完全不碰 `csv/AI_Scores.csv`：
+
+  ```bash
+  /usr/bin/python3 annotate_testimonials.py --prepare --subcat 唇蜜,護唇膏
+  #   → llm_io/testimonial_requests.json，由 Claude Code 逐則判讀
+  #     寫出 llm_io/testimonial_responses.json
+  /usr/bin/python3 annotate_testimonials.py --merge
+  /usr/bin/python3 build_scores_data.py
+  ```
+
+  已標過的 url 不重複送、沒有分數的品項不送、已有卡片的預設跳過（`--include-scored` 可覆蓋）。
 - **現況與預期**：首輪人工核對 18 則候選後只有 5 則可用（4 個品項）。標記檔會隨每次重跑
   `--compute` 自動累積（不額外花成本），涵蓋範圍變大後心得卡片才會實質變多。
   換句話說，心得卡片以小紅書為主**主要是資料特性使然**（Threads 多為短貼文、代購、求推薦），
@@ -72,6 +87,7 @@ Glow Up/
 ├── test_google.py              ← Google SerpAPI 爬蟲
 ├── test_xhs.py                 ← 小紅書 Apify 爬蟲（備用）
 ├── clean_data.py               ← 廣告過濾（送 Claude 評分前先跑）
+├── annotate_testimonials.py    ← 心得卡片專用評論標記（不碰分數，見下方說明）
 ├── score_reviews.py            ← Claude 評分主程式
 └── generate_article_image.py   ← 保養專欄文章封面圖生圖工具（見下方說明）
 ```
