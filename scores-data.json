@@ -2698,8 +2698,20 @@
    "塗抹均勻度": 3.8
   },
   "mentions": 43,
-  "testimonial": null,
-  "testimonials": [],
+  "testimonial": {
+   "platform": "Threads",
+   "author": "he***",
+   "likes": 2,
+   "text": "推薦大家YSL黑管唇釉 已經火了非常久的系列，鏡面玻璃感🪞春夏的氛圍都被拿捏了！上嘴成膜快，不粘膩，一樣幫大家整理比較多人推薦的色號🏅"
+  },
+  "testimonials": [
+   {
+    "platform": "Threads",
+    "author": "he***",
+    "likes": 2,
+    "text": "推薦大家YSL黑管唇釉 已經火了非常久的系列，鏡面玻璃感🪞春夏的氛圍都被拿捏了！上嘴成膜快，不粘膩，一樣幫大家整理比較多人推薦的色號🏅"
+   }
+  ],
   "reviewSummary": "網友對這款黑管唇釉的討論多聚焦在顯色與持妝：有人稱讚調出來的顏色好看又不容易沾染掉色，也有人形容上唇後就懂為什麼這個系列這麼紅；另有評論提到成膜速度快、上嘴不黏膩，色號選擇多、討論熱度高。整體看下來評價偏正面，主要圍繞顯色和持妝表現。"
  },
  "DIOR||迪奧粉漾水光潤唇釉": {
@@ -2877,8 +2889,20 @@
    "塗抹均勻度": 3.8
   },
   "mentions": 14,
-  "testimonial": null,
-  "testimonials": [],
+  "testimonial": {
+   "platform": "Threads",
+   "author": "ad***",
+   "likes": 2,
+   "text": "最近愛翻的唇部產品~超能量冰沙翹唇萃 水水潤潤的寶寶唇，真的是愛翻"
+  },
+  "testimonials": [
+   {
+    "platform": "Threads",
+    "author": "ad***",
+    "likes": 2,
+    "text": "最近愛翻的唇部產品~超能量冰沙翹唇萃 水水潤潤的寶寶唇，真的是愛翻"
+   }
+  ],
   "reviewSummary": "網友對這款唇萃的評價集中在水潤保濕與嘟唇效果，形容擦起來水水潤潤、呈現自然的寶寶唇感，也有人被安利後入手同系列色號直呼好看，甚至封它為「水光天花板」。整體討論偏正面、好評居多，不過相關分享數量還不算多，算是比較新竄紅的品項。"
  },
  "雅詩蘭黛||Pure Color 絕美奢潤精華唇萃": {
@@ -2923,8 +2947,20 @@
    "塗抹均勻度": 3.8
   },
   "mentions": 21,
-  "testimonial": null,
-  "testimonials": [],
+  "testimonial": {
+   "platform": "Threads",
+   "author": "_3***",
+   "likes": 1,
+   "text": "等不及想先分享已經收到的兩支 BOBBI BROWN 雲朵唇霜 人如其名（？）真的很輕盈不乾！ 顏色也都調得超好看不挑膚色"
+  },
+  "testimonials": [
+   {
+    "platform": "Threads",
+    "author": "_3***",
+    "likes": 1,
+    "text": "等不及想先分享已經收到的兩支 BOBBI BROWN 雲朵唇霜 人如其名（？）真的很輕盈不乾！ 顏色也都調得超好看不挑膚色"
+   }
+  ],
   "reviewSummary": "目前相關分享還不多,但有網友表示收到後試用兩支柔霧雲朵唇霜,質地輕盈不乾燥,擦起來不會有厚重感,顏色也調得討喜、不太挑膚色。整體評價偏正面,不過真實心得數量有限,建議想入手的人可以再多參考色號實際試色，避免踩雷。"
  },
  "植村秀||無色限玻光潤色嘟唇精華": {
@@ -6547,8 +6583,26 @@
    "功效顯著度": 5.0
   },
   "mentions": 2,
-  "testimonial": null,
-  "testimonials": []
+  "testimonial": {
+   "platform": "Google",
+   "author": "Go***",
+   "likes": 0,
+   "text": "bobbi brown高保濕化妝水. 這瓶是去年12月買的！我就是每天早上用而已我覺得保濕度真的很不錯～裡面好像有薰衣草和小黃瓜的成分櫃姐說可以舒緩…"
+  },
+  "testimonials": [
+   {
+    "platform": "Google",
+    "author": "Go***",
+    "likes": 0,
+    "text": "bobbi brown高保濕化妝水. 這瓶是去年12月買的！我就是每天早上用而已我覺得保濕度真的很不錯～裡面好像有薰衣草和小黃瓜的成分櫃姐說可以舒緩…"
+   },
+   {
+    "platform": "Google",
+    "author": "Go***",
+    "likes": 0,
+    "text": "Bobbibrown 高保濕化妝水本人長期愛用的款看起來水水的但到臉上的時候是清爽又保濕吸收之後會感受到皮膚潤潤滑滑的臉乾到脫皮的時候用有刺痛感是正常…"
+   }
+  ]
  },
  "植村秀||全能奇蹟金萃乳霜": {
   "brand": "植村秀",

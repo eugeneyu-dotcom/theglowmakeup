@@ -19,6 +19,14 @@ AI = os.path.join(BASE, "csv", "AI_Scores.csv")
 ITEMS = os.path.join(BASE, "csv", "Items.csv")
 ROUTED = os.path.join(BASE, "routed_reviews.json")
 OUT = os.path.join(BASE, "scores-data.json")
+# score_reviews.py --compute 累積下來的「評論層級 LLM 標記」（以評論 url 為鍵）。
+# Threads/Google 的評論沒有 item_id（只有小紅書會經過路由），過去因此完全進不了
+# 心得卡片候選池；但它們的 search_keyword 就是爬蟲當初鎖定的品項，可以精準回推。
+# 回推只解決「是哪個商品」，不解決「這則真的在講這個商品嗎」——實測 27,051 則
+# Threads 裡有大量代購貼文、蝦皮導購、品牌行銷稿，以及講到別家商品只把本商品當
+# 對照組的貼文。因此一律要求該則評論在這份標記檔裡被判為 product_match=match
+# 且非業配，才准進候選池。沒有標記的一律不收（寧缺勿濫）。
+ANNOTATIONS = os.path.join(BASE, "llm_io", "review_annotations.json")
 
 # 小紅書自家表情貼圖標籤，例如 [生气R] [哭惹R] [doge]（結尾是 R/H 的方括號標籤才視為表情，
 # 避免誤刪像 [品牌]、[商品] 這種作者自己寫的真實內容）
@@ -102,6 +110,93 @@ def load_item_ids():
     return out
 
 
+def _strip_spf(n):
+    return (n or "").split("SPF")[0].strip()
+
+
+def build_search_keywords(brand, tw_name, cn_name, alt_name):
+    """複製 scrape_threads.py 的 _build_keywords()：爬蟲當初就是用這些字串去搜的，
+    所以 search_keyword 可以反推回品項。兩邊若改動需同步。"""
+    kws, seen = [], set()
+
+    def add(kw):
+        kw = (kw or "").strip()
+        if kw and kw not in seen:
+            seen.add(kw)
+            kws.append(kw)
+
+    if alt_name:
+        add(f"{brand} {alt_name}")
+    if cn_name and cn_name != tw_name:
+        add(_strip_spf(cn_name))
+    if tw_name:
+        add(f"{brand} {_strip_spf(tw_name)}")
+    return kws
+
+
+# test_google.py 搜尋時加的語境後綴，比對前要去掉（score_reviews.py 也做同樣處理）
+_GOOGLE_SUFFIXES = (" Dcard 評價", " PTT 評價", " Dcard", " PTT", " IG", " 心得", " 評價")
+
+
+def _normalize_keyword(kw):
+    kw = (kw or "").strip()
+    for suf in _GOOGLE_SUFFIXES:
+        if kw.endswith(suf):
+            kw = kw[: -len(suf)].strip()
+    return kw
+
+
+def load_keyword_to_item_id():
+    """search_keyword -> item_id；一個關鍵字對到多個品項時視為不可靠，直接捨棄。"""
+    with open(ITEMS, encoding="utf-8") as f:
+        rows = list(csv.DictReader(f))
+    fields = list(rows[0].keys())
+    id_f, tw_f, cn_f, alt_f = fields[0], fields[5], fields[6], fields[7]
+    buckets = {}
+    for r in rows:
+        iid = str(r.get(id_f, "")).strip()
+        if not iid:
+            continue
+        for kw in build_search_keywords(r.get("Brand", "").strip(), r.get(tw_f, "").strip(),
+                                        (r.get(cn_f) or "").strip(), (r.get(alt_f) or "").strip()):
+            buckets.setdefault(kw, set()).add(iid)
+    return {kw: next(iter(v)) for kw, v in buckets.items() if len(v) == 1}
+
+
+def load_annotations():
+    if not os.path.exists(ANNOTATIONS):
+        return {}
+    try:
+        with open(ANNOTATIONS, encoding="utf-8") as f:
+            return json.load(f)
+    except (ValueError, OSError):
+        return {}
+
+
+def annotation_allows_testimonial(ann_store, brand, item_name, url):
+    """只有被 LLM（或人工核對）判為「確實在講這個商品、且不是業配」的才准當心得。"""
+    bucket = ann_store.get(f"{brand}||{item_name}")
+    if not bucket:
+        return False
+    a = bucket.get((url or "").strip())
+    if not a:
+        return False
+    return a.get("product_match") == "match" and not a.get("is_ad")
+
+
+# Google 搜尋摘要的殘留雜訊：Dcard 的圖片佔位符 megapx、摘要被截斷的尾巴「...」、
+# 以及開頭重複貼上的標題片段。這些是抓取格式造成的，不是網友真的寫的字。
+_GOOGLE_NOISE_RE = re.compile(r"\bmegapx\b\.?", re.IGNORECASE)
+
+
+def clean_google_text(text):
+    text = _GOOGLE_NOISE_RE.sub(" ", text)
+    text = re.sub(r"\s{2,}", " ", text).strip()
+    text = re.sub(r"[.。]?\s*\.{3,}\s*$", "…", text)     # 結尾的 ... → …
+    text = re.sub(r"^[\s.、,，]+", "", text)
+    return text.strip()
+
+
 def _non_hashtag_len(c):
     """去掉 #標籤 後的實質文字長度（判斷是不是純標籤貼文）。"""
     stripped = re.sub(r"#[^\s#]+", "", c)
@@ -150,9 +245,11 @@ def pick_testimonials(reviews, n=3):
     seen_prefix = set()
     for r in ranked:
         text = (r.get("content") or "").strip().replace("\n", " ")
-        is_xhs = "小紅書" in (r.get("platform") or "")
-        if is_xhs:
+        plat_raw = r.get("platform") or ""
+        if "小紅書" in plat_raw:
             text = clean_xhs_text(text)
+        elif "Google" in plat_raw:
+            text = clean_google_text(text)
         prefix = text[:40]
         if prefix in seen_prefix:
             continue
@@ -189,10 +286,21 @@ def main():
     with open(ROUTED, encoding="utf-8") as f:
         routed = json.load(f)
     by_item_id = {}
+    # 沒有 item_id 的 Threads/Google 評論：用 search_keyword 回推品項，先放旁邊，
+    # 等下確認有 LLM 標記背書才併進候選池（見 annotation_allows_testimonial）。
+    kw_to_iid = load_keyword_to_item_id()
+    ann_store = load_annotations()
+    by_item_id_unrouted = {}
     for r in routed:
         iid = str(r.get("item_id", "")).strip()
         if iid:
             by_item_id.setdefault(iid, []).append(r)
+            continue
+        if not ann_store:
+            continue
+        guess = kw_to_iid.get(_normalize_keyword(r.get("search_keyword")))
+        if guess:
+            by_item_id_unrouted.setdefault(guess, []).append(r)
 
     # 讀 AI_Scores
     with open(AI, encoding="utf-8") as f:
@@ -232,12 +340,22 @@ def main():
     # 只保留有綜合評分的品項，並補上代表評論
     out = {}
     n_test = 0
+    n_extra = n_extra_items = 0
     for key, e in data.items():
         if e["composite"] is None:
             continue
         iid = item_ids.get((e["brand"], e["name"]))
-        if iid and iid in by_item_id:
-            ts = pick_testimonials(by_item_id[iid])
+        pool = list(by_item_id.get(iid, [])) if iid else []
+        if iid:
+            extra = [r for r in by_item_id_unrouted.get(iid, [])
+                     if annotation_allows_testimonial(ann_store, e["brand"], e["name"],
+                                                      r.get("url"))]
+            if extra:
+                pool.extend(extra)
+                n_extra_items += 1
+                n_extra += len(extra)
+        if pool:
+            ts = pick_testimonials(pool)
             if ts:
                 e["testimonials"] = ts
                 e["testimonial"] = ts[0]   # 向下相容：舊版單篇欄位仍保留給 Cruel Battle 等用途
@@ -247,6 +365,11 @@ def main():
     with open(OUT, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=1)
     print(f"✅ scores-data.json：{len(out)} 個品項有真實綜合分，其中 {n_test} 個附上代表評論")
+    if n_extra:
+        print(f"   ↳ 其中 {n_extra} 則來自 Threads/Google（{n_extra_items} 個品項），"
+              f"皆通過 review_annotations.json 的 product_match 檢核")
+    elif ann_store:
+        print("   ↳ Threads/Google 目前沒有任何評論通過標記檢核（標記檔涵蓋範圍還小是正常的）")
 
 
 if __name__ == "__main__":

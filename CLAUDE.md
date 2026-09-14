@@ -25,12 +25,28 @@
 
 **評論來源分布**（`standardized_reviews.json` 全體，非僅已評分品項）：
 Threads 約 57%、小紅書約 37%、Google（含 Dcard/IG/General）約 6%。
-⚠️ 但前台「真實網友心得」卡片目前 100% 來自小紅書——這是 `build_scores_data.py` 的
-`pick_testimonials()` 只從 `routed_reviews.json` 裡「有 `item_id`」的評論選，而只有小紅書
-會經過路由（`route_reviews.py`/`route_xhs_programmatic.py` 都只處理小紅書），Threads/Google
-的評論就算內容再好也進不了候選池。如果要讓心得卡片的來源比例更真實反映實際資料組成，
-需要把 Threads/Google 裡已標記 `product_match: match` 的評論也納入 `pick_testimonials()` 的
-候選池，而不是只看有沒有 `item_id`。
+⚠️ 前台「真實網友心得」卡片幾乎全部來自小紅書。2026-09-14 已做過完整調查並修掉管線缺口，
+結論與原先的假設不同，**不要再依「把 Threads/Google 納入候選池就好」這個方向重做**：
+
+- **回推品項沒有問題**：Threads 的 `search_keyword` 100% 有值，而且就是 `scrape_threads.py`
+  的 `_build_keywords()` 針對某個品項組出來的搜尋字串，**99.2% 能唯一對回 Items.csv**
+  （撞名只有 1 組：YSL 自由之水）。Google 加上 `Dcard`/`IG`/`心得` 後綴，去掉即可。
+- **真正的門檻是內容，不是 `item_id`**：實測 27,051 則 Threads + 717 則 Google，就算要求
+  「內容同時出現品牌與商品專屬名稱」也只剩 238 則，而這 238 則裡大量是代購貼文、蝦皮導購、
+  品牌行銷稿（含港式廣告），還有講別家商品只把本商品當對照組的（例：M.A.C 妝前唇霜的候選
+  其實在評 heme，YSL 情挑誘光嫩唇凍的候選全是 heme 與 1028 的「水光唇釉」——別稱取了通用
+  類別詞就會這樣）。評分端之所以不受影響，是因為有 LLM 的 `product_match` 與業配偵測擋著；
+  `pick_testimonials()` 沒有這層保護，直接放寬等於把廣告印成「真實網友心得」。
+- **實作方式**：`score_reviews.py --compute` 現在會把每則評論的 LLM 標記（`product_match`、
+  `is_ad`、`credibility`）以**評論 url 為鍵**累積寫進 `llm_io/review_annotations.json`
+  （跨輪合併，不覆蓋舊品項）。`build_scores_data.py` 用 `search_keyword` 回推 item_id 後，
+  **只收在這份標記檔裡被判為 `product_match=match` 且非業配的評論**，沒有標記的一律不收。
+- **現況與預期**：首輪人工核對 18 則候選後只有 5 則可用（4 個品項）。標記檔會隨每次重跑
+  `--compute` 自動累積（不額外花成本），涵蓋範圍變大後心得卡片才會實質變多。
+  換句話說，心得卡片以小紅書為主**主要是資料特性使然**（Threads 多為短貼文、代購、求推薦），
+  不是程式挑錯，不要為了「讓來源比例好看」去放寬檢核。
+- `build_scores_data.py` 的 `build_search_keywords()` 是 `scrape_threads.py` `_build_keywords()`
+  的複製品，**兩邊改動要同步**。
 
 ---
 

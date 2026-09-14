@@ -60,6 +60,12 @@ LLM_IO_DIR = os.path.join(BASE_DIR, "llm_io")
 SCORE_REQ = os.path.join(LLM_IO_DIR, "score_requests.json")
 SCORE_RESP = os.path.join(LLM_IO_DIR, "score_responses.json")
 
+# 評論層級標記的「耐久存檔」：score_responses.json 每輪都會被覆寫，但裡面的
+# product_match / is_ad 判斷對前台挑「真實網友心得」很有價值（Threads/Google 的
+# 評論沒有 item_id，只能靠這份標記才知道哪幾則真的在講這個商品、哪幾則是業配）。
+# 因此在 --compute 時把標記以評論 url 為鍵合併累積下來，跨輪不會遺失。
+REVIEW_ANNOTATIONS = os.path.join(LLM_IO_DIR, "review_annotations.json")
+
 
 def _product_key(brand, item_name):
     return f"{brand}||{item_name}"
@@ -229,6 +235,30 @@ def score_indicator(entries):
     final = base * consensus_modifier(sentiments)
     final = max(1.0, min(5.0, final))
     return round(final, 2), detect_polarization(sentiments), len(entries)
+
+
+def _record_review_annotations(store, brand, item_name, reviews, annotations):
+    """把本輪 LLM 標記依評論 url 存進耐久檔（annotations 的 review_index 對應 reviews 順序）。
+
+    只留下前台挑心得會用到的欄位，不存整包指標情緒（那些已經算進分數了）。
+    """
+    if not annotations:
+        return
+    key = _product_key(brand, item_name)
+    bucket = store.setdefault(key, {})
+    for ann in annotations:
+        idx = ann.get("review_index")
+        if idx is None or not isinstance(idx, int) or idx >= len(reviews) or idx < 0:
+            continue
+        url = (reviews[idx].get("url") or "").strip()
+        if not url:
+            continue
+        bucket[url] = {
+            "product_match": ann.get("product_match", "match"),
+            "is_ad": bool(ann.get("is_ad")),
+            "credibility": ann.get("credibility", "mid"),
+            "sub_variant": ann.get("sub_variant", ""),
+        }
 
 
 def _score_annotations_to_results(annotations, target_indicators, reviews):
@@ -408,6 +438,14 @@ def main():
 
     # 標記來源優先序：agent 產生的 score_responses.json（免 API）> Claude API。
     precomputed = None
+    # 耐久標記檔：載入既有內容，本輪標記用「合併」寫回（舊輪的其他品項原樣保留）
+    review_annotations = {}
+    if os.path.exists(REVIEW_ANNOTATIONS):
+        try:
+            with open(REVIEW_ANNOTATIONS, encoding="utf-8") as f:
+                review_annotations = json.load(f)
+        except (ValueError, OSError):
+            review_annotations = {}
     if os.path.exists(SCORE_RESP):
         with open(SCORE_RESP, "r", encoding="utf-8") as f:
             precomputed = json.load(f)
@@ -580,6 +618,8 @@ def main():
                     continue
                 # agent 模式：品項有標記但陣列為空，代表這輪標記後判定沒有一則有效評論
                 annotations = precomputed.get(product_key) or []
+                _record_review_annotations(review_annotations, brand, item_name,
+                                           unique_reviews, annotations)
             else:
                 annotations = None
             variant_results = compute_product_scores_with_variants(
@@ -693,6 +733,14 @@ def main():
         print("   下一步：由 Claude Code 讀取此檔、逐則標記，寫出 llm_io/score_responses.json，")
         print("   再執行 `/usr/bin/python3 score_reviews.py --compute` 完成算分。")
         return
+
+    if review_annotations:
+        os.makedirs(LLM_IO_DIR, exist_ok=True)
+        with open(REVIEW_ANNOTATIONS, "w", encoding="utf-8") as f:
+            json.dump(review_annotations, f, ensure_ascii=False, indent=1)
+        n_ann = sum(len(v) for v in review_annotations.values())
+        print(f"🗂  評論標記已累積至 {REVIEW_ANNOTATIONS}"
+              f"（{len(review_annotations)} 個品項 / {n_ann} 則）")
 
     save_weights_state(weights_state)
 
