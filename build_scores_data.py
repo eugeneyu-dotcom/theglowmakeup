@@ -186,14 +186,20 @@ def annotation_allows_testimonial(ann_store, brand, item_name, url):
 
 # Google 搜尋摘要的殘留雜訊：Dcard 的圖片佔位符 megapx、摘要被截斷的尾巴「...」、
 # 以及開頭重複貼上的標題片段。這些是抓取格式造成的，不是網友真的寫的字。
+# megapx 是 Dcard 的圖片佔位符；「為你推薦」「延伸閱讀」等是 Google/站方的介面字，
+# 會被一起抓進摘要，但不是網友寫的內容。
 _GOOGLE_NOISE_RE = re.compile(r"\bmegapx\b\.?", re.IGNORECASE)
+_GOOGLE_CHROME_RE = re.compile(r"\s*(?:\.{3,}\s*)?(?:為你推薦|延伸閱讀|相關文章|更多內容)[.。]?\s*$")
 
 
 def clean_google_text(text):
     text = _GOOGLE_NOISE_RE.sub(" ", text)
     text = re.sub(r"\s{2,}", " ", text).strip()
+    for _ in range(2):                                    # 介面字可能疊在省略號後面
+        text = _GOOGLE_CHROME_RE.sub("", text).strip()
     text = re.sub(r"[.。]?\s*\.{3,}\s*$", "…", text)     # 結尾的 ... → …
-    text = re.sub(r"^[\s.、,，]+", "", text)
+    # 摘要常從句中切起，開頭殘留標點；去掉後若首字仍是標點就再去一次
+    text = re.sub(r"^[\s.、,，。！？!?：:；;·\-–—]+", "", text)
     return text.strip()
 
 

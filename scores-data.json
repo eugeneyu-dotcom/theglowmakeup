@@ -2854,8 +2854,20 @@
    "沾杯程度": 3.1
   },
   "mentions": 27,
-  "testimonial": null,
-  "testimonials": []
+  "testimonial": {
+   "platform": "Google",
+   "author": "Go***",
+   "likes": 0,
+   "text": "但一直塵封在我相簿的兩隻DIOR豐漾俏唇蜜. 先上038給你們看 . 心得❤️. 038是一支很裸的奶茶唇色. 適合淡妝的時候擦淡妝擦很溫柔很有氣質❤️❤️❤️."
+  },
+  "testimonials": [
+   {
+    "platform": "Google",
+    "author": "Go***",
+    "likes": 0,
+    "text": "但一直塵封在我相簿的兩隻DIOR豐漾俏唇蜜. 先上038給你們看 . 心得❤️. 038是一支很裸的奶茶唇色. 適合淡妝的時候擦淡妝擦很溫柔很有氣質❤️❤️❤️."
+   }
+  ]
  },
  "CHANEL||香奈兒超炫耀持色唇萃": {
   "brand": "CHANEL",
@@ -3011,8 +3023,32 @@
    "成分安全性": 3.8
   },
   "mentions": 20,
-  "testimonial": null,
-  "testimonials": []
+  "testimonial": {
+   "platform": "Google",
+   "author": "Go***",
+   "likes": 0,
+   "text": "之前有發文詢問請大家幫忙推薦有顏色的潤唇膏感謝大家的推薦最後在預算及顏值的考量下選了這支新上市的YSL情挑誘光潤唇膏色號是5B透感赤…"
+  },
+  "testimonials": [
+   {
+    "platform": "Google",
+    "author": "Go***",
+    "likes": 0,
+    "text": "之前有發文詢問請大家幫忙推薦有顏色的潤唇膏感謝大家的推薦最後在預算及顏值的考量下選了這支新上市的YSL情挑誘光潤唇膏色號是5B透感赤…"
+   },
+   {
+    "platform": "Google",
+    "author": "Go***",
+    "likes": 0,
+    "text": "發現我好多隻口紅裡面能用到空或甚至凹的真的只有YSL，所以來跟大家分享一下幾隻除非停產，不然我會一直回購的最愛色號，1、情挑誘光潤唇膏"
+   },
+   {
+    "platform": "Google",
+    "author": "Go***",
+    "likes": 0,
+    "text": "今天來試最近超熱門的新唇膏—YSL情挑誘光潤唇膏。 ... 質地是薄透不飽和的滋潤型唇膏，膏體很軟很水。 這次入手的是5B跟7B，廢話不多說先直接上試色圖，最後再…"
+   }
+  ]
  },
  "DIOR||迪奧癮誘粉漾潤唇膏": {
   "brand": "DIOR",
@@ -3042,8 +3078,20 @@
    "持久度": 3.1
   },
   "mentions": 15,
-  "testimonial": null,
-  "testimonials": []
+  "testimonial": {
+   "platform": "Threads",
+   "author": "sy***",
+   "likes": 10,
+   "text": "💄CHANEL白管914 ♥︎ 分享個剛拿到的唇膏 難哄溫以凡同款口紅 .ᐟ.ᐟ 很日常的顏色ꕀ喜歡🥰"
+  },
+  "testimonials": [
+   {
+    "platform": "Threads",
+    "author": "sy***",
+    "likes": 10,
+    "text": "💄CHANEL白管914 ♥︎ 分享個剛拿到的唇膏 難哄溫以凡同款口紅 .ᐟ.ᐟ 很日常的顏色ꕀ喜歡🥰"
+   }
+  ]
  },
  "MAKE UP FOREVER||藝術大師玩色水感護唇膏": {
   "brand": "MAKE UP FOREVER",
