@@ -30,6 +30,10 @@ FOLDER_TO_SUBCAT = {
     "精華液": "精華液", "眼霜": "眼霜",
     "腮紅": "腮紅", "粉底液": "粉底液", "蜜粉": "蜜粉", "氣墊粉餅": "氣墊粉餅",
     "化妝水": "化妝水",
+    # 以下 8 個資料夾名與 Items.csv 子分類完全同名，先前漏建對照，整批被靜默跳過
+    # （2026-09-17 查出共 1,101 則小紅書評論因此從未路由，連帶也進不了心得卡片候選池）
+    "乳液": "乳液", "洗面乳": "洗面乳", "卸妝油": "卸妝油", "卸妝膏": "卸妝膏",
+    "卸妝水": "卸妝水", "卸妝棉": "卸妝棉", "眼唇卸妝液": "眼唇卸妝液", "去角質": "去角質",
 }
 
 # 品牌 → 可能出現在子資料夾開頭的別名（比對用，全部轉大寫比對）
@@ -79,11 +83,20 @@ def run(folders):
     with open(ROUTED, "r", encoding="utf-8") as f:
         routed = json.load(f)
 
-    already = {r.get("routed_from_url") for r in routed if r.get("routed_from_url")}
-    already |= {r.get("url") for r in routed if r.get("url")}
+    # 只有「真的帶 item_id」的記錄才算已路由。routed_reviews.json 裡還有大量
+    # route_reviews.py --compute 原樣通過的副本（沒有 item_id），那些不該擋住程式化路由——
+    # 2026-09-15 查出眼影有 256 則因為 url 已存在於這類副本中，一直路由不到、也就一直
+    # 沒進評分（該子分類實際有 507 則不重複評論，卻只有 251 則被計分）。
+    def _routed_ok(r):
+        return bool(str(r.get("item_id") or "").strip())
+
+    already = {r.get("routed_from_url") for r in routed
+               if r.get("routed_from_url") and _routed_ok(r)}
+    already |= {r.get("url") for r in routed if r.get("url") and _routed_ok(r)}
 
     added = 0
     skipped_multi = 0
+    unknown_folders = set()
     unmatched = []
     for rec in cleaned:
         url = rec.get("url") or ""
@@ -97,6 +110,7 @@ def run(folders):
             continue
         subcat = FOLDER_TO_SUBCAT.get(folder)
         if not subcat:
+            unknown_folders.add(folder)   # 靜默跳過曾讓 8 個子分類整批漏路由，改成會出聲
             continue
         base_url = url
         if base_url in already:
@@ -124,6 +138,10 @@ def run(folders):
 
     print(f"✅ 程式化路由完成：新增 {added} 筆帶 item_id 的小紅書記錄")
     print(f"   跳過多品項資料夾 {skipped_multi} 筆（需多品項拆分）")
+    if unknown_folders:
+        print(f"   ⚠️ FOLDER_TO_SUBCAT 沒有對照、整批跳過的資料夾 {len(unknown_folders)} 個：")
+        for u in sorted(unknown_folders):
+            print(f"       {u}（補進 FOLDER_TO_SUBCAT 才會被路由）")
     if unmatched:
         uniq = sorted(set(unmatched))
         print(f"   ⚠️ 品牌未匹配 {len(uniq)} 個資料夾：")
