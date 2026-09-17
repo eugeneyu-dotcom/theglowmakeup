@@ -1,674 +1,674 @@
 {
   "粉底液": {
     "遮瑕力": {
-      "importance": 0.0206,
+      "importance": 0.0144,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "保濕度": {
-      "importance": 0.0119,
+      "importance": 0.0083,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "控油力": {
-      "importance": 0.0113,
+      "importance": 0.0079,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "持妝度": {
-      "importance": 0.0301,
+      "importance": 0.0211,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "輕透度": {
-      "importance": 0.0094,
+      "importance": 0.0066,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "厚重度": {
-      "importance": 0.0055,
+      "importance": 0.0038,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "服貼度": {
-      "importance": 0.0204,
+      "importance": 0.0143,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "防水抗汗": {
-      "importance": 0.0172,
+      "importance": 0.012,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "光澤度": {
-      "importance": 0.0064,
+      "importance": 0.0045,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "成膜度": {
-      "importance": 0.0071,
+      "importance": 0.005,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "遮瑕膏": {
     "遮蓋力": {
-      "importance": 0.0039,
+      "importance": 0.0027,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "抗紋力": {
-      "importance": 0.0015,
+      "importance": 0.001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "持久度": {
-      "importance": 0.0005,
+      "importance": 0.0003,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "服貼度": {
-      "importance": 0.002,
+      "importance": 0.0014,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "不暗沉變色": {
       "importance": 0.0001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "校色效果": {
-      "importance": 0.0003,
+      "importance": 0.0002,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "厚重度": {
-      "importance": 0.0006,
+      "importance": 0.0004,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "氣墊粉餅": {
     "遮瑕力": {
-      "importance": 0.0266,
+      "importance": 0.0186,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "保濕度": {
-      "importance": 0.018,
+      "importance": 0.0126,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "控油力": {
-      "importance": 0.0041,
+      "importance": 0.0029,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "持妝度": {
-      "importance": 0.0286,
+      "importance": 0.02,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "輕透度": {
-      "importance": 0.0032,
+      "importance": 0.0022,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "厚重度": {
-      "importance": 0.0153,
+      "importance": 0.0107,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "服貼度": {
-      "importance": 0.027,
+      "importance": 0.0189,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "成膜度": {
-      "importance": 0.0437,
+      "importance": 0.0306,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "防水抗汗": {
-      "importance": 0.0443,
+      "importance": 0.031,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "光澤度": {
-      "importance": 0.0094,
+      "importance": 0.0066,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "包裝與粉撲設計": {
-      "importance": 0.0261,
+      "importance": 0.0183,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "蜜粉": {
     "粉質細緻度": {
-      "importance": 0.0925,
+      "importance": 0.0648,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "毛孔柔焦度": {
-      "importance": 0.0631,
+      "importance": 0.0442,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "控油持妝力": {
-      "importance": 0.0981,
+      "importance": 0.0687,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "保濕度": {
-      "importance": 0.0236,
+      "importance": 0.0165,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "輕透度": {
-      "importance": 0.0243,
+      "importance": 0.017,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "取粉設計": {
-      "importance": 0.0871,
+      "importance": 0.061,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "腮紅": {
     "顯色度": {
-      "importance": 0.0104,
+      "importance": 0.0073,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "色調適合度": {
-      "importance": 0.0381,
+      "importance": 0.0267,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "持久度": {
-      "importance": 0.0115,
+      "importance": 0.008,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "粉質細緻度": {
-      "importance": 0.0169,
+      "importance": 0.0118,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "服貼度": {
-      "importance": 0.0032,
+      "importance": 0.0022,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "暈染力": {
-      "importance": 0.0078,
+      "importance": 0.0055,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "修飾力": {
-      "importance": 0.0059,
+      "importance": 0.0041,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "妝前乳": {
     "服貼度": {
-      "importance": 0.0004,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "膚色校正": {
-      "importance": 0.0006,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "毛孔隱形": {
       "importance": 0.0003,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
-    "抗暗沉": {
+    "膚色校正": {
       "importance": 0.0004,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
-    "保濕度": {
-      "importance": 0.0036,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "控油力": {
+    "毛孔隱形": {
       "importance": 0.0002,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
-    "底妝相容性": {
-      "importance": 0.0031,
+    "抗暗沉": {
+      "importance": 0.0003,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "保濕度": {
+      "importance": 0.0025,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "控油力": {
+      "importance": 0.0001,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "底妝相容性": {
+      "importance": 0.0022,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "防曬乳": {
     "防曬係數": {
-      "importance": 0.0002,
+      "importance": 0.0001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "清爽透氣度": {
-      "importance": 0.0012,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "防水抗汗力": {
-      "importance": 0.0002,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "不泛白自然度": {
-      "importance": 0.0005,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "底妝相容性": {
       "importance": 0.0008,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "防水抗汗力": {
+      "importance": 0.0001,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "不泛白自然度": {
+      "importance": 0.0003,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "底妝相容性": {
+      "importance": 0.0006,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "打亮/修容": {
     "粉質細膩度": {
-      "importance": 0.3615,
-      "raw_importance_last_run": 0.5215,
-      "mentions_last_run": 61,
-      "last_updated": "2026-09-14 21:35:03"
+      "importance": 0.253,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
     },
     "暈染力": {
-      "importance": 0.1814,
-      "raw_importance_last_run": 0.2654,
-      "mentions_last_run": 39,
-      "last_updated": "2026-09-14 21:35:03"
+      "importance": 0.127,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
     },
     "色調適合度": {
-      "importance": 0.2809,
-      "raw_importance_last_run": 0.4154,
-      "mentions_last_run": 78,
-      "last_updated": "2026-09-14 21:35:03"
+      "importance": 0.1966,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
     },
     "顯色力": {
-      "importance": 0.09,
-      "raw_importance_last_run": 0.1038,
-      "mentions_last_run": 27,
-      "last_updated": "2026-09-14 21:35:03"
+      "importance": 0.063,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
     },
     "持久度": {
-      "importance": 0.1548,
-      "raw_importance_last_run": 0.231,
-      "mentions_last_run": 19,
-      "last_updated": "2026-09-14 21:35:03"
+      "importance": 0.1084,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "定妝噴霧": {
     "成膜速度": {
-      "importance": 0.0003,
+      "importance": 0.0002,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "噴霧細緻度": {
-      "importance": 0.0024,
+      "importance": 0.0017,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "清爽不黏膩": {
+      "importance": 0.0002,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "控油保濕平衡": {
+      "importance": 0.0009,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "氣味接受度": {
+      "importance": 0.0005,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "持久度": {
+      "importance": 0.0017,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "抗摩擦力": {
+      "importance": 0.0008,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "防水抗汗": {
       "importance": 0.0003,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "控油保濕平衡": {
-      "importance": 0.0013,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "氣味接受度": {
-      "importance": 0.0007,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "持久度": {
-      "importance": 0.0025,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "抗摩擦力": {
-      "importance": 0.0012,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "防水抗汗": {
-      "importance": 0.0004,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "眉筆": {
     "筆芯滑順度": {
+      "importance": 0.0004,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "筆芯硬度": {
+      "importance": 0.0001,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "顯色度": {
       "importance": 0.0006,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
-    "筆芯硬度": {
+    "持妝抗暈力": {
+      "importance": 0.0004,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "防結塊": {
       "importance": 0.0002,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "顯色度": {
-      "importance": 0.0009,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "持妝抗暈力": {
-      "importance": 0.0006,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "防結塊": {
-      "importance": 0.0003,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "眼線筆": {
     "防水防油抗暈力": {
-      "importance": 0.0057,
+      "importance": 0.004,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "防沾染": {
-      "importance": 0.0003,
+      "importance": 0.0002,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "筆觸滑順度": {
-      "importance": 0.0009,
+      "importance": 0.0006,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "顯色度": {
-      "importance": 0.0007,
+      "importance": 0.0005,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "筆尖設計": {
-      "importance": 0.0036,
+      "importance": 0.0025,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "睫毛膏": {
     "捲翹持久度": {
-      "importance": 0.0004,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "抗暈染力": {
-      "importance": 0.001,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "纖長效果": {
       "importance": 0.0003,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "抗暈染力": {
+      "importance": 0.0007,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "纖長效果": {
+      "importance": 0.0002,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
     },
     "濃密效果": {
-      "importance": 0.0002,
+      "importance": 0.0001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "卸除難易度": {
-      "importance": 0.0002,
+      "importance": 0.0001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "根根分明度": {
-      "importance": 0.0009,
+      "importance": 0.0006,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "眼影/眼影盤": {
     "粉質細緻度": {
-      "importance": 0.0005,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "importance": 0.0289,
+      "raw_importance_last_run": 0.0952,
+      "mentions_last_run": 4,
+      "last_updated": "2026-09-17 17:05:22"
     },
     "顏色飽和度": {
-      "importance": 0.0001,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "importance": 0.0286,
+      "raw_importance_last_run": 0.0952,
+      "mentions_last_run": 4,
+      "last_updated": "2026-09-17 17:05:22"
     },
     "顯色度": {
-      "importance": 0.0002,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "importance": 0.0144,
+      "raw_importance_last_run": 0.0476,
+      "mentions_last_run": 2,
+      "last_updated": "2026-09-17 17:05:22"
     },
     "防飛粉": {
-      "importance": 0.0002,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "importance": 0.0144,
+      "raw_importance_last_run": 0.0476,
+      "mentions_last_run": 2,
+      "last_updated": "2026-09-17 17:05:22"
     },
     "暈染力": {
       "importance": 0.0001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "配色實用性": {
-      "importance": 0.0013,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "importance": 0.0723,
+      "raw_importance_last_run": 0.2381,
+      "mentions_last_run": 10,
+      "last_updated": "2026-09-17 17:05:22"
     },
     "持妝度": {
-      "importance": 0.0001,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "importance": 0.0072,
+      "raw_importance_last_run": 0.0238,
+      "mentions_last_run": 1,
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "唇膏": {
     "修飾唇紋效果": {
-      "importance": 0.0237,
+      "importance": 0.0166,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "卸除難易度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "顯色度": {
-      "importance": 0.0178,
+      "importance": 0.0125,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "持妝力": {
       "importance": 0.0001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "質地觸感": {
-      "importance": 0.0116,
+      "importance": 0.0081,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "保濕不拔乾": {
-      "importance": 0.0068,
+      "importance": 0.0048,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "防沾染": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "沾杯程度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "塗抹均勻度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "唇蜜": {
     "質地黏膩度": {
-      "importance": 0.0006,
+      "importance": 0.0004,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "保濕滋潤度": {
-      "importance": 0.0031,
+      "importance": 0.0022,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "成膜性": {
       "importance": 0.0001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "豐唇效果": {
-      "importance": 0.003,
+      "importance": 0.0021,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "修飾唇紋效果": {
-      "importance": 0.0028,
+      "importance": 0.002,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "防沾染": {
+      "importance": 0.0001,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "沾杯程度": {
       "importance": 0.0002,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "沾杯程度": {
-      "importance": 0.0003,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "卸除難易度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "塗抹均勻度": {
       "importance": 0.0001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "唇釉": {
@@ -676,723 +676,723 @@
       "importance": 0.0001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "顯色度": {
-      "importance": 0.0012,
+      "importance": 0.0008,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "持妝度": {
-      "importance": 0.0003,
+      "importance": 0.0002,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "沾杯程度": {
       "importance": 0.0001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "修飾唇紋效果": {
-      "importance": 0.0006,
+      "importance": 0.0004,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "氧化變色率": {
       "importance": 0.0001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "卸除難易度": {
       "importance": 0.0001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "塗抹均勻度": {
-      "importance": 0.0003,
+      "importance": 0.0002,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "護唇膏": {
     "滋潤度": {
+      "importance": 0.0012,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "保濕度": {
+      "importance": 0.0008,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "潤色效果": {
       "importance": 0.0017,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "保濕度": {
-      "importance": 0.0012,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "潤色效果": {
-      "importance": 0.0024,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "撫平唇紋": {
-      "importance": 0.0014,
+      "importance": 0.001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "持久度": {
-      "importance": 0.0012,
+      "importance": 0.0008,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "修復改善": {
-      "importance": 0.0002,
+      "importance": 0.0001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "成分安全性": {
       "importance": 0.0001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "洗面乳": {
     "清潔力": {
-      "importance": 0.0028,
+      "importance": 0.002,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "成分溫和度": {
-      "importance": 0.0013,
+      "importance": 0.0009,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "起泡力": {
-      "importance": 0.0029,
+      "importance": 0.002,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "膚質適配性": {
-      "importance": 0.0013,
+      "importance": 0.0009,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "保濕度": {
-      "importance": 0.003,
+      "importance": 0.0021,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "去角質": {
     "成分溫和度": {
-      "importance": 0.0018,
+      "importance": 0.0013,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "粉刺毛孔淨化度": {
-      "importance": 0.0006,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "清潔力": {
-      "importance": 0.0022,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "膚質適配性": {
       "importance": 0.0004,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "清潔力": {
+      "importance": 0.0015,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "膚質適配性": {
+      "importance": 0.0003,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
     },
     "保濕度": {
+      "importance": 0.0013,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "去角質機制": {
       "importance": 0.0019,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "去角質機制": {
-      "importance": 0.0027,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "卸妝油": {
     "卸妝力": {
-      "importance": 0.0031,
+      "importance": 0.0022,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "乳化速度": {
-      "importance": 0.0017,
+      "importance": 0.0012,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "毛孔清潔度": {
       "importance": 0.0001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "殘妝溶解力": {
-      "importance": 0.0017,
+      "importance": 0.0012,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "溫和不熏眼": {
-      "importance": 0.0021,
+      "importance": 0.0015,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "致痘風險": {
-      "importance": 0.0013,
+      "importance": 0.0009,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "卸妝膏": {
     "卸妝力": {
-      "importance": 0.003,
+      "importance": 0.0021,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "乳化速度": {
-      "importance": 0.0019,
+      "importance": 0.0013,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "毛孔清潔度": {
-      "importance": 0.0004,
+      "importance": 0.0003,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "殘妝溶解力": {
-      "importance": 0.0024,
+      "importance": 0.0017,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "溫和不熏眼": {
-      "importance": 0.001,
+      "importance": 0.0007,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "致痘風險": {
-      "importance": 0.001,
+      "importance": 0.0007,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "挖勺便利性": {
-      "importance": 0.0005,
+      "importance": 0.0003,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "卸妝水": {
     "卸妝力": {
-      "importance": 0.0026,
+      "importance": 0.0018,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "清爽度": {
-      "importance": 0.001,
+      "importance": 0.0007,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "毛孔清潔度": {
-      "importance": 0.0004,
+      "importance": 0.0003,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "低摩擦度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "溫和不熏眼": {
-      "importance": 0.001,
+      "importance": 0.0007,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "殘妝溶解力": {
       "importance": 0.0001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "致痘風險": {
       "importance": 0.0001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "保濕度": {
-      "importance": 0.0009,
+      "importance": 0.0006,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "眼唇卸妝液": {
     "卸妝力": {
-      "importance": 0.0027,
+      "importance": 0.0019,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "乳化速度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "殘妝溶解力": {
-      "importance": 0.0036,
+      "importance": 0.0025,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "溫和不熏眼": {
-      "importance": 0.0038,
+      "importance": 0.0027,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "低摩擦度": {
       "importance": 0.0001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "卸妝棉": {
     "卸妝力": {
-      "importance": 0.005,
+      "importance": 0.0035,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "殘妝溶解力": {
-      "importance": 0.001,
+      "importance": 0.0007,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "溫和不熏眼": {
-      "importance": 0.001,
+      "importance": 0.0007,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "低摩擦度": {
-      "importance": 0.002,
+      "importance": 0.0014,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "棉片材質親膚度": {
-      "importance": 0.0041,
+      "importance": 0.0029,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "包裝密封設計": {
-      "importance": 0.001,
+      "importance": 0.0007,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "化妝水": {
     "吸收滲透力": {
-      "importance": 0.002,
+      "importance": 0.0014,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "保濕鎖水度": {
-      "importance": 0.0066,
+      "importance": 0.0046,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "清爽度": {
-      "importance": 0.0019,
+      "importance": 0.0013,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "膚況穩定度": {
-      "importance": 0.0019,
+      "importance": 0.0013,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "成分安全性": {
-      "importance": 0.0061,
+      "importance": 0.0043,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "功效顯著度": {
-      "importance": 0.0372,
+      "importance": 0.026,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "乳液": {
     "吸收滲透力": {
-      "importance": 0.0017,
+      "importance": 0.0012,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "保濕鎖水度": {
-      "importance": 0.0051,
+      "importance": 0.0036,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "清爽度": {
-      "importance": 0.0022,
+      "importance": 0.0015,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "膚況穩定度": {
-      "importance": 0.0014,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "致痘風險": {
       "importance": 0.001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "致痘風險": {
+      "importance": 0.0007,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
     },
     "成分安全性": {
-      "importance": 0.0005,
+      "importance": 0.0003,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "功效顯著度": {
-      "importance": 0.0066,
+      "importance": 0.0046,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "面霜": {
     "吸收滲透力": {
-      "importance": 0.0228,
+      "importance": 0.016,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "保濕鎖水度": {
-      "importance": 0.0338,
+      "importance": 0.0237,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "清爽度": {
-      "importance": 0.0247,
+      "importance": 0.0173,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "膚況穩定度": {
-      "importance": 0.0288,
+      "importance": 0.0202,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "致痘風險": {
-      "importance": 0.0304,
+      "importance": 0.0213,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "成分配方": {
-      "importance": 0.0122,
+      "importance": 0.0085,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "功效顯著度": {
-      "importance": 0.0365,
+      "importance": 0.0255,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "修復改善": {
-      "importance": 0.0083,
+      "importance": 0.0058,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "精華液": {
     "吸收滲透力": {
-      "importance": 0.0202,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "清爽度": {
-      "importance": 0.0136,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "膚況穩定度": {
-      "importance": 0.0267,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "致痘風險": {
       "importance": 0.0141,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "清爽度": {
+      "importance": 0.0095,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "膚況穩定度": {
+      "importance": 0.0187,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "致痘風險": {
+      "importance": 0.0099,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
     },
     "成分配方": {
-      "importance": 0.01,
+      "importance": 0.007,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "功效顯著度": {
-      "importance": 0.0391,
+      "importance": 0.0274,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "修復改善": {
-      "importance": 0.0115,
+      "importance": 0.008,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "眼霜": {
     "吸收滲透力": {
-      "importance": 0.0046,
+      "importance": 0.0032,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "保濕鎖水度": {
-      "importance": 0.0068,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "撫紋抗皺效能": {
-      "importance": 0.0058,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "修復改善": {
       "importance": 0.0048,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
-    "成分安全性": {
-      "importance": 0.0051,
+    "撫紋抗皺效能": {
+      "importance": 0.0041,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "修復改善": {
+      "importance": 0.0034,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "成分安全性": {
+      "importance": 0.0036,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "面膜": {
     "面膜材質": {
+      "importance": 0.0066,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "服貼度": {
+      "importance": 0.0076,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "功效顯著度": {
+      "importance": 0.0146,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "吸收滲透力": {
+      "importance": 0.0057,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "修復改善": {
       "importance": 0.0095,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "服貼度": {
-      "importance": 0.0108,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "功效顯著度": {
-      "importance": 0.0208,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "吸收滲透力": {
-      "importance": 0.0082,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "修復改善": {
-      "importance": 0.0136,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "成分配方": {
-      "importance": 0.0046,
+      "importance": 0.0032,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "成分安全性": {
-      "importance": 0.0059,
+      "importance": 0.0041,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "粉底刷": {
     "刷痕殘留度": {
-      "importance": 0.0073,
+      "importance": 0.0051,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "吃粉程度": {
+      "importance": 0.0029,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "釋粉力": {
       "importance": 0.0041,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "釋粉力": {
-      "importance": 0.0058,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "刷毛彈性": {
-      "importance": 0.0013,
+      "importance": 0.0009,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "刷毛密度": {
-      "importance": 0.001,
+      "importance": 0.0007,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "上妝順手度": {
-      "importance": 0.0121,
+      "importance": 0.0085,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "耐用度": {
-      "importance": 0.0055,
+      "importance": 0.0038,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "毛質觸感": {
-      "importance": 0.0065,
+      "importance": 0.0045,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "腮紅刷": {
     "刷痕殘留度": {
-      "importance": 0.0003,
+      "importance": 0.0002,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "吃粉程度": {
-      "importance": 0.0019,
+      "importance": 0.0013,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "釋粉力": {
-      "importance": 0.0009,
+      "importance": 0.0006,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "刷毛彈性": {
-      "importance": 0.0127,
+      "importance": 0.0089,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "刷毛密度": {
-      "importance": 0.0041,
+      "importance": 0.0029,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "上妝順手度": {
-      "importance": 0.0118,
+      "importance": 0.0083,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "耐用度": {
-      "importance": 0.0125,
+      "importance": 0.0087,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "毛質觸感": {
-      "importance": 0.0073,
+      "importance": 0.0051,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "暈染均勻度": {
-      "importance": 0.0079,
+      "importance": 0.0055,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "打亮修容刷": {
@@ -1400,173 +1400,173 @@
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "吃粉程度": {
-      "importance": 0.0015,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "釋粉力": {
-      "importance": 0.0025,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "刷毛彈性": {
       "importance": 0.001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "釋粉力": {
+      "importance": 0.0017,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "刷毛彈性": {
+      "importance": 0.0007,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
     },
     "刷毛密度": {
-      "importance": 0.0015,
+      "importance": 0.001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "上妝順手度": {
-      "importance": 0.0097,
+      "importance": 0.0068,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "耐用度": {
-      "importance": 0.002,
+      "importance": 0.0014,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "毛質觸感": {
-      "importance": 0.0089,
+      "importance": 0.0062,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "暈染均勻度": {
-      "importance": 0.0125,
+      "importance": 0.0087,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "顯色度": {
-      "importance": 0.0005,
+      "importance": 0.0003,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "海綿粉撲": {
     "材質回彈力": {
-      "importance": 0.0013,
+      "importance": 0.0009,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "材質柔軟度": {
-      "importance": 0.008,
+      "importance": 0.0056,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "吃粉程度": {
-      "importance": 0.0105,
+      "importance": 0.0073,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "釋粉力": {
-      "importance": 0.0003,
+      "importance": 0.0002,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "孔隙密度": {
-      "importance": 0.0032,
+      "importance": 0.0022,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "服貼度": {
-      "importance": 0.0092,
+      "importance": 0.0064,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "親水性": {
-      "importance": 0.0017,
+      "importance": 0.0012,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "耐用度": {
-      "importance": 0.0061,
+      "importance": 0.0043,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "眼影刷": {
     "刷痕殘留度": {
+      "importance": 0.0002,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "吃粉程度": {
+      "importance": 0.0063,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-09-17 17:05:22"
+    },
+    "釋粉力": {
       "importance": 0.0003,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "吃粉程度": {
-      "importance": 0.009,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
-    },
-    "釋粉力": {
-      "importance": 0.0005,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "刷毛彈性": {
-      "importance": 0.001,
+      "importance": 0.0007,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "刷毛密度": {
-      "importance": 0.0008,
+      "importance": 0.0006,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "上妝順手度": {
-      "importance": 0.004,
+      "importance": 0.0028,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "耐用度": {
-      "importance": 0.0073,
+      "importance": 0.0051,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "毛質觸感": {
-      "importance": 0.006,
+      "importance": 0.0042,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "暈染均勻度": {
-      "importance": 0.0127,
+      "importance": 0.0089,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "顯色度": {
-      "importance": 0.0068,
+      "importance": 0.0048,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "眼線刷": {
@@ -1574,61 +1574,61 @@
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "吃粉程度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "釋粉力": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "刷毛彈性": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "刷毛密度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "上妝順手度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "耐用度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "毛質觸感": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "暈染均勻度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "顯色度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "睫毛夾": {
@@ -1636,31 +1636,31 @@
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "夾翹持久力": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "膠墊彈力": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "施力手感設計": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "死角兼顧度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "假睫毛": {
@@ -1668,37 +1668,37 @@
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "造型仿真度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "睫毛梗部設計": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "牢固力": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "上手操作便利性": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "重複使用率": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "唇刷": {
@@ -1706,61 +1706,61 @@
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "吃粉程度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "釋粉力": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "刷毛彈性": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "刷毛密度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "上妝順手度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "耐用度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "毛質觸感": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "暈染均勻度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "顯色度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "香水": {
@@ -1768,49 +1768,49 @@
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "持香度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "香味層次銜接流暢度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "原料品質": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "擴散度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "場景百搭度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "噴頭瓶身設計": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "低酒精/無刺鼻感": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "淡香水": {
@@ -1818,49 +1818,49 @@
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "持香度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "香味層次銜接流暢度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "原料品質": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "擴散度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "場景百搭度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "噴頭瓶身設計": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "低酒精/無刺鼻感": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "香精": {
@@ -1868,49 +1868,49 @@
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "持香度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "香味層次銜接流暢度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "原料品質": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "擴散度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "場景百搭度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "噴頭瓶身設計": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "低酒精/無刺鼻感": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   },
   "淡香精": {
@@ -1918,49 +1918,49 @@
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "持香度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "香味層次銜接流暢度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "原料品質": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "擴散度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "場景百搭度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "噴頭瓶身設計": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     },
     "低酒精/無刺鼻感": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-14 21:35:03"
+      "last_updated": "2026-09-17 17:05:22"
     }
   }
 }

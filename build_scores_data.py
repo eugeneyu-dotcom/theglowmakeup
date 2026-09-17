@@ -184,6 +184,24 @@ def annotation_allows_testimonial(ann_store, brand, item_name, url):
     return a.get("product_match") == "match" and not a.get("is_ad")
 
 
+def annotation_rejects_testimonial(ann_store, brand, item_name, url):
+    """這則評論是否「已被標記為不該當心得」（業配或商品不符）。
+
+    跟 annotation_allows_testimonial() 的差別是對「沒有標記」的處理：
+    那邊是白名單（沒標記就不准），用在 Threads/Google——那批沒有 item_id，
+    只能靠關鍵字比對，誤判率高，所以必須逐則確認過才收。
+    這邊是黑名單（沒標記就放行），用在已路由的小紅書——那批的商品歸屬是可信的，
+    只需要把已知的業配／不符擋掉，不該因為還沒標記就把卡片整批清空。
+    """
+    bucket = ann_store.get(f"{brand}||{item_name}")
+    if not bucket:
+        return False
+    a = bucket.get((url or "").strip())
+    if not a:
+        return False
+    return a.get("is_ad", False) or a.get("product_match") == "mismatch"
+
+
 # Google 搜尋摘要的殘留雜訊：Dcard 的圖片佔位符 megapx、摘要被截斷的尾巴「...」、
 # 以及開頭重複貼上的標題片段。這些是抓取格式造成的，不是網友真的寫的字。
 # megapx 是 Dcard 的圖片佔位符；「為你推薦」「延伸閱讀」等是 Google/站方的介面字，
@@ -351,7 +369,14 @@ def main():
         if e["composite"] is None:
             continue
         iid = item_ids.get((e["brand"], e["name"]))
-        pool = list(by_item_id.get(iid, [])) if iid else []
+        # 已路由（小紅書）的評論本來直接進池，完全沒過業配檢核——手動存檔時代還好，
+        # 改成自動抓取之後，品牌行銷稿會直接被印成「真實網友心得」（實際發生過：
+        # NARS 4色眼彩盤的高龍島業配文上了卡片）。這裡補上檢核，但只排除「有標記
+        # 且被判為業配／商品不符」的，沒標記的維持原樣——否則尚未標記過的品項
+        # （標記檔目前只涵蓋一部分）會整批失去心得卡片。
+        pool = [r for r in by_item_id.get(iid, [])
+                if not annotation_rejects_testimonial(ann_store, e["brand"], e["name"],
+                                                      r.get("url"))] if iid else []
         if iid:
             # routed_reviews.json 目前同一則貼文有多列重複（同 url），這裡順手去重，
             # 免得統計數字把重複列也算成不同評論
