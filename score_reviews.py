@@ -72,6 +72,16 @@ def _product_key(brand, item_name):
 
 MAX_REVIEWS_PER_PRODUCT = 30
 MIN_VARIANT_REVIEWS = 3    # 子款至少需幾則評論才獨立計分
+
+# 最低樣本門檻（2026-09-22 新增）。沒有這道門檻時，業配與商品不符被排除後，剩下的
+# 往往是「短而正向」的隨手好評，寫長篇、講具體缺點的使用者反而拉低分數——實測遮瑕膏
+# 子分類因此排名整個倒過來：有效評論 2 則的品項拿 4.6，20 則的只有 3.7。
+MIN_INDICATOR_MENTIONS = 2   # 單一指標至少幾則提及才出分（設 3 會把只被講 2 次的
+                             # 負評指標整個丟掉，反而推高分數——實測 YSL 遮瑕因此從 4.4 變 4.8）
+MIN_COMPOSITE_REVIEWS = 5    # 綜合分至少需幾則有效評論（match、非業配、且有標到指標）
+# 為什麼是 5 而不是更高：小紅書有 23% 是影片、50% 本文只有 hashtag，實測 121 則只有
+# 33 則有文字可讀（27%）。門檻訂太高會因為這個資料天花板把正常品項全部打掉，
+# 訂 5 能擋掉 1-4 則撐起分數的失真（雅詩蘭黛遮瑕曾用 1 則算出 3.8、蘭蔻用 2 則算 3.9）。
 IMAGE_REVIEW_LIKES_BOOST = 15  # 圖上評測型貼文排序加分（非強制入榜，讚數太低仍可能被擠出）
 
 CORE_TOP_N = 3
@@ -262,8 +272,12 @@ def _record_review_annotations(store, brand, item_name, reviews, annotations):
 
 
 def _score_annotations_to_results(annotations, target_indicators, reviews):
-    """標記列表 → (indicator_results, excluded_ad, excluded_mismatch, per_indicator_entries)。"""
-    excluded_ad = excluded_mismatch = 0
+    """標記列表 → (indicator_results, excluded_ad, excluded_mismatch, per_indicator_entries, valid_reviews)。
+
+    valid_reviews：通過業配／商品不符篩選、且至少標到一個有效指標的評論則數，
+    給綜合分的最低樣本門檻用。
+    """
+    excluded_ad = excluded_mismatch = valid_reviews = 0
     per_indicator_entries = {ind: [] for ind in target_indicators}
     per_indicator_mentions = {ind: 0 for ind in target_indicators}
 
@@ -281,6 +295,7 @@ def _score_annotations_to_results(annotations, target_indicators, reviews):
         credibility = ann.get("credibility", "mid")
         if match == "uncertain":
             credibility = CREDIBILITY_DOWNGRADE.get(credibility, "low")
+        counted = False
         for ind_entry in ann.get("indicators", []):
             indicator = ind_entry.get("indicator")
             sentiment = ind_entry.get("sentiment")
@@ -291,6 +306,9 @@ def _score_annotations_to_results(annotations, target_indicators, reviews):
             entry_credibility = "mid" if (sentiment == "---" and credibility == "low") else credibility
             per_indicator_entries[indicator].append((sentiment, entry_credibility))
             per_indicator_mentions[indicator] += 1
+            counted = True
+        if counted:
+            valid_reviews += 1
 
     results = []
     for indicator in target_indicators:
@@ -299,6 +317,12 @@ def _score_annotations_to_results(annotations, target_indicators, reviews):
         if mentions == 0:
             results.append({"Indicator": indicator, "Score": "", "Mentions": 0,
                             "Polarization": False, "Reason": "資料不足，評論中未提及此指標"})
+            continue
+        if mentions < MIN_INDICATOR_MENTIONS:
+            # 提及數太少的指標不出分：1-2 則就算出來也只是雜訊，還會被加權進綜合分
+            results.append({"Indicator": indicator, "Score": "", "Mentions": mentions,
+                            "Polarization": False,
+                            "Reason": f"樣本不足（僅 {mentions} 則提及，需 {MIN_INDICATOR_MENTIONS} 則）"})
             continue
         score, polarized, count = score_indicator(entries)
         reason = ""
@@ -311,7 +335,7 @@ def _score_annotations_to_results(annotations, target_indicators, reviews):
         results.append({"Indicator": indicator, "Score": score, "Mentions": mentions,
                         "Polarization": polarized, "Reason": reason})
 
-    return results, excluded_ad, excluded_mismatch, per_indicator_entries
+    return results, excluded_ad, excluded_mismatch, per_indicator_entries, valid_reviews
 
 
 def compute_product_scores_with_variants(brand, item_name, target_indicators, reviews, annotations=None):
@@ -332,7 +356,7 @@ def compute_product_scores_with_variants(brand, item_name, target_indicators, re
     if not all_annotations or not isinstance(all_annotations, list):
         empty = [{"Indicator": ind, "Score": "", "Mentions": 0, "Polarization": False,
                   "Reason": "Claude 回傳為空或格式錯誤"} for ind in target_indicators]
-        return {"": (empty, 0, 0, {ind: [] for ind in target_indicators})}
+        return {"": (empty, 0, 0, {ind: [] for ind in target_indicators}, 0)}
 
     # 依 sub_variant 分組
     variant_anns = {}
@@ -360,10 +384,10 @@ def compute_product_scores_with_variants(brand, item_name, target_indicators, re
 
     results = {}
     for sv, anns in scored_variants.items():
-        ind_results, ex_ad, ex_mis, per_ind = _score_annotations_to_results(
+        ind_results, ex_ad, ex_mis, per_ind, n_valid = _score_annotations_to_results(
             anns, target_indicators, reviews
         )
-        results[sv] = (ind_results, ex_ad, ex_mis, per_ind)
+        results[sv] = (ind_results, ex_ad, ex_mis, per_ind, n_valid)
     return results
 
 
@@ -567,7 +591,7 @@ def main():
                     "brand": brand, "item_name": item_name, "timestamp": timestamp,
                     "variants": {"": ([{"Indicator": ind, "Score": "", "Mentions": 0,
                                         "Polarization": False, "Reason": "尚未有足夠的爬蟲評論資料"}
-                                       for ind in target_indicators], 0, 0, {})},
+                                       for ind in target_indicators], 0, 0, {}, 0)},
                 })
                 continue
 
@@ -628,7 +652,7 @@ def main():
 
             # 累計子分類 EMA 統計（所有子款合計，因為 EMA 是子分類層級的）
             total_ex_ad = total_ex_mis = 0
-            for sv, (ind_results, ex_ad, ex_mis, per_ind) in variant_results.items():
+            for sv, (ind_results, ex_ad, ex_mis, per_ind, n_valid) in variant_results.items():
                 total_ex_ad += ex_ad
                 total_ex_mis += ex_mis
                 for indicator, entries in per_ind.items():
@@ -661,7 +685,7 @@ def main():
             total_ex_m = product.get("total_ex_mis", 0)
             has_variants = any(sv != "" for sv in product["variants"])
 
-            for sv, (indicator_results, ex_ad, ex_mis, _) in product["variants"].items():
+            for sv, (indicator_results, ex_ad, ex_mis, _, n_valid) in product["variants"].items():
                 valid_count = len([ann for ann in indicator_results if ann.get("Score") != ""])
                 variant_review_count = total_r  # approximate
                 sample_warning = ""
@@ -693,7 +717,23 @@ def main():
                     })
 
                 valid_scores = [r for r in indicator_results if isinstance(r.get("Score"), (int, float))]
-                if valid_scores:
+                # 沒有任何指標過門檻時也要留下綜合評分列，寫明「資料不足」。
+                # 否則該品項在 CSV 裡連一列都沒有，前台直接消失卻查不到原因
+                # （蘭蔻遮瑕、雅詩蘭黛遮瑕就是這樣憑空不見的）。
+                if not valid_scores or n_valid < MIN_COMPOSITE_REVIEWS:
+                    # 有效評論太少就不出綜合分。排除業配與商品不符之後剩下的常是短而正向的
+                    # 隨手好評，樣本一少就會把品項推到不合理的高分（見檔頭常數說明）。
+                    results.append({
+                        "Brand": brand, "Items": item_name, "Variant": sv,
+                        "Subcategories": subcat, "Indicator": "綜合評分",
+                        "Score": "", "Mentions": "", "CoreIndicator": "", "Polarization": "",
+                        "Reason": (f"有效評論僅 {n_valid} 則（需 {MIN_COMPOSITE_REVIEWS} 則），"
+                                   if n_valid < MIN_COMPOSITE_REVIEWS
+                                   else "無指標達最低提及門檻，")
+                                  + f"排除 {ex_ad} 則業配/疑似業配、{ex_mis} 則商品不符",
+                        "Evaluated_At": timestamp,
+                    })
+                elif valid_scores:
                     # SKILL Step 4.4 雙軌加權：軌道一固定核心指標 ×1.3（跨品牌比較基準）；
                     # 軌道二依本品項評論實際提及次數，前兩名再疊乘 ×1.2，反映這款商品網友
                     # 真正在乎的重點，兩軌可疊加（最高 ×1.56）。
