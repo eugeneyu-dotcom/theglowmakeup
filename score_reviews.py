@@ -79,6 +79,16 @@ MIN_VARIANT_REVIEWS = 3    # 子款至少需幾則評論才獨立計分
 MIN_INDICATOR_MENTIONS = 2   # 單一指標至少幾則提及才出分（設 3 會把只被講 2 次的
                              # 負評指標整個丟掉，反而推高分數——實測 YSL 遮瑕因此從 4.4 變 4.8）
 MIN_COMPOSITE_REVIEWS = 5    # 綜合分至少需幾則有效評論（match、非業配、且有標到指標）
+
+# 部分子分類要更高的門檻。唇膏是實測出來的特例：這個品類幾乎沒有「產品爛」的評論，
+# 負評幾乎都是「色號不適合我」這種主觀問題（深唇顯唇紋、暗黃皮不推薦、黏杯）。
+# 評論越多越容易撈到這類負評，導致資料少的品項系統性虛高——實測 9 則的 M.A.C 拿 4.7、
+# 24 則且有具體缺點的 Bobbi Brown 只有 3.9。拉高門檻讓只有紮實樣本的品項才出分。
+MIN_COMPOSITE_REVIEWS_BY_SUBCAT = {"唇膏": 15}
+
+
+def min_composite_reviews(subcat):
+    return MIN_COMPOSITE_REVIEWS_BY_SUBCAT.get(subcat, MIN_COMPOSITE_REVIEWS)
 # 為什麼是 5 而不是更高：小紅書有 23% 是影片、50% 本文只有 hashtag，實測 121 則只有
 # 33 則有文字可讀（27%）。門檻訂太高會因為這個資料天花板把正常品項全部打掉，
 # 訂 5 能擋掉 1-4 則撐起分數的失真（雅詩蘭黛遮瑕曾用 1 則算出 3.8、蘭蔻用 2 則算 3.9）。
@@ -720,15 +730,16 @@ def main():
                 # 沒有任何指標過門檻時也要留下綜合評分列，寫明「資料不足」。
                 # 否則該品項在 CSV 裡連一列都沒有，前台直接消失卻查不到原因
                 # （蘭蔻遮瑕、雅詩蘭黛遮瑕就是這樣憑空不見的）。
-                if not valid_scores or n_valid < MIN_COMPOSITE_REVIEWS:
+                min_needed = min_composite_reviews(subcat)
+                if not valid_scores or n_valid < min_needed:
                     # 有效評論太少就不出綜合分。排除業配與商品不符之後剩下的常是短而正向的
                     # 隨手好評，樣本一少就會把品項推到不合理的高分（見檔頭常數說明）。
                     results.append({
                         "Brand": brand, "Items": item_name, "Variant": sv,
                         "Subcategories": subcat, "Indicator": "綜合評分",
                         "Score": "", "Mentions": "", "CoreIndicator": "", "Polarization": "",
-                        "Reason": (f"有效評論僅 {n_valid} 則（需 {MIN_COMPOSITE_REVIEWS} 則），"
-                                   if n_valid < MIN_COMPOSITE_REVIEWS
+                        "Reason": (f"有效評論僅 {n_valid} 則（需 {min_needed} 則），"
+                                   if n_valid < min_needed
                                    else "無指標達最低提及門檻，")
                                   + f"排除 {ex_ad} 則業配/疑似業配、{ex_mis} 則商品不符",
                         "Evaluated_At": timestamp,
