@@ -125,10 +125,27 @@ description: "判斷並實作 Glow Up 保養專欄文章（articles.json）的�
 
 1. 用 Python 檢查 HTML 標籤配對（`<a>`/`</a>`、`<p>`/`</p>`、`<ul>`/`</ul>` 等 open/close
    數量相等），確認沒有因為字串替換破壞既有結構。
-2. Bump `articles.json` 的 cache-busting 版本號（`script.js` 裡
-   `fetch('articles.json?v=NN')` 的 `NN`，這個專案的 `articles.json`／`site-data.json`／
-   `scores-data.json`／`script.js` 各自有獨立的版本號軌道，只需要動 `articles.json` 對應
-   的那個）。
+2. Bump cache-busting 版本號。**這一步有兩個地方要一起改，只改一邊等於沒改**：
+
+   a. `script.js` 裡的 `fetch('articles.json?v=NN')`；
+   b. **專案根目錄所有 HTML 檔的 `<script src="script.js?v=NN">`**（`index.html`、
+      `article.html`、`item-detail.html`、`detail.html`、`news.html`、
+      `skincare-blog.html`、`review-base.html`、`review-landing.html`、
+      `board-landing.html`、`privacy-policy.html`，共 10 個，用
+      `grep -rl "script.js?v=" *.html` 確認當下清單）。
+
+   兩個號碼**設成同一個數字**，日後一眼就看得出有沒有漏。
+
+   > ⚠️ 為什麼兩邊都要改（2026-09-23 實際踩到）：`articles.json?v=NN` 是寫在
+   > `script.js` **內部**的。如果只改它、沒動 HTML 裡的 `script.js?v=`，那個 URL 就沒變，
+   > 瀏覽器會直接沿用**快取中的舊 `script.js`**——舊檔裡指的還是舊版 `articles.json`，
+   > 於是文章內容看起來完全沒更新。這個 bug 當時已經存在一段時間（HTML 停在 `v=73`，
+   > 中間好幾次改稿都只動了 `script.js` 內部的號碼），症狀是本機預覽與正式站的**回訪**
+   > 讀者都看不到新內容，但用新分頁／無痕視窗開又是對的，很容易誤判成「我沒改到」。
+   > 驗證方式：`curl -s "<頁面網址>" | grep -o "script.js?v=[0-9]*"`，
+   > 再對照 `grep -n "articles.json?v=" script.js`，兩個數字必須一致。
+
+   `site-data.json`／`scores-data.json` 有各自獨立的版本號軌道，改文章時不用動。
 3. 開瀏覽器實際打開改過的文章頁，確認連結有正確渲染、可以點擊、導到正確頁面。
 4. **commit + push 前，把這批（含新文章）的標題列出來給使用者看，等明確同意才繼續**
    （2026-08 使用者定案：標題要每篇客製化找獨特切角，不套固定公式——見
