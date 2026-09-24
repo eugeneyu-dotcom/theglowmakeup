@@ -13,12 +13,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Glow Makeup | 商品詳情</title>
     <link rel="canonical" id="canonical-link" href="https://www.theglowmakeup.org/board-landing.html">
+    <meta property="og:url" id="og-url" content="https://www.theglowmakeup.org/">
+    <script id="canonical-early">/* 在 HTML 解析當下就把 canonical 指向自己，不等 JSON 載入；避免 Googlebot 讀到指向列表頁的錯誤 canonical */
+    (function(){try{var v=new URLSearchParams(location.search).get('item');if(v){var u='https://www.theglowmakeup.org/item-detail.html?item='+encodeURIComponent(v)+'&from=board';document.getElementById("canonical-link").href=u;var o=document.getElementById("og-url");if(o)o.setAttribute("content",u);}}catch(e){}})();</script>
     <meta name="description" id="meta-description" content="Glow Makeup 真實社群美妝評分與心得彙整。">
     <meta property="og:title" id="og-title" content="Glow Makeup | 商品詳情">
     <meta property="og:description" id="og-description" content="Glow Makeup 真實社群美妝評分與心得彙整。">
     <meta property="og:type" content="product">
     <meta property="og:image" id="og-image" content="">
     <script type="application/ld+json" id="schema-jsonld"></script>
+    <script type="application/ld+json" id="breadcrumb-jsonld"></script>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%84%3C/text%3E%3C/svg%3E">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css?v=48">
@@ -465,6 +469,7 @@
                 document.getElementById('og-description')?.setAttribute('content', seoDesc);
                 document.getElementById('og-image')?.setAttribute('content', targetItem.image || targetItem.img || '');
                 document.getElementById('canonical-link')?.setAttribute('href', `https://www.theglowmakeup.org/item-detail.html?item=${encodeURIComponent(targetItem.name)}&from=board`);
+                (function(){var el=document.getElementById('breadcrumb-jsonld');if(!el)return;var L=[['首頁','https://www.theglowmakeup.org/'],['熱門美妝看板','https://www.theglowmakeup.org/board-landing.html']].concat(belongingSubcategoryName?[[belongingSubcategoryName,'https://www.theglowmakeup.org/detail.html?sub='+encodeURIComponent(belongingSubcategoryName)+'&from=board']]:[]).concat([[targetItem.name,'https://www.theglowmakeup.org/item-detail.html?item='+encodeURIComponent(targetItem.name)+'&from=board']]);el.textContent=JSON.stringify({'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:L.map(function(x,i){return {'@type':'ListItem',position:i+1,name:x[0],item:x[1]};})});})();
 
                 // 真實網友心得（多篇，取代原本評比對照表最後一欄的做法）
                 renderTestimonials(targetItem);
