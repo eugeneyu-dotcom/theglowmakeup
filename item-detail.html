@@ -21,7 +21,7 @@
     <script type="application/ld+json" id="schema-jsonld"></script>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%84%3C/text%3E%3C/svg%3E">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles.css?v=46">
+    <link rel="stylesheet" href="styles.css?v=48">
     <style>
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
@@ -150,6 +150,8 @@
                     <div>
                         <h4 class="text-xs font-black text-gray-400 uppercase tracking-wider mb-3">完整成分列表 / Full Ingredient List</h4>
                         <div id="ingredients-list" class="flex flex-wrap gap-2"></div>
+                        <button id="ingredients-toggle" type="button" onclick="toggleIngredients()"
+                                class="hidden md:!hidden mt-4 w-full py-2.5 text-xs font-black text-[#f2a7b5] border border-[#f2a7b5]/30 rounded-full hover:bg-[#f2a7b5]/5 transition-colors"></button>
                     </div>
                 </div>
 
@@ -313,6 +315,30 @@
                 <a href="https://en.wikipedia.org/w/index.php?title=Special:Search&search=${encodeURIComponent(ing)}" target="_blank" rel="noopener"
                    class="px-3 py-1 bg-[#fff9f5] border border-gray-100 text-gray-600 text-xs font-bold rounded-full hover:border-[#f2a7b5] hover:text-[#f2a7b5] hover:bg-[#f2a7b5]/5 transition-colors">${ing}</a>
             `).join('');
+
+            // 手機版成分多時預設收合：完整 INCI 表動輒 50~70 項，全展開會把頁面拉得
+            // 非常長，讀者要滑很久才能看到後面的區塊。桌機空間夠，維持全展開。
+            const listEl = document.getElementById('ingredients-list');
+            const toggleEl = document.getElementById('ingredients-toggle');
+            if (entry.ingredients.length > INGREDIENTS_COLLAPSE_MIN) {
+                listEl.classList.add('ing-collapsed');
+                toggleEl.textContent = `展開完整成分（${entry.ingredients.length} 項）`;
+                toggleEl.classList.remove('hidden');
+            } else {
+                listEl.classList.remove('ing-collapsed');
+                toggleEl.classList.add('hidden');
+            }
+        }
+
+        const INGREDIENTS_COLLAPSE_MIN = 20;
+
+        function toggleIngredients() {
+            const listEl = document.getElementById('ingredients-list');
+            const toggleEl = document.getElementById('ingredients-toggle');
+            const collapsed = listEl.classList.toggle('ing-collapsed');
+            const n = listEl.children.length;
+            toggleEl.textContent = collapsed ? `展開完整成分（${n} 項）` : '收合成分列表';
+            if (collapsed) listEl.scrollIntoView({ block: 'nearest' });
         }
 
         // 真實評分與心得資料（來自 AI_Scores.csv → scores-data.json）

@@ -620,3 +620,47 @@ body.mobile-nav-open {
         width: calc(20% - 26px);
     }
 }
+
+/* 完整成分列表：手機版改為連續文字排列
+   成分名稱常常很長（例如 Bis-Behenyl/Isostearyl/Phytosteryl Dimer Dilinoleyl Dimer
+   Dilinoleate），在藥丸標籤裡會換成兩三行、每顆標籤都被撐高，整段列表在手機上長到
+   難以捲動。改成 INCI 標示慣用的頓號連續排列，高度大幅縮短，連結與可點擊性不變。
+   桌機維持原本的藥丸樣式不受影響。 */
+@media (max-width: 767px) {
+    #ingredients-list {
+        display: block;
+        line-height: 2;
+        word-break: break-word;
+    }
+    #ingredients-list > a {
+        display: inline;
+        padding: 0;
+        border: 0;
+        background: none;
+        border-radius: 0;
+        color: #6b7280;
+    }
+    #ingredients-list > a:not(:last-child)::after {
+        content: "、";
+        color: #c9c9c9;
+    }
+    #ingredients-list > a:hover {
+        background: none;
+        color: #f2a7b5;
+    }
+}
+
+/* 成分列表收合（僅手機版；桌機空間夠，一律全展開） */
+@media (max-width: 767px) {
+    #ingredients-list.ing-collapsed {
+        max-height: 11em;
+        overflow: hidden;
+        -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
+        mask-image: linear-gradient(to bottom, #000 70%, transparent 100%);
+    }
+    #ingredients-toggle { display: block; }
+}
+@media (min-width: 768px) {
+    #ingredients-list.ing-collapsed { max-height: none; overflow: visible; }
+    #ingredients-toggle { display: none !important; }
+}
