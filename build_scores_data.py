@@ -238,9 +238,10 @@ def _clean_likes(v):
     return max(0, v)
 
 
-def pick_testimonials(reviews, n=3):
+def pick_testimonials(reviews, n=3, keep_non_xhs=2):
     """從一個品項的 routed 評論裡挑最多 n 則有代表性的評論（供產品頁 1~3 則展示，增加可信度）：
-    實質文字足夠、非純標籤、優先小紅書、讚數高；依內容前綴去重避免同則重複貼文洗版。"""
+    實質文字足夠、非純標籤、優先小紅書、讚數高；依內容前綴去重避免同則重複貼文洗版。
+    另外保留最多 keep_non_xhs 則 Threads/Google 心得（見下方註解）。"""
     def ok(r):
         c = (r.get("content") or "").strip()
         if len(c) < 30 or len(c) > 400:
@@ -267,7 +268,9 @@ def pick_testimonials(reviews, n=3):
     ranked = sorted(cands, key=rank, reverse=True)
     out = []
     seen_prefix = set()
-    for r in ranked:
+
+    def take(r):
+        """通過前綴去重就轉成卡片並加進 out，回傳有沒有真的加入。"""
         text = (r.get("content") or "").strip().replace("\n", " ")
         plat_raw = r.get("platform") or ""
         if "小紅書" in plat_raw:
@@ -276,7 +279,7 @@ def pick_testimonials(reviews, n=3):
             text = clean_google_text(text)
         prefix = text[:40]
         if prefix in seen_prefix:
-            continue
+            return False
         seen_prefix.add(prefix)
         if len(text) > 120:
             text = text[:118] + "…"
@@ -286,8 +289,28 @@ def pick_testimonials(reviews, n=3):
             "likes": _clean_likes(r.get("likes")),
             "text": text,
         })
+        return True
+
+    for r in ranked:
         if len(out) >= n:
             break
+        take(r)
+
+    # 非小紅書（Threads/Google）的候選即使排在 n 名之外也保留。
+    # rank() 把 is_xhs 當第一排序鍵，所以只要某品項湊得出 n 則小紅書，
+    # Threads/Google 就永遠擠不進來——2026-09-17 修好小紅書路由後，
+    # 6 個唇部品項的 8 則 Threads/Google 卡片就是這樣靜默消失的。
+    # 這批候選在 main() 已經過 annotation_allows_testimonial 明確放行
+    # （必須被 LLM 標記為 product_match=match 且非業配），數量極少、
+    # 品質有背書，沒有理由因為排序規則被丟掉。
+    n_other = 0
+    for r in ranked:
+        if n_other >= keep_non_xhs:
+            break
+        if "小紅書" in (r.get("platform") or ""):
+            continue
+        if take(r):
+            n_other += 1
     return out
 
 
