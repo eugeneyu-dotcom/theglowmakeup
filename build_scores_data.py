@@ -7,6 +7,9 @@
 """
 import csv, io, json, os, re
 
+# 心得卡文字上限（2026-09-24 由 120 放寬）：來源評論中位數 212 字，120 字會讓 69% 卡片被截斷
+TESTIMONIAL_MAX_CHARS = 300
+
 try:
     import opencc
     _S2T = opencc.OpenCC("s2twp")  # 簡體轉繁體（台灣慣用詞＋用字，例如「唇」不轉成「脣」）
@@ -281,8 +284,10 @@ def pick_testimonials(reviews, n=3, keep_non_xhs=2):
         if prefix in seen_prefix:
             return False
         seen_prefix.add(prefix)
-        if len(text) > 120:
-            text = text[:118] + "…"
+        # 心得卡字數上限。原本 120 字導致 69% 的卡片被截斷（來源評論中位數 212 字），
+        # 放寬到 300 字後約 64% 的評論可完整顯示；前端預設收合、超過門檻才顯示「展開」。
+        if len(text) > TESTIMONIAL_MAX_CHARS:
+            text = text[:TESTIMONIAL_MAX_CHARS - 2] + "…"
         out.append({
             "platform": platform_label(r.get("platform")),
             "author": mask_author(r.get("author")),

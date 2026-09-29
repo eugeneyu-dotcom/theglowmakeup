@@ -33,7 +33,7 @@ let articlesCache = null;
 async function getArticles() {
     if (articlesCache) return articlesCache;
     try {
-        const res = await fetch('articles.json?v=80');
+        const res = await fetch('articles.json?v=87');
         const data = await res.json();
         articlesCache = (data.articles || []).slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
         return articlesCache;
@@ -759,7 +759,7 @@ async function getSiteData() {
 async function getScoresData() {
     if (scoresDataCache) return scoresDataCache;
     try {
-        const response = await fetch('scores-data.json?v=37');
+        const response = await fetch('scores-data.json?v=42');
         scoresDataCache = await response.json();
         return scoresDataCache;
     } catch (err) {

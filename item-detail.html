@@ -195,7 +195,7 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="script.js?v=80"></script>
+    <script src="script.js?v=87"></script>
     <script>
         // Global State & Setup
         window.selectedSkinVal = 'fair';
@@ -349,7 +349,7 @@
         window.SCORES_DATA = {};
         async function loadScoresData() {
             try {
-                const res = await fetch('scores-data.json?v=41');
+                const res = await fetch('scores-data.json?v=42');
                 window.SCORES_DATA = await res.json();
             } catch (e) {
                 console.error('scores-data.json 載入失敗', e);
@@ -389,10 +389,49 @@
                             <span class="text-xs font-bold text-gray-500">@${t.author}</span>
                             ${t.likes ? `<span class="text-[10px] text-gray-400 font-bold ml-auto whitespace-nowrap">👍 ${t.likes.toLocaleString()}</span>` : ''}
                         </div>
-                        <p class="text-sm text-gray-600 leading-relaxed">「${t.text}」</p>
+                        <p class="tm-text text-sm text-gray-600 leading-relaxed" style="display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;">「${t.text}」</p>
+                        <button type="button" class="tm-toggle hidden mt-2 text-xs font-black text-[#f2a7b5] hover:underline">展開全文 ▾</button>
                     </div>
                 `;
             }).join('');
+
+            // 文字放寬到 300 字後預設收合 4 行，只有真的被截到才顯示「展開全文」。
+            // 溢出判斷要等版面與字體就緒才準，而且單次檢查不可靠（字體載入、圖片撐開版面都會改變行高），
+            // 所以用 ResizeObserver 持續重評估；已展開的卡片不再改動按鈕。
+            const evaluateToggle = (p) => {
+                const btn = p.parentElement.querySelector('.tm-toggle');
+                if (!btn || p.dataset.expanded === '1') return;
+                if (p.scrollHeight - p.clientHeight > 2) {
+                    btn.classList.remove('hidden');
+                    if (!btn.dataset.wired) {
+                        btn.dataset.wired = '1';
+                        btn.addEventListener('click', () => {
+                            if (p.dataset.expanded === '1') {
+                                p.dataset.expanded = '0';
+                                p.style.display = '-webkit-box';
+                                p.style.webkitLineClamp = '4';
+                                btn.textContent = '展開全文 ▾';
+                            } else {
+                                p.dataset.expanded = '1';
+                                p.style.webkitLineClamp = '';
+                                p.style.display = 'block';
+                                btn.textContent = '收合 ▴';
+                            }
+                        });
+                    }
+                }
+            };
+            const paras = Array.from(grid.querySelectorAll('.tm-text'));
+            const evaluateAll = () => paras.forEach(evaluateToggle);
+            if (typeof ResizeObserver !== 'undefined') {
+                const ro = new ResizeObserver(evaluateAll);
+                paras.forEach(p => ro.observe(p));
+            }
+            evaluateAll();
+            requestAnimationFrame(() => requestAnimationFrame(evaluateAll));
+            if (document.fonts && document.fonts.ready) document.fonts.ready.then(evaluateAll);
+            window.addEventListener('load', evaluateAll);
+            setTimeout(evaluateAll, 600);
         }
 
         // 依 CLAUDE.md 評分分級：4.5+優秀/4.0-4.5不錯可用/3.5-4普通/3-3.5負面居多/<3幾乎負面，套對應顏色
