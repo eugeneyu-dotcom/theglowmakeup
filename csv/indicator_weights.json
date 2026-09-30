@@ -1,64 +1,64 @@
 {
   "粉底液": {
     "遮瑕力": {
-      "importance": 0.0006,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "importance": 0.143,
+      "raw_importance_last_run": 0.2174,
+      "mentions_last_run": 10,
+      "last_updated": "2026-09-30 15:56:53"
     },
     "保濕度": {
-      "importance": 0.0003,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "importance": 0.1429,
+      "raw_importance_last_run": 0.2174,
+      "mentions_last_run": 10,
+      "last_updated": "2026-09-30 15:56:53"
     },
     "控油力": {
-      "importance": 0.0003,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "importance": 0.0144,
+      "raw_importance_last_run": 0.0217,
+      "mentions_last_run": 1,
+      "last_updated": "2026-09-30 15:56:53"
     },
     "持妝度": {
-      "importance": 0.0008,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "importance": 0.2364,
+      "raw_importance_last_run": 0.3595,
+      "mentions_last_run": 13,
+      "last_updated": "2026-09-30 15:56:53"
     },
     "輕透度": {
-      "importance": 0.0002,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "importance": 0.0429,
+      "raw_importance_last_run": 0.0652,
+      "mentions_last_run": 3,
+      "last_updated": "2026-09-30 15:56:53"
     },
     "厚重度": {
-      "importance": 0.0001,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "importance": 0.0429,
+      "raw_importance_last_run": 0.0652,
+      "mentions_last_run": 3,
+      "last_updated": "2026-09-30 15:56:53"
     },
     "服貼度": {
-      "importance": 0.0006,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "importance": 0.2471,
+      "raw_importance_last_run": 0.3758,
+      "mentions_last_run": 14,
+      "last_updated": "2026-09-30 15:56:53"
     },
     "防水抗汗": {
-      "importance": 0.0005,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
-    },
-    "光澤度": {
       "importance": 0.0001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "last_updated": "2026-09-30 15:56:53"
+    },
+    "光澤度": {
+      "importance": 0.1,
+      "raw_importance_last_run": 0.1522,
+      "mentions_last_run": 7,
+      "last_updated": "2026-09-30 15:56:53"
     },
     "成膜度": {
-      "importance": 0.0002,
+      "importance": 0.0001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "last_updated": "2026-09-30 15:56:53"
     }
   },
   "遮瑕膏": {
