@@ -1363,6 +1363,7 @@ function renderCategories(categories, container, fromContext) {
 // Initial Load
 window.addEventListener('DOMContentLoaded', () => {
     initNav();
+    initSearch();
     initMobileMenuToggle();
     initSlider();
     initRankings();
@@ -1379,3 +1380,141 @@ window.addEventListener('DOMContentLoaded', () => {
         switchBattle('makeup', firstBtn);
     }
 });
+
+/* ===== 站內搜尋 =====
+   搜尋框原本全站 10 個頁面都有，但沒有綁任何程式碼，輸入完全沒反應（安全政策卻已
+   寫明「僅在你的瀏覽器內即時比對站內既有的商品與文章資料」）。這裡補上實作：純前端
+   比對已經載入的 site-data.json 與 articles.json，不送出任何請求。 */
+const SEARCH_MAX_ITEMS = 6;
+const SEARCH_MAX_ARTICLES = 4;
+let searchIndexCache = null;
+
+// 比對用正規化：忽略大小寫、空白與常見分隔符，讓「bobbi brown」「BobbiBrown」都能命中
+function normalizeSearchText(s) {
+    return (s || '').toString().toLowerCase().replace(/[\s\-_.·・／/]/g, '');
+}
+
+async function buildSearchIndex() {
+    if (searchIndexCache) return searchIndexCache;
+    const [siteData, articles] = await Promise.all([getSiteData(), getArticles()]);
+    const items = [];
+    if (siteData && siteData.subcategoryDetails) {
+        Object.entries(siteData.subcategoryDetails).forEach(([subcat, detail]) => {
+            (detail.items || []).forEach(it => {
+                items.push({
+                    type: 'item',
+                    name: it.name, brand: it.brand, subcat,
+                    image: it.image,
+                    url: `item-detail.html?item=${encodeURIComponent(it.name)}&from=board`,
+                    hay: normalizeSearchText(`${it.brand} ${it.name} ${subcat} ${(it.hashtags || []).join(' ')}`),
+                });
+            });
+        });
+    }
+    const arts = (articles || []).map(a => ({
+        type: 'article',
+        name: a.title, brand: a.category || '保養專欄', subcat: a.tag || '',
+        image: a.image,
+        url: `article.html?id=${encodeURIComponent(a.id)}`,
+        hay: normalizeSearchText(`${a.title} ${a.category} ${a.tag} ${(a.concerns || []).join(' ')} ${a.excerpt}`),
+    }));
+    searchIndexCache = { items, articles: arts };
+    return searchIndexCache;
+}
+
+function searchRank(entry, q) {
+    const i = entry.hay.indexOf(q);
+    if (i < 0) return -1;
+    return i === 0 ? 0 : 1;          // 開頭命中優先
+}
+
+function renderSearchResults(panel, q, hits) {
+    if (!q) { panel.classList.remove('is-open'); panel.innerHTML = ''; return; }
+    const { items, articles } = hits;
+    if (!items.length && !articles.length) {
+        panel.innerHTML = `<p class="search-empty">找不到「${q}」相關的商品或文章</p>`;
+        panel.classList.add('is-open');
+        return;
+    }
+    const row = (e) => `
+        <a href="${e.url}" class="search-result" role="option">
+            <img src="${e.image || 'assets/placeholder.png'}" alt="" loading="lazy" onerror="this.style.visibility='hidden'">
+            <span class="search-result-text">
+                <span class="search-result-name">${e.name}</span>
+                <span class="search-result-meta">${[e.brand, e.subcat].filter(Boolean).join(' · ')}</span>
+            </span>
+        </a>`;
+    panel.innerHTML =
+        (items.length ? `<p class="search-group">商品</p>${items.map(row).join('')}` : '') +
+        (articles.length ? `<p class="search-group">文章</p>${articles.map(row).join('')}` : '');
+    panel.classList.add('is-open');
+}
+
+function initSearch() {
+    document.querySelectorAll('.search-container').forEach(container => {
+        const input = container.querySelector('.search-input');
+        if (!input || container.dataset.searchReady) return;
+        container.dataset.searchReady = '1';
+
+        const panel = document.createElement('div');
+        panel.className = 'search-results';
+        panel.setAttribute('role', 'listbox');
+        container.appendChild(panel);
+
+        input.setAttribute('role', 'combobox');
+        input.setAttribute('aria-autocomplete', 'list');
+        input.setAttribute('aria-expanded', 'false');
+
+        let timer = null;
+        let active = -1;
+
+        const rows = () => Array.from(panel.querySelectorAll('.search-result'));
+        const setActive = (n) => {
+            const list = rows();
+            if (!list.length) return;
+            active = (n + list.length) % list.length;
+            list.forEach((el, i) => el.classList.toggle('is-active', i === active));
+            list[active].scrollIntoView({ block: 'nearest' });
+        };
+        const close = () => {
+            panel.classList.remove('is-open');
+            input.setAttribute('aria-expanded', 'false');
+            active = -1;
+        };
+
+        const run = async () => {
+            const q = normalizeSearchText(input.value);
+            if (q.length < 1) { close(); return; }
+            const idx = await buildSearchIndex();
+            const pick = (arr, max) => arr
+                .map(e => ({ e, r: searchRank(e, q) }))
+                .filter(x => x.r >= 0)
+                .sort((a, b) => a.r - b.r)
+                .slice(0, max)
+                .map(x => x.e);
+            active = -1;
+            renderSearchResults(panel, input.value.trim(), {
+                items: pick(idx.items, SEARCH_MAX_ITEMS),
+                articles: pick(idx.articles, SEARCH_MAX_ARTICLES),
+            });
+            input.setAttribute('aria-expanded', panel.classList.contains('is-open') ? 'true' : 'false');
+        };
+
+        input.addEventListener('input', () => {
+            clearTimeout(timer);
+            timer = setTimeout(run, 120);
+        });
+        input.addEventListener('focus', () => { if (input.value.trim()) run(); });
+        input.addEventListener('keydown', (ev) => {
+            if (ev.key === 'Escape') { close(); input.blur(); return; }
+            const list = rows();
+            if (!list.length) return;
+            if (ev.key === 'ArrowDown') { ev.preventDefault(); setActive(active + 1); }
+            else if (ev.key === 'ArrowUp') { ev.preventDefault(); setActive(active - 1); }
+            else if (ev.key === 'Enter' && active >= 0) { ev.preventDefault(); list[active].click(); }
+        });
+        document.addEventListener('click', (ev) => {
+            if (!container.contains(ev.target)) close();
+        });
+    });
+}
