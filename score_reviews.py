@@ -422,6 +422,20 @@ def save_weights_state(state):
 
 def update_core_indicators(subcat, target_indicators, agg_mentions, agg_strong, total_valid_reviews, state):
     subcat_state = state.setdefault(subcat, {})
+
+    # 本輪這個子分類完全沒有標記資料，就不要動它的狀態。
+    # --compute 沒有 --subcat，永遠會重算全部品項；當 score_responses.json 只涵蓋
+    # 部分子分類時，其餘子分類的 agg_mentions 全是 0 → raw_importance = 0 →
+    # EMA 把既有權重乘 (1-α)=0.7。跑幾輪就會衰減到四捨五入歸零，該子分類的
+    # 核心指標 ×1.3 加權整個失效（2026-09-30 實測：一天跑三次 --compute，
+    # 113 個指標被洗到剩 34%，妝前乳膚色校正 0.2563 → 0.0879）。
+    # 沒有新證據就沿用舊排序，不拿 0 當觀測值餵進 EMA。
+    if total_valid_reviews <= 0 or not any(agg_mentions.get(i, 0) for i in target_indicators):
+        existing = {i: (subcat_state.get(i, {}).get("importance") or 0.0)
+                    for i in target_indicators}
+        kept = sorted(existing.items(), key=lambda kv: kv[1], reverse=True)
+        return {ind for ind, imp in kept[:CORE_TOP_N] if imp > 0}
+
     denom = max(total_valid_reviews, 1)
     importance_by_indicator = {}
     for indicator in target_indicators:
