@@ -4,7 +4,15 @@
     {
       "name": "glowmakeup",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["serve.py", "8777"],
+      "runtimeArgs": [
+        "serve.py",
+        "8777"
+      ],
+      "port": 8777
+    },
+    {
+      "name": "glowmakeup-attach",
+      "url": "http://localhost:8777",
       "port": 8777
     }
   ]
