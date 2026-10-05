@@ -33,7 +33,7 @@ let articlesCache = null;
 async function getArticles() {
     if (articlesCache) return articlesCache;
     try {
-        const res = await fetch('articles.json?v=111');
+        const res = await fetch('articles.json?v=112');
         const data = await res.json();
         articlesCache = (data.articles || []).slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
         return articlesCache;
