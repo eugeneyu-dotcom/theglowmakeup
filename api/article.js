@@ -7,8 +7,14 @@
 //   2. LINE/Threads/Facebook 等社群分享預覽卡片產生器不會執行 JS，抓到的永遠是同一個
 //      通用標題「Glow Makeup | 保養專欄」跟空白圖，拖累社群分享點擊率
 //
-// 這支 function 攔截對 /article.html 的請求（見 vercel.json 的 rewrite），讀本機
-// article.html 當範本、articles.json 當資料源，把真正的標題/meta/schema/文章內文
+// 這支 function 承接對 /article.html 的請求（見 vercel.json 的 rewrite），讀本機
+// article.template.html 當範本、articles.json 當資料源。
+//
+// ⚠️ 範本檔名刻意不叫 article.html：Vercel 的 rewrites 是在「檔案系統比對之後」才
+// 執行的，只要根目錄存在同名的 article.html，請求就會被那個靜態檔直接接走，rewrite
+// 永遠不會觸發（2026-10-06 查出：SSR 自 3187a1f 上線起從未真正生效，線上 58 篇文章頁
+// 的原始 HTML 共用同一組 title/description、og:image 全空）。把範本改名讓 /article.html
+// 在檔案系統查無對應，rewrite 才會把請求交給這支 function，把真正的標題/meta/schema/文章內文
 // 直接寫進伺服器回傳的 HTML 裡——網址完全不變，站內外所有連結、GSC 已收錄的網址都不用動。
 // 瀏覽器載入後 script.js 原本的 CSR 邏輯還是會照跑一次（重新渲染同一份內容），
 // 純粹是多一次冪等的 DOM 更新，不影響互動功能，也是這支 function 出錯時的安全網。
@@ -26,7 +32,7 @@ function escapeHtml(str) {
 }
 
 function readTemplate() {
-    return fs.readFileSync(path.join(process.cwd(), 'article.html'), 'utf-8');
+    return fs.readFileSync(path.join(process.cwd(), 'article.template.html'), 'utf-8');
 }
 
 function readArticles() {

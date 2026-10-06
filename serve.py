@@ -35,6 +35,13 @@ ALLOW_DIRS = {"assets"}                                # 唯一可對外的子�
 ALLOW_ROOT_FILES = {"robots.txt", "sitemap.xml"}       # 無副檔名白名單、根目錄放行的特例檔
 
 
+# 正式環境 /article.html 由 api/article.js（SSR）承接，根目錄只留 article.template.html
+# （檔名不能叫 article.html，否則 Vercel 的 rewrite 會被靜態檔搶先，見 api/article.js 註解）。
+# 本機沒有 serverless runtime，這裡直接把 /article.html 指到範本——範本內的 inline 腳本
+# 會在 client 端補上標題/meta/內文，本機預覽的畫面與正式站一致。
+LOCAL_ALIAS = {"article.html": "article.template.html"}
+
+
 def allowed(relpath):
     """回傳可服務的相對路徑；不可服務則回 None。"""
     if relpath in ("", "/"):
@@ -60,6 +67,12 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         return allowed(p)
 
     def send_head(self):
+        # 別名要在這裡換掉 self.path，而不是在 allowed() 裡——allowed() 只是放行與否的
+        # 閘門，真正決定開哪個檔的是 SimpleHTTPRequestHandler.send_head() 讀的 self.path。
+        head = self.path.split("?", 1)[0].split("#", 1)[0]
+        key = posixpath.normpath(unquote(head)).lstrip("/")
+        if key in LOCAL_ALIAS:
+            self.path = "/" + LOCAL_ALIAS[key] + self.path[len(head):]
         if self._gate() is None:
             self.send_error(404, "Not found")
             return None
