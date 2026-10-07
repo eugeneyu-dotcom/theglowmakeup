@@ -30,7 +30,11 @@
     },
     {
       "id": "seasonal-skincare-autumn-winter",
-      "concerns": [],
+      "concerns": [
+        "新手不知道怎麼挑",
+        "脫皮乾燥‧刺激泛紅",
+        "搓泥卡粉厚重"
+      ],
       "date": "2026-09-30",
       "category": "保養",
       "tag": "換季保養",
@@ -42,7 +46,10 @@
     },
     {
       "id": "toner-usage-guide",
-      "concerns": [],
+      "concerns": [
+        "新手不知道怎麼挑",
+        "脫皮乾燥‧刺激泛紅"
+      ],
       "date": "2026-09-29",
       "category": "保養",
       "tag": "化妝水",
@@ -54,7 +61,11 @@
     },
     {
       "id": "retinol-beginner-guide",
-      "concerns": [],
+      "concerns": [
+        "新手不知道怎麼挑",
+        "脫皮乾燥‧刺激泛紅",
+        "致痘毛孔粉刺"
+      ],
       "date": "2026-09-23",
       "category": "保養",
       "tag": "保養",
@@ -90,7 +101,10 @@
     },
     {
       "id": "setting-powder-review-2026",
-      "concerns": [],
+      "concerns": [
+        "新手不知道怎麼挑",
+        "脫妝不持久‧暈染掉色"
+      ],
       "date": "2026-09-17",
       "category": "化妝",
       "tag": "蜜粉",
@@ -102,7 +116,10 @@
     },
     {
       "id": "exfoliation-scrub-review-2026",
-      "concerns": [],
+      "concerns": [
+        "新手不知道怎麼挑",
+        "致痘毛孔粉刺"
+      ],
       "date": "2026-09-16",
       "category": "保養",
       "tag": "去角質",
@@ -142,6 +159,8 @@
     {
       "id": "foundation-seasonal-caking-guide",
       "concerns": [
+        "搓泥卡粉厚重",
+        "脫皮乾燥‧刺激泛紅",
         "換季卡粉",
         "底妝乾紋"
       ],
@@ -199,6 +218,7 @@
     {
       "id": "eye-cream-usage-guide",
       "concerns": [
+        "新手不知道怎麼挑",
         "黑眼圈細紋‧眼周暗沉"
       ],
       "date": "2026-09-03",
