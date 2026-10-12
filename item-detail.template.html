@@ -506,7 +506,10 @@
                 document.getElementById('meta-description')?.setAttribute('content', seoDesc);
                 document.getElementById('og-title')?.setAttribute('content', `${targetItem.brand} ${targetItem.name} | Glow Makeup`);
                 document.getElementById('og-description')?.setAttribute('content', seoDesc);
-                document.getElementById('og-image')?.setAttribute('content', targetItem.image || targetItem.img || '');
+                // og:image 要給絕對網址，社群分享卡片才抓得到（相對路徑會被當成無效圖），
+                // 也跟 api/item-detail.js 伺服器端輸出的值一致
+                const ogImgSrc = targetItem.image || targetItem.img || '';
+                document.getElementById('og-image')?.setAttribute('content', ogImgSrc ? new URL(ogImgSrc, 'https://www.theglowmakeup.org/').href : '');
                 document.getElementById('canonical-link')?.setAttribute('href', `https://www.theglowmakeup.org/item-detail.html?item=${encodeURIComponent(targetItem.name)}&from=board`);
                 (function(){var el=document.getElementById('breadcrumb-jsonld');if(!el)return;var L=[['首頁','https://www.theglowmakeup.org/'],['熱門美妝看板','https://www.theglowmakeup.org/board-landing.html']].concat(belongingSubcategoryName?[[belongingSubcategoryName,'https://www.theglowmakeup.org/detail.html?sub='+encodeURIComponent(belongingSubcategoryName)+'&from=board']]:[]).concat([[targetItem.name,'https://www.theglowmakeup.org/item-detail.html?item='+encodeURIComponent(targetItem.name)+'&from=board']]);el.textContent=JSON.stringify({'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:L.map(function(x,i){return {'@type':'ListItem',position:i+1,name:x[0],item:x[1]};})});})();
 

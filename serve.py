@@ -39,7 +39,10 @@ ALLOW_ROOT_FILES = {"robots.txt", "sitemap.xml"}       # 無副檔名白名單�
 # （檔名不能叫 article.html，否則 Vercel 的 rewrite 會被靜態檔搶先，見 api/article.js 註解）。
 # 本機沒有 serverless runtime，這裡直接把 /article.html 指到範本——範本內的 inline 腳本
 # 會在 client 端補上標題/meta/內文，本機預覽的畫面與正式站一致。
-LOCAL_ALIAS = {"article.html": "article.template.html"}
+LOCAL_ALIAS = {
+    "article.html": "article.template.html",
+    "item-detail.html": "item-detail.template.html",
+}
 
 
 def allowed(relpath):

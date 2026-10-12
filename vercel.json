@@ -1,10 +1,20 @@
 {
   "rewrites": [
-    { "source": "/article.html", "destination": "/api/article" }
+    { "source": "/article.html", "destination": "/api/article" },
+    { "source": "/item-detail.html", "destination": "/api/item-detail" }
+  ],
+  "headers": [
+    {
+      "source": "/(article|item-detail).template.html",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }]
+    }
   ],
   "functions": {
     "api/article.js": {
       "includeFiles": "{article.template.html,articles.json}"
+    },
+    "api/item-detail.js": {
+      "includeFiles": "{item-detail.template.html,site-data.json,scores-data.json}"
     }
   }
 }
