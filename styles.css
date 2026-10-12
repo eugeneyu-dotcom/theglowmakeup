@@ -23,6 +23,12 @@ h1, h2, h3, h4 {
     font-family: 'Playfair Display', 'Noto Sans TC', serif;
 }
 
+/* Header 與 footer 的「Glow Makeup.」原本是 h1／h2，等於每一頁的 H1 都是品牌名而不是
+   頁面主題。改成連結與一般區塊後，標題字體不再由上面那條規則套用，靠這個 class 維持原樣。 */
+.brand-logo {
+    font-family: 'Playfair Display', 'Noto Sans TC', serif;
+}
+
 /* Header & Nav Fixes */
 header {
     height: 96px; /* Fixed height for consistency */

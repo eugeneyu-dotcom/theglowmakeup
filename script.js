@@ -33,7 +33,7 @@ let articlesCache = null;
 async function getArticles() {
     if (articlesCache) return articlesCache;
     try {
-        const res = await fetch('articles.json?v=120');
+        const res = await fetch('articles.json?v=122');
         const data = await res.json();
         articlesCache = (data.articles || []).slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
         return articlesCache;
@@ -144,7 +144,7 @@ async function renderNewProducts() {
                 ${newProductImageBlock(p, i)}
                 <div class="p-3 md:p-5 flex flex-col flex-grow">
                     <span class="${BRAND_BADGE_COLORS[i % BRAND_BADGE_COLORS.length]} text-white text-[9px] md:text-[10px] font-black px-2.5 md:px-3 py-1 rounded-full self-start mb-2 md:mb-3 tracking-wide">${p.brand}</span>
-                    <h4 class="font-black text-xs md:text-sm leading-snug mb-1 md:mb-2 group-hover:text-[#f2a7b5] transition-colors line-clamp-2">${p.name}</h4>
+                    <h3 class="font-black text-xs md:text-sm leading-snug mb-1 md:mb-2 group-hover:text-[#f2a7b5] transition-colors line-clamp-2">${p.name}</h3>
                     <p class="hidden md:block text-xs text-gray-500 leading-relaxed line-clamp-3 flex-grow">${p.highlight || ''}</p>
                     <span class="text-[10px] md:text-[11px] font-bold text-[#f2a7b5] mt-2 md:mt-4 flex items-center gap-1">查看${p.source_label || '官網'} ➔</span>
                 </div>
@@ -195,7 +195,7 @@ async function renderLatestArticlesSection() {
                     ${a.tag ? '#' + a.tag : '保養專欄'}
                 </a>
             </div>
-            <h4 class="text-xl font-black mb-4 leading-tight group-hover:text-[#f2a7b5] transition-colors cursor-pointer" onclick="location.href='${a.url || 'skincare-blog.html'}'">${a.title}</h4>
+            <h3 class="text-xl font-black mb-4 leading-tight group-hover:text-[#f2a7b5] transition-colors cursor-pointer" onclick="location.href='${a.url || 'skincare-blog.html'}'">${a.title}</h3>
         </div>
     `).join('');
 }
@@ -277,7 +277,7 @@ async function renderSkincareArticles() {
             <img src="${a.image}" class="article-list-img" alt="${a.title}">
             <div>
                 <span class="text-xs font-black text-gray-400">${formatArticleDate(a.date)}${a.tag ? ' · #' + a.tag : ''}</span>
-                <h3 class="text-2xl font-black mt-2 mb-4">${a.title}</h3>
+                <h2 class="text-2xl font-black mt-2 mb-4">${a.title}</h2>
                 <p class="text-gray-500 line-clamp-2">${a.excerpt || ''}</p>
             </div>
         </div>
@@ -426,7 +426,7 @@ function renderRankingGrid() {
                     <img src="${img}" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform" alt="${e.name}">
                 </div>
                 <p class="text-[10px] font-black text-gray-400 uppercase tracking-wide mb-1 truncate">${e.brand}</p>
-                <h4 class="font-black text-xs md:text-sm leading-snug mb-2 line-clamp-2 group-hover:text-[#f2a7b5] transition-colors" title="${e.name}">${e.name}</h4>
+                <h3 class="font-black text-xs md:text-sm leading-snug mb-2 line-clamp-2 group-hover:text-[#f2a7b5] transition-colors" title="${e.name}">${e.name}</h3>
                 <div class="flex items-center gap-1.5 text-xs">
                     <span class="text-[#e05a47] font-black">★ ${e.composite.toFixed(1)}</span>
                     <span class="text-gray-400 text-[11px]">(${e.mentions}則)</span>
@@ -598,6 +598,16 @@ function selectOption(card) {
     card.classList.add('selected', 'border-[#f2a7b5]');
 }
 
+// 測驗選項卡片的標題標籤會隨頁面標題層級調整而變動（2026-10-12 由 h4 改成 h3，
+// 因為它的上層是 H2 區塊標題），所以這裡用「標籤無關」的選法取卡片文字。
+// 之前是把標籤名寫死在選擇器裡，改層級時整個首頁測驗會在 initHomeQuizVisibility
+// 直接丟 TypeError，而且畫面上不會有任何症狀，只有 console 看得到。
+function optionCardLabel(card) {
+    if (!card) return '';
+    const heading = card.querySelector('h1, h2, h3, h4, h5, h6');
+    return heading ? heading.innerText : '';
+}
+
 function nextStep(current) {
     const currentStep = document.querySelector(`.quiz-step[data-step="${current}"]`);
     const selected = currentStep.querySelector('.option-card.selected');
@@ -608,14 +618,14 @@ function nextStep(current) {
     }
 
     if (current === 1) {
-        const category = selected.querySelector('h4').innerText;
+        const category = optionCardLabel(selected);
         renderQuizStep2(category);
         currentStep.classList.add('hidden');
         return;
     }
 
     if (current === 2) {
-        const category = document.querySelector('.quiz-step[data-step="1"] .option-card.selected h4').innerText;
+        const category = optionCardLabel(document.querySelector('.quiz-step[data-step="1"] .option-card.selected'));
         const value = selected.dataset.value;
         const config = HOME_QUIZ_CONFIG[category];
         currentStep.classList.add('hidden');
@@ -628,7 +638,7 @@ function nextStep(current) {
     }
 
     if (current === 3) {
-        const category = document.querySelector('.quiz-step[data-step="1"] .option-card.selected h4').innerText;
+        const category = optionCardLabel(document.querySelector('.quiz-step[data-step="1"] .option-card.selected'));
         const value = currentStep.dataset.parentValue;
         const tag = selected.dataset.value;
         currentStep.classList.add('hidden');
@@ -650,7 +660,7 @@ async function renderQuizStep2(category) {
     document.getElementById('quiz-step2-options').innerHTML = availableOptions.length
         ? availableOptions.map(opt => `
             <div class="option-card border-2 border-gray-100 px-8 py-6 rounded-3xl cursor-pointer hover:border-[#f2a7b5] transition-all" data-value="${opt}" onclick="selectOption(this)">
-                <h4 class="font-bold text-lg">${opt}</h4>
+                <h3 class="font-bold text-lg">${opt}</h3>
             </div>
         `).join('')
         : '<p class="text-gray-400 text-sm">此類別評分資料建置中，敬請期待</p>';
@@ -672,7 +682,7 @@ async function renderQuizStep3(category, value) {
     document.getElementById('quiz-step3-question').innerText = step3Data.question;
     document.getElementById('quiz-step3-options').innerHTML = step3Data.options.map(opt => `
         <div class="option-card border-2 border-gray-100 px-8 py-6 rounded-3xl cursor-pointer hover:border-[#f2a7b5] transition-all" data-value="${opt}" onclick="selectOption(this)">
-            <h4 class="font-bold text-lg">${opt}</h4>
+            <h3 class="font-bold text-lg">${opt}</h3>
         </div>
     `).join('');
     step3.classList.remove('hidden');
@@ -725,7 +735,7 @@ async function initHomeQuizVisibility() {
 
     const cards = [...step1.querySelectorAll('.option-card')];
     await Promise.all(cards.map(async card => {
-        const category = card.querySelector('h4').innerText;
+        const category = optionCardLabel(card);
         const config = HOME_QUIZ_CONFIG[category];
         if (!config) return;
         const availability = await Promise.all(config.options.map(opt => config.hasData(opt)));
@@ -847,7 +857,7 @@ async function renderSpotlightCards(containerId, mode) {
                             <span class="text-xs font-black tracking-widest text-gray-500 uppercase">${e.brand}</span>
                             ${badge}
                         </div>
-                        <h3 class="font-black text-xl text-[#2d2d2d] group-hover:text-[#f2a7b5] transition-colors mb-2">${e.name}</h3>
+                        <h2 class="font-black text-xl text-[#2d2d2d] group-hover:text-[#f2a7b5] transition-colors mb-2">${e.name}</h2>
                         <p class="text-xs text-gray-500 leading-relaxed line-clamp-3">${quote}</p>
                     </div>
                     <span class="text-xs font-bold text-[#f2a7b5] mt-4 flex items-center gap-1 group-hover:translate-x-1 transition-transform">${cta}</span>
@@ -895,7 +905,7 @@ async function renderSubcatTop5(containerId, subcat) {
                             <span class="text-xs font-black text-gray-500 uppercase tracking-widest">${e.brand}</span>
                             <span class="text-sm font-black text-[#e05a47]">★ ${e.composite.toFixed(1)}（${e.mentions || 0} 則）</span>
                         </div>
-                        <a href="${href}" class="block hover:text-[#f2a7b5] transition-colors"><h3 class="text-2xl font-black mb-6">${e.name}</h3></a>
+                        <a href="${href}" class="block hover:text-[#f2a7b5] transition-colors"><h2 class="text-2xl font-black mb-6">${e.name}</h2></a>
                         <div class="mt-4 flex justify-start items-center">
                             <div class="w-full max-w-md bg-gray-50 rounded-2xl p-4 border border-gray-100/50 flex justify-center items-center">
                                 <img src="${chartUrl}" class="w-full object-contain" style="max-height: 250px;" alt="${e.name}指標雷達圖">
@@ -971,7 +981,7 @@ function initSentimentAnalysis(side, item) {
 
     panel.innerHTML = `
         <div class="animate-fade-in flex flex-col gap-4 h-full">
-            <h4 class="text-xs font-black text-gray-500 uppercase tracking-widest text-center border-b border-gray-50 pb-2">${label} 好感度</h4>
+            <h3 class="text-xs font-black text-gray-500 uppercase tracking-widest text-center border-b border-gray-50 pb-2">${label} 好感度</h3>
             <div class="py-4">
                 <img src="${chartUrl}" class="sentiment-chart" alt="Sentiment Chart">
                 <div class="flex justify-between mt-2 px-2">
@@ -1065,7 +1075,7 @@ async function updateBattleRadarChart(subcategory, leftItem, rightItem) {
 
     container.innerHTML = `
         <div class="animate-fade-in w-full flex flex-col items-center gap-4">
-            <h4 class="text-xs font-black text-gray-500 uppercase tracking-widest text-center border-b border-gray-50 pb-2 w-full">指標效能比較（真實分數）</h4>
+            <h3 class="text-xs font-black text-gray-500 uppercase tracking-widest text-center border-b border-gray-50 pb-2 w-full">指標效能比較（真實分數）</h3>
             <img src="${chartUrl}" class="w-full object-contain" style="max-height: 380px;" alt="Battle Radar Chart">
         </div>
     `;

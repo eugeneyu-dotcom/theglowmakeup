@@ -25,7 +25,7 @@
     <script type="application/ld+json" id="breadcrumb-jsonld"></script>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%84%3C/text%3E%3C/svg%3E">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles.css?v=51">
+    <link rel="stylesheet" href="styles.css?v=52">
 </head>
 <body class="bg-[#fff9f5] text-[#2d2d2d] selection:bg-[#f2a7b5] selection:text-white">
 
@@ -33,7 +33,7 @@
     <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#f2a7b5]/10 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 w-full h-full flex items-center justify-between">
             <div class="flex items-center gap-4">
-                <h1 class="text-3xl font-black tracking-tighter text-[#f2a7b5] italic cursor-pointer" onclick="location.href='index.html'">Glow Makeup.</h1>
+                <a href="index.html" class="brand-logo text-3xl font-black tracking-tighter text-[#f2a7b5] italic">Glow Makeup.</a>
             </div>
             <nav id="desktop-nav" class="hidden lg:flex items-center gap-8 text-xl font-bold h-full">
                 <!-- Dynamically populated from site-data.json via script.js -->
@@ -82,7 +82,7 @@
 
     <!-- Footer -->
     <footer class="bg-white border-t border-[#f2a7b5]/10 py-16 text-center">
-        <h2 class="text-3xl font-black tracking-tighter text-[#f2a7b5] italic mb-4">Glow Makeup.</h2>
+        <div class="brand-logo text-3xl font-black tracking-tighter text-[#f2a7b5] italic mb-4">Glow Makeup.</div>
         <div class="flex justify-center items-center gap-6 mb-6">
             <button onclick="location.href='mailto:maggiechang@maxora.ai'" class="px-6 py-2 bg-[#f2a7b5] text-white font-bold rounded-full hover:bg-[#d88a99] transition-colors shadow-sm">聯絡我們</button>
             <a href="privacy-policy.html" class="text-gray-500 font-bold hover:text-[#f2a7b5] transition-colors">安全政策</a>
@@ -90,7 +90,7 @@
         <p class="text-gray-400 text-sm">© 2026 美妝生活誌 - 妳的最美應援團</p>
     </footer>
 
-    <script src="script.js?v=120"></script>
+    <script src="script.js?v=122"></script>
     <script>
         function formatDate(d) {
             return (d || '').replace(/-/g, '.');

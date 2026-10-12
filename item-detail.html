@@ -25,7 +25,7 @@
     <script type="application/ld+json" id="breadcrumb-jsonld"></script>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%84%3C/text%3E%3C/svg%3E">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles.css?v=51">
+    <link rel="stylesheet" href="styles.css?v=52">
     <style>
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
@@ -49,7 +49,7 @@
     <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#f2a7b5]/10 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 w-full h-full flex items-center justify-between">
             <div class="flex items-center gap-4">
-                <h1 class="text-3xl font-black tracking-tighter text-[#f2a7b5] italic cursor-pointer" onclick="location.href='index.html'">Glow Makeup.</h1>
+                <a href="index.html" class="brand-logo text-3xl font-black tracking-tighter text-[#f2a7b5] italic">Glow Makeup.</a>
             </div>
             
             <nav id="desktop-nav" class="hidden lg:flex items-center gap-8 text-xl font-bold h-full">
@@ -101,7 +101,7 @@
                     <div class="w-full md:w-1/2 flex flex-col justify-between py-2">
                         <div>
                             <span id="product-brand" class="text-base font-black tracking-widest text-[#f2a7b5] uppercase mb-3 block">品牌名稱</span>
-                            <h2 id="product-name" class="text-3xl md:text-4xl font-black text-[#2d2d2d] leading-tight mb-2">商品名稱</h2>
+                            <h1 id="product-name" class="text-3xl md:text-4xl font-black text-[#2d2d2d] leading-tight mb-2">商品名稱</h1>
                             
                             <!-- Sleek Hashtags Container -->
                             <div id="product-hashtags" class="flex flex-wrap gap-2 mb-6">
@@ -131,7 +131,7 @@
                         
                         <!-- Context-based Content Section -->
                         <div class="border-t border-gray-100 pt-8">
-                            <h3 id="panel-title" class="text-2xl font-black text-[#2d2d2d] mb-1.5">社群互動評比</h3>
+                            <h2 id="panel-title" class="text-2xl font-black text-[#2d2d2d] mb-1.5">社群互動評比</h2>
                             <p id="panel-desc" class="text-sm text-gray-500 mb-6">點擊星星來為各項效能指標進行評分</p>
                             
                             <div id="ratings-container" class="space-y-5">
@@ -146,7 +146,7 @@
                     <div class="flex items-center gap-3 mb-6 border-b border-gray-100 pb-5">
                         <span class="text-3xl">🧪</span>
                         <div>
-                            <h3 class="text-2xl md:text-3xl font-black text-[#2d2d2d] italic">成分資訊 <span class="text-[#f2a7b5] not-italic text-lg">Ingredient Info</span></h3>
+                            <h2 class="text-2xl md:text-3xl font-black text-[#2d2d2d] italic">成分資訊 <span class="text-[#f2a7b5] not-italic text-lg">Ingredient Info</span></h2>
                             <p class="text-sm text-gray-500 font-bold">查證自第三方成分資料庫，並比對常見成分警示對照表</p>
                         </div>
                     </div>
@@ -164,7 +164,7 @@
                     <div class="flex items-center gap-3 mb-8 border-b border-gray-100 pb-5">
                         <span class="text-3xl">💬</span>
                         <div>
-                            <h3 class="text-2xl md:text-3xl font-black text-[#2d2d2d] italic">真實網友心得 <span class="text-[#f2a7b5] not-italic text-lg">User Testimonials</span></h3>
+                            <h2 class="text-2xl md:text-3xl font-black text-[#2d2d2d] italic">真實網友心得 <span class="text-[#f2a7b5] not-italic text-lg">User Testimonials</span></h2>
                             <p class="text-sm text-gray-500 font-bold">精選多則最有可信力的社群真實評論，帳號已馬賽克保護隱私</p>
                         </div>
                     </div>
@@ -175,7 +175,7 @@
 
                 <!-- Related Items Section -->
                 <section id="related-section">
-                    <h3 class="text-2xl font-black mb-6 italic">Related Items / <span class="text-[#f2a7b5] text-lg not-italic">同類熱門單品</span></h3>
+                    <h2 class="text-2xl font-black mb-6 italic">Related Items / <span class="text-[#f2a7b5] text-lg not-italic">同類熱門單品</span></h2>
                     <div id="related-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <!-- Dynamically populated related items cards, filtered by sidebar brands -->
                         <div class="text-gray-400 text-sm">載入中...</div>
@@ -186,7 +186,7 @@
 
     <!-- Footer -->
     <footer class="bg-white border-t border-[#f2a7b5]/10 py-16 text-center">
-        <h2 class="text-3xl font-black tracking-tighter text-[#f2a7b5] italic mb-4">Glow Makeup.</h2>
+        <div class="brand-logo text-3xl font-black tracking-tighter text-[#f2a7b5] italic mb-4">Glow Makeup.</div>
         <div class="flex justify-center items-center gap-6 mb-6">
             <button onclick="location.href='mailto:maggiechang@maxora.ai'" class="px-6 py-2 bg-[#f2a7b5] text-white font-bold rounded-full hover:bg-[#d88a99] transition-colors shadow-sm">聯絡我們</button>
             <a href="privacy-policy.html" class="text-gray-500 font-bold hover:text-[#f2a7b5] transition-colors">安全政策</a>
@@ -195,7 +195,7 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="script.js?v=120"></script>
+    <script src="script.js?v=122"></script>
     <script>
         // Global State & Setup
         window.selectedSkinVal = 'fair';

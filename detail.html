@@ -24,7 +24,7 @@
     <meta property="og:type" content="website">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%84%3C/text%3E%3C/svg%3E">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles.css?v=51">
+    <link rel="stylesheet" href="styles.css?v=52">
     <style>
         .custom-scrollbar::-webkit-scrollbar {
             width: 6px;
@@ -48,7 +48,7 @@
     <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#f2a7b5]/10 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 w-full h-full flex items-center justify-between">
             <div class="flex items-center gap-4">
-                <h1 class="text-3xl font-black tracking-tighter text-[#f2a7b5] italic cursor-pointer" onclick="location.href='index.html'">Glow Makeup.</h1>
+                <a href="index.html" class="brand-logo text-3xl font-black tracking-tighter text-[#f2a7b5] italic">Glow Makeup.</a>
             </div>
             
             <nav id="desktop-nav" class="hidden lg:flex items-center gap-8 text-xl font-bold h-full">
@@ -107,13 +107,13 @@
             <!-- Page Title -->
             <div class="bg-white rounded-3xl p-8 border border-[#f2a7b5]/10 shadow-sm relative overflow-hidden">
                 <div class="absolute -right-10 -top-10 w-40 h-40 bg-[#f2a7b5]/10 rounded-full blur-3xl"></div>
-                <h2 id="page-title" class="text-4xl font-black italic relative z-10">載入中...</h2>
+                <h1 id="page-title" class="text-4xl font-black italic relative z-10">載入中...</h1>
             </div>
 
             <!-- All Products Grid (Only in Board Mode) -->
             <section id="all-products-section" class="hidden">
                 <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
-                    <h3 class="text-2xl font-black italic">✨ 所有商品項目 / <span class="text-[#f2a7b5] text-lg not-italic">All Products</span></h3>
+                    <h2 class="text-2xl font-black italic">✨ 所有商品項目 / <span class="text-[#f2a7b5] text-lg not-italic">All Products</span></h2>
                     <div id="board-sort-buttons" class="flex gap-2">
                         <!-- Loaded here -->
                     </div>
@@ -125,7 +125,7 @@
 
             <!-- Comparative Table (Only in Review Mode) -->
             <section id="review-table-section" class="hidden">
-                <h3 class="text-2xl font-black mb-6 italic">📊 全品項指標評比對照表 / <span class="text-[#f2a7b5] text-lg not-italic">Comparative Review</span></h3>
+                <h2 class="text-2xl font-black mb-6 italic">📊 全品項指標評比對照表 / <span class="text-[#f2a7b5] text-lg not-italic">Comparative Review</span></h2>
                 <div id="review-table-container">
                     <!-- Loaded here -->
                 </div>
@@ -133,7 +133,7 @@
 
             <!-- Trending Articles (Only in Board Mode) -->
             <section id="articles-section" class="hidden">
-                <h3 class="text-2xl font-black mb-6 italic">📰 熱門相關文章 / <span class="text-[#f2a7b5] text-lg not-italic">Trending Articles</span></h3>
+                <h2 class="text-2xl font-black mb-6 italic">📰 熱門相關文章 / <span class="text-[#f2a7b5] text-lg not-italic">Trending Articles</span></h2>
                 <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <!-- Loaded here -->
                 </div>
@@ -144,7 +144,7 @@
     </main>
 
     <footer class="bg-white border-t border-[#f2a7b5]/10 py-16 text-center mt-20">
-        <h2 class="text-3xl font-black tracking-tighter text-[#f2a7b5] italic mb-4">Glow Makeup.</h2>
+        <div class="brand-logo text-3xl font-black tracking-tighter text-[#f2a7b5] italic mb-4">Glow Makeup.</div>
         <div class="flex justify-center items-center gap-6 mb-6">
             <button onclick="location.href='mailto:maggiechang@maxora.ai'" class="px-6 py-2 bg-[#f2a7b5] text-white font-bold rounded-full hover:bg-[#d88a99] transition-colors shadow-sm">聯絡我們</button>
             <a href="privacy-policy.html" class="text-gray-500 font-bold hover:text-[#f2a7b5] transition-colors">安全政策</a>
@@ -152,7 +152,7 @@
         <p class="text-gray-400 text-sm">© 2026 美妝生活誌 - 妳的最美應援團</p>
     </footer>
 
-    <script src="script.js?v=120"></script>
+    <script src="script.js?v=122"></script>
     <script>
         const indicatorDescriptions = {
             // 底妝 / 彩妝

@@ -20,7 +20,7 @@
     <meta property="og:type" content="website">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%84%3C/text%3E%3C/svg%3E">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles.css?v=51">
+    <link rel="stylesheet" href="styles.css?v=52">
 </head>
 <body class="bg-[#fff9f5] text-[#2d2d2d] selection:bg-[#f2a7b5] selection:text-white">
 
@@ -28,7 +28,7 @@
     <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#f2a7b5]/10 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 w-full h-full flex items-center justify-between">
             <div class="flex items-center gap-4">
-                <h1 class="text-3xl font-black tracking-tighter text-[#f2a7b5] italic cursor-pointer" onclick="location.href='index.html'">Glow Makeup.</h1>
+                <a href="index.html" class="brand-logo text-3xl font-black tracking-tighter text-[#f2a7b5] italic">Glow Makeup.</a>
             </div>
             
             <nav id="desktop-nav" class="hidden lg:flex items-center gap-8 text-xl font-bold h-full">
@@ -61,6 +61,7 @@
     </aside>
 
     <main>
+        <h1 class="sr-only">真實社群網友美妝心得 &amp; 評比一站看</h1>
         <!-- 1. Slider（保養專欄最新文章，由 articles.json 動態產生） -->
         <section class="slider-container group relative">
             <div class="slider-track h-full" id="mainSlider">
@@ -94,7 +95,7 @@
         <!-- 3. 美妝新品快報（12 大專櫃品牌官網新品，資料來源見 new-products.json） -->
         <section class="py-20 bg-white">
             <div class="max-w-7xl mx-auto px-4">
-                <h3 class="text-3xl font-black mb-2 italic">New Arrivals / <span class="text-[#f2a7b5] text-lg not-italic">美妝新品快報</span></h3>
+                <h2 class="text-3xl font-black mb-2 italic">New Arrivals / <span class="text-[#f2a7b5] text-lg not-italic">美妝新品快報</span></h2>
                 <p class="text-sm text-gray-400 font-bold mb-12">精選 12 大專櫃品牌官網公告的最新品項，人工整理更新</p>
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 md:gap-5 np-collapsed" id="new-products-grid">
                     <div class="text-gray-400 text-sm">載入中...</div>
@@ -170,24 +171,24 @@
         <!-- 5. Homepage Quiz: Beauty Help -->
         <section class="max-w-5xl mx-auto px-4 py-20">
             <div class="home-quiz-container text-center">
-                <h3 class="text-3xl font-black mb-4">今天需要什麼美妝協助嗎？</h3>
+                <h2 class="text-3xl font-black mb-4">今天需要什麼美妝協助嗎？</h2>
                 <p class="text-gray-400 mb-12">告訴我們妳的困擾，讓 Glow Makeup 幫妳導航！</p>
                 <div id="quiz-flow">
                     <div class="quiz-step active" data-step="1">
                         <div class="flex flex-col md:flex-row flex-wrap justify-center gap-6">
                             <div class="option-card w-full md:flex-1 md:max-w-sm border-2 border-gray-100 p-8 rounded-3xl cursor-pointer hover:border-[#f2a7b5] transition-all" onclick="selectOption(this)">
                                 <span class="text-3xl mb-4 block">&#x1F9D6;</span>
-                                <h4 class="font-bold text-lg mb-2">缺乏保養知識</h4>
+                                <h3 class="font-bold text-lg mb-2">缺乏保養知識</h3>
                                 <p class="text-xs text-gray-500">想了解成分與步驟</p>
                             </div>
                             <div class="option-card w-full md:flex-1 md:max-w-sm border-2 border-gray-100 p-8 rounded-3xl cursor-pointer hover:border-[#f2a7b5] transition-all" onclick="selectOption(this)">
                                 <span class="text-3xl mb-4 block">&#x1F484;</span>
-                                <h4 class="font-bold text-lg mb-2">挑選底妝困難</h4>
+                                <h3 class="font-bold text-lg mb-2">挑選底妝困難</h3>
                                 <p class="text-xs text-gray-500">想找命定色號與質地</p>
                             </div>
                             <div class="option-card w-full md:flex-1 md:max-w-sm border-2 border-gray-100 p-8 rounded-3xl cursor-pointer hover:border-[#f2a7b5] transition-all" onclick="selectOption(this)">
                                 <span class="text-3xl mb-4 block">&#x1F58C;</span>
-                                <h4 class="font-bold text-lg mb-2">美妝工具選擇</h4>
+                                <h3 class="font-bold text-lg mb-2">美妝工具選擇</h3>
                                 <p class="text-xs text-gray-500">想知道刷具與海綿差異</p>
                             </div>
                         </div>
@@ -196,7 +197,7 @@
                         </div>
                     </div>
                     <div class="quiz-step hidden" data-step="2" id="quiz-step-2">
-                        <h4 class="text-xl font-bold mb-8" id="quiz-step2-question"></h4>
+                        <h3 class="text-xl font-bold mb-8" id="quiz-step2-question"></h3>
                         <div class="flex flex-wrap justify-center gap-6" id="quiz-step2-options"></div>
                         <div class="mt-12 flex justify-center gap-4">
                             <button class="text-gray-400 font-bold py-4 px-8" onclick="quizBack(2)">← 返回上一步</button>
@@ -204,7 +205,7 @@
                         </div>
                     </div>
                     <div class="quiz-step hidden" data-step="3" id="quiz-step-3">
-                        <h4 class="text-xl font-bold mb-8" id="quiz-step3-question"></h4>
+                        <h3 class="text-xl font-bold mb-8" id="quiz-step3-question"></h3>
                         <div class="flex flex-wrap justify-center gap-6" id="quiz-step3-options"></div>
                         <div class="mt-12 flex justify-center gap-4">
                             <button class="text-gray-400 font-bold py-4 px-8" onclick="quizBack(3)">← 返回上一步</button>
@@ -213,7 +214,7 @@
                     </div>
                     <div class="quiz-step hidden" id="quiz-result">
                         <div class="py-6">
-                            <h4 class="text-xl font-bold mb-4" id="result-title">分析中...</h4>
+                            <h3 class="text-xl font-bold mb-4" id="result-title">分析中...</h3>
                             <p id="result-text" class="text-gray-500 mb-8"></p>
                             <button class="bg-gray-100 text-gray-600 font-bold py-3 px-8 rounded-full" onclick="resetQuiz()">重新測驗</button>
                         </div>
@@ -225,7 +226,7 @@
         <!-- 6. 排行榜（依產品類別分頁籤，各類別 Top10） -->
         <section class="py-24 bg-[#fff9f5]">
             <div class="max-w-7xl mx-auto px-4">
-                <h3 class="text-4xl font-black mb-4 italic">Top Rankings / <span class="text-[#f2a7b5] text-xl font-bold not-italic">熱門榜單</span></h3>
+                <h2 class="text-4xl font-black mb-4 italic">Top Rankings / <span class="text-[#f2a7b5] text-xl font-bold not-italic">熱門榜單</span></h2>
                 <p class="text-sm text-gray-400 font-bold mb-2">依 Glow Makeup 社群真實評分排名，僅收錄評論量足夠（20 則以上提及）的品項</p>
                 <p class="text-xs text-gray-400 mb-6 md:hidden">👉 左右滑動切換分類</p>
                 <div class="ranking-tabs-wrap relative mb-8">
@@ -245,7 +246,7 @@
         <section class="py-24 bg-white">
             <div class="max-w-7xl mx-auto px-4">
                 <div class="flex items-center justify-between mb-10 md:mb-16">
-                    <h3 class="text-3xl font-black italic">Latest Articles / <span class="text-[#f2a7b5] text-xl not-italic">最新文章</span></h3>
+                    <h2 class="text-3xl font-black italic">Latest Articles / <span class="text-[#f2a7b5] text-xl not-italic">最新文章</span></h2>
                     <div class="hidden md:flex items-center gap-3">
                         <button onclick="scrollArticleCarousel(-1)" aria-label="上一篇" class="w-11 h-11 rounded-full bg-[#f2a7b5] text-white hover:bg-[#e88fa0] shadow-md flex items-center justify-center transition-colors">&#10094;</button>
                         <button onclick="scrollArticleCarousel(1)" aria-label="下一篇" class="w-11 h-11 rounded-full bg-[#f2a7b5] text-white hover:bg-[#e88fa0] shadow-md flex items-center justify-center transition-colors">&#10095;</button>
@@ -262,7 +263,7 @@
     </main>
 
     <footer class="bg-white border-t border-[#f2a7b5]/10 py-16 text-center">
-        <h2 class="text-3xl font-black tracking-tighter text-[#f2a7b5] italic mb-4">Glow Makeup.</h2>
+        <div class="brand-logo text-3xl font-black tracking-tighter text-[#f2a7b5] italic mb-4">Glow Makeup.</div>
         <div class="flex justify-center items-center gap-6 mb-6">
             <button onclick="location.href='mailto:maggiechang@maxora.ai'" class="px-6 py-2 bg-[#f2a7b5] text-white font-bold rounded-full hover:bg-[#d88a99] transition-colors shadow-sm">聯絡我們</button>
             <a href="privacy-policy.html" class="text-gray-500 font-bold hover:text-[#f2a7b5] transition-colors">安全政策</a>
@@ -270,6 +271,6 @@
         <p class="text-gray-400 text-sm">© 2026 美妝生活誌 - 妳的最美應援團</p>
     </footer>
 
-    <script src="script.js?v=120"></script>
+    <script src="script.js?v=122"></script>
 </body>
 </html>
