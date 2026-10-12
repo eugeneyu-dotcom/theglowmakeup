@@ -33,7 +33,7 @@ let articlesCache = null;
 async function getArticles() {
     if (articlesCache) return articlesCache;
     try {
-        const res = await fetch('articles.json?v=122');
+        const res = await fetch('articles.json?v=124');
         const data = await res.json();
         articlesCache = (data.articles || []).slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
         return articlesCache;
@@ -235,10 +235,15 @@ async function renderSkincareArticles() {
             window.blogFilterState.category = params.get('category') || null;
         }
 
-        // 「活動快訊」（週年慶/母親節/Olive Young促銷）跟保養專欄共用這個列表頁模板，
-        // 但不該一直掛著「Skincare Column / 保養專欄」的標題跟保養用的分類頁籤，
-        // 篩到 category=活動 時換成活動快訊自己的標題，分類頁籤也先隱藏（改用下面的
-        // tag-filters 在週年慶/母親節/Olive Young促銷之間切換就好，不需要再選一次分類）。
+        // 「活動快訊」跟保養專欄共用這個列表頁模板，但不該掛著「Skincare Column /
+        // 保養專欄」的標題，所以篩到 category=活動 時換成活動快訊自己的標題。
+        //
+        // 分類頁籤原本在這個情況下會一起隱藏，理由是「改用下面的 tag-filters 在
+        // 週年慶/母親節/Olive Young促銷之間切換就好」。但那批標籤從來沒長出來——
+        // 5 篇活動文章全部都是 #週年慶，標籤排只會浮一顆沒有作用的按鈕出來，
+        // 結果是進到活動快訊之後畫面上完全沒有任何可以切回其他分類的東西，
+        // 只能走上方選單或改網址。頁籤現在一律顯示，活動快訊跟保養專欄一樣可以
+        // 直接在分類之間互相切換。
         const heading = document.getElementById('blog-page-heading');
         const isEventCategory = window.blogFilterState.category === '活動';
         if (heading) {
@@ -246,11 +251,8 @@ async function renderSkincareArticles() {
                 ? 'Event Center / <span class="text-[#f2a7b5] text-2xl not-italic">活動快訊</span>'
                 : 'Skincare Column / <span class="text-[#f2a7b5] text-2xl not-italic">保養專欄</span>';
         }
-        tabsContainer.style.display = isEventCategory ? 'none' : '';
-
-        if (!isEventCategory) {
-            renderCategoryTabs(allArticles, tabsContainer);
-        }
+        tabsContainer.style.display = '';
+        renderCategoryTabs(allArticles, tabsContainer);
         if (window.blogFilterState.category) {
             filtered = filtered.filter(a => a.category === window.blogFilterState.category);
         }
@@ -301,6 +303,16 @@ function renderCategoryTabs(allArticles, container) {
 // 標籤篩選：比分類更細，依「目前分類篩選後」的文章動態列出有出現過的標籤，點擊可切換篩選
 function renderTagFilters(articlesInCategory, container) {
     const tags = [...new Set(articlesInCategory.map(a => a.tag).filter(Boolean))];
+
+    // 目前這個分類裡根本沒有這個標籤（例如網址帶著別的分類才有的 ?tag=），
+    // 留著會篩出一片空白、而且下面那排按鈕裡沒有它可以再點一次取消，直接重置掉。
+    if (window.blogFilterState.tag && !tags.includes(window.blogFilterState.tag)) {
+        window.blogFilterState.tag = null;
+    }
+
+    // 只剩一個標籤時照樣顯示（活動快訊的 #週年慶 就是這個情形）。它在原地點下去雖然
+    // 篩不掉東西，但它是別處連過來的落點——從「全部文章」點 #週年慶 會帶到活動快訊，
+    // 到站之後要看得到那顆標籤是亮著的，才知道自己現在被篩在哪裡。
     if (tags.length === 0) {
         container.innerHTML = '';
         return;
@@ -324,9 +336,32 @@ window.setBlogCategory = function (cat) {
     renderSkincareArticles();
 };
 
+// 這個標籤底下的文章是不是全部都屬於指定分類
+function tagBelongsOnlyTo(tag, category) {
+    const tagged = (articlesCache || []).filter(a => a.tag === tag);
+    return tagged.length > 0 && tagged.every(a => a.category === category);
+}
+
 window.setBlogTag = function (tag) {
     // 再點一次同一個標籤 = 取消篩選
-    window.blogFilterState.tag = (window.blogFilterState.tag === tag) ? null : tag;
+    const turningOff = window.blogFilterState.tag === tag;
+    window.blogFilterState.tag = turningOff ? null : tag;
+
+    // 「活動快訊」是獨立的目的地頁（有自己的 Event Center 標題），不是保養專欄底下的
+    // 一個篩選結果。所以在別的分類（例如「全部文章」）點到只屬於活動的標籤時，要連分類
+    // 一起切成「活動」，直接把人帶到活動快訊那一頁，而不是停在「保養專欄」的標題底下
+    // 顯示一批活動文章。
+    //
+    // 只對活動這樣做：目前只有它有自己的頁面識別。其他分類的標籤維持原地篩選，否則
+    // 從「全部文章」點 #面膜 會被鎖進保養分類，底下的標籤排跟著縮成保養那 13 個，
+    // 想再跳去 #香水 就得先切回全部文章，反而更難用。
+    if (!turningOff && window.blogFilterState.category !== '活動' && tagBelongsOnlyTo(tag, '活動')) {
+        window.blogFilterState.category = '活動';
+        const url = new URL(window.location);
+        url.searchParams.set('category', '活動');
+        window.history.replaceState({}, '', url);
+    }
+
     renderSkincareArticles();
 };
 
