@@ -1,11 +1,12 @@
 {
   "rewrites": [
     { "source": "/article.html", "destination": "/api/article" },
-    { "source": "/item-detail.html", "destination": "/api/item-detail" }
+    { "source": "/item-detail.html", "destination": "/api/item-detail" },
+    { "source": "/detail.html", "destination": "/api/detail" }
   ],
   "headers": [
     {
-      "source": "/(article|item-detail).template.html",
+      "source": "/(article|item-detail|detail).template.html",
       "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }]
     }
   ],
@@ -15,6 +16,9 @@
     },
     "api/item-detail.js": {
       "includeFiles": "{item-detail.template.html,site-data.json,scores-data.json}"
+    },
+    "api/detail.js": {
+      "includeFiles": "{detail.template.html,site-data.json}"
     }
   }
 }

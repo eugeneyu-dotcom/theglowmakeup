@@ -42,6 +42,7 @@ ALLOW_ROOT_FILES = {"robots.txt", "sitemap.xml"}       # 無副檔名白名單�
 LOCAL_ALIAS = {
     "article.html": "article.template.html",
     "item-detail.html": "item-detail.template.html",
+    "detail.html": "detail.template.html",
 }
 
 

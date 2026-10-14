@@ -95,6 +95,13 @@ function renderArticleHtml(template, article) {
             'id="canonical-link" href="https://www.theglowmakeup.org/skincare-blog.html">',
             `id="canonical-link" href="${canonical}">`
         )
+        // og:url 原本漏掉了，58 篇文章頁送出去的都是首頁網址，社群平台會把每一篇的分享
+        // 與互動數全部歸到首頁同一個 URL 物件（2026-10-07 由文章端 session 回報）。
+        // canonical 本來就有換，這裡補上同一組替換。
+        .replace(
+            'id="og-url" content="https://www.theglowmakeup.org/">',
+            `id="og-url" content="${canonical}">`
+        )
         .replace(
             '<script type="application/ld+json" id="schema-jsonld"></script>',
             `<script type="application/ld+json" id="schema-jsonld">${schema}</script>`
