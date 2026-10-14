@@ -1962,5 +1962,55 @@
       "mentions_last_run": 0,
       "last_updated": "2026-09-22 18:05:33"
     }
+  },
+  "唇油": {
+    "油感厚度": {
+      "importance": 0.0805,
+      "raw_importance_last_run": 0.1579,
+      "mentions_last_run": 6,
+      "last_updated": "2026-10-14 10:07:11"
+    },
+    "刷頭沾取量控制": {
+      "importance": 0.0671,
+      "raw_importance_last_run": 0.1316,
+      "mentions_last_run": 5,
+      "last_updated": "2026-10-14 10:07:11"
+    },
+    "疊擦不推開底色": {
+      "importance": 0.0,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-10-14 10:07:11"
+    },
+    "保濕滋潤度": {
+      "importance": 0.0805,
+      "raw_importance_last_run": 0.1579,
+      "mentions_last_run": 6,
+      "last_updated": "2026-10-14 10:07:11"
+    },
+    "修飾唇紋效果": {
+      "importance": 0.0134,
+      "raw_importance_last_run": 0.0263,
+      "mentions_last_run": 1,
+      "last_updated": "2026-10-14 10:07:11"
+    },
+    "沾杯程度": {
+      "importance": 0.0134,
+      "raw_importance_last_run": 0.0263,
+      "mentions_last_run": 1,
+      "last_updated": "2026-10-14 10:07:11"
+    },
+    "潤色效果": {
+      "importance": 0.5146,
+      "raw_importance_last_run": 0.3684,
+      "mentions_last_run": 14,
+      "last_updated": "2026-10-14 10:07:11"
+    },
+    "修復改善": {
+      "importance": 0.0,
+      "raw_importance_last_run": 0.0,
+      "mentions_last_run": 0,
+      "last_updated": "2026-10-14 10:07:11"
+    }
   }
 }

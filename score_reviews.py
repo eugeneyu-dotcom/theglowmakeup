@@ -84,7 +84,12 @@ MIN_COMPOSITE_REVIEWS = 5    # 綜合分至少需幾則有效評論（match、�
 # 負評幾乎都是「色號不適合我」這種主觀問題（深唇顯唇紋、暗黃皮不推薦、黏杯）。
 # 評論越多越容易撈到這類負評，導致資料少的品項系統性虛高——實測 9 則的 M.A.C 拿 4.7、
 # 24 則且有具體缺點的 Bobbi Brown 只有 3.9。拉高門檻讓只有紮實樣本的品項才出分。
-MIN_COMPOSITE_REVIEWS_BY_SUBCAT = {"唇膏": 15}
+# 唇油同理（2026-10-14 加入）。這個子分類目前只有 2 個品項，而存活下來的評論幾乎
+# 全是小紅書色號試色文——那個文體本來就很少講缺點，DIOR 那支 16 則有效評論裡只有
+# 1 則提出具體缺點（刷頭太大難塗勻、開蓋牽絲）。再加上唇油的指標是「保濕滋潤度／
+# 油感厚度／潤色效果」這種對滋潤型商品友善的量法（同一支商品在唇釉指標下只有 3.6，
+# 換到唇油指標變成 4.6），小樣本更容易虛高，所以跟唇膏用同一道門檻。
+MIN_COMPOSITE_REVIEWS_BY_SUBCAT = {"唇膏": 15, "唇油": 15}
 
 
 def min_composite_reviews(subcat):
@@ -153,17 +158,27 @@ def call_claude(prompt):
 # 評論標記 Prompt（Step 0 / 2 / 3 + 子款偵測）
 # ==========================================
 
-def build_annotation_prompt(brand, item_name, indicators, reviews):
+def build_annotation_prompt(brand, item_name, indicators, reviews, aliases=None):
     reviews_block = "\n".join(
         f'[{i}] (讚數:{r.get("likes", 0)}) {r.get("content", "").replace(chr(10), " ")}'
         for i, r in enumerate(reviews)
     )
     sentiment_keys = "/".join(SENTIMENT_SCORE.keys())
 
+    # 同一支商品在台灣官網、中國官網、社群口語裡經常叫三個不同名字，而使用者寫評論時
+    # 用的幾乎都是口語名。不把別稱給 Claude，它只能拿台灣官網名去對，照「同品牌但不同
+    # 系列也算不符」這條規則就會把正確的評論整批判成 mismatch。
+    # 2026-10-14 實例：DIOR 迪奧粉漾水光潤唇釉（中國官網名「迪奥魅惑润唇油」）的 30 則
+    # 標記有 29 則被判不符，抽樣讀原文後確認其中大多數確實在講這支，只是全都寫「魅惑润唇油」
+    # 或「Dior唇油」。全站有 13 個品項的不符率 ≥60%，且全部都有別稱。
+    alias_list = [a.strip() for a in (aliases or []) if a and a.strip()]
+    alias_block = ("\n同一支商品的其他名稱（中國官網名／社群常用別稱，看到這些名稱一律視為同一支）："
+                   + "、".join(alias_list)) if alias_list else ""
+
     return f"""你是一個專業的美妝產品分析師，請依照以下規則逐則分析評論。
 
 產品品牌：{brand}
-產品名稱：{item_name}
+產品名稱：{item_name}{alias_block}
 需要評估的指標列表：{", ".join(indicators)}
 
 評論列表（每則前方 [編號] 對應 likes 數）：
@@ -348,7 +363,7 @@ def _score_annotations_to_results(annotations, target_indicators, reviews):
     return results, excluded_ad, excluded_mismatch, per_indicator_entries, valid_reviews
 
 
-def compute_product_scores_with_variants(brand, item_name, target_indicators, reviews, annotations=None):
+def compute_product_scores_with_variants(brand, item_name, target_indicators, reviews, annotations=None, aliases=None):
     """依子款分組計分。
 
     標記來源：若傳入 annotations（agent 兩段式模式的 score_responses）則直接使用；
@@ -360,7 +375,7 @@ def compute_product_scores_with_variants(brand, item_name, target_indicators, re
     if annotations is not None:
         all_annotations = annotations
     else:
-        prompt = build_annotation_prompt(brand, item_name, target_indicators, reviews)
+        prompt = build_annotation_prompt(brand, item_name, target_indicators, reviews, aliases=aliases)
         all_annotations = call_claude(prompt)
 
     if not all_annotations or not isinstance(all_annotations, list):
@@ -587,8 +602,17 @@ def main():
             if cn_name and cn_name != item_name:
                 product_keywords.add(_strip_spf(cn_name))
             if alt_name:
-                product_keywords.add(f"{brand} {alt_name}")
-                product_keywords.add(alt_name)
+                # 別稱可能以「/」分隔多個。2026-10-06 起爬蟲會拆開分別搜，
+                # 所以拆開後的形式要納入；同時保留原始整串，才比對得到
+                # 2026-10-06 之前用舊邏輯抓回來的歷史評論。
+                for piece in alt_name.split("/"):
+                    piece = piece.strip()
+                    if piece:
+                        product_keywords.add(f"{brand} {piece}")
+                        product_keywords.add(piece)
+                if "/" in alt_name:
+                    product_keywords.add(f"{brand} {alt_name}")
+                    product_keywords.add(alt_name)
 
             matched_reviews = []
             seen_match_urls = set()
@@ -611,6 +635,15 @@ def main():
             timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
             if not matched_reviews:
+                # 本輪沒有標記到這個品項時，不可以寫出空白列——否則會把 CSV 裡原本
+                # 的真實分數洗掉。2026-10-06 實測：用 --cleaned 跑唇油時，4 個「評論
+                # 只存在於 routed_reviews.json 的 item_id、cleaned_reviews.json 沒有」
+                # 的品項（冬蟲夏草隔離、晶亮潤膚乳液、立體透亮水光棒、唯我水感妝前乳）
+                # 比對到 0 則評論，走進這個分支被清空。原本下面那道「不在 precomputed
+                # 就跳過」的保護擋不住，因為它在這段之後才執行。
+                if precomputed is not None and _product_key(brand, item_name) not in precomputed:
+                    processed += 1
+                    continue
                 product_cache.append({
                     "brand": brand, "item_name": item_name, "timestamp": timestamp,
                     "variants": {"": ([{"Indicator": ind, "Score": "", "Mentions": 0,
@@ -645,6 +678,8 @@ def main():
                 requests_out.append({
                     "key": _product_key(brand, item_name),
                     "brand": brand, "item_name": item_name, "subcategory": subcat,
+                    # 別稱要一起送出去，否則 agent 兩段式跟 API 模式看到的商品身份不一樣
+                    "aliases": [a for a in ([cn_name] + [x.strip() for x in alt_name.split("/")]) if a],
                     "indicators": target_indicators,
                     "reviews": [{"index": i, "likes": r.get("likes", 0),
                                  "content": (r.get("content", "") or "").replace(chr(10), " ")}
@@ -671,7 +706,8 @@ def main():
             else:
                 annotations = None
             variant_results = compute_product_scores_with_variants(
-                brand, item_name, target_indicators, unique_reviews, annotations=annotations
+                brand, item_name, target_indicators, unique_reviews, annotations=annotations,
+                aliases=[a for a in ([cn_name] + [x.strip() for x in alt_name.split("/")]) if a],
             )
 
             # 累計子分類 EMA 統計（所有子款合計，因為 EMA 是子分類層級的）
