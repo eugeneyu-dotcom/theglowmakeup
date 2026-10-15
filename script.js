@@ -33,7 +33,7 @@ let articlesCache = null;
 async function getArticles() {
     if (articlesCache) return articlesCache;
     try {
-        const res = await fetch('articles.json?v=129');
+        const res = await fetch('articles.json?v=130');
         const data = await res.json();
         articlesCache = (data.articles || []).slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
         return articlesCache;
@@ -792,7 +792,7 @@ let scoresDataCache = null;
 async function getSiteData() {
     if (siteDataCache) return siteDataCache;
     try {
-        const response = await fetch('site-data.json?v=36');
+        const response = await fetch('site-data.json?v=37');
         siteDataCache = await response.json();
         return siteDataCache;
     } catch (err) {
@@ -1139,7 +1139,7 @@ function filterTypesByScoredSubcats(types, scoredSubcats) {
 // Nav Logic (Mega Menu)
 async function initNav() {
     try {
-        const [response, scoredSubcats] = await Promise.all([fetch('site-data.json?v=36'), getScoredSubcats()]);
+        const [response, scoredSubcats] = await Promise.all([fetch('site-data.json?v=37'), getScoredSubcats()]);
         const data = await response.json();
         const navContainer = document.getElementById('desktop-nav');
         if (!navContainer) return;
