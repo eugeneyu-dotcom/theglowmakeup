@@ -33,7 +33,7 @@ let articlesCache = null;
 async function getArticles() {
     if (articlesCache) return articlesCache;
     try {
-        const res = await fetch('articles.json?v=144');
+        const res = await fetch('articles.json?v=145');
         const data = await res.json();
         articlesCache = (data.articles || []).slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
         return articlesCache;
@@ -250,6 +250,20 @@ async function renderSkincareArticles() {
             heading.innerHTML = isEventCategory
                 ? 'Event Center / <span class="text-[#f2a7b5] text-2xl not-italic">活動快訊</span>'
                 : 'Skincare Column / <span class="text-[#f2a7b5] text-2xl not-italic">保養專欄</span>';
+        }
+        // 畫面標題換了，瀏覽器分頁標題與 meta 也要跟著換；原本只換 H1，分頁標題仍是
+        // 「保養專欄 | Glow Makeup」，跟畫面對不上。canonical 一併指向自己：不然這一頁
+        // 對外宣告自己是保養專欄列表的複本，換了標題也不會被 Google 採用。
+        if (isEventCategory) {
+            const eventUrl = 'https://www.theglowmakeup.org/skincare-blog.html?category=' + encodeURIComponent('活動');
+            const eventTitle = '活動快訊 | Glow Makeup';
+            const eventDesc = 'Glow Makeup 活動快訊：百貨週年慶與檔期優惠整理，活動時間與內容一次看。';
+            document.title = eventTitle;
+            const setMeta = (sel, attr, val) => { const el = document.querySelector(sel); if (el) el.setAttribute(attr, val); };
+            setMeta('meta[name="description"]', 'content', eventDesc);
+            setMeta('meta[property="og:title"]', 'content', eventTitle);
+            setMeta('meta[property="og:description"]', 'content', eventDesc);
+            setMeta('link[rel="canonical"]', 'href', eventUrl);
         }
         tabsContainer.style.display = '';
         renderCategoryTabs(allArticles, tabsContainer);
