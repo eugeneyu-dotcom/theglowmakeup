@@ -6,6 +6,8 @@
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      // 只在正式網域送資料，本機預覽與 vercel 預覽網址不進 GA4（官方停用開關）
+      if (!/^(www\.)?theglowmakeup\.org$/.test(location.hostname)) window['ga-disable-G-0X15DLCVLR'] = true;
       gtag('js', new Date());
       gtag('config', 'G-0X15DLCVLR');
     </script>
