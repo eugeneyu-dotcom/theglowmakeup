@@ -132,7 +132,7 @@ async function renderNewProducts() {
     const grid = document.getElementById('new-products-grid');
     if (!grid) return;
     try {
-        const res = await fetch('new-products.json?v=6');
+        const res = await fetch('new-products.json?v=7');
         const data = await res.json();
         const products = data.products || [];
         if (products.length === 0) {
@@ -795,9 +795,9 @@ async function initHomeQuizVisibility() {
 // 5. Cruel Battle 殘酷擂台（真實資料版：composite/indicators/testimonial 全部來自 scores-data.json）
 
 const battleData = {
-    'makeup': { title: '2026 年度氣墊粉餅服貼大戰', subcategory: '氣墊粉餅' },
-    'skincare': { title: '2026 年度卸妝膏清潔力對決', subcategory: '卸妝膏' },
-    'blush': { title: '2026 年度腮紅顯色大戰', subcategory: '腮紅' }
+    'powder': { title: '2026 年度蜜粉定妝大戰', subcategory: '蜜粉' },
+    'lotion': { title: '2026 年度乳液保濕力對決', subcategory: '乳液' },
+    'eyeshadow': { title: '2026 年度眼影盤顯色大戰', subcategory: '眼影/眼影盤' }
 };
 
 let siteDataCache = null;
@@ -1436,7 +1436,7 @@ window.addEventListener('DOMContentLoaded', () => {
     renderSubcatTop5('subcat-top5-grid', '粉底液');
     if (document.getElementById('sentiment-left')) {
         const firstBtn = document.querySelector('.battle-btn');
-        switchBattle('makeup', firstBtn);
+        switchBattle('powder', firstBtn);
     }
 });
 

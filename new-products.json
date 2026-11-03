@@ -1,26 +1,26 @@
 {
   "_comment": "首頁「美妝新品快報」資料來源：人工逐一開啟品牌官網頁面查證後手動整理（非自動抓取）。原本品牌選定依 scores-data.json 裡評論最多的 10 個專櫃品牌，2026-09-10 起應使用者要求額外加入 NARS、肌膚之鑰共 12 個品牌（不分排名，純粹展示新品）。每次更新前務必重新開啟 source_url 核對品項是否還在架上，不要憑舊資料或記憶直接沿用。image 欄位是從官網頁面下載到本機 assets/new-products/ 的真實商品圖（非熱連結）。DIOR/CHANEL/Bobbi Brown/雅詩蘭黛的圖是靠品牌官網有防盜鏈保護（直接下載會403），改用瀏覽器內 fetch+canvas 縮圖再逐字核對 checksum 正確才寫檔取得，非熱連結；M.A.C/YSL/植村秀/蘭蔻/資生堂/MAKE UP FOR EVER/NARS/肌膚之鑰是圖片伺服器沒防盜鏈，直接下載即可。",
-  "_last_updated": "2026-09-10",
+  "_last_updated": "2026-11-03",
   "products": [
     {
       "brand": "DIOR",
-      "name": "迪奧巨星持色唇膏－極霧",
+      "name": "迪奧金緻雙頭唇釉",
       "category": "彩妝",
-      "highlight": "24小時長效持色、不沾染，10色可選",
+      "highlight": "聖誕限定，「柔霧星光」與「閃耀釉光」雙重妝效，6色可選",
       "image": "assets/new-products/dior.jpg",
-      "source_url": "https://www.dior.com/zh_tw/beauty/page/all-new-arrivals.html",
+      "source_url": "https://www.dior.com/zh_tw/beauty/products/%E8%BF%AA%E5%A5%A7%E9%87%91%E7%B7%BB%E9%9B%99%E9%A0%AD%E5%94%87%E9%87%89-Y0000440.html",
       "source_label": "DIOR 官網",
-      "verified_date": "2026-09-10"
+      "verified_date": "2026-11-03"
     },
     {
       "brand": "CHANEL",
-      "name": "香奈兒摩登COCO極致印記系列",
+      "name": "香奈兒COCO唇膏 #130／#124 新色",
       "category": "彩妝",
-      "highlight": "限量彩妝系列，含九色眼影#587極致摩登、COCO唇膏#165極致CRUSH限定",
+      "highlight": "雪境聖誕假期彩妝新登場，#130 La Pausa法式別墅（淺桃粉）、#124瑪麗（柔粉紅）",
       "image": "assets/new-products/chanel.jpg",
       "source_url": "https://www.chanel.com/tw/makeup/",
       "source_label": "CHANEL 官網",
-      "verified_date": "2026-09-10"
+      "verified_date": "2026-11-03"
     },
     {
       "brand": "M.A.C",
