@@ -1171,46 +1171,46 @@
   },
   "精華液": {
     "吸收滲透力": {
-      "importance": 0.0006,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "importance": 0.0504,
+      "raw_importance_last_run": 0.1667,
+      "mentions_last_run": 6,
+      "last_updated": "2026-11-03 11:16:43"
     },
     "清爽度": {
-      "importance": 0.0003,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "importance": 0.0335,
+      "raw_importance_last_run": 0.1111,
+      "mentions_last_run": 4,
+      "last_updated": "2026-11-03 11:16:43"
     },
     "膚況穩定度": {
-      "importance": 0.0007,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "importance": 0.0422,
+      "raw_importance_last_run": 0.1389,
+      "mentions_last_run": 5,
+      "last_updated": "2026-11-03 11:16:43"
     },
     "致痘風險": {
-      "importance": 0.0004,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "importance": 0.0086,
+      "raw_importance_last_run": 0.0278,
+      "mentions_last_run": 1,
+      "last_updated": "2026-11-03 11:16:43"
     },
     "成分配方": {
-      "importance": 0.0003,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "importance": 0.0419,
+      "raw_importance_last_run": 0.1389,
+      "mentions_last_run": 5,
+      "last_updated": "2026-11-03 11:16:43"
     },
     "功效顯著度": {
-      "importance": 0.001,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "importance": 0.0757,
+      "raw_importance_last_run": 0.25,
+      "mentions_last_run": 9,
+      "last_updated": "2026-11-03 11:16:43"
     },
     "修復改善": {
-      "importance": 0.0003,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "importance": 0.0335,
+      "raw_importance_last_run": 0.1111,
+      "mentions_last_run": 4,
+      "last_updated": "2026-11-03 11:16:43"
     }
   },
   "眼霜": {
