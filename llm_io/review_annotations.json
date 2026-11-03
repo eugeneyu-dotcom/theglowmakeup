@@ -5303,7 +5303,7 @@
   },
   "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏101.html#p0": {
    "product_match": "mismatch",
-   "is_ad": true,
+   "is_ad": false,
    "credibility": "low",
    "sub_variant": ""
   },
@@ -5314,7 +5314,7 @@
    "sub_variant": ""
   },
   "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏103.html#p0": {
-   "product_match": "uncertain",
+   "product_match": "match",
    "is_ad": false,
    "credibility": "mid",
    "sub_variant": ""
@@ -5428,7 +5428,7 @@
    "sub_variant": ""
   },
   "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏13.html#p0": {
-   "product_match": "uncertain",
+   "product_match": "match",
    "is_ad": false,
    "credibility": "high",
    "sub_variant": ""
@@ -5460,7 +5460,181 @@
   "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏18.html#p0": {
    "product_match": "match",
    "is_ad": false,
+   "credibility": "mid",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏3.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "mid",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏4.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "mid",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏5.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏67.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏222.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "mid",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏224.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "mid",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏226.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
    "credibility": "high",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏21.html#p0": {
+   "product_match": "uncertain",
+   "is_ad": false,
+   "credibility": "mid",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏28.html#p0": {
+   "product_match": "uncertain",
+   "is_ad": false,
+   "credibility": "mid",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏221.html#p0": {
+   "product_match": "uncertain",
+   "is_ad": false,
+   "credibility": "mid",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏2.html#p0": {
+   "product_match": "match",
+   "is_ad": true,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏6.html#p0": {
+   "product_match": "match",
+   "is_ad": true,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏83.html#p0": {
+   "product_match": "match",
+   "is_ad": true,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏88.html#p0": {
+   "product_match": "match",
+   "is_ad": true,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏219.html#p0": {
+   "product_match": "match",
+   "is_ad": true,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏220.html#p0": {
+   "product_match": "match",
+   "is_ad": true,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏19.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏20.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏24.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏25.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏27.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏29.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏30.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏37.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏38.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏40.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏223.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏225.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://唇膏/肌膚之鑰奢華訂製粉漾潤唇膏/肌膚之鑰唇膏231.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
    "sub_variant": ""
   }
  },
@@ -9174,7 +9348,7 @@
   "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊12.html#p0": {
    "product_match": "match",
    "is_ad": false,
-   "credibility": "mid",
+   "credibility": "high",
    "sub_variant": ""
   },
   "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊13.html#p0": {
@@ -9196,9 +9370,9 @@
    "sub_variant": ""
   },
   "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊16.html#p0": {
-   "product_match": "uncertain",
+   "product_match": "match",
    "is_ad": false,
-   "credibility": "mid",
+   "credibility": "high",
    "sub_variant": ""
   },
   "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊17.html#p0": {
@@ -9251,19 +9425,19 @@
   },
   "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊24.html#p0": {
    "product_match": "mismatch",
-   "is_ad": true,
-   "credibility": "low",
-   "sub_variant": ""
-  },
-  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊25.html#p0": {
-   "product_match": "uncertain",
    "is_ad": false,
    "credibility": "low",
    "sub_variant": ""
   },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊25.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "mid",
+   "sub_variant": ""
+  },
   "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊26.html#p0": {
    "product_match": "mismatch",
-   "is_ad": true,
+   "is_ad": false,
    "credibility": "low",
    "sub_variant": ""
   },
@@ -9280,7 +9454,7 @@
    "sub_variant": ""
   },
   "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊3.html#p0": {
-   "product_match": "uncertain",
+   "product_match": "match",
    "is_ad": false,
    "credibility": "low",
    "sub_variant": ""
@@ -9300,7 +9474,7 @@
   "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊6.html#p0": {
    "product_match": "match",
    "is_ad": false,
-   "credibility": "high",
+   "credibility": "mid",
    "sub_variant": ""
   },
   "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊7.html#p0": {
@@ -9310,12 +9484,486 @@
    "sub_variant": ""
   },
   "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊8.html#p0": {
-   "product_match": "uncertain",
+   "product_match": "match",
    "is_ad": false,
    "credibility": "mid",
    "sub_variant": ""
   },
   "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊9.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊102.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊106.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊108.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "mid",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊122.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "mid",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊30.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "mid",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊34.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "high",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊40.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "mid",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊41.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "mid",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊48.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "high",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊49.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "high",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊51.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "mid",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊53.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "mid",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊56.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "high",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊58.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊59.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊71.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊72.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "mid",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊76.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "mid",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊80.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "mid",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊81.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "mid",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊97.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "mid",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊98.html#p0": {
+   "product_match": "match",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊104.html#p0": {
+   "product_match": "match",
+   "is_ad": true,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊105.html#p0": {
+   "product_match": "match",
+   "is_ad": true,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊110.html#p0": {
+   "product_match": "match",
+   "is_ad": true,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊111.html#p0": {
+   "product_match": "match",
+   "is_ad": true,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊114.html#p0": {
+   "product_match": "match",
+   "is_ad": true,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊116.html#p0": {
+   "product_match": "match",
+   "is_ad": true,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊118.html#p0": {
+   "product_match": "match",
+   "is_ad": true,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊119.html#p0": {
+   "product_match": "match",
+   "is_ad": true,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊120.html#p0": {
+   "product_match": "match",
+   "is_ad": true,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊121.html#p0": {
+   "product_match": "match",
+   "is_ad": true,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊31.html#p0": {
+   "product_match": "match",
+   "is_ad": true,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊35.html#p0": {
+   "product_match": "match",
+   "is_ad": true,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊74.html#p0": {
+   "product_match": "match",
+   "is_ad": true,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊84.html#p0": {
+   "product_match": "match",
+   "is_ad": true,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊89.html#p0": {
+   "product_match": "match",
+   "is_ad": true,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊90.html#p0": {
+   "product_match": "match",
+   "is_ad": true,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊100.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊101.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊103.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊107.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊109.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊112.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊113.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊115.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊117.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊33.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊37.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊38.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊39.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊42.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊43.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊44.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊45.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊46.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊47.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊50.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊57.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊61.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊62.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊66.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊67.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊70.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊73.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊75.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊79.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊83.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊85.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊86.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊87.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊88.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊91.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊92.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊93.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊94.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊95.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊96.html#p0": {
+   "product_match": "mismatch",
+   "is_ad": false,
+   "credibility": "low",
+   "sub_variant": ""
+  },
+  "xhs://氣墊粉餅/肌膚之鑰水潤光采氣墊粉霜/肌膚之鑰氣墊99.html#p0": {
    "product_match": "mismatch",
    "is_ad": false,
    "credibility": "low",
