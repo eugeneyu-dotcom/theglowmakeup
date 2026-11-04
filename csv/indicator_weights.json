@@ -175,40 +175,40 @@
   },
   "蜜粉": {
     "粉質細緻度": {
-      "importance": 0.0026,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "importance": 0.0203,
+      "raw_importance_last_run": 0.0617,
+      "mentions_last_run": 10,
+      "last_updated": "2026-11-04 10:08:18"
     },
     "毛孔柔焦度": {
-      "importance": 0.0017,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "importance": 0.0086,
+      "raw_importance_last_run": 0.0247,
+      "mentions_last_run": 4,
+      "last_updated": "2026-11-04 10:08:18"
     },
     "控油持妝力": {
-      "importance": 0.0027,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "importance": 0.0186,
+      "raw_importance_last_run": 0.0556,
+      "mentions_last_run": 9,
+      "last_updated": "2026-11-04 10:08:18"
     },
     "保濕度": {
-      "importance": 0.0006,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "importance": 0.006,
+      "raw_importance_last_run": 0.0185,
+      "mentions_last_run": 3,
+      "last_updated": "2026-11-04 10:08:18"
     },
     "輕透度": {
-      "importance": 0.0007,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "importance": 0.0116,
+      "raw_importance_last_run": 0.037,
+      "mentions_last_run": 6,
+      "last_updated": "2026-11-04 10:08:18"
     },
     "取粉設計": {
-      "importance": 0.0024,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "importance": 0.0202,
+      "raw_importance_last_run": 0.0617,
+      "mentions_last_run": 10,
+      "last_updated": "2026-11-04 10:08:18"
     }
   },
   "腮紅": {
