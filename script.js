@@ -366,9 +366,23 @@ async function renderNewsVoices() {
 // 開架美妝（drugstore-beauty.html）：Olive Young 韓系＋台灣藥妝通路的商品目錄，資料來自 drugstore-products.json。
 // 第一版沒有評分與心得（開架品牌尚未跑評論管線），只放品牌、品名、重點；卡片不外連（2026-11-04 使用者決定，等接上評分、做出站內商品頁再連站內）。
 // source_url 仍保留在 JSON 裡，之後做站內頁時可用。
-const DRUGSTORE_GROUPS = { all: '全部', olive: 'Olive Young 韓系', tw: '台灣藥妝通路' };
-const DRUGSTORE_CATEGORIES = ['彩妝', '保養'];
-window.drugstoreFilter = 'all';
+// 分類（2026-11-04 使用者定案）：藥妝開架品牌依品牌產地分，Olive Young 依品類分。
+// 沒有商品的分類不顯示（台灣品牌、頭髮保養品牌待補）。site-data.json 的 drugstoreMenu 是導覽列下拉，兩邊要同步。
+const DRUGSTORE_MENU = [
+    { group: 'drug', name: '藥妝開架品牌', en: 'Drugstore', sections: ['台灣品牌', '歐美品牌', '日本品牌', '韓國品牌'] },
+    { group: 'olive', name: 'Olive Young', en: 'Olive Young', sections: ['熱門彩妝品牌', '保養品牌', '頭髮保養品牌'] }
+];
+window.drugstoreState = (() => {
+    const st = { group: 'all', section: 'all' };
+    try {
+        const q = new URLSearchParams(location.search);
+        const sec = q.get('section'), grp = q.get('group');
+        const hit = DRUGSTORE_MENU.find(g => g.sections.includes(sec));
+        if (hit) { st.group = hit.group; st.section = sec; }
+        else if (DRUGSTORE_MENU.some(g => g.group === grp)) st.group = grp;
+    } catch (e) {}
+    return st;
+})();
 
 async function renderDrugstore() {
     const list = document.getElementById('drugstore-list');
@@ -376,7 +390,7 @@ async function renderDrugstore() {
     if (!list || !filters) return;
     let products = [];
     try {
-        const res = await fetch('drugstore-products.json?v=3');
+        const res = await fetch('drugstore-products.json?v=5');
         products = (await res.json()).products || [];
     } catch (err) {
         console.error('drugstore-products.json 載入失敗', err);
@@ -386,32 +400,45 @@ async function renderDrugstore() {
         list.innerHTML = '<div class="text-center text-gray-400 text-sm py-12">商品整理中，敬請期待</div>';
         return;
     }
+    const st = window.drugstoreState;
+    const has = (g, sec) => products.some(p => p.group === g && p.section === sec);
+    const btn = (attr, val, label, on, dark) => `<button type="button" ${attr}="${escHtml(val)}" class="px-5 py-2 rounded-full text-sm font-black transition-colors ${on ? (dark ? 'bg-[#2d2d2d] text-white' : 'bg-[#f2a7b5] text-white') : (dark ? 'bg-white text-gray-500 border border-[#2d2d2d]/20 hover:text-[#2d2d2d]' : 'bg-white text-gray-500 border border-[#f2a7b5]/30 hover:text-[#f2a7b5]')}">${escHtml(label)}</button>`;
 
     const draw = () => {
-        filters.innerHTML = Object.entries(DRUGSTORE_GROUPS).map(([key, label]) => {
-            const on = window.drugstoreFilter === key;
-            return `<button type="button" data-group="${key}" class="px-5 py-2 rounded-full text-sm font-black transition-colors ${on ? 'bg-[#f2a7b5] text-white' : 'bg-white text-gray-500 border border-[#f2a7b5]/30 hover:text-[#f2a7b5]'}">${label}</button>`;
-        }).join('');
-        filters.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => {
-            window.drugstoreFilter = btn.dataset.group;
-            draw();
+        const groupDef = DRUGSTORE_MENU.find(g => g.group === st.group);
+        let html = btn('data-group', 'all', '全部', st.group === 'all')
+            + DRUGSTORE_MENU.map(g => btn('data-group', g.group, g.name, st.group === g.group)).join('');
+        if (groupDef) {
+            const secs = groupDef.sections.filter(sec => has(groupDef.group, sec));
+            html += '<div class="basis-full h-0"></div>'
+                + btn('data-section', 'all', '全部', st.section === 'all', true)
+                + secs.map(sec => btn('data-section', sec, sec, st.section === sec, true)).join('');
+        }
+        filters.innerHTML = html;
+        filters.querySelectorAll('button[data-group]').forEach(b => b.addEventListener('click', () => {
+            st.group = b.dataset.group; st.section = 'all'; draw();
+        }));
+        filters.querySelectorAll('button[data-section]').forEach(b => b.addEventListener('click', () => {
+            st.section = b.dataset.section; draw();
         }));
 
-        const shown = products.filter(p => window.drugstoreFilter === 'all' || p.group === window.drugstoreFilter);
-        list.innerHTML = DRUGSTORE_CATEGORIES.map(cat => {
-            const items = shown.filter(p => p.category === cat);
-            if (items.length === 0) return '';
-            return `
+        let blocks = '';
+        let n = 0;
+        DRUGSTORE_MENU.filter(g => st.group === 'all' || st.group === g.group).forEach(g => {
+            g.sections.filter(sec => st.section === 'all' || st.section === sec).forEach(sec => {
+                const items = products.filter(p => p.group === g.group && p.section === sec);
+                if (items.length === 0) return;
+                n += items.length;
+                blocks += `
             <section class="mb-14">
-                <h2 class="text-2xl font-black mb-6 italic border-l-8 border-[#f2a7b5] pl-4">${cat === '彩妝' ? 'Makeup' : 'Skincare'} / <span class="text-[#f2a7b5] text-lg not-italic">${cat}</span></h2>
+                <h2 class="text-2xl font-black mb-6 italic border-l-8 border-[#f2a7b5] pl-4">${escHtml(g.en)} / <span class="text-[#f2a7b5] text-lg not-italic">${escHtml(sec)}</span></h2>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
                     ${items.map((p, i) => `
                     <div class="bg-white rounded-2xl overflow-hidden border border-[#f2a7b5]/15 shadow-sm flex flex-col">
                         ${newProductImageBlock(p, i)}
                         <div class="p-3 md:p-5 flex flex-col flex-grow">
-                            <div class="flex flex-wrap items-center gap-1.5 mb-2">
+                            <div class="mb-2">
                                 <span class="${BRAND_BADGE_COLORS[i % BRAND_BADGE_COLORS.length]} text-white text-[10px] font-black px-3 py-1 rounded-full tracking-wide">${escHtml(p.brand)}</span>
-                                <span class="text-[10px] font-bold text-gray-400">${p.group === 'olive' ? 'Olive Young' : '藥妝通路'}</span>
                             </div>
                             <h3 class="font-black text-sm md:text-base leading-snug mb-1 line-clamp-2">${escHtml(p.name)}</h3>
                             <p class="hidden md:block text-xs text-gray-500 leading-relaxed line-clamp-3">${escHtml(p.highlight || '')}</p>
@@ -419,7 +446,9 @@ async function renderDrugstore() {
                     </div>`).join('')}
                 </div>
             </section>`;
-        }).join('');
+            });
+        });
+        list.innerHTML = blocks || '<div class="text-center text-gray-400 text-sm py-12">這個分類商品整理中，敬請期待</div>';
     };
     draw();
 }
@@ -1021,7 +1050,7 @@ let scoresDataCache = null;
 async function getSiteData() {
     if (siteDataCache) return siteDataCache;
     try {
-        const response = await fetch('site-data.json?v=39');
+        const response = await fetch('site-data.json?v=40');
         siteDataCache = await response.json();
         return siteDataCache;
     } catch (err) {
@@ -1093,42 +1122,90 @@ async function topItemsOverall(limit = 4, minMentions = RANKING_MIN_MENTIONS) {
 }
 
 // 專櫃美妝／精選評比 landing 頁用：真實 Top 商品卡片（board=討論則數、review=綜合評分）
-async function renderSpotlightCards(containerId, mode) {
-    const container = document.getElementById(containerId);
-    if (!container) return;
+function spotlightCardHtml(e, mode) {
+    const href = `item-detail.html?item=${encodeURIComponent(e.name)}&from=${mode}`;
+    const badge = mode === 'board'
+        ? `<span class="text-xs font-bold text-[#f2a7b5] bg-[#f2a7b5]/10 px-2.5 py-1 rounded-full">🔥 ${e.mentions} 則真實討論</span>`
+        : `<div class="flex items-center gap-1 bg-[#f2a7b5]/10 px-2 py-0.5 rounded-full text-xs font-bold text-[#f2a7b5]"><span>★ ${e.composite.toFixed(1)}</span><span class="text-xs text-gray-500 font-normal">(${e.mentions} 則提及)</span></div>`;
+    const cta = mode === 'board' ? '進入看詳細看板介紹與知識點 ➔' : '查看各項性能指標網友綜合得分 ➔';
+    const quote = e.testimonial
+        ? `「${e.testimonial.text.slice(0, 70)}${e.testimonial.text.length > 70 ? '…' : ''}」`
+        : `真實社群綜合評分 ${e.composite.toFixed(1)} 分，${e.subcat}類別中的高分之選。`;
+    return `
+        <a href="${href}" class="bg-white rounded-[32px] p-6 border border-[#f2a7b5]/10 shadow-sm hover:shadow-lg transition-all group flex flex-col sm:flex-row gap-6 items-stretch">
+            <div class="w-full sm:w-2/5 aspect-square sm:aspect-auto bg-[#fff9f5] rounded-2xl p-4 overflow-hidden flex items-center justify-center border border-[#f2a7b5]/10 shrink-0">
+                <img src="${e.img || ''}" alt="${e.brand}" class="max-w-full max-h-[160px] object-contain group-hover:scale-105 transition-transform duration-500">
+            </div>
+            <div class="flex flex-col justify-between py-2">
+                <div>
+                    <div class="flex justify-between items-center gap-2 mb-2">
+                        <span class="text-xs font-black tracking-widest text-gray-500 uppercase">${e.brand}</span>
+                        ${badge}
+                    </div>
+                    <h2 class="font-black text-xl text-[#2d2d2d] group-hover:text-[#f2a7b5] transition-colors mb-2">${e.name}</h2>
+                    <p class="text-xs text-gray-500 leading-relaxed line-clamp-3">${quote}</p>
+                </div>
+                <span class="text-xs font-bold text-[#f2a7b5] mt-4 flex items-center gap-1 group-hover:translate-x-1 transition-transform">${cta}</span>
+            </div>
+        </a>
+    `;
+}
+
+// 專櫃美妝頁的品牌篩選：有討論量門檻（同榜單）的商品才列出，依討論則數排序；全部＝原本的熱門前 4 名
+const BOARD_BRAND_PREVIEW = 8;
+
+async function renderBoardBrands(container, filters) {
+    const [scores, siteData] = await Promise.all([getScoresData(), getSiteData()]);
+    const pool = Object.values(scores || {}).filter(e => e.composite != null && (e.mentions || 0) >= RANKING_MIN_MENTIONS);
+    if (pool.length === 0) { filters.innerHTML = ''; return; }
+    const byBrand = {};
+    pool.forEach(e => { (byBrand[e.brand] = byBrand[e.brand] || []).push(e); });
+    const brands = Object.keys(byBrand).sort((a, b) => byBrand[b].length - byBrand[a].length);
+    let current = 'all', expanded = false;
+    try { const b = new URLSearchParams(location.search).get('brand'); if (byBrand[b]) current = b; } catch (e) {}
+
+    const draw = () => {
+        filters.innerHTML = ['all', ...brands].map(key => {
+            const on = current === key;
+            return `<button type="button" data-brand="${escHtml(key)}" class="px-5 py-2 rounded-full text-sm font-black transition-colors ${on ? 'bg-[#f2a7b5] text-white' : 'bg-white text-gray-500 border border-[#f2a7b5]/30 hover:text-[#f2a7b5]'}">${key === 'all' ? '全部品牌' : escHtml(key)}</button>`;
+        }).join('');
+        filters.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => {
+            current = btn.dataset.brand; expanded = false; draw();
+        }));
+
+        if (current === 'all') {
+            container.className = 'grid grid-cols-1 md:grid-cols-2 gap-8';
+            renderSpotlightCardsInto(container, 'board');
+            return;
+        }
+        const list = byBrand[current].slice().sort((a, b) => (b.mentions - a.mentions) || (b.composite - a.composite))
+            .map(e => ({ ...e, img: findItemImage(siteData, e.subcat, e.brand, e.name) }));
+        const shown = expanded ? list : list.slice(0, BOARD_BRAND_PREVIEW);
+        container.className = 'grid grid-cols-1 md:grid-cols-2 gap-8';
+        container.innerHTML = `<div class="col-span-full text-center text-xs text-gray-400 font-bold">${escHtml(current)}：${list.length} 款討論量足夠的商品，依真實討論則數排序</div>`
+            + shown.map(e => spotlightCardHtml(e, 'board')).join('')
+            + (list.length > shown.length ? `<div class="col-span-full text-center"><button type="button" id="board-brand-more" class="px-6 py-2 rounded-full text-sm font-black bg-white text-[#f2a7b5] border border-[#f2a7b5]/40 hover:bg-[#f2a7b5] hover:text-white transition-colors">顯示全部 ${list.length} 款 ➔</button></div>` : '');
+        const more = document.getElementById('board-brand-more');
+        if (more) more.addEventListener('click', () => { expanded = true; draw(); });
+    };
+    draw();
+}
+
+async function renderSpotlightCardsInto(container, mode) {
     const items = await topItemsOverall(4);
     if (items.length === 0) {
         container.innerHTML = '<div class="col-span-full text-center text-gray-400 text-sm py-12">評分資料建置中，敬請期待</div>';
         return;
     }
-    container.innerHTML = items.map(e => {
-        const href = `item-detail.html?item=${encodeURIComponent(e.name)}&from=${mode}`;
-        const badge = mode === 'board'
-            ? `<span class="text-xs font-bold text-[#f2a7b5] bg-[#f2a7b5]/10 px-2.5 py-1 rounded-full">🔥 ${e.mentions} 則真實討論</span>`
-            : `<div class="flex items-center gap-1 bg-[#f2a7b5]/10 px-2 py-0.5 rounded-full text-xs font-bold text-[#f2a7b5]"><span>★ ${e.composite.toFixed(1)}</span><span class="text-xs text-gray-500 font-normal">(${e.mentions} 則提及)</span></div>`;
-        const cta = mode === 'board' ? '進入看詳細看板介紹與知識點 ➔' : '查看各項性能指標網友綜合得分 ➔';
-        const quote = e.testimonial
-            ? `「${e.testimonial.text.slice(0, 70)}${e.testimonial.text.length > 70 ? '…' : ''}」`
-            : `真實社群綜合評分 ${e.composite.toFixed(1)} 分，${e.subcat}類別中的高分之選。`;
-        return `
-            <a href="${href}" class="bg-white rounded-[32px] p-6 border border-[#f2a7b5]/10 shadow-sm hover:shadow-lg transition-all group flex flex-col sm:flex-row gap-6 items-stretch">
-                <div class="w-full sm:w-2/5 aspect-square sm:aspect-auto bg-[#fff9f5] rounded-2xl p-4 overflow-hidden flex items-center justify-center border border-[#f2a7b5]/10 shrink-0">
-                    <img src="${e.img || ''}" alt="${e.brand}" class="max-w-full max-h-[160px] object-contain group-hover:scale-105 transition-transform duration-500">
-                </div>
-                <div class="flex flex-col justify-between py-2">
-                    <div>
-                        <div class="flex justify-between items-center gap-2 mb-2">
-                            <span class="text-xs font-black tracking-widest text-gray-500 uppercase">${e.brand}</span>
-                            ${badge}
-                        </div>
-                        <h2 class="font-black text-xl text-[#2d2d2d] group-hover:text-[#f2a7b5] transition-colors mb-2">${e.name}</h2>
-                        <p class="text-xs text-gray-500 leading-relaxed line-clamp-3">${quote}</p>
-                    </div>
-                    <span class="text-xs font-bold text-[#f2a7b5] mt-4 flex items-center gap-1 group-hover:translate-x-1 transition-transform">${cta}</span>
-                </div>
-            </a>
-        `;
-    }).join('');
+    container.innerHTML = items.map(e => spotlightCardHtml(e, mode)).join('');
+}
+
+async function renderSpotlightCards(containerId, mode) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const filters = mode === 'board' ? document.getElementById('board-brand-filters') : null;
+    if (filters) return renderBoardBrands(container, filters);
+    return renderSpotlightCardsInto(container, mode);
 }
 
 // review-base.html「底妝精選評比」用：真實 Top5 + 真實指標雷達圖
@@ -1368,7 +1445,7 @@ function filterTypesByScoredSubcats(types, scoredSubcats) {
 // Nav Logic (Mega Menu)
 async function initNav() {
     try {
-        const [response, scoredSubcats] = await Promise.all([fetch('site-data.json?v=39'), getScoredSubcats()]);
+        const [response, scoredSubcats] = await Promise.all([fetch('site-data.json?v=40'), getScoredSubcats()]);
         const data = await response.json();
         const navContainer = document.getElementById('desktop-nav');
         if (!navContainer) return;
@@ -1405,6 +1482,29 @@ async function initNav() {
                     ${target.tagCategories.map(tag =>
                         `<a href="skincare-blog.html?category=${catParam}&amp;tag=${encodeURIComponent(tag)}" class="dropdown-item">${tag}</a>`
                     ).join('')}
+                `;
+
+                parent.appendChild(a);
+                parent.appendChild(menu);
+                navContainer.appendChild(parent);
+            } else if (target.drugstoreMenu) {
+                // 開架美妝：「藥妝開架品牌」（依產地）與「Olive Young」（依品類）兩組簡單下拉
+                const parent = document.createElement('div');
+                parent.className = 'dropdown-parent simple-dropdown h-full flex items-center';
+
+                const a = document.createElement('a');
+                a.href = 'drugstore-beauty.html';
+                a.className = 'nav-link hover:text-[#f2a7b5] h-full flex items-center';
+                a.innerHTML = `${target.name} &#x25BE;`;
+
+                const menu = document.createElement('div');
+                menu.className = 'dropdown-menu';
+                menu.innerHTML = `
+                    <a href="drugstore-beauty.html" class="dropdown-item">全部開架美妝</a>
+                    ${target.drugstoreMenu.map(g => `
+                        <a href="drugstore-beauty.html?group=${g.group}" class="dropdown-item" style="color:var(--primary);font-weight:800">${g.name}</a>
+                        ${g.sections.map(sec => `<a href="drugstore-beauty.html?section=${encodeURIComponent(sec)}" class="dropdown-item" style="padding-left:40px;font-weight:600">${sec}</a>`).join('')}
+                    `).join('')}
                 `;
 
                 parent.appendChild(a);
@@ -1534,6 +1634,14 @@ function renderMobileNav(data, scoredSubcats) {
                 ${target.tagCategories.map(tag =>
                     `<a href="skincare-blog.html?category=${catParam}&amp;tag=${encodeURIComponent(tag)}" class="mobile-nav-sub-item">${tag}</a>`
                 ).join('')}
+            `;
+        } else if (target.drugstoreMenu) {
+            submenu.innerHTML = `
+                <a href="drugstore-beauty.html" class="mobile-nav-sub-item">全部開架美妝</a>
+                ${target.drugstoreMenu.map(g => `
+                    <a href="drugstore-beauty.html?group=${g.group}" class="mobile-nav-type-label" style="display:block">${g.name}</a>
+                    ${g.sections.map(sec => `<a href="drugstore-beauty.html?section=${encodeURIComponent(sec)}" class="mobile-nav-sub-item">${sec}</a>`).join('')}
+                `).join('')}
             `;
         } else if (target.articleCategories) {
             submenu.innerHTML = `

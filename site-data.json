@@ -137,7 +137,27 @@
   {
    "id": "t2b",
    "name": "開架美妝",
-   "hasDropdown": false
+   "hasDropdown": true,
+   "drugstoreMenu": [
+    {
+     "name": "藥妝開架品牌",
+     "group": "drug",
+     "sections": [
+      "台灣品牌",
+      "歐美品牌",
+      "日本品牌",
+      "韓國品牌"
+     ]
+    },
+    {
+     "name": "Olive Young",
+     "group": "olive",
+     "sections": [
+      "熱門彩妝品牌",
+      "保養品牌"
+     ]
+    }
+   ]
   },
   {
    "id": "t3",
