@@ -36,6 +36,8 @@ FOLDER_TO_SUBCAT = {
     "卸妝水": "卸妝水", "卸妝棉": "卸妝棉", "眼唇卸妝液": "眼唇卸妝液", "去角質": "去角質",
     # 2026-09-21 補：資料夾叫「遮瑕」但 Items.csv 子分類是「遮瑕膏」，另兩個同名
     "遮瑕": "遮瑕膏", "妝前乳": "妝前乳", "定妝噴霧": "定妝噴霧",
+    # 2026-10-06 新增子分類「唇油」時一併補，避免又被靜默跳過
+    "唇油": "唇油",
 }
 
 # 品牌 → 可能出現在子資料夾開頭的別名（比對用，全部轉大寫比對）
@@ -71,11 +73,18 @@ def load_subcat_brand_ids():
 def match_brand(product_folder, brand_rows):
     """product_folder 開頭比對品牌別名，回傳 (id, brand, item_name) 或 None。"""
     pf = product_folder.upper()
+    hits = []
     for brand, iid, item_name in brand_rows:
         for alias in BRAND_ALIASES.get(brand, [brand]):
             if pf.startswith(alias.upper()):
-                return iid, brand, item_name
-    return None
+                hits.append((iid, brand, item_name))
+                break
+    # 同品牌在同一子分類有多個品項時（肌膚之鑰面霜/精華液/妝前乳），光比品牌會一律取第一個，
+    # 把新品項的貼文全部歸到舊品項。優先選「品項名稱出現在資料夾名稱裡」的那個。
+    for iid, brand, item_name in hits:
+        if item_name and item_name.upper() in pf:
+            return iid, brand, item_name
+    return hits[0] if hits else None
 
 
 def run(folders):
