@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Glow Makeup | AI成分查詢（設計預覽，非正式功能）</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css?v=51">
+</head>
+<body class="bg-[#fff9f5] text-[#2d2d2d] selection:bg-[#f2a7b5] selection:text-white">
+
+    <div class="bg-[#2d2d2d] text-white text-center text-xs font-bold py-2">
+        ⚠️ 這是設計預覽用的靜態模擬頁面，不是正式上線功能，拍照/分析都是假資料
+    </div>
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#f2a7b5]/10 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 h-20 w-full flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <h1 class="text-3xl font-black tracking-tighter text-[#f2a7b5] italic cursor-pointer">Glow Makeup.</h1>
+            </div>
+            <nav class="hidden lg:flex items-center gap-8 text-xl font-bold h-full text-gray-500">
+                <span>最新情報</span>
+                <span>美妝看板</span>
+                <span>精選評比</span>
+                <span>保養專欄</span>
+                <span class="text-[#f2a7b5]">AI成分查詢 <span class="text-[10px] bg-[#f2a7b5] text-white px-2 py-0.5 rounded-full align-middle">NEW</span></span>
+            </nav>
+            <div class="flex items-center gap-6">
+                <div class="flex items-center gap-2 bg-gray-100 rounded-full px-4 py-2">
+                    <span>&#x1F50D;</span>
+                    <span class="text-sm text-gray-400">搜尋美妝情報...</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-4 py-16">
+
+        <!-- Hero -->
+        <div class="text-center mb-14">
+            <span class="bg-[#f2a7b5]/10 text-[#f2a7b5] px-4 py-1 rounded-full text-xs font-bold tracking-widest">AI 成分查詢</span>
+            <h2 class="text-3xl md:text-4xl font-black mt-4 mb-4 leading-tight">拍一張成分表，<br class="md:hidden">看懂每一個你唸不出來的名字</h2>
+            <p class="text-gray-500 max-w-xl mx-auto">上傳或拍下商品背後的成分列表，AI 幫你翻成中文，並根據醫師衛教資料，標出孕婦、哺乳期、敏感肌需要特別注意的成分。</p>
+        </div>
+
+        <!-- Upload Card -->
+        <div id="upload-card" class="bg-white rounded-[32px] p-8 md:p-12 shadow-sm border border-[#f2a7b5]/10 mb-10">
+
+            <!-- Tab switcher -->
+            <div class="flex gap-2 bg-[#fdeef1] rounded-full p-1.5 max-w-sm mx-auto mb-10">
+                <button id="tab-photo-btn" onclick="document.getElementById('tab-photo').classList.remove('hidden'); document.getElementById('tab-text').classList.add('hidden'); document.getElementById('tab-photo-btn').classList.add('bg-white','shadow-sm','text-[#2d2d2d]'); document.getElementById('tab-photo-btn').classList.remove('text-gray-400'); document.getElementById('tab-text-btn').classList.remove('bg-white','shadow-sm','text-[#2d2d2d]'); document.getElementById('tab-text-btn').classList.add('text-gray-400');" class="flex-1 py-2.5 rounded-full font-bold text-sm bg-white shadow-sm text-[#2d2d2d] transition-all">📷 拍照／上傳圖片</button>
+                <button id="tab-text-btn" onclick="document.getElementById('tab-text').classList.remove('hidden'); document.getElementById('tab-photo').classList.add('hidden'); document.getElementById('tab-text-btn').classList.add('bg-white','shadow-sm','text-[#2d2d2d]'); document.getElementById('tab-text-btn').classList.remove('text-gray-400'); document.getElementById('tab-photo-btn').classList.remove('bg-white','shadow-sm','text-[#2d2d2d]'); document.getElementById('tab-photo-btn').classList.add('text-gray-400');" class="flex-1 py-2.5 rounded-full font-bold text-sm text-gray-400 transition-all">⌨️ 直接輸入成分文字</button>
+            </div>
+
+            <!-- Photo mode -->
+            <div id="tab-photo" class="text-center">
+                <div class="border-2 border-dashed border-[#f2a7b5]/30 rounded-3xl p-10 md:p-14">
+                    <div class="text-5xl mb-4">📷</div>
+                    <p class="font-black text-lg mb-2">拍照或上傳成分列表照片</p>
+                    <p class="text-sm text-gray-400 mb-8">支援中文、英文、日文、韓文成分標示</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button class="bg-[#f2a7b5] text-white font-bold py-3 px-8 rounded-full hover:scale-105 transition-transform shadow-sm">📸 開啟相機拍照</button>
+                        <button class="bg-white border-2 border-[#f2a7b5] text-[#f2a7b5] font-bold py-3 px-8 rounded-full hover:bg-[#f2a7b5]/5 transition-colors">上傳圖片</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text mode -->
+            <div id="tab-text" class="hidden">
+                <p class="font-black text-lg mb-2 text-center">直接貼上或輸入成分列表</p>
+                <p class="text-sm text-gray-400 mb-6 text-center">不用拍照，複製商品頁上的成分標示貼過來就可以查詢</p>
+                <textarea class="w-full border-2 border-[#f2a7b5]/20 rounded-2xl p-4 text-sm mb-6 focus:outline-none focus:border-[#f2a7b5]/60" rows="4" placeholder="例如：Water, Salicylic Acid, Glycerin, Alcohol Denat., Niacinamide...">Water, Salicylic Acid, Glycerin, Alcohol Denat., Niacinamide...</textarea>
+                <div class="text-center">
+                    <button class="bg-[#f2a7b5] text-white font-bold py-3 px-10 rounded-full hover:scale-105 transition-transform shadow-sm">🔍 成分查詢</button>
+                </div>
+            </div>
+
+            <button onclick="document.getElementById('upload-card').classList.add('hidden'); document.getElementById('loading-card').classList.remove('hidden'); setTimeout(()=>{document.getElementById('loading-card').classList.add('hidden'); document.getElementById('result-card').classList.remove('hidden');}, 1200);" class="block mx-auto mt-8 text-xs text-gray-400 underline hover:text-[#f2a7b5]">（設計預覽：點我看範例分析結果 →）</button>
+        </div>
+
+        <!-- Loading state -->
+        <div id="loading-card" class="hidden bg-white rounded-[32px] p-16 shadow-sm border border-[#f2a7b5]/10 text-center mb-10">
+            <div class="inline-block w-10 h-10 border-4 border-[#f2a7b5]/20 border-t-[#f2a7b5] rounded-full animate-spin mb-6"></div>
+            <p class="font-bold text-gray-400">AI 辨識成分中，約需 5-10 秒...</p>
+        </div>
+
+        <!-- Result state -->
+        <div id="result-card" class="hidden">
+
+            <div class="bg-white rounded-[32px] p-8 shadow-sm border border-[#f2a7b5]/10 mb-6 flex items-center gap-6">
+                <div class="w-20 h-20 bg-[#fdeef1] rounded-2xl flex items-center justify-center text-3xl shrink-0">🧴</div>
+                <div>
+                    <p class="text-xs font-black text-gray-400 mb-1">辨識到的商品類型</p>
+                    <p class="font-black text-lg">化妝水／精華液 成分列表</p>
+                    <p class="text-xs text-gray-400 mt-1">辨識出 12 項成分，其中 2 項有相關注意事項</p>
+                </div>
+            </div>
+
+            <!-- Warning cards -->
+            <h3 class="text-xl font-black mb-4">⚠️ 這 2 項成分，特定族群請多注意</h3>
+
+            <div class="bg-[#fff6e5] border border-[#f0c674]/50 rounded-3xl p-6 mb-4">
+                <div class="flex items-start justify-between gap-4 mb-2">
+                    <p class="font-black text-[#8a6d1f]">水楊酸 <span class="text-xs font-normal text-gray-500">Salicylic Acid</span></p>
+                    <span class="bg-[#f0c674] text-white text-xs font-bold px-3 py-1 rounded-full shrink-0">孕婦謹慎使用</span>
+                </div>
+                <p class="text-sm text-gray-600 leading-relaxed mb-3">低濃度外用水楊酸（如市售2%以下）皮膚吸收比例低，一般認為風險不高，但醫師通常不建議懷孕期間進行高濃度的果酸/水楊酸換膚，避免過度刺激。屬於「謹慎使用」而非絕對禁用，仍建議諮詢醫師。</p>
+                <p class="text-xs text-gray-400">資料來源：MedPartner美的好朋友（醫師藥師營養師團隊）〈懷孕期間孕婦10大保養品安全性全攻略〉</p>
+            </div>
+
+            <div class="bg-[#fdeef1] border border-[#f2a7b5]/40 rounded-3xl p-6 mb-8">
+                <div class="flex items-start justify-between gap-4 mb-2">
+                    <p class="font-black text-[#c96a80]">酒精（乙醇） <span class="text-xs font-normal text-gray-500">Alcohol Denat.</span></p>
+                    <span class="bg-[#f2a7b5] text-white text-xs font-bold px-3 py-1 rounded-full shrink-0">敏感肌／容易過敏者注意</span>
+                </div>
+                <p class="text-sm text-gray-600 leading-relaxed mb-3">酒精在配方中常用來幫助溶解原料、均勻油水相、產生清涼感，一般臉部保養品濃度多低於10%，低濃度使用一般不易造成問題。但皮膚科醫師指出酒精對敏感肌具刺激性，敏感肌或容易過敏族群建議選擇不含酒精的產品。</p>
+                <p class="text-xs text-gray-400">資料來源：照護線上（王筱涵醫師，台北市立萬芳醫院皮膚科主治醫師）〈敏感肌迷思破解〉</p>
+            </div>
+
+            <!-- Full ingredient list -->
+            <h3 class="text-xl font-black mb-4">📋 完整成分清單（中文對照）</h3>
+            <div class="bg-white rounded-3xl border border-[#f2a7b5]/10 shadow-sm overflow-hidden mb-8">
+                <table class="w-full text-sm text-left">
+                    <thead class="bg-[#fdeef1]"><tr>
+                        <th class="p-4 font-black">原文標示</th>
+                        <th class="p-4 font-black">中文名稱</th>
+                        <th class="p-4 font-black">備註</th>
+                    </tr></thead>
+                    <tbody>
+                        <tr class="border-t border-[#f2a7b5]/10"><td class="p-4">Water</td><td class="p-4">水</td><td class="p-4 text-gray-400">—</td></tr>
+                        <tr class="border-t border-[#f2a7b5]/10 bg-[#fff6e5]/50"><td class="p-4 font-bold">Salicylic Acid</td><td class="p-4 font-bold">水楊酸</td><td class="p-4 text-[#8a6d1f] font-bold">⚠️ 見上方警示</td></tr>
+                        <tr class="border-t border-[#f2a7b5]/10"><td class="p-4">Glycerin</td><td class="p-4">甘油</td><td class="p-4 text-gray-400">保濕劑</td></tr>
+                        <tr class="border-t border-[#f2a7b5]/10 bg-[#fdeef1]/50"><td class="p-4 font-bold">Alcohol Denat.</td><td class="p-4 font-bold">變性酒精</td><td class="p-4 text-[#c96a80] font-bold">⚠️ 見上方警示</td></tr>
+                        <tr class="border-t border-[#f2a7b5]/10"><td class="p-4">Niacinamide</td><td class="p-4">菸鹼醯胺</td><td class="p-4 text-gray-400">美白/屏障修護</td></tr>
+                        <tr class="border-t border-[#f2a7b5]/10"><td class="p-4 text-gray-400">...</td><td class="p-4 text-gray-400">（其餘7項略）</td><td class="p-4 text-gray-400">—</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="bg-gray-50 rounded-2xl p-5 text-xs text-gray-400 leading-relaxed mb-8">
+                ⚠️ 本工具僅供參考，AI辨識結果可能因拍攝角度、反光、字體不清晰而有誤差，不構成醫療建議。若對特定成分有疑慮，請諮詢醫師或藥師，並以商品官方標示為準。
+            </div>
+
+            <button onclick="document.getElementById('result-card').classList.add('hidden'); document.getElementById('upload-card').classList.remove('hidden');" class="text-sm text-[#f2a7b5] font-bold underline">← 重新掃描另一項商品</button>
+        </div>
+
+    </main>
+
+    <footer class="bg-white border-t border-[#f2a7b5]/10 py-16 text-center mt-10">
+        <h2 class="text-3xl font-black tracking-tighter text-[#f2a7b5] italic mb-4">Glow Makeup.</h2>
+        <p class="text-gray-400 text-sm">© 2026 美妝生活誌 - 妳的最美應援團</p>
+    </footer>
+
+</body>
+</html>
