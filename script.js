@@ -298,8 +298,8 @@ async function renderNewsNewProducts() {
     }
 }
 
-// 網友怎麼說：挑「綜合分 4.0 以上、評論量夠、心得 40～220 字、提到該商品、語氣正面、不含 # 標籤堆疊的廣告式文案」的真實心得，
-// 同一子分類、同一品牌各只取一則，依按讚數排序後依月份輪替起點，所以每個月會換一批，同一個月內固定不變。
+// 網友怎麼說：挑「綜合分 3.8 以上、評論量夠、心得 40～300 字、提到該商品、語氣正面、不含 # 標籤堆疊的廣告式文案」的真實心得，
+// 同一子分類只取一則、同一品牌最多兩則，依按讚數排序後依月份輪替起點，顯示 6 則；每個月會換一批，同一個月內固定不變。
 async function renderNewsVoices() {
     const section = document.getElementById('news-voices-section');
     const grid = document.getElementById('news-voices');
@@ -308,7 +308,8 @@ async function renderNewsVoices() {
         const [scores, siteData] = await Promise.all([getScoresData(), getSiteData()]);
         const pool = [];
         Object.values(scores || {}).forEach(e => {
-            if (e.composite == null || e.composite < 4.0 || (e.mentions || 0) < RANKING_MIN_MENTIONS) return;
+            if (e.composite == null || e.composite < 3.8 || (e.mentions || 0) < RANKING_MIN_MENTIONS) return;
+            // 綜合分門檻 3.8（對應「還不錯」以上）；符合條件的心得本來就少，4.0 只剩 5 則，放寬到 3.8 才湊得出多則。
             // 心得要「在講這個商品」（提到品牌或商品名四字詞）、語氣正面（跟旁邊顯示的高分一致），
             // 且不是 # 標籤堆疊的廣告式文案；寧可少放，也不要放一則負評配高分
             const coreName = (e.name || '').toLowerCase().replace(/[^\w\u4e00-\u9fff]/g, '');
@@ -319,26 +320,27 @@ async function renderNewsVoices() {
                 for (let i = 0; i + 4 <= coreName.length; i++) hits.push(lx.indexOf(coreName.slice(i, i + 4)));
                 return hits.some(h => h >= 0 && h <= 50);
             };
-            const NEG = /不回購|不推薦|不建議|踩雷|雷品|失望|惡心|欠我|一般般|粉質算一般|不愛|不喜歡|無功無過|過敏|退貨|難用|不好用|不太|沒什麼效果|沒啥效果|拔乾|搓泥|卡粉/;
+            const NEG = /不回購|不推薦|不建議|踩雷|雷品|失望|惡心|欠我|一般般|粉質算一般|不愛|不喜歡|無功無過|過敏|退貨|難用|不好用|不太|沒什麼效果|沒啥效果|拔乾|搓泥|卡粉|平替|有沒有|代購|正品|現貨|下單|私訊|私聊|團購|預購|限時|優惠|來啦/;
             const POS = /回購|好用|喜歡|很愛|巨愛|大愛|推薦|驚豔|驚為|不錯|很好|滿意|舒服|細膩|寶藏|好聞|治癒|本命/;
             const ts = (e.testimonials && e.testimonials.length ? e.testimonials : (e.testimonial ? [e.testimonial] : []))
-                .filter(t => t && t.text && t.text.length >= 40 && t.text.length <= 220 && t.text.indexOf('#') === -1
+                .filter(t => t && t.text && t.text.length >= 40 && t.text.length <= 300 && t.text.indexOf('#') === -1
                     && mentionsItem(t.text) && POS.test(t.text) && !NEG.test(t.text));
             if (ts.length === 0) return;
             ts.sort((a, b) => (b.likes || 0) - (a.likes || 0));
             pool.push({ e, t: ts[0] });
         });
         pool.sort((a, b) => (b.t.likes || 0) - (a.t.likes || 0));
-        const bySub = new Set(), byBrand = new Set();
+        const bySub = new Set(), brandCount = {};
         const uniq = pool.filter(x => {
-            if (bySub.has(x.e.subcat) || byBrand.has(x.e.brand)) return false;
-            bySub.add(x.e.subcat); byBrand.add(x.e.brand); return true;
+            if (bySub.has(x.e.subcat) || (brandCount[x.e.brand] || 0) >= 2) return false;
+            bySub.add(x.e.subcat); brandCount[x.e.brand] = (brandCount[x.e.brand] || 0) + 1; return true;
         });
         if (uniq.length === 0) { section.remove(); return; }
         const tp = new Date(Date.now() + 8 * 3600 * 1000);
+        const SHOWN = 6;
         const offset = (tp.getUTCFullYear() * 12 + tp.getUTCMonth()) * 3 % uniq.length;
         const picks = [];
-        for (let i = 0; i < Math.min(3, uniq.length); i++) picks.push(uniq[(offset + i) % uniq.length]);
+        for (let i = 0; i < Math.min(SHOWN, uniq.length); i++) picks.push(uniq[(offset + i) % uniq.length]);
         grid.innerHTML = picks.map(({ e, t }) => {
             const img = findItemImage(siteData, e.subcat, e.brand, e.name);
             const text = t.text.replace(/\s+/g, ' ').trim();
