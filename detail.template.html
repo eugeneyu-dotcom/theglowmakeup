@@ -156,7 +156,7 @@
         <p class="text-gray-400 text-sm">© 2026 美妝生活誌 - 妳的最美應援團</p>
     </footer>
 
-    <script src="script.js?v=164"></script>
+    <script src="script.js?v=170"></script>
     <script>
         const indicatorDescriptions = {
             // 底妝 / 彩妝
@@ -366,7 +366,7 @@
                 return;
             }
             
-            const modeLabel = fromContext === 'review' ? '精選評比' : '美妝看板';
+            const modeLabel = fromContext === 'review' ? '精選評比' : '專櫃美妝';
             document.getElementById('page-title').textContent = `${modeLabel}：${sub}`;
             document.title = `${sub}${modeLabel} | Glow Makeup`;
             const seoDesc = `Glow Makeup ${modeLabel}：${sub}真實社群評分與網友心得彙整，購物不踩雷。`;
@@ -374,11 +374,11 @@
             document.getElementById('og-title').setAttribute('content', `${sub}${modeLabel} | Glow Makeup`);
             document.getElementById('og-description').setAttribute('content', seoDesc);
             document.getElementById('canonical-link')?.setAttribute('href', `https://www.theglowmakeup.org/detail.html?sub=${encodeURIComponent(sub)}&from=board`);
-            (function(){var el=document.getElementById('breadcrumb-jsonld');if(!el)return;var L=[['首頁','https://www.theglowmakeup.org/'],['熱門美妝看板','https://www.theglowmakeup.org/board-landing.html'],[sub,'https://www.theglowmakeup.org/detail.html?sub='+encodeURIComponent(sub)+'&from=board']];el.textContent=JSON.stringify({'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:L.map(function(x,i){return {'@type':'ListItem',position:i+1,name:x[0],item:x[1]};})});})();
+            (function(){var el=document.getElementById('breadcrumb-jsonld');if(!el)return;var L=[['首頁','https://www.theglowmakeup.org/'],['專櫃美妝','https://www.theglowmakeup.org/board-landing.html'],[sub,'https://www.theglowmakeup.org/detail.html?sub='+encodeURIComponent(sub)+'&from=board']];el.textContent=JSON.stringify({'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:L.map(function(x,i){return {'@type':'ListItem',position:i+1,name:x[0],item:x[1]};})});})();
 
             try {
                 await loadScoresData();
-                const response = await fetch('site-data.json?v=37');
+                const response = await fetch('site-data.json?v=38');
                 const data = await response.json();
 
                 const details = data.subcategoryDetails?.[sub];

@@ -199,7 +199,7 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="script.js?v=164"></script>
+    <script src="script.js?v=170"></script>
     <script>
         // Global State & Setup
         window.selectedSkinVal = 'fair';
@@ -456,7 +456,7 @@
 
             try {
                 await Promise.all([loadScoresData(), loadIngredientsData()]);
-                const response = await fetch('site-data.json?v=37');
+                const response = await fetch('site-data.json?v=38');
                 const data = await response.json();
 
                 let targetItem = null;
@@ -515,7 +515,7 @@
                 const ogImgSrc = targetItem.image || targetItem.img || '';
                 document.getElementById('og-image')?.setAttribute('content', ogImgSrc ? new URL(ogImgSrc, 'https://www.theglowmakeup.org/').href : '');
                 document.getElementById('canonical-link')?.setAttribute('href', `https://www.theglowmakeup.org/item-detail.html?item=${encodeURIComponent(targetItem.name)}&from=board`);
-                (function(){var el=document.getElementById('breadcrumb-jsonld');if(!el)return;var L=[['首頁','https://www.theglowmakeup.org/'],['熱門美妝看板','https://www.theglowmakeup.org/board-landing.html']].concat(belongingSubcategoryName?[[belongingSubcategoryName,'https://www.theglowmakeup.org/detail.html?sub='+encodeURIComponent(belongingSubcategoryName)+'&from=board']]:[]).concat([[targetItem.name,'https://www.theglowmakeup.org/item-detail.html?item='+encodeURIComponent(targetItem.name)+'&from=board']]);el.textContent=JSON.stringify({'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:L.map(function(x,i){return {'@type':'ListItem',position:i+1,name:x[0],item:x[1]};})});})();
+                (function(){var el=document.getElementById('breadcrumb-jsonld');if(!el)return;var L=[['首頁','https://www.theglowmakeup.org/'],['專櫃美妝','https://www.theglowmakeup.org/board-landing.html']].concat(belongingSubcategoryName?[[belongingSubcategoryName,'https://www.theglowmakeup.org/detail.html?sub='+encodeURIComponent(belongingSubcategoryName)+'&from=board']]:[]).concat([[targetItem.name,'https://www.theglowmakeup.org/item-detail.html?item='+encodeURIComponent(targetItem.name)+'&from=board']]);el.textContent=JSON.stringify({'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:L.map(function(x,i){return {'@type':'ListItem',position:i+1,name:x[0],item:x[1]};})});})();
 
                 // 真實網友心得（多篇，取代原本評比對照表最後一欄的做法）
                 renderTestimonials(targetItem);

@@ -53,7 +53,7 @@ function firstImage(details) {
 
 function renderDetailHtml(template, sub, fromContext, details) {
     // 跟 detail.template.html 裡 DOMContentLoaded 的寫法保持一致，兩邊要一起改
-    const modeLabel = fromContext === 'review' ? '精選評比' : '美妝看板';
+    const modeLabel = fromContext === 'review' ? '精選評比' : '專櫃美妝';
     const title = `${sub}${modeLabel} | Glow Makeup`;
     const desc = `Glow Makeup ${modeLabel}：${sub}真實社群評分與網友心得彙整，購物不踩雷。`;
     // canonical 一律用 from=board，跟前端與 sitemap.xml 的寫法一致（review 模式不另開網址）
@@ -65,7 +65,7 @@ function renderDetailHtml(template, sub, fromContext, details) {
         '@type': 'BreadcrumbList',
         itemListElement: [
             ['首頁', `${SITE}/`],
-            ['熱門美妝看板', `${SITE}/board-landing.html`],
+            ['專櫃美妝', `${SITE}/board-landing.html`],
             [sub, canonical],
         ].map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c[0], item: c[1] })),
     });

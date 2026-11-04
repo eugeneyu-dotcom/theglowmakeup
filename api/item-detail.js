@@ -87,7 +87,7 @@ function renderItemHtml(template, item, subcategoryName, scoreEntry) {
 
     const crumbs = [
         ['首頁', `${SITE}/`],
-        ['熱門美妝看板', `${SITE}/board-landing.html`],
+        ['專櫃美妝', `${SITE}/board-landing.html`],
     ];
     if (subcategoryName) {
         crumbs.push([

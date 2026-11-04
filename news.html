@@ -14,10 +14,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>最新情報 | Glow Makeup</title>
-    <meta name="description" content="Glow Makeup 最新情報：美妝保養新知與社群熱議話題彙整。">
+    <meta name="description" content="Glow Makeup 最新情報：本月新上線的美妝保養文章，一次看完。">
     <link rel="canonical" href="https://www.theglowmakeup.org/news.html">
     <meta property="og:title" content="最新情報 | Glow Makeup">
-    <meta property="og:description" content="美妝保養新知與社群熱議話題彙整。">
+    <meta property="og:description" content="本月新上線的美妝保養文章，一次看完。">
     <meta property="og:image" content="https://www.theglowmakeup.org/assets/hero-bg.jpg">
     <meta property="og:type" content="website">
     <link rel="icon" href="/favicon.ico" sizes="48x48">
@@ -66,10 +66,22 @@
     <main class="max-w-5xl mx-auto px-4 py-20">
         <h1 class="text-4xl font-black mb-12 italic border-l-8 border-[#f2a7b5] pl-6">Latest News / <span class="text-[#f2a7b5] text-2xl not-italic">最新情報</span></h1>
         
-        <!-- 由 script.js renderSkincareArticles() 依真實 articles.json 產生（與保養專欄同源，避免另造假新聞） -->
-        <div class="space-y-4" id="skincare-article-list">
+        <!-- 由 script.js renderWeeklyNews() 依真實 articles.json 產生：只顯示最新一個月的文章（不足 5 篇用近期文章補）（與保養專欄同源，避免另造假新聞） -->
+        <div id="weekly-news">
             <div class="text-gray-400 text-sm">載入中...</div>
         </div>
+
+        <!-- 本月新品：由 script.js renderNewsNewProducts() 依 new-products.json 產生（與首頁美妝新品快報同源） -->
+        <section id="news-new-products-section" class="mt-20">
+            <h2 class="text-2xl font-black mb-6 italic border-l-8 border-[#f2a7b5] pl-4">New Arrivals / <span class="text-[#f2a7b5] text-lg not-italic">本月新品</span></h2>
+            <div id="news-new-products" class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6"></div>
+        </section>
+
+        <!-- 網友怎麼說：由 script.js renderNewsVoices() 依 scores-data.json 的真實心得產生 -->
+        <section id="news-voices-section" class="mt-20">
+            <h2 class="text-2xl font-black mb-6 italic border-l-8 border-[#f2a7b5] pl-4">Real Voices / <span class="text-[#f2a7b5] text-lg not-italic">網友怎麼說</span></h2>
+            <div id="news-voices" class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6"></div>
+        </section>
     </main>
 
     <footer class="bg-white border-t border-[#f2a7b5]/10 py-16 text-center">
@@ -81,6 +93,6 @@
         <p class="text-gray-400 text-sm">© 2026 美妝生活誌 - 妳的最美應援團</p>
     </footer>
 
-    <script src="script.js?v=164"></script>
+    <script src="script.js?v=170"></script>
 </body>
 </html>

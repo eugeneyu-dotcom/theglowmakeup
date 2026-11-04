@@ -209,11 +209,163 @@ function scrollArticleCarousel(direction) {
     track.scrollBy({ left: delta * direction, behavior: 'smooth' });
 }
 
+// 最新情報（news.html）：顯示「最新一個月」的文章；該月不足 5 篇時，用更早的最新文章補到 5 篇，避免月初版面太空。
+// 版面＝一張主推大卡＋右側 4 張小卡；超過 5 篇的部分排在下方兩欄。刻意不放分類篩選與往期列表（使用者指定），跟保養專欄的列表區隔。
+// 「最新一個月」以 articles.json 裡日期最新那篇所在的月份為準：月初還沒有新文章時，仍顯示上個月，不會空版。
+async function renderWeeklyNews() {
+    const root = document.getElementById('weekly-news');
+    if (!root) return;
+
+    const all = await getArticles();
+    const dated = all.filter(a => /^\d{4}-\d{2}-\d{2}/.test(a.date || ''));
+    if (dated.length === 0) {
+        root.innerHTML = '<div class="text-gray-400 text-sm py-8">尚無文章</div>';
+        return;
+    }
+
+    const MIN_SHOWN = 5;
+    const esc = s => String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+    // getArticles() 已依日期由新到舊排序（同一天維持 articles.json 原順序）
+    const monthKey = dated[0].date.slice(0, 7);
+    const inMonth = dated.filter(a => a.date.startsWith(monthKey));
+    const filler = dated.filter(a => !a.date.startsWith(monthKey)).slice(0, Math.max(0, MIN_SHOWN - inMonth.length));
+    const shown = inMonth.concat(filler);
+
+    const [lead, ...rest] = shown;
+    const side = rest.slice(0, 4);
+    const below = rest.slice(4);
+
+    const small = (a, i, extra) => `
+        <a href="${esc(a.url || '#')}" class="flex gap-4 bg-white rounded-2xl p-4 border border-[#f2a7b5]/15 shadow-sm hover:shadow-lg transition-shadow ${extra || ''}">
+            <img src="${esc(a.image)}" alt="${esc(a.title)}" class="w-28 h-28 md:w-32 md:h-32 rounded-xl object-cover shrink-0">
+            <div class="min-w-0">
+                <span class="text-xs font-black text-[#f2a7b5]">No.${i + 2}</span>
+                <span class="text-xs font-black text-gray-400"> · ${formatArticleDate(a.date)}${a.tag ? ' · #' + esc(a.tag) : ''}</span>
+                <h3 class="text-base md:text-lg font-black leading-snug mt-1 line-clamp-3">${esc(a.title)}</h3>
+            </div>
+        </a>`;
+
+    const leadCard = `
+        <a href="${esc(lead.url || '#')}" class="${side.length ? 'md:col-span-3' : 'md:col-span-5'} block bg-white rounded-3xl overflow-hidden border border-[#f2a7b5]/15 shadow-sm hover:shadow-lg transition-shadow">
+            <img src="${esc(lead.image)}" alt="${esc(lead.title)}" class="w-full aspect-[3/2] object-cover">
+            <div class="p-6 md:p-8">
+                <div class="flex items-center gap-2 mb-3">
+                    <span class="bg-[#f2a7b5] text-white px-3 py-1 rounded-full text-xs font-black tracking-widest">最新上線</span>
+                    <span class="text-xs font-black text-gray-400">${formatArticleDate(lead.date)}${lead.tag ? ' · #' + esc(lead.tag) : ''}</span>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-black leading-snug mb-3">${esc(lead.title)}</h2>
+                <p class="text-gray-500 line-clamp-3">${esc(lead.excerpt)}</p>
+            </div>
+        </a>`;
+
+    root.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-6">
+            ${leadCard}
+            ${side.length ? `<div class="md:col-span-2 flex flex-col gap-6">${side.map((a, i) => small(a, i)).join('')}</div>` : ''}
+        </div>
+        ${below.length ? `<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">${below.map((a, i) => small(a, i + 4)).join('')}</div>` : ''}`;
+}
+
+// 最新情報下方的兩個區塊：本月新品（new-products.json，與首頁「美妝新品快報」同源）、網友怎麼說（scores-data.json 的真實心得）。
+// 資料抓不到或空的時候整個區塊隱藏，不留空標題。
+function escHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+async function renderNewsNewProducts() {
+    const section = document.getElementById('news-new-products-section');
+    const grid = document.getElementById('news-new-products');
+    if (!section || !grid) return;
+    try {
+        const res = await fetch('new-products.json?v=7');
+        const data = await res.json();
+        const products = (data.products || []).slice(0, 6);
+        if (products.length === 0) { section.remove(); return; }
+        grid.innerHTML = products.map((p, i) => `
+            <a href="${escHtml(p.source_url)}" target="_blank" rel="noopener" class="bg-white rounded-2xl overflow-hidden border border-[#f2a7b5]/15 shadow-sm hover:shadow-lg transition-all group flex flex-col">
+                ${newProductImageBlock(p, i)}
+                <div class="p-3 md:p-5 flex flex-col flex-grow">
+                    <span class="${BRAND_BADGE_COLORS[i % BRAND_BADGE_COLORS.length]} text-white text-[10px] font-black px-3 py-1 rounded-full self-start mb-2 tracking-wide">${escHtml(p.brand)}</span>
+                    <h3 class="font-black text-sm md:text-base leading-snug mb-1 group-hover:text-[#f2a7b5] transition-colors line-clamp-2">${escHtml(p.name)}</h3>
+                    <p class="hidden md:block text-xs text-gray-500 leading-relaxed line-clamp-2 flex-grow">${escHtml(p.highlight || '')}</p>
+                    <span class="text-[11px] font-bold text-[#f2a7b5] mt-3">查看${escHtml(p.source_label || '官網')} ➔</span>
+                </div>
+            </a>`).join('');
+    } catch (err) {
+        console.error('new-products.json 載入失敗', err);
+        section.remove();
+    }
+}
+
+// 網友怎麼說：挑「綜合分 4.0 以上、評論量夠、心得 40～220 字、提到該商品、語氣正面、不含 # 標籤堆疊的廣告式文案」的真實心得，
+// 同一子分類、同一品牌各只取一則，依按讚數排序後依月份輪替起點，所以每個月會換一批，同一個月內固定不變。
+async function renderNewsVoices() {
+    const section = document.getElementById('news-voices-section');
+    const grid = document.getElementById('news-voices');
+    if (!section || !grid) return;
+    try {
+        const [scores, siteData] = await Promise.all([getScoresData(), getSiteData()]);
+        const pool = [];
+        Object.values(scores || {}).forEach(e => {
+            if (e.composite == null || e.composite < 4.0 || (e.mentions || 0) < RANKING_MIN_MENTIONS) return;
+            // 心得要「在講這個商品」（提到品牌或商品名四字詞）、語氣正面（跟旁邊顯示的高分一致），
+            // 且不是 # 標籤堆疊的廣告式文案；寧可少放，也不要放一則負評配高分
+            const coreName = (e.name || '').toLowerCase().replace(/[^\w\u4e00-\u9fff]/g, '');
+            // 品牌或商品名出現在前 50 字內：節錄只取前 110 字，商品名出現太晚的話，讀者看到的會是在講別款的前半段
+            const mentionsItem = x => {
+                const lx = x.toLowerCase();
+                const hits = [lx.indexOf((e.brand || '').toLowerCase())];
+                for (let i = 0; i + 4 <= coreName.length; i++) hits.push(lx.indexOf(coreName.slice(i, i + 4)));
+                return hits.some(h => h >= 0 && h <= 50);
+            };
+            const NEG = /不回購|不推薦|不建議|踩雷|雷品|失望|惡心|欠我|一般般|粉質算一般|不愛|不喜歡|無功無過|過敏|退貨|難用|不好用|不太|沒什麼效果|沒啥效果|拔乾|搓泥|卡粉/;
+            const POS = /回購|好用|喜歡|很愛|巨愛|大愛|推薦|驚豔|驚為|不錯|很好|滿意|舒服|細膩|寶藏|好聞|治癒|本命/;
+            const ts = (e.testimonials && e.testimonials.length ? e.testimonials : (e.testimonial ? [e.testimonial] : []))
+                .filter(t => t && t.text && t.text.length >= 40 && t.text.length <= 220 && t.text.indexOf('#') === -1
+                    && mentionsItem(t.text) && POS.test(t.text) && !NEG.test(t.text));
+            if (ts.length === 0) return;
+            ts.sort((a, b) => (b.likes || 0) - (a.likes || 0));
+            pool.push({ e, t: ts[0] });
+        });
+        pool.sort((a, b) => (b.t.likes || 0) - (a.t.likes || 0));
+        const bySub = new Set(), byBrand = new Set();
+        const uniq = pool.filter(x => {
+            if (bySub.has(x.e.subcat) || byBrand.has(x.e.brand)) return false;
+            bySub.add(x.e.subcat); byBrand.add(x.e.brand); return true;
+        });
+        if (uniq.length === 0) { section.remove(); return; }
+        const tp = new Date(Date.now() + 8 * 3600 * 1000);
+        const offset = (tp.getUTCFullYear() * 12 + tp.getUTCMonth()) * 3 % uniq.length;
+        const picks = [];
+        for (let i = 0; i < Math.min(3, uniq.length); i++) picks.push(uniq[(offset + i) % uniq.length]);
+        grid.innerHTML = picks.map(({ e, t }) => {
+            const img = findItemImage(siteData, e.subcat, e.brand, e.name);
+            const text = t.text.replace(/\s+/g, ' ').trim();
+            return `
+            <a href="item-detail.html?item=${encodeURIComponent(e.name)}&from=review" class="bg-white rounded-2xl p-5 border border-[#f2a7b5]/15 shadow-sm hover:shadow-lg transition-all flex flex-col gap-4">
+                <p class="text-gray-700 leading-relaxed text-sm flex-grow">「${escHtml(text.length > 110 ? text.slice(0, 110) + '…' : text)}」</p>
+                <div class="flex items-center gap-3 border-t border-[#f2a7b5]/15 pt-4">
+                    ${img ? `<img src="${escHtml(img)}" alt="${escHtml(e.brand)}" class="w-12 h-12 object-contain rounded-lg bg-[#fff9f5] p-1 shrink-0">` : ''}
+                    <div class="min-w-0">
+                        <span class="text-[10px] font-black tracking-widest text-gray-400 uppercase">${escHtml(e.brand)}</span>
+                        <div class="font-black text-sm leading-snug line-clamp-1">${escHtml(e.name)}</div>
+                        <span class="text-xs font-bold text-[#f2a7b5]">★ ${e.composite.toFixed(1)} · ${escHtml(t.platform || '網友')}真實心得</span>
+                    </div>
+                </div>
+            </a>`;
+        }).join('');
+    } catch (err) {
+        console.error('網友心得載入失敗', err);
+        section.remove();
+    }
+}
+
 // 保養專欄分類/標籤篩選狀態。category: undefined=尚未從網址初始化, null=全部文章；tag: null=不篩選標籤
 window.blogFilterState = { category: undefined, tag: undefined };
 
 // 保養專欄列表（與首頁輪播同一份 articles.json，確保「輪播＝專欄最新文章」不會不同步）
-// news.html 也共用這個 function，但沒有 category-tabs/tag-filters 容器，會自動略過分類/標籤篩選只顯示全部文章
+// （news.html 已改用 renderWeeklyNews()，不再共用這個 function）
 async function renderSkincareArticles() {
     const list = document.getElementById('skincare-article-list');
     if (!list) return;
@@ -806,7 +958,7 @@ let scoresDataCache = null;
 async function getSiteData() {
     if (siteDataCache) return siteDataCache;
     try {
-        const response = await fetch('site-data.json?v=37');
+        const response = await fetch('site-data.json?v=38');
         siteDataCache = await response.json();
         return siteDataCache;
     } catch (err) {
@@ -877,7 +1029,7 @@ async function topItemsOverall(limit = 4, minMentions = RANKING_MIN_MENTIONS) {
     }));
 }
 
-// 美妝看板／精選評比 landing 頁用：真實 Top 商品卡片（board=討論則數、review=綜合評分）
+// 專櫃美妝／精選評比 landing 頁用：真實 Top 商品卡片（board=討論則數、review=綜合評分）
 async function renderSpotlightCards(containerId, mode) {
     const container = document.getElementById(containerId);
     if (!container) return;
@@ -1132,7 +1284,7 @@ async function updateBattleRadarChart(subcategory, leftItem, rightItem) {
 
 // 「精選評比」是評分導向的下拉選單，子分類底下如果一個有真實綜合分的品項都沒有，
 // 選了也是死路，所以在選單層級就先隱藏（型/分類/子分類三層都是空的就整層拿掉）。
-// 「美妝看板」則維持完整商品目錄，不受評分進度影響。
+// 「專櫃美妝」則維持完整商品目錄，不受評分進度影響。
 async function getScoredSubcats() {
     const scores = await getScoresData();
     if (!scores) return new Set();
@@ -1153,7 +1305,7 @@ function filterTypesByScoredSubcats(types, scoredSubcats) {
 // Nav Logic (Mega Menu)
 async function initNav() {
     try {
-        const [response, scoredSubcats] = await Promise.all([fetch('site-data.json?v=37'), getScoredSubcats()]);
+        const [response, scoredSubcats] = await Promise.all([fetch('site-data.json?v=38'), getScoredSubcats()]);
         const data = await response.json();
         const navContainer = document.getElementById('desktop-nav');
         if (!navContainer) return;
@@ -1221,7 +1373,7 @@ async function initNav() {
                 parent.className = 'dropdown-parent h-full flex items-center';
 
                 const a = document.createElement('a');
-                if (target.name === '美妝看板') a.href = 'board-landing.html';
+                if (target.name === '專櫃美妝') a.href = 'board-landing.html';
                 else if (target.name === '精選評比') a.href = 'review-landing.html';
                 else a.href = '#';
 
@@ -1241,7 +1393,7 @@ async function initNav() {
                 contentContainer.className = 'mega-content';
                 
                 let fromContext = 'board';
-                if (target.name === '美妝看板') fromContext = 'board';
+                if (target.name === '專櫃美妝') fromContext = 'board';
                 else if (target.name === '精選評比') fromContext = 'review';
 
                 const menuTypes = fromContext === 'review'
@@ -1431,6 +1583,9 @@ window.addEventListener('DOMContentLoaded', () => {
     renderNewProducts();
     renderLatestArticlesSection();
     renderSkincareArticles();
+    renderWeeklyNews();
+    renderNewsNewProducts();
+    renderNewsVoices();
     renderSpotlightCards('board-spotlight-grid', 'board');
     renderSpotlightCards('review-spotlight-grid', 'review');
     renderSubcatTop5('subcat-top5-grid', '粉底液');
