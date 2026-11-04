@@ -364,7 +364,8 @@ async function renderNewsVoices() {
 }
 
 // 開架美妝（drugstore-beauty.html）：Olive Young 韓系＋台灣藥妝通路的商品目錄，資料來自 drugstore-products.json。
-// 第一版沒有評分與心得（開架品牌尚未跑評論管線），只放品牌、品名、重點與購買連結。
+// 第一版沒有評分與心得（開架品牌尚未跑評論管線），只放品牌、品名、重點；卡片不外連（2026-11-04 使用者決定，等接上評分、做出站內商品頁再連站內）。
+// source_url 仍保留在 JSON 裡，之後做站內頁時可用。
 const DRUGSTORE_GROUPS = { all: '全部', olive: 'Olive Young 韓系', tw: '台灣藥妝通路' };
 const DRUGSTORE_CATEGORIES = ['彩妝', '保養'];
 window.drugstoreFilter = 'all';
@@ -405,18 +406,17 @@ async function renderDrugstore() {
                 <h2 class="text-2xl font-black mb-6 italic border-l-8 border-[#f2a7b5] pl-4">${cat === '彩妝' ? 'Makeup' : 'Skincare'} / <span class="text-[#f2a7b5] text-lg not-italic">${cat}</span></h2>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
                     ${items.map((p, i) => `
-                    <a href="${escHtml(p.source_url)}" target="_blank" rel="noopener" class="bg-white rounded-2xl overflow-hidden border border-[#f2a7b5]/15 shadow-sm hover:shadow-lg transition-all group flex flex-col">
+                    <div class="bg-white rounded-2xl overflow-hidden border border-[#f2a7b5]/15 shadow-sm flex flex-col">
                         ${newProductImageBlock(p, i)}
                         <div class="p-3 md:p-5 flex flex-col flex-grow">
                             <div class="flex flex-wrap items-center gap-1.5 mb-2">
                                 <span class="${BRAND_BADGE_COLORS[i % BRAND_BADGE_COLORS.length]} text-white text-[10px] font-black px-3 py-1 rounded-full tracking-wide">${escHtml(p.brand)}</span>
                                 <span class="text-[10px] font-bold text-gray-400">${p.group === 'olive' ? 'Olive Young' : '藥妝通路'}</span>
                             </div>
-                            <h3 class="font-black text-sm md:text-base leading-snug mb-1 group-hover:text-[#f2a7b5] transition-colors line-clamp-2">${escHtml(p.name)}</h3>
-                            <p class="hidden md:block text-xs text-gray-500 leading-relaxed line-clamp-3 flex-grow">${escHtml(p.highlight || '')}</p>
-                            <span class="text-[11px] font-bold text-[#f2a7b5] mt-3">查看${escHtml(p.source_label || '官網')} ➔</span>
+                            <h3 class="font-black text-sm md:text-base leading-snug mb-1 line-clamp-2">${escHtml(p.name)}</h3>
+                            <p class="hidden md:block text-xs text-gray-500 leading-relaxed line-clamp-3">${escHtml(p.highlight || '')}</p>
                         </div>
-                    </a>`).join('')}
+                    </div>`).join('')}
                 </div>
             </section>`;
         }).join('');
