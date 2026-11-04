@@ -1,5 +1,5 @@
 {
- "_comment": "開架美妝（drugstore-beauty.html）商品目錄。第一版無評分；每款的連結與圖片皆於 verified_date 當天開啟核對。圖片取自品牌官網或通路商品頁，存放於 assets/drugstore/。image 為 null 時前台顯示品牌色塊。",
+ "_comment": "開架美妝（drugstore-beauty.html）商品目錄。第一版無評分；每款的連結與圖片皆於 verified_date 當天開啟核對。圖片取自品牌官網或通路商品頁，存放於 assets/drugstore/。image 為 null 時前台顯示品牌色塊。rom&nd 圖取自品牌官網 romand.co.kr；Jung Saem Mool 官網無法連線，圖取自 YesStyle 同品商品頁。",
  "_last_updated": "2026-11-04",
  "products": [
   {
@@ -8,7 +8,7 @@
    "brand": "rom&nd",
    "name": "The Juicy Lasting Tint",
    "highlight": "Olive Young 頁面共提供 38 色可選，建議從唇內側向外均勻推開上色",
-   "image": null,
+   "image": "assets/drugstore/romand-juicy-lasting-tint.webp",
    "source_url": "https://global.oliveyoung.com/product/detail?prdtNo=GA251235991",
    "source_label": "Olive Young",
    "verified_date": "2026-11-04"
@@ -74,7 +74,7 @@
    "brand": "Jung Saem Mool",
    "name": "Essential Skin Nuder Cushion",
    "highlight": "透薄服貼、像自身透出水光的裸肌氣墊，附補充蕊、共 12 色",
-   "image": null,
+   "image": "assets/drugstore/jungsaemmool-nuder-cushion.webp",
    "source_url": "https://global.oliveyoung.com/product/detail?prdtNo=GA210002919",
    "source_label": "Olive Young",
    "verified_date": "2026-11-04"
