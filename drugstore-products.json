@@ -1,0 +1,292 @@
+{
+ "_comment": "開架美妝（drugstore-beauty.html）商品目錄。第一版無評分；每款的連結與圖片皆於 verified_date 當天開啟核對。圖片取自品牌官網或通路商品頁，存放於 assets/drugstore/。image 為 null 時前台顯示品牌色塊。",
+ "_last_updated": "2026-11-04",
+ "products": [
+  {
+   "group": "olive",
+   "category": "彩妝",
+   "brand": "rom&nd",
+   "name": "The Juicy Lasting Tint",
+   "highlight": "Olive Young 頁面共提供 38 色可選，建議從唇內側向外均勻推開上色",
+   "image": null,
+   "source_url": "https://global.oliveyoung.com/product/detail?prdtNo=GA251235991",
+   "source_label": "Olive Young",
+   "verified_date": "2026-11-04"
+  },
+  {
+   "group": "olive",
+   "category": "彩妝",
+   "brand": "peripera",
+   "name": "Ink Mood Glowy Tint",
+   "highlight": "水潤光澤染唇露，含虎百合與金縷梅萃取，幫助滋潤唇部質地",
+   "image": "assets/drugstore/peripera-ink-mood-glowy-tint.webp",
+   "source_url": "https://global.oliveyoung.com/product/detail?prdtNo=GA231121205",
+   "source_label": "Olive Young",
+   "verified_date": "2026-11-04"
+  },
+  {
+   "group": "olive",
+   "category": "彩妝",
+   "brand": "Colorgram",
+   "name": "Nude Blur Tint",
+   "highlight": "輕盈質地、柔霧模糊的霧面唇妝，主打貼唇舒適、持久不厚重",
+   "image": "assets/drugstore/colorgram-nude-blur-tint.webp",
+   "source_url": "https://global.oliveyoung.com/product/detail?prdtNo=GA250732540",
+   "source_label": "Olive Young",
+   "verified_date": "2026-11-04"
+  },
+  {
+   "group": "olive",
+   "category": "彩妝",
+   "brand": "fwee",
+   "name": "Lip & Cheek Blurry Pudding Pot",
+   "highlight": "布丁質地唇頰兩用，可柔焦唇紋與毛孔；含可可籽脂與龍舌蘭葉萃取",
+   "image": "assets/drugstore/fwee-pudding-pot.webp",
+   "source_url": "https://global.oliveyoung.com/product/detail?prdtNo=GA260742385",
+   "source_label": "Olive Young",
+   "verified_date": "2026-11-04"
+  },
+  {
+   "group": "olive",
+   "category": "彩妝",
+   "brand": "Dear Dahlia",
+   "name": "Petal Drop Liquid Blush",
+   "highlight": "水感精華質地液態腮紅，附點塗式刷頭好控量，呈現自然透亮氣色",
+   "image": "assets/drugstore/deardahlia-petal-drop-liquid-blush.webp",
+   "source_url": "https://global.oliveyoung.com/product/detail?prdtNo=GA260338315",
+   "source_label": "Olive Young",
+   "verified_date": "2026-11-04"
+  },
+  {
+   "group": "olive",
+   "category": "彩妝",
+   "brand": "CLIO",
+   "name": "Kill Cover Founwear Cushion",
+   "highlight": "主打自然服貼的緞面霧光底妝，頁面宣稱可持續 24 小時不脫妝",
+   "image": "assets/drugstore/clio-kill-cover-founwear-cushion.webp",
+   "source_url": "https://global.oliveyoung.com/product/detail?prdtNo=GA240825109",
+   "source_label": "Olive Young",
+   "verified_date": "2026-11-04"
+  },
+  {
+   "group": "olive",
+   "category": "彩妝",
+   "brand": "Jung Saem Mool",
+   "name": "Essential Skin Nuder Cushion",
+   "highlight": "透薄服貼、像自身透出水光的裸肌氣墊，附補充蕊、共 12 色",
+   "image": null,
+   "source_url": "https://global.oliveyoung.com/product/detail?prdtNo=GA210002919",
+   "source_label": "Olive Young",
+   "verified_date": "2026-11-04"
+  },
+  {
+   "group": "olive",
+   "category": "彩妝",
+   "brand": "Banila Co",
+   "name": "Prime Primer Finish Powder",
+   "highlight": "頁面稱臨床證實可即刻減少多餘油脂，並柔焦毛孔、呈現不油亮肌膚",
+   "image": "assets/drugstore/banilaco-prime-primer-finish-powder.webp",
+   "source_url": "https://global.oliveyoung.com/product/detail?prdtNo=GA260439183",
+   "source_label": "Olive Young",
+   "verified_date": "2026-11-04"
+  },
+  {
+   "group": "olive",
+   "category": "彩妝",
+   "brand": "Wakemake",
+   "name": "Soft Blurring Eye Palette",
+   "highlight": "頁面標示為 OY 人氣第一的眼影盤，含粉狀、濕式與烤製亮片質地",
+   "image": "assets/drugstore/wakemake-soft-blurring-eye-palette.webp",
+   "source_url": "https://global.oliveyoung.com/product/detail?prdtNo=GA230317906",
+   "source_label": "Olive Young",
+   "verified_date": "2026-11-04"
+  },
+  {
+   "group": "olive",
+   "category": "保養",
+   "brand": "Round Lab",
+   "name": "1025 Dokdo Toner",
+   "highlight": "水感質地溫和代謝老廢角質並保濕，含深海水礦物與泛醇、尿囊素，無香料。",
+   "image": "assets/drugstore/roundlab-dokdo-toner.webp",
+   "source_url": "https://roundlab.com/products/1025-dokdo-toner",
+   "source_label": "品牌官網",
+   "verified_date": "2026-11-04"
+  },
+  {
+   "group": "olive",
+   "category": "保養",
+   "brand": "Anua",
+   "name": "Heartleaf 77% Soothing Toner",
+   "highlight": "含77%魚腥草與玻尿酸，主打舒緩、保濕並降低肌膚燥熱感，無香料。",
+   "image": "assets/drugstore/anua-heartleaf-77-toner.webp",
+   "source_url": "https://anua.com/products/heartleaf-77-soothing-toner",
+   "source_label": "品牌官網",
+   "verified_date": "2026-11-04"
+  },
+  {
+   "group": "olive",
+   "category": "保養",
+   "brand": "Torriden",
+   "name": "DIVE-IN Low Molecule Hyaluronic Acid Serum",
+   "highlight": "以5D多分子低分子玻尿酸補水，搭配泛醇與尿囊素，品牌稱可維持48小時保濕。",
+   "image": "assets/drugstore/torriden-dive-in-serum.webp",
+   "source_url": "https://torriden.us/products/dive-in-serum",
+   "source_label": "品牌官網",
+   "verified_date": "2026-11-04"
+  },
+  {
+   "group": "olive",
+   "category": "保養",
+   "brand": "COSRX",
+   "name": "The 6 Peptide Skin Booster Serum",
+   "highlight": "輕盈六胜肽精華，主打緊緻、保濕並為後續保養打底，品牌稱臨床測試可改善彈性。",
+   "image": "assets/drugstore/cosrx-6-peptide-booster-serum.webp",
+   "source_url": "https://www.cosrx.com/products/the-6-peptide-skin-booster-serum",
+   "source_label": "品牌官網",
+   "verified_date": "2026-11-04"
+  },
+  {
+   "group": "olive",
+   "category": "保養",
+   "brand": "Aestura",
+   "name": "Atobarrier 365 Cream",
+   "highlight": "以進化版DermaON技術強化乾燥敏感肌的肌膚屏障，屬高保濕乳霜（80ml）。",
+   "image": "assets/drugstore/aestura-atobarrier-365-cream.webp",
+   "source_url": "https://global.oliveyoung.com/product/detail?prdtNo=GA240121573",
+   "source_label": "Olive Young",
+   "verified_date": "2026-11-04"
+  },
+  {
+   "group": "olive",
+   "category": "保養",
+   "brand": "Round Lab",
+   "name": "Birch Moisturizing Sunscreen UVLock SPF 50",
+   "highlight": "含白樺樹汁與玻尿酸的SPF50廣譜防曬，主打無白斑、膚感像保濕乳液。",
+   "image": "assets/drugstore/roundlab-birch-sunscreen.webp",
+   "source_url": "https://roundlab.com/products/birch-moisturizing-uv-sunscreen",
+   "source_label": "品牌官網",
+   "verified_date": "2026-11-04"
+  },
+  {
+   "group": "olive",
+   "category": "保養",
+   "brand": "d'Alba",
+   "name": "Waterfull Tone-Up Sun Cream",
+   "highlight": "SPF50+廣譜防曬，帶淡粉色調提亮暗沉、修飾膚色，營造自然透亮感。",
+   "image": "assets/drugstore/dalba-waterfull-tone-up-sun.webp",
+   "source_url": "https://global.oliveyoung.com/product/detail?prdtNo=GA220414399",
+   "source_label": "Olive Young",
+   "verified_date": "2026-11-04"
+  },
+  {
+   "group": "olive",
+   "category": "保養",
+   "brand": "SKIN1004",
+   "name": "Madagascar Centella Hyalu-Cica Water-Fit Sun Serum",
+   "highlight": "質地如精華般輕盈的防曬，主打保濕舒緩、無白斑，含積雪草與玻尿酸。",
+   "image": "assets/drugstore/skin1004-hyalu-cica-sun-serum.webp",
+   "source_url": "https://global.oliveyoung.com/product/detail?prdtNo=GA220715346",
+   "source_label": "Olive Young",
+   "verified_date": "2026-11-04"
+  },
+  {
+   "group": "olive",
+   "category": "保養",
+   "brand": "Torriden",
+   "name": "Dive-in Low Molecular Hyaluronic Acid Mask",
+   "highlight": "5D多分子低分子玻尿酸的水感精華面膜，主打深層補水，敏感肌也適用。",
+   "image": "assets/drugstore/torriden-dive-in-mask.webp",
+   "source_url": "https://torriden.us/products/dive-in-mask",
+   "source_label": "品牌官網",
+   "verified_date": "2026-11-04"
+  },
+  {
+   "group": "olive",
+   "category": "保養",
+   "brand": "MEDIHEAL",
+   "name": "Madecassoside Essential Mask Blemish Repair",
+   "highlight": "針對反覆長痘、脆弱肌的舒緩面膜，精華補水並淡化痘後痕跡，脂質體助吸收。",
+   "image": "assets/drugstore/mediheal-madecassoside-mask.webp",
+   "source_url": "https://mediheal.com/products/madecassoside-essential-mask-blemish-repair-1",
+   "source_label": "品牌官網",
+   "verified_date": "2026-11-04"
+  },
+  {
+   "group": "olive",
+   "category": "保養",
+   "brand": "Biodance",
+   "name": "Bio-Collagen Real Deep Mask",
+   "highlight": "凝膠狀水凝膠面膜，含低分子寡聚玻尿酸，主打深層保濕與隔夜敷用。",
+   "image": "assets/drugstore/biodance-bio-collagen-mask.webp",
+   "source_url": "https://biodance.com/products/biodance-bio-collagen-real-deep-mask",
+   "source_label": "品牌官網",
+   "verified_date": "2026-11-04"
+  },
+  {
+   "group": "tw",
+   "category": "彩妝",
+   "brand": "KATE TOKYO 凱婷",
+   "name": "極輕感持久粉底液",
+   "highlight": "輕盈遮飾毛孔凹凸，預防出油與乾燥脫妝，持續極輕盈的妝感。",
+   "image": "assets/drugstore/kate-tokyo-light-foundation.webp",
+   "source_url": "https://www.watsons.com.tw/kate-%E5%87%B1%E5%A9%B7-%E5%87%B1%E5%A9%B7-%E6%A5%B5%E8%BC%95%E6%84%9F%E6%8C%81%E4%B9%85%E7%B2%89%E5%BA%95%E6%B6%B2-01-25ml/p/BP_316492",
+   "source_label": "屈臣氏",
+   "verified_date": "2026-11-04"
+  },
+  {
+   "group": "tw",
+   "category": "彩妝",
+   "brand": "ettusais 艾杜紗",
+   "name": "微暮絲絨雙色眼影",
+   "highlight": "絲緞光澤與柔霧質地雙色設計，自然放大雙眼、打造有層次的深邃眼妝。",
+   "image": "assets/drugstore/ettusais-duo-eyeshadow.webp",
+   "source_url": "https://www.watsons.com.tw/ettusais%E8%89%BE%E6%9D%9C%E7%B4%97-%E8%89%BE%E6%9D%9C%E7%B4%97%E5%BE%AE%E6%9A%AE%E7%B5%B2%E7%B5%A8%E9%9B%99%E8%89%B2%E7%9C%BC%E5%BD%B1-24-3.8g/p/BP_318873",
+   "source_label": "屈臣氏",
+   "verified_date": "2026-11-04"
+  },
+  {
+   "group": "tw",
+   "category": "彩妝",
+   "brand": "PONY EFFECT",
+   "name": "水透嫩妝前防護乳",
+   "highlight": "防曬、妝前打底、飾底三合一，SPF50+/PA++++，水感清爽不黏膩。",
+   "image": "assets/drugstore/ponyeffect-sun-primer.webp",
+   "source_url": "https://tw.memebox.com/SalePage/Index/9957889",
+   "source_label": "MEMEBOX 台灣",
+   "verified_date": "2026-11-04"
+  },
+  {
+   "group": "tw",
+   "category": "彩妝",
+   "brand": "Maybelline 媚比琳",
+   "name": "超持久水光鎖吻唇釉",
+   "highlight": "三層水光鎖色成膜科技，一抹覆蓋原生唇色，打造16小時不沾杯水光唇。",
+   "image": "assets/drugstore/maybelline-superstay-vinyl-ink.webp",
+   "source_url": "https://www.maybelline.com.tw/all-products/lip-makeup/lip-polish/superstay-vinyl-ink",
+   "source_label": "品牌官網",
+   "verified_date": "2026-11-04"
+  },
+  {
+   "group": "tw",
+   "category": "彩妝",
+   "brand": "i'm meme 我愛",
+   "name": "QQ 光波唇凍",
+   "highlight": "全新唇凍質地兼具光澤、輕盈與顯色，Q彈氣墊筆頭精準控量。",
+   "image": "assets/drugstore/immeme-qq-lip-jelly.webp",
+   "source_url": "https://tw.memebox.com/SalePage/Index/11680542",
+   "source_label": "MEMEBOX 台灣",
+   "verified_date": "2026-11-04"
+  },
+  {
+   "group": "tw",
+   "category": "彩妝",
+   "brand": "fwee",
+   "name": "3D 透明水晶唇彩",
+   "highlight": "韓國首創3D立體豐潤光澤，30%/70%雙濃度切換，高分子凝膠不黏膩。",
+   "image": "assets/drugstore/fwee-3d-crystal-gloss.webp",
+   "source_url": "https://fwee.com.tw/products/3d%E9%80%8F%E6%98%8E%E6%B0%B4%E6%99%B6%E5%94%87%E5%BD%A9",
+   "source_label": "品牌官網",
+   "verified_date": "2026-11-04"
+  }
+ ]
+}

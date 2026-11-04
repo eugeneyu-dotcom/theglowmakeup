@@ -17,7 +17,7 @@ SITE_URL = "https://www.theglowmakeup.org"  # 正式網域：實測 apex（無 w
 
 STATIC_PAGES = [
     "news.html", "skincare-blog.html",
-    "board-landing.html", "review-landing.html", "review-base.html",
+    "board-landing.html", "review-landing.html", "review-base.html", "drugstore-beauty.html",
 ]
 
 

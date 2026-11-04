@@ -363,6 +363,67 @@ async function renderNewsVoices() {
     }
 }
 
+// 開架美妝（drugstore-beauty.html）：Olive Young 韓系＋台灣藥妝通路的商品目錄，資料來自 drugstore-products.json。
+// 第一版沒有評分與心得（開架品牌尚未跑評論管線），只放品牌、品名、重點與購買連結。
+const DRUGSTORE_GROUPS = { all: '全部', olive: 'Olive Young 韓系', tw: '台灣藥妝通路' };
+const DRUGSTORE_CATEGORIES = ['彩妝', '保養'];
+window.drugstoreFilter = 'all';
+
+async function renderDrugstore() {
+    const list = document.getElementById('drugstore-list');
+    const filters = document.getElementById('drugstore-filters');
+    if (!list || !filters) return;
+    let products = [];
+    try {
+        const res = await fetch('drugstore-products.json?v=1');
+        products = (await res.json()).products || [];
+    } catch (err) {
+        console.error('drugstore-products.json 載入失敗', err);
+    }
+    if (products.length === 0) {
+        filters.innerHTML = '';
+        list.innerHTML = '<div class="text-center text-gray-400 text-sm py-12">商品整理中，敬請期待</div>';
+        return;
+    }
+
+    const draw = () => {
+        filters.innerHTML = Object.entries(DRUGSTORE_GROUPS).map(([key, label]) => {
+            const on = window.drugstoreFilter === key;
+            return `<button type="button" data-group="${key}" class="px-5 py-2 rounded-full text-sm font-black transition-colors ${on ? 'bg-[#f2a7b5] text-white' : 'bg-white text-gray-500 border border-[#f2a7b5]/30 hover:text-[#f2a7b5]'}">${label}</button>`;
+        }).join('');
+        filters.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => {
+            window.drugstoreFilter = btn.dataset.group;
+            draw();
+        }));
+
+        const shown = products.filter(p => window.drugstoreFilter === 'all' || p.group === window.drugstoreFilter);
+        list.innerHTML = DRUGSTORE_CATEGORIES.map(cat => {
+            const items = shown.filter(p => p.category === cat);
+            if (items.length === 0) return '';
+            return `
+            <section class="mb-14">
+                <h2 class="text-2xl font-black mb-6 italic border-l-8 border-[#f2a7b5] pl-4">${cat === '彩妝' ? 'Makeup' : 'Skincare'} / <span class="text-[#f2a7b5] text-lg not-italic">${cat}</span></h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                    ${items.map((p, i) => `
+                    <a href="${escHtml(p.source_url)}" target="_blank" rel="noopener" class="bg-white rounded-2xl overflow-hidden border border-[#f2a7b5]/15 shadow-sm hover:shadow-lg transition-all group flex flex-col">
+                        ${newProductImageBlock(p, i)}
+                        <div class="p-3 md:p-5 flex flex-col flex-grow">
+                            <div class="flex flex-wrap items-center gap-1.5 mb-2">
+                                <span class="${BRAND_BADGE_COLORS[i % BRAND_BADGE_COLORS.length]} text-white text-[10px] font-black px-3 py-1 rounded-full tracking-wide">${escHtml(p.brand)}</span>
+                                <span class="text-[10px] font-bold text-gray-400">${p.group === 'olive' ? 'Olive Young' : '藥妝通路'}</span>
+                            </div>
+                            <h3 class="font-black text-sm md:text-base leading-snug mb-1 group-hover:text-[#f2a7b5] transition-colors line-clamp-2">${escHtml(p.name)}</h3>
+                            <p class="hidden md:block text-xs text-gray-500 leading-relaxed line-clamp-3 flex-grow">${escHtml(p.highlight || '')}</p>
+                            <span class="text-[11px] font-bold text-[#f2a7b5] mt-3">查看${escHtml(p.source_label || '官網')} ➔</span>
+                        </div>
+                    </a>`).join('')}
+                </div>
+            </section>`;
+        }).join('');
+    };
+    draw();
+}
+
 // 保養專欄分類/標籤篩選狀態。category: undefined=尚未從網址初始化, null=全部文章；tag: null=不篩選標籤
 window.blogFilterState = { category: undefined, tag: undefined };
 
@@ -960,7 +1021,7 @@ let scoresDataCache = null;
 async function getSiteData() {
     if (siteDataCache) return siteDataCache;
     try {
-        const response = await fetch('site-data.json?v=38');
+        const response = await fetch('site-data.json?v=39');
         siteDataCache = await response.json();
         return siteDataCache;
     } catch (err) {
@@ -1307,7 +1368,7 @@ function filterTypesByScoredSubcats(types, scoredSubcats) {
 // Nav Logic (Mega Menu)
 async function initNav() {
     try {
-        const [response, scoredSubcats] = await Promise.all([fetch('site-data.json?v=38'), getScoredSubcats()]);
+        const [response, scoredSubcats] = await Promise.all([fetch('site-data.json?v=39'), getScoredSubcats()]);
         const data = await response.json();
         const navContainer = document.getElementById('desktop-nav');
         if (!navContainer) return;
@@ -1318,6 +1379,7 @@ async function initNav() {
             if (!target.hasDropdown) {
                 const a = document.createElement('a');
                 if (target.name === '最新情報') a.href = 'news.html';
+                else if (target.name === '開架美妝') a.href = 'drugstore-beauty.html';
                 else if (target.name === '保養專欄') a.href = 'skincare-blog.html';
                 else a.href = '#';
 
@@ -1449,6 +1511,7 @@ function renderMobileNav(data, scoredSubcats) {
         if (!target.hasDropdown) {
             const a = document.createElement('a');
             if (target.name === '最新情報') a.href = 'news.html';
+            else if (target.name === '開架美妝') a.href = 'drugstore-beauty.html';
             else if (target.name === '保養專欄') a.href = 'skincare-blog.html';
             else a.href = '#';
             a.className = 'mobile-nav-link';
@@ -1588,6 +1651,7 @@ window.addEventListener('DOMContentLoaded', () => {
     renderWeeklyNews();
     renderNewsNewProducts();
     renderNewsVoices();
+    renderDrugstore();
     renderSpotlightCards('board-spotlight-grid', 'board');
     renderSpotlightCards('review-spotlight-grid', 'review');
     renderSubcatTop5('subcat-top5-grid', '粉底液');

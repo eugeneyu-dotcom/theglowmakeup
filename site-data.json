@@ -135,6 +135,11 @@
    ]
   },
   {
+   "id": "t2b",
+   "name": "開架美妝",
+   "hasDropdown": false
+  },
+  {
    "id": "t3",
    "name": "精選評比",
    "hasDropdown": true,
