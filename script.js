@@ -38,7 +38,7 @@ async function getArticles() {
     if (!articlesPromise) {
         articlesPromise = (async () => {
             try {
-                const res = await fetch('articles.json?v=162');
+                const res = await fetch('articles.json?v=163');
                 const data = await res.json();
                 articlesCache = (data.articles || []).slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
             } catch (err) {

@@ -742,3 +742,35 @@ body.mobile-nav-open {
         max-height: calc(100vh - 120px);
     }
 }
+
+/* ===== 文章內文標題（2026-11-05）=====
+   極簡但有層次：H2 是粗體加粉色「螢光筆」底線，H3（含 FAQ 的 Q1. Q2. 問題）是粗體加金色左側色條。
+   H3 刻意用金色、不用粉色：文章裡的「重點框」本來就是粉色左邊線，同色會被誤認成同一種元件。
+   文章內容裡的標題都帶著 Tailwind 的 text-2xl／mt-10 等 class，這裡用 .article-body 加元素名稱的
+   選擇器（優先於單一 class）統一覆蓋，不需要逐篇改文章內容。 */
+.article-body h2 {
+    font-size: clamp(1.5rem, 1.15rem + 1.1vw, 1.9rem);
+    line-height: 1.4;
+    font-weight: 900;
+    letter-spacing: 0.01em;
+    color: #2d2d2d;
+    margin: 3.4rem 0 1.3rem;
+    text-decoration: underline;
+    text-decoration-color: rgba(242, 167, 181, 0.8);
+    text-decoration-thickness: 0.34em;
+    text-underline-offset: 0.02em;
+    text-decoration-skip-ink: none;
+}
+.article-body h3 {
+    font-size: clamp(1.12rem, 1rem + 0.5vw, 1.32rem);
+    line-height: 1.5;
+    font-weight: 800;
+    color: #2d2d2d;
+    margin: 2.3rem 0 0.9rem;
+    padding-left: 0.9rem;
+    border-left: 5px solid #d4af37;
+}
+.article-body h2 strong,
+.article-body h3 strong {
+    font-weight: inherit;
+}
