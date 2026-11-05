@@ -1137,7 +1137,7 @@ async function getSiteData() {
     if (!siteDataPromise) {
         siteDataPromise = (async () => {
             try {
-                const response = await fetch('site-data.json?v=42');
+                const response = await fetch('site-data.json?v=43');
                 siteDataCache = await response.json();
                 return siteDataCache;
             } catch (err) {
