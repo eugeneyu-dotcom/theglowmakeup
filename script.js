@@ -30,18 +30,25 @@ const MAX_SLIDES = 5;
 let articlesCache = null;
 
 // 取保養專欄文章，依日期由新到舊
+// 快取的是「進行中的請求」而不只是結果：頁面上好幾個區塊同時呼叫時共用同一次下載，
+// 不然每個都會各抓一份（articles.json 1.2MB、scores-data.json 0.7MB 都被重複下載過）。
+let articlesPromise = null;
 async function getArticles() {
     if (articlesCache) return articlesCache;
-    try {
-        const res = await fetch('articles.json?v=162');
-        const data = await res.json();
-        articlesCache = (data.articles || []).slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-        return articlesCache;
-    } catch (err) {
-        console.error('articles.json 載入失敗', err);
-        articlesCache = [];
-        return articlesCache;
+    if (!articlesPromise) {
+        articlesPromise = (async () => {
+            try {
+                const res = await fetch('articles.json?v=162');
+                const data = await res.json();
+                articlesCache = (data.articles || []).slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+            } catch (err) {
+                console.error('articles.json 載入失敗', err);
+                articlesCache = [];
+            }
+            return articlesCache;
+        })();
     }
+    return articlesPromise;
 }
 
 function formatArticleDate(d) {
@@ -298,9 +305,93 @@ async function renderNewsNewProducts() {
     }
 }
 
-// 網友怎麼說：挑「綜合分 3.8 以上、評論量夠、心得 40～300 字、提到該商品、語氣正面、不含 # 標籤堆疊的廣告式文案」的真實心得，
-// 同一子分類只取一則、同一品牌最多兩則，依按讚數排序後依月份輪替起點，顯示 6 則；每個月會換一批，同一個月內固定不變。
-async function renderNewsVoices() {
+// 網友怎麼說的卡片 HTML（候選池版與後備版共用）
+function renderVoiceCards(grid, picks, siteData) {
+    grid.innerHTML = picks.map(({ e, t }) => {
+        const img = findItemImage(siteData, e.subcat, e.brand, e.name);
+        const text = t.text.replace(/\s+/g, ' ').trim();
+        return `
+            <a href="item-detail.html?item=${encodeURIComponent(e.name)}&from=review" class="bg-white rounded-2xl p-5 border border-[#f2a7b5]/15 shadow-sm hover:shadow-lg transition-all flex flex-col gap-4">
+                <p class="text-gray-700 leading-relaxed text-sm flex-grow">「${escHtml(text.length > 110 ? text.slice(0, 110) + '…' : text)}」</p>
+                <div class="flex items-center gap-3 border-t border-[#f2a7b5]/15 pt-4">
+                    ${img ? `<img ${thumbAttrs(img)} alt="${escHtml(e.brand)}" loading="lazy" decoding="async" class="w-12 h-12 object-contain rounded-lg bg-[#fff9f5] p-1 shrink-0">` : ''}
+                    <div class="min-w-0">
+                        <span class="text-[10px] font-black tracking-widest text-gray-400 uppercase">${escHtml(e.brand)}</span>
+                        <div class="font-black text-sm leading-snug line-clamp-1">${escHtml(e.name)}</div>
+                        <span class="text-xs font-bold text-[#f2a7b5]">★ ${e.composite.toFixed(1)} · ${escHtml(t.platform || '網友')}真實心得</span>
+                    </div>
+                </div>
+            </a>`;
+    }).join('');
+}
+
+// 網友怎麼說：候選池 voices-pool.json 由 build_voices_pool.py 在建置階段產出（已過品項門檻、語氣、商品比對篩選），
+// 前端只負責依「台北時間的日期」決定今天顯示哪 6 則。
+// 刻意不用隨機：同一天所有訪客與搜尋引擎看到的內容都一樣、隔天自動換一批；
+// 也不產生任何網址參數或新頁面，每張卡片仍連到原本的商品頁。
+// dayNumber 只給預覽／測試用（呼叫 renderNewsVoices(天數) 看不同日子的組合），正式頁面不傳。
+function seededRng(seed) {   // mulberry32：同一個 seed 永遠產生同一串數字
+    let a = seed >>> 0;
+    return function () {
+        a = (a + 0x6D2B79F5) | 0;
+        let t = Math.imul(a ^ (a >>> 15), 1 | a);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+        return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+}
+function taipeiDayNumber(d) { return Math.floor((d.getTime() + 8 * 3600 * 1000) / 86400000); }
+
+async function renderNewsVoices(dayNumber) {
+    const section = document.getElementById('news-voices-section');
+    const grid = document.getElementById('news-voices');
+    if (!section || !grid) return;
+    try {
+        const [scores, siteData, pool] = await Promise.all([
+            getScoresData(), getSiteData(),
+            fetch('voices-pool.json?v=1').then(r => r.ok ? r.json() : null).catch(() => null)
+        ]);
+        // 池抓不到或空的 → 退回只看 scores-data.json 的舊做法，頁面不會變空
+        if (!Array.isArray(pool) || pool.length === 0) return renderNewsVoicesFromScores();
+        const cands = [];
+        pool.forEach(t => {
+            const e = (scores || {})[`${t.brand}||${t.name}`];
+            // 品項分數與評論量以 scores-data.json 為準（池是建置當下的快照，分數後來掉下去就不該再顯示）
+            if (!e || e.composite == null || e.composite < 3.8 || (e.mentions || 0) < RANKING_MIN_MENTIONS) return;
+            cands.push({ e, t });
+        });
+        if (cands.length === 0) return renderNewsVoicesFromScores();
+
+        const day = dayNumber == null ? taipeiDayNumber(new Date()) : dayNumber;
+        const rnd = seededRng(Math.imul(day, 2654435761) ^ 0x9E3779B9);
+        for (let i = cands.length - 1; i > 0; i--) {          // Fisher–Yates，用當天的 seed
+            const j = Math.floor(rnd() * (i + 1));
+            [cands[i], cands[j]] = [cands[j], cands[i]];
+        }
+        // 先湊「不同子分類、同品項 1 則、同品牌最多 2 則」；湊不滿 6 則再放寬子分類限制
+        const SHOWN = 6, picks = [];
+        const usedSub = new Set(), usedItem = new Set(), brandCount = {};
+        const fill = relaxSub => {
+            for (const x of cands) {
+                if (picks.length >= SHOWN) break;
+                if (picks.includes(x) || usedItem.has(x.e.name) || (brandCount[x.e.brand] || 0) >= 2) continue;
+                if (!relaxSub && usedSub.has(x.e.subcat)) continue;
+                picks.push(x); usedSub.add(x.e.subcat); usedItem.add(x.e.name);
+                brandCount[x.e.brand] = (brandCount[x.e.brand] || 0) + 1;
+            }
+        };
+        fill(false);
+        if (picks.length < SHOWN) fill(true);
+        renderVoiceCards(grid, picks, siteData);
+    } catch (err) {
+        console.error('網友心得載入失敗', err);
+        section.remove();
+    }
+}
+
+// 後備版（原本的做法）：只用 scores-data.json 每品項存的 3 則代表心得，依月份輪替起點。
+// 挑「綜合分 3.8 以上、評論量夠、心得 40～300 字、提到該商品、語氣正面、不含 # 標籤堆疊的廣告式文案」的真實心得，
+// 同一子分類只取一則、同一品牌最多兩則，依按讚數排序。
+async function renderNewsVoicesFromScores() {
     const section = document.getElementById('news-voices-section');
     const grid = document.getElementById('news-voices');
     if (!section || !grid) return;
@@ -341,22 +432,7 @@ async function renderNewsVoices() {
         const offset = (tp.getUTCFullYear() * 12 + tp.getUTCMonth()) * 3 % uniq.length;
         const picks = [];
         for (let i = 0; i < Math.min(SHOWN, uniq.length); i++) picks.push(uniq[(offset + i) % uniq.length]);
-        grid.innerHTML = picks.map(({ e, t }) => {
-            const img = findItemImage(siteData, e.subcat, e.brand, e.name);
-            const text = t.text.replace(/\s+/g, ' ').trim();
-            return `
-            <a href="item-detail.html?item=${encodeURIComponent(e.name)}&from=review" class="bg-white rounded-2xl p-5 border border-[#f2a7b5]/15 shadow-sm hover:shadow-lg transition-all flex flex-col gap-4">
-                <p class="text-gray-700 leading-relaxed text-sm flex-grow">「${escHtml(text.length > 110 ? text.slice(0, 110) + '…' : text)}」</p>
-                <div class="flex items-center gap-3 border-t border-[#f2a7b5]/15 pt-4">
-                    ${img ? `<img src="${escHtml(img)}" alt="${escHtml(e.brand)}" class="w-12 h-12 object-contain rounded-lg bg-[#fff9f5] p-1 shrink-0">` : ''}
-                    <div class="min-w-0">
-                        <span class="text-[10px] font-black tracking-widest text-gray-400 uppercase">${escHtml(e.brand)}</span>
-                        <div class="font-black text-sm leading-snug line-clamp-1">${escHtml(e.name)}</div>
-                        <span class="text-xs font-bold text-[#f2a7b5]">★ ${e.composite.toFixed(1)} · ${escHtml(t.platform || '網友')}真實心得</span>
-                    </div>
-                </div>
-            </a>`;
-        }).join('');
+        renderVoiceCards(grid, picks, siteData);
     } catch (err) {
         console.error('網友心得載入失敗', err);
         section.remove();
@@ -716,7 +792,7 @@ function renderRankingGrid() {
             <a href="item-detail.html?item=${encodeURIComponent(e.name)}&from=board" class="relative bg-white border border-gray-100 rounded-2xl p-3 md:p-4 hover:border-[#f2a7b5]/50 hover:shadow-md transition-all group">
                 <div class="absolute top-2.5 left-2.5 md:top-3 md:left-3 z-10 w-6 h-6 md:w-7 md:h-7 ${rankBg} rounded-full flex items-center justify-center font-black text-xs italic">${i + 1}</div>
                 <div class="aspect-square bg-gray-50 rounded-xl overflow-hidden mb-3 flex items-center justify-center p-3 md:p-4">
-                    <img src="${img}" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform" alt="${e.name}">
+                    <img ${thumbAttrs(img)} decoding="async" class="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform" alt="${e.name}">
                 </div>
                 <p class="text-[10px] font-black text-gray-400 uppercase tracking-wide mb-1 truncate">${e.brand}</p>
                 <h3 class="font-black text-xs md:text-sm leading-snug mb-2 line-clamp-2 group-hover:text-[#f2a7b5] transition-colors" title="${e.name}">${e.name}</h3>
@@ -1047,28 +1123,44 @@ const battleData = {
 let siteDataCache = null;
 let scoresDataCache = null;
 
+// 同 getArticles：共用進行中的請求；失敗時清掉，下次呼叫會重試（initRankings 就靠這個重試一次）
+let siteDataPromise = null;
+let scoresDataPromise = null;
+
 async function getSiteData() {
     if (siteDataCache) return siteDataCache;
-    try {
-        const response = await fetch('site-data.json?v=41');
-        siteDataCache = await response.json();
-        return siteDataCache;
-    } catch (err) {
-        console.error('Error fetching site data:', err);
-        return null;
+    if (!siteDataPromise) {
+        siteDataPromise = (async () => {
+            try {
+                const response = await fetch('site-data.json?v=41');
+                siteDataCache = await response.json();
+                return siteDataCache;
+            } catch (err) {
+                console.error('Error fetching site data:', err);
+                siteDataPromise = null;
+                return null;
+            }
+        })();
     }
+    return siteDataPromise;
 }
 
 async function getScoresData() {
     if (scoresDataCache) return scoresDataCache;
-    try {
-        const response = await fetch('scores-data.json?v=47');
-        scoresDataCache = await response.json();
-        return scoresDataCache;
-    } catch (err) {
-        console.error('Error fetching scores data:', err);
-        return null;
+    if (!scoresDataPromise) {
+        scoresDataPromise = (async () => {
+            try {
+                const response = await fetch('scores-data.json?v=47');
+                scoresDataCache = await response.json();
+                return scoresDataCache;
+            } catch (err) {
+                console.error('Error fetching scores data:', err);
+                scoresDataPromise = null;
+                return null;
+            }
+        })();
     }
+    return scoresDataPromise;
 }
 
 // 找該品項在 site-data.json 裡的圖片（scores-data 本身不存圖）
@@ -1076,6 +1168,20 @@ function findItemImage(siteData, subcategory, brand, name) {
     const items = siteData?.subcategoryDetails?.[subcategory]?.items || [];
     const found = items.find(it => it.brand === brand && it.name === name);
     return (found && (found.image || found.img)) || '';
+}
+
+// 小卡片（熱門榜單、網友怎麼說、聚光卡）用縮圖，不載 1MB 的原圖：
+// assets/products/xxx.png → assets/products/thumb/xxx.webp（由 make_product_thumbs.py 產生，新增商品圖後要跑一次）。
+// 縮圖不存在或載入失敗時 onerror 會退回原圖，所以漏跑腳本只是沒加速，不會壞圖。商品頁大圖不受影響。
+function thumbOf(path) {
+    const m = /^assets\/products\/([^\/]+)\.[a-z0-9]+$/i.exec(path || '');
+    return m ? `assets/products/thumb/${m[1]}.webp` : (path || '');
+}
+function thumbAttrs(full) {
+    if (!full) return 'src=""';
+    const t = thumbOf(full);
+    if (t === full) return `src="${escHtml(full)}"`;
+    return `src="${escHtml(t)}" onerror="this.onerror=null;this.src='${escHtml(full)}'"`;
 }
 
 // 取該子分類真實綜合分前 N 名，各自帶上圖片
@@ -1134,7 +1240,7 @@ function spotlightCardHtml(e, mode) {
     return `
         <a href="${href}" class="bg-white rounded-[32px] p-6 border border-[#f2a7b5]/10 shadow-sm hover:shadow-lg transition-all group flex flex-col sm:flex-row gap-6 items-stretch">
             <div class="w-full sm:w-2/5 aspect-square sm:aspect-auto bg-[#fff9f5] rounded-2xl p-4 overflow-hidden flex items-center justify-center border border-[#f2a7b5]/10 shrink-0">
-                <img src="${e.img || ''}" alt="${e.brand}" class="max-w-full max-h-[160px] object-contain group-hover:scale-105 transition-transform duration-500">
+                <img ${thumbAttrs(e.img)} alt="${e.brand}" class="max-w-full max-h-[160px] object-contain group-hover:scale-105 transition-transform duration-500">
             </div>
             <div class="flex flex-col justify-between py-2">
                 <div>
@@ -1445,8 +1551,8 @@ function filterTypesByScoredSubcats(types, scoredSubcats) {
 // Nav Logic (Mega Menu)
 async function initNav() {
     try {
-        const [response, scoredSubcats] = await Promise.all([fetch('site-data.json?v=41'), getScoredSubcats()]);
-        const data = await response.json();
+        const [data, scoredSubcats] = await Promise.all([getSiteData(), getScoredSubcats()]);
+        if (!data) throw new Error('site-data.json 載入失敗');
         const navContainer = document.getElementById('desktop-nav');
         if (!navContainer) return;
 

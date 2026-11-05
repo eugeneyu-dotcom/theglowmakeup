@@ -32,7 +32,7 @@ BASE = Path(__file__).resolve().parent
 # 會被加上 ?v= 的資產。鍵是檔名，值由程式掃描出「誰引用了它」。
 VERSIONED = [
     "articles.json", "scores-data.json", "site-data.json", "new-products.json", "drugstore-products.json",
-    "ingredients-data.json", "ingredient_warnings.json", "script.js", "styles.css",
+    "ingredients-data.json", "ingredient_warnings.json", "voices-pool.json", "script.js", "styles.css",
 ]
 
 # 這些路徑不是正式站台內容，掃描時跳過
