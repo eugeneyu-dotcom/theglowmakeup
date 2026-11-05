@@ -743,11 +743,16 @@ body.mobile-nav-open {
     }
 }
 
-/* ===== 文章內文標題（2026-11-05）=====
-   極簡但有層次：H2 是粗體加粉色「螢光筆」底線，H3（含 FAQ 的 Q1. Q2. 問題）是粗體加金色左側色條。
-   H3 刻意用金色、不用粉色：文章裡的「重點框」本來就是粉色左邊線，同色會被誤認成同一種元件。
+/* ===== 文章內文標題（2026-11-05；依使用者意見調整兩次）=====
+   極簡但有層次，全部粉色系、用深淺區分：H2 是粗體加粉色底線（#f2a7b5），H3 是粗體加更淡的粉色左側色條
+   （#f8cdd6），兩者線的粗細都是 5px。
+   FAQ 的問題（H3.faq-q）做成淡粉底的小卡片，「Q1.」用深粉色強調，答案維持一般段落，
+   一眼分得出「問題」和「答案」。faq-q 與 span.faq-n 由 normalize_article_faq.py 寫進文章內容。
    文章內容裡的標題都帶著 Tailwind 的 text-2xl／mt-10 等 class，這裡用 .article-body 加元素名稱的
    選擇器（優先於單一 class）統一覆蓋，不需要逐篇改文章內容。 */
+:root {
+    --article-pink: #f2a7b5;   /* H2 底線與 FAQ 問題文字共用的粉色（使用者 2026-11-05 指定） */
+}
 .article-body h2 {
     font-size: clamp(1.5rem, 1.15rem + 1.1vw, 1.9rem);
     line-height: 1.4;
@@ -756,9 +761,9 @@ body.mobile-nav-open {
     color: #2d2d2d;
     margin: 3.4rem 0 1.3rem;
     text-decoration: underline;
-    text-decoration-color: rgba(242, 167, 181, 0.8);
-    text-decoration-thickness: 0.34em;
-    text-underline-offset: 0.02em;
+    text-decoration-color: var(--article-pink);
+    text-decoration-thickness: 5px;   /* 跟 H3 的左側色條（5px）一樣粗 */
+    text-underline-offset: 0.18em;
     text-decoration-skip-ink: none;
 }
 .article-body h3 {
@@ -768,7 +773,18 @@ body.mobile-nav-open {
     color: #2d2d2d;
     margin: 2.3rem 0 0.9rem;
     padding-left: 0.9rem;
-    border-left: 5px solid #d4af37;
+    border-left: 5px solid #f8cdd6;   /* 比 H2 底線（#f2a7b5）更淡 */
+}
+.article-body h3.faq-q {
+    background: #fff3f6;
+    border-radius: 0 14px 14px 0;
+    padding: 0.35rem 1rem;        /* 卡片變薄（上下內距縮小），長度維持整行 */
+    margin: 2rem 0 0.7rem;
+}
+.article-body h3.faq-q .faq-n {
+    color: #e0708a;
+    font-weight: 900;
+    margin-right: 0.1em;
 }
 .article-body h2 strong,
 .article-body h3 strong {

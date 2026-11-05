@@ -44,14 +44,32 @@ HEAD = re.compile(r"<h([1-6])\b([^>]*)>(.*?)</h\1>", re.S | re.I)
 STRONG_WRAP = re.compile(r"^\s*<strong>(.*)</strong>\s*$", re.S | re.I)
 
 
+FAQ_N_SPAN = re.compile(r'^\s*<span class="faq-n">.*?</span>\s*', re.S | re.I)
+
+
 def clean_question(inner):
-    """問題文字：拆掉整段外層的 <strong>（標題本身已是粗體），再拿掉開頭的 Q／數字前綴。
+    """問題文字：拆掉整段外層的 <strong>（標題本身已是粗體），再拿掉開頭的 Q／數字前綴
+    （含這支腳本自己產生的 <span class="faq-n">Q1.</span>，所以重跑是冪等的）。
     內部連結等其他標籤原樣保留。"""
     inner = inner.strip()
     m = STRONG_WRAP.match(inner)
     if m:
         inner = m.group(1).strip()
+    if FAQ_N_SPAN.match(inner):
+        return FAQ_N_SPAN.sub("", inner, count=1).strip()
     return PREFIX.sub("", inner, count=1).strip()
+
+
+def q_heading(attrs, n, q):
+    """FAQ 問題標題：H3 加 faq-q class，編號包在 span.faq-n（CSS 用來做醒目的卡片與深粉色編號）。
+    attrs 是原有的屬性字串（沿用原本的 class／id，只補上 faq-q）。"""
+    if 'class="' in attrs:
+        m = re.search(r'class="([^"]*)"', attrs)
+        if "faq-q" not in m.group(1).split():
+            attrs = attrs.replace(m.group(0), f'class="{m.group(1)} faq-q"')
+    else:
+        attrs = f' class="{H3_CLS} faq-q"' + attrs
+    return f'<h3{attrs}><span class="faq-n">Q{n}.</span> {q}</h3>'
 
 
 def text_of(s):
@@ -138,7 +156,7 @@ def normalize(c, keep_keyword_titles=True, reorder=True):
         n[0] += 1
         # 只拿掉開頭的「Q：」類前綴，問題裡的連結等 HTML 標籤要原樣保留（內部連結不能掉）
         q = clean_question(strong)
-        out = f'<h3 class="{H3_CLS}">Q{n[0]}. {q}</h3>'
+        out = q_heading(f' class="{H3_CLS}"', n[0], q)
         rest = rest.strip()
         if rest:
             out += f"<p{attrs_p}>{rest}</p>"
@@ -151,7 +169,7 @@ def normalize(c, keep_keyword_titles=True, reorder=True):
             return mm.group(0)
         n[0] += 1
         q = clean_question(inner_h3)
-        return f'<h3{mm.group(1)}>Q{n[0]}. {q}</h3>'
+        return q_heading(mm.group(1), n[0], q)
 
     # 先處理 h3 問題，再處理粗體段落（兩種混用時依出現順序編號：用單一掃描）
     tok = re.compile(r"<h3\b([^>]*)>(.*?)</h3>|<p\b([^>]*)>\s*<strong>(.*?)</strong>\s*(.*?)</p>", re.S | re.I)
