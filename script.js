@@ -1114,11 +1114,16 @@ async function initHomeQuizVisibility() {
 
 // 5. Cruel Battle 殘酷擂台（真實資料版：composite/indicators/testimonial 全部來自 scores-data.json）
 
-const battleData = {
-    'powder': { title: '2026 年度蜜粉定妝大戰', subcategory: '蜜粉' },
-    'lotion': { title: '2026 年度乳液保濕力對決', subcategory: '乳液' },
-    'eyeshadow': { title: '2026 年度眼影盤顯色大戰', subcategory: '眼影/眼影盤' }
+// 殘酷擂台：分類按鈕與可選商品全部由 scores-data.json 自動產生（有真實綜合分的品項才能上擂台，
+// 至少 2 個才會有該分類）。下面這幾個分類固定排最前面，並用原本的標題；其餘依品項數由多到少排。
+const BATTLE_PINNED = ['蜜粉', '乳液', '眼影/眼影盤'];
+const BATTLE_TITLES = {
+    '蜜粉': '2026 年度蜜粉定妝大戰',
+    '乳液': '2026 年度乳液保濕力對決',
+    '眼影/眼影盤': '2026 年度眼影盤顯色大戰'
 };
+// 目前擂台狀態：分類、該分類所有可選品項（分數高到低）、左右兩側
+const battleState = { subcat: null, items: [], left: null, right: null };
 
 let siteDataCache = null;
 let scoresDataCache = null;
@@ -1132,7 +1137,7 @@ async function getSiteData() {
     if (!siteDataPromise) {
         siteDataPromise = (async () => {
             try {
-                const response = await fetch('site-data.json?v=41');
+                const response = await fetch('site-data.json?v=42');
                 siteDataCache = await response.json();
                 return siteDataCache;
             } catch (err) {
@@ -1365,25 +1370,62 @@ async function renderSubcatTop5(containerId, subcat) {
     }).join('');
 }
 
-async function switchBattle(category, el) {
-    const conf = battleData[category];
-    if (!conf) return;
+const battleKey = e => `${e.brand}||${e.name}`;
 
-    // Update Button States
-    document.querySelectorAll('.battle-btn').forEach(btn => {
-        btn.classList.remove('border-[#f2a7b5]', 'text-[#f2a7b5]');
-        btn.classList.add('border-gray-100', 'text-gray-400');
+// 依資料建立分類按鈕，並切到第一個分類
+async function initBattle() {
+    const track = document.getElementById('battle-tabs');
+    if (!track) return;
+    const scores = await getScoresData();
+    const bySub = {};
+    Object.values(scores || {}).forEach(e => {
+        if (e.composite != null && e.subcat) (bySub[e.subcat] = bySub[e.subcat] || []).push(e);
     });
-    if (el) {
-        el.classList.remove('border-gray-100', 'text-gray-400');
-        el.classList.add('border-[#f2a7b5]', 'text-[#f2a7b5]');
+    const subs = Object.keys(bySub).filter(s => bySub[s].length >= 2);
+    if (subs.length === 0) {
+        track.innerHTML = '<div class="text-gray-400 text-sm py-2">評分資料累積中，敬請期待</div>';
+        return;
     }
+    subs.sort((a, b) => {
+        const pa = BATTLE_PINNED.indexOf(a), pb = BATTLE_PINNED.indexOf(b);
+        if (pa !== -1 || pb !== -1) return (pa === -1 ? 99 : pa) - (pb === -1 ? 99 : pb);
+        return bySub[b].length - bySub[a].length;
+    });
+    track.innerHTML = subs.map(s =>
+        `<button type="button" data-subcat="${escHtml(s)}" class="battle-btn shrink-0 whitespace-nowrap px-5 py-2 rounded-full border-2 border-gray-100 text-gray-400 font-bold hover:border-[#f2a7b5] hover:text-[#f2a7b5] transition-all text-sm">${escHtml(s)}</button>`
+    ).join('');
+    track.querySelectorAll('.battle-btn').forEach(btn => {
+        btn.addEventListener('click', () => switchBattle(btn.dataset.subcat, btn));
+    });
+    switchBattle(subs[0], track.querySelector('.battle-btn'));
+}
 
-    document.getElementById('battle-title').innerText = conf.title;
+function scrollBattleTabs(direction) {
+    const track = document.getElementById('battle-tabs');
+    if (!track) return;
+    track.scrollBy({ left: track.clientWidth * 0.6 * direction, behavior: 'smooth' });
+}
 
-    const top2 = await topTwoForSubcat(conf.subcategory);
-    if (top2.length < 2) {
-        document.getElementById('battle-center').querySelector('.flex.justify-between.items-center.mb-12')?.classList.add('hidden');
+// 切換分類：預設擂台是該分類分數最高的前兩名，使用者可以再用下拉選單換成任何商品
+async function switchBattle(subcat, el) {
+    document.querySelectorAll('.battle-btn').forEach(btn => {
+        const active = btn === el;
+        btn.classList.toggle('border-[#f2a7b5]', active);
+        btn.classList.toggle('text-[#f2a7b5]', active);
+        btn.classList.toggle('border-gray-100', !active);
+        btn.classList.toggle('text-gray-400', !active);
+    });
+
+    const [scores, siteData] = await Promise.all([getScoresData(), getSiteData()]);
+    const items = Object.values(scores || {})
+        .filter(e => e.subcat === subcat && e.composite != null)
+        .sort((a, b) => (b.composite - a.composite) || ((b.mentions || 0) - (a.mentions || 0)))
+        .map(e => ({ ...e, img: findItemImage(siteData, subcat, e.brand, e.name) }));
+
+    document.getElementById('battle-title').innerText = BATTLE_TITLES[subcat] || `2026 年度${subcat}評比大對決`;
+
+    if (items.length < 2) {
+        document.getElementById('battle-cards-row')?.classList.add('hidden');
         document.getElementById('battle-radar-container').innerHTML = '<p class="text-xs font-bold text-gray-400 py-10">此分類真實評分資料仍在累積中，敬請期待！</p>';
         ['left', 'right'].forEach(side => {
             const panel = document.getElementById(`sentiment-${side}`);
@@ -1392,21 +1434,162 @@ async function switchBattle(category, el) {
         return;
     }
 
-    const [leftItem, rightItem] = top2;
-    document.getElementById('battle-center').querySelector('.flex.justify-between.items-center.mb-12')?.classList.remove('hidden');
+    battleState.subcat = subcat;
+    battleState.items = items;
+    battleState.left = items[0];
+    battleState.right = items[1];
+    document.getElementById('battle-cards-row')?.classList.remove('hidden');
+    renderBattle();
+}
 
+function onBattleSelect(side, key) {
+    const picked = battleState.items.find(e => battleKey(e) === key);
+    if (!picked) return;
+    battleState[side] = picked;
+    renderBattle();
+}
+
+// 依 battleState 的左右商品畫出卡片、好感度面板與雷達圖
+function renderBattle() {
+    const { subcat, left, right } = battleState;
+    if (!left || !right) return;
     const leftCard = document.querySelector('#battle-center .group:first-child');
     const rightCard = document.querySelector('#battle-center .group:last-child');
+    [[leftCard, left], [rightCard, right]].forEach(([card, item]) => {
+        const img = card.querySelector('img');
+        const full = item.img || '';
+        const thumb = thumbOf(full);
+        img.onerror = null;
+        if (thumb !== full) img.onerror = () => { img.onerror = null; img.src = full; };
+        img.src = thumb;
+        img.alt = `${item.brand} ${item.name}`;
+        card.querySelector('p').innerText = `${item.brand} ${item.name}`;
+    });
+    initSentimentAnalysis('left', left);
+    initSentimentAnalysis('right', right);
+    updateBattleRadarChart(subcat, left, right);
+}
 
-    leftCard.querySelector('img').src = leftItem.img || '';
-    leftCard.querySelector('p').innerText = `${leftItem.brand} ${leftItem.name}`;
+// ===== 殘酷擂台：商品選擇器（縮圖卡片）=====
+// 只看品名新手認不出是哪一款，所以改成彈出視窗：每個商品有縮圖、品牌、品名、分數、特點標籤與常見別稱，
+// 上方可依品牌篩選。手機是從底部滑出的面板，桌面是置中視窗。
+// 彈窗在第一次開啟時才建立並掛在 body 底下（不受外層版面影響），沒有新頁面、沒有網址參數。
+const battlePicker = { side: null, brand: '全部', returnFocus: null };
 
-    rightCard.querySelector('img').src = rightItem.img || '';
-    rightCard.querySelector('p').innerText = `${rightItem.brand} ${rightItem.name}`;
+function findSiteItem(siteData, subcategory, brand, name) {
+    const items = siteData?.subcategoryDetails?.[subcategory]?.items || [];
+    return items.find(it => it.brand === brand && it.name === name) || null;
+}
 
-    initSentimentAnalysis('left', leftItem);
-    initSentimentAnalysis('right', rightItem);
-    updateBattleRadarChart(conf.subcategory, leftItem, rightItem);
+function ensureBattlePicker() {
+    if (document.getElementById('battle-picker')) return;
+    const el = document.createElement('div');
+    el.id = 'battle-picker';
+    el.className = 'fixed inset-0 z-[100] hidden';
+    el.setAttribute('role', 'dialog');
+    el.setAttribute('aria-modal', 'true');
+    el.setAttribute('aria-labelledby', 'battle-picker-title');
+    el.innerHTML = `
+        <div class="absolute inset-0 bg-black/40" data-close="1"></div>
+        <div class="absolute inset-x-0 bottom-0 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 w-full md:w-[min(58rem,92vw)] max-h-[88vh] flex flex-col bg-white rounded-t-[28px] md:rounded-[28px] shadow-2xl text-left">
+            <div class="shrink-0 flex items-center justify-between gap-3 px-5 md:px-7 pt-5 pb-3">
+                <div>
+                    <h3 id="battle-picker-title" class="font-black text-lg md:text-xl"></h3>
+                    <p id="battle-picker-sub" class="text-xs text-gray-400 font-bold mt-1"></p>
+                </div>
+                <button type="button" id="battle-picker-close" data-close="1" aria-label="關閉" class="shrink-0 w-9 h-9 rounded-full bg-gray-100 hover:bg-[#f2a7b5] hover:text-white text-gray-500 font-black transition-colors">&#10005;</button>
+            </div>
+            <div id="battle-picker-brands" class="ranking-tabs shrink-0 flex gap-2 overflow-x-auto px-5 md:px-7 pb-3"></div>
+            <div id="battle-picker-grid" class="min-h-0 overflow-y-auto overscroll-contain px-5 md:px-7 pb-6 grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4"></div>
+        </div>`;
+    document.body.appendChild(el);
+
+    el.addEventListener('click', ev => {
+        if (ev.target.closest('[data-close]')) { closeBattlePicker(); return; }
+        const chip = ev.target.closest('[data-brand]');
+        if (chip) { battlePicker.brand = chip.dataset.brand; renderBattlePicker(); return; }
+        const card = ev.target.closest('[data-key]');
+        if (card && card.getAttribute('aria-disabled') !== 'true') {
+            const side = battlePicker.side;
+            closeBattlePicker();
+            onBattleSelect(side, card.dataset.key);
+        }
+    });
+    // Esc 關閉；Tab 只在彈窗內循環（不會跑到背後的頁面）
+    document.addEventListener('keydown', ev => {
+        if (el.classList.contains('hidden')) return;
+        if (ev.key === 'Escape') { closeBattlePicker(); return; }
+        if (ev.key !== 'Tab') return;
+        const f = [...el.querySelectorAll('button:not([disabled]):not([aria-disabled="true"])')].filter(b => b.offsetParent !== null);
+        if (f.length === 0) return;
+        const first = f[0], last = f[f.length - 1];
+        if (ev.shiftKey && document.activeElement === first) { ev.preventDefault(); last.focus(); }
+        else if (!ev.shiftKey && document.activeElement === last) { ev.preventDefault(); first.focus(); }
+    });
+}
+
+function openBattlePicker(side) {
+    if (!battleState.items.length) return;
+    ensureBattlePicker();
+    battlePicker.side = side;
+    battlePicker.brand = '全部';
+    battlePicker.returnFocus = document.getElementById(`battle-pick-${side}`);
+    renderBattlePicker();
+    document.getElementById('battle-picker').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('battle-picker-close').focus();
+}
+
+function closeBattlePicker() {
+    const el = document.getElementById('battle-picker');
+    if (!el || el.classList.contains('hidden')) return;
+    el.classList.add('hidden');
+    document.body.style.overflow = '';
+    if (battlePicker.returnFocus) battlePicker.returnFocus.focus();
+}
+
+function renderBattlePicker() {
+    const { side, brand } = battlePicker;
+    const mine = battleState[side];
+    const other = battleState[side === 'left' ? 'right' : 'left'];
+    const all = battleState.items;
+    const sideName = side === 'left' ? '左側' : '右側';
+    document.getElementById('battle-picker-title').textContent = `選擇${sideName}商品・${battleState.subcat}`;
+    document.getElementById('battle-picker-sub').textContent = `共 ${all.length} 款有真實評分的商品，依分數排序；點一下就會換成它`;
+
+    // 品牌篩選鈕（依該分類商品數由多到少）
+    const counts = {};
+    all.forEach(e => { counts[e.brand] = (counts[e.brand] || 0) + 1; });
+    const brands = Object.keys(counts).sort((a, b) => counts[b] - counts[a] || a.localeCompare(b));
+    const chip = (label, count, active) => `<button type="button" data-brand="${escHtml(label)}" aria-pressed="${active}" class="shrink-0 whitespace-nowrap px-4 py-1.5 rounded-full border-2 text-xs md:text-sm font-bold transition-all ${active ? 'border-[#f2a7b5] text-[#f2a7b5]' : 'border-gray-100 text-gray-400 hover:border-[#f2a7b5] hover:text-[#f2a7b5]'}">${escHtml(label)}${count ? ` ${count}` : ''}</button>`;
+    document.getElementById('battle-picker-brands').innerHTML =
+        chip('全部', all.length, brand === '全部') + brands.map(b => chip(b, counts[b], brand === b)).join('');
+
+    const siteData = siteDataCache;
+    const list = all.filter(e => brand === '全部' || e.brand === brand);
+    document.getElementById('battle-picker-grid').innerHTML = list.map(e => {
+        const key = battleKey(e);
+        const isMine = mine && key === battleKey(mine);
+        const isOther = other && key === battleKey(other);
+        const site = findSiteItem(siteData, e.subcat, e.brand, e.name) || {};
+        const tags = (site.hashtags || []).slice(0, 3);
+        const aka = (site.aka || []).slice(0, 2);
+        const stateCls = isMine ? 'border-[#f2a7b5] bg-[#fff9f5]' : isOther ? 'border-gray-100 opacity-50 cursor-not-allowed' : 'border-gray-100 hover:border-[#f2a7b5] hover:shadow-md';
+        const badge = isMine ? '<span class="absolute top-2 left-2 text-[10px] font-black bg-[#f2a7b5] text-white px-2 py-0.5 rounded-full">目前選擇</span>'
+            : isOther ? '<span class="absolute top-2 left-2 text-[10px] font-black bg-gray-400 text-white px-2 py-0.5 rounded-full">已在另一側</span>' : '';
+        return `
+            <button type="button" data-key="${escHtml(key)}" ${isOther ? 'aria-disabled="true"' : ''} class="relative text-left bg-white border-2 rounded-2xl p-3 flex flex-col gap-1.5 transition-all ${stateCls}">
+                ${badge}
+                <div class="aspect-square bg-[#fff9f5] rounded-xl p-2 flex items-center justify-center mb-1">
+                    <img ${thumbAttrs(e.img)} alt="" loading="lazy" decoding="async" class="max-w-full max-h-full object-contain">
+                </div>
+                <span class="text-[10px] font-black tracking-widest text-gray-400 uppercase truncate">${escHtml(e.brand)}</span>
+                <span class="font-black text-xs md:text-sm leading-snug line-clamp-2 text-[#2d2d2d]">${escHtml(e.name)}</span>
+                <span class="text-xs"><span class="text-[#e05a47] font-black">★ ${e.composite.toFixed(1)}</span> <span class="text-gray-400">(${e.mentions || 0}則)</span></span>
+                ${aka.length ? `<span class="text-[11px] text-gray-500 leading-snug">常被叫：${escHtml(aka.join('／'))}</span>` : ''}
+                ${tags.length ? `<span class="flex flex-wrap gap-1 mt-0.5">${tags.map(t => `<span class="text-[10px] font-bold bg-[#fff0f3] text-[#e6a0ad] px-2 py-0.5 rounded-full">${escHtml(t)}</span>`).join('')}</span>` : ''}
+            </button>`;
+    }).join('') || '<p class="col-span-full text-center text-sm text-gray-400 py-10">這個品牌在此分類目前沒有評分商品</p>';
 }
 
 // 真實社群好感度（依綜合分換算）+ 真實指標強弱項標籤 + 真實代表心得
@@ -1870,8 +2053,7 @@ window.addEventListener('DOMContentLoaded', () => {
     renderSpotlightCards('review-spotlight-grid', 'review');
     renderSubcatTop5('subcat-top5-grid', '粉底液');
     if (document.getElementById('sentiment-left')) {
-        const firstBtn = document.querySelector('.battle-btn');
-        switchBattle('powder', firstBtn);
+        initBattle();
     }
 });
 
