@@ -97,7 +97,7 @@
         <!-- Left: Brands Filter -->
         <aside class="w-full lg:w-64 shrink-0">
             <div class="bg-white rounded-3xl p-6 border border-[#f2a7b5]/10 shadow-sm sticky top-[120px]">
-                <h3 class="text-xl font-black mb-6 italic border-b border-[#f2a7b5]/20 pb-3">Brands</h3>
+                <p class="brand-logo text-xl font-black mb-6 italic border-b border-[#f2a7b5]/20 pb-3">Brands</p>
                 <ul id="brands-list" class="space-y-3 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
                     <!-- Brands will be loaded here -->
                     <li class="text-gray-400 text-sm">載入中...</li>
@@ -323,14 +323,14 @@
                 <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-10">
                     <div class="flex flex-col justify-between gap-6">
                         <div>
-                            <div class="flex items-center gap-3 mb-4"><span class="text-3xl">📈</span><h3 class="text-2xl font-black italic text-[#2d2d2d]">Glow Makeup 社群評分總覽</h3></div>
+                            <div class="flex items-center gap-3 mb-4"><span class="text-3xl">📈</span><p class="brand-logo text-2xl font-black italic text-[#2d2d2d]">Glow Makeup 社群評分總覽</p></div>
                             <div class="flex flex-wrap gap-2 mb-6">${tags.map(t => `<span class="px-3.5 py-1.5 bg-[#2d2d2d] text-white text-xs font-bold rounded-full">#${t}</span>`).join('')}</div>
                             <p class="text-gray-600 leading-relaxed text-sm font-bold">「<span class="text-[#f2a7b5]">${sub}</span>」社群真實評論數據彙整。</p>
                         </div>
                         ${statBlock}
                     </div>
                     <div class="flex flex-col gap-6 justify-center">
-                        <h4 class="text-xl font-black italic text-[#2d2d2d] flex items-center gap-2"><span>🎓</span> 專家指標</h4>
+                        <p class="brand-logo text-xl font-black italic text-[#2d2d2d] flex items-center gap-2"><span>🎓</span> 專家指標</p>
                         <div class="flex flex-col gap-4">${kPoints.map(point => `<div class="p-6 bg-white/95 rounded-2xl border border-[#f2a7b5]/20"><div class="flex items-center gap-3 mb-2"><span class="text-lg text-[#f2a7b5]">💡</span><span class="text-base font-black">${point.title}</span></div><p class="text-xs text-gray-700 pl-12">${point.content}</p></div>`).join('')}</div>
                     </div>
                 </div>`;

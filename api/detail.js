@@ -135,6 +135,9 @@ module.exports = async (req, res) => {
         const details = sub ? (readSiteData().subcategoryDetails || {})[sub] : null;
         if (!sub || !details) {
             // 沒帶 sub 或查無這個子分類：回 404，避免軟 404 被當成「已檢索但未建立索引」。
+            // ⚠️ 同 api/item-detail.js：這裡送的是未改寫的原始範本，canonical 仍是
+            // board-landing.html。靠 404 讓 Google 丟棄整頁才沒事；要改成回 200 的話，
+            // canonical / og:url 必須一併處理。
             // 畫面仍由前端補上「未指定分類」，使用者看到的東西不變。
             res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=60, stale-while-revalidate=600');
             res.status(404).send(template);

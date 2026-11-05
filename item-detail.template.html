@@ -114,7 +114,7 @@
 
                             <!-- Product Description Section (Product Features) -->
                             <div class="mb-8 p-6 bg-[#fff9f5] rounded-3xl border border-[#f2a7b5]/10">
-                                <h4 class="text-xs font-black text-gray-400 uppercase tracking-wider mb-2">✦ 產品特點 / Product Features</h4>
+                                <h2 class="text-xs font-black text-gray-400 uppercase tracking-wider mb-2">✦ 產品特點 / Product Features</h2>
                                 <p id="product-description" class="text-base text-gray-700 leading-relaxed font-bold">載入中...</p>
                             </div>
 
@@ -122,7 +122,7 @@
                                  沒有真實評論可匯總時整塊隱藏（見下方 DOMContentLoaded 內對 scoreEntry.reviewSummary 的判斷）
                                  配色刻意用金色系跟上方「產品特點」的粉色系區隔，方便一眼分辨兩塊內容不同 -->
                             <div id="review-summary-section" class="mb-8 p-6 bg-[#fdf6e6] rounded-3xl border border-[#d4af37]/20 hidden">
-                                <h4 class="text-xs font-black text-[#b8912e] uppercase tracking-wider mb-2">💬 網友評價匯總 / Community Verdict</h4>
+                                <h2 class="text-xs font-black text-[#b8912e] uppercase tracking-wider mb-2">💬 網友評價匯總 / Community Verdict</h2>
                                 <p id="review-summary-text" class="text-base text-gray-700 leading-relaxed font-bold"></p>
                             </div>
 
@@ -156,7 +156,7 @@
                     </div>
                     <div id="ingredients-warnings" class="space-y-3 mb-8"></div>
                     <div>
-                        <h4 class="text-xs font-black text-gray-400 uppercase tracking-wider mb-3">完整成分列表 / Full Ingredient List</h4>
+                        <h3 class="text-xs font-black text-gray-400 uppercase tracking-wider mb-3">完整成分列表 / Full Ingredient List</h3>
                         <div id="ingredients-list" class="flex flex-wrap gap-2"></div>
                         <button id="ingredients-toggle" type="button" onclick="toggleIngredients()"
                                 class="hidden md:!hidden mt-4 w-full py-2.5 text-xs font-black text-[#f2a7b5] border border-[#f2a7b5]/30 rounded-full hover:bg-[#f2a7b5]/5 transition-colors"></button>
@@ -608,9 +608,9 @@
                                 <div class="bg-white rounded-[22px] p-6 space-y-6">
                                     <!-- Hot Shades -->
                                     <div>
-                                        <h4 class="font-black text-lg text-[#2d2d2d] mb-3 flex items-center gap-2">
+                                        <h3 class="font-black text-lg text-[#2d2d2d] mb-3 flex items-center gap-2">
                                             <span class="text-[#f2a7b5]">💄</span> 熱門推薦色號 / Hot Shades
-                                        </h4>
+                                        </h3>
                                         <div class="flex flex-wrap gap-2">
                                             ${enrichedDetails.hot_shades.map(shade => `
                                                 <span class="px-3 py-1.5 bg-[#f2a7b5]/5 border border-[#f2a7b5]/20 text-[#2d2d2d] text-sm font-bold rounded-full flex items-center gap-1.5 hover:border-[#f2a7b5] transition-all cursor-default">
@@ -622,9 +622,9 @@
 
                                     <!-- Suitable Audience -->
                                     <div class="border-t border-gray-100 pt-5">
-                                        <h4 class="font-black text-lg text-[#2d2d2d] mb-3 flex items-center gap-2">
+                                        <h3 class="font-black text-lg text-[#2d2d2d] mb-3 flex items-center gap-2">
                                             <span class="text-[#f2a7b5]">🎯</span> 適用人群 / Target Audience
-                                        </h4>
+                                        </h3>
                                         <ul class="space-y-2">
                                             ${enrichedDetails.suitable_audience.map(aud => `
                                                 <li class="flex items-start gap-2 text-sm text-[#666666] font-bold">
@@ -643,9 +643,9 @@
                                 <div class="bg-white rounded-[22px] p-6 space-y-6">
                                     <!-- Core Advantages -->
                                     <div>
-                                        <h4 class="font-black text-lg text-[#2d2d2d] mb-3 flex items-center gap-2">
+                                        <h3 class="font-black text-lg text-[#2d2d2d] mb-3 flex items-center gap-2">
                                             <span class="text-[#f2a7b5]">✨</span> 產品優勢亮點 / Core Advantages
-                                        </h4>
+                                        </h3>
                                         <ul class="space-y-2">
                                             ${enrichedDetails.advantages.map(adv => `
                                                 <li class="flex items-start gap-2 text-sm text-[#666666] font-bold">
@@ -658,9 +658,9 @@
 
                                     <!-- Suitable Audience -->
                                     <div class="border-t border-gray-100 pt-5">
-                                        <h4 class="font-black text-lg text-[#2d2d2d] mb-3 flex items-center gap-2">
+                                        <h3 class="font-black text-lg text-[#2d2d2d] mb-3 flex items-center gap-2">
                                             <span class="text-[#f2a7b5]">🎯</span> 適用人群 / Target Audience
-                                        </h4>
+                                        </h3>
                                         <ul class="space-y-2">
                                             ${enrichedDetails.suitable_audience.map(aud => `
                                                 <li class="flex items-start gap-2 text-sm text-[#666666] font-bold">
@@ -724,7 +724,7 @@
                                 <div class="aspect-square bg-gray-50 rounded-xl mb-4 p-4 overflow-hidden">
                                     <img src="${item.image || item.img || window.IMG_FALLBACK}" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
                                 </div>
-                                <h4 class="font-bold text-lg mb-1 group-hover:text-[#f2a7b5] transition-colors">${item.name}</h4>
+                                <h3 class="font-bold text-lg mb-1 group-hover:text-[#f2a7b5] transition-colors">${item.name}</h3>
                                 <p class="text-sm text-gray-500 mb-3">${item.brand}</p>
                                 <div class="flex items-center gap-2">
                                     ${ratingBlock}

@@ -108,7 +108,8 @@ function renderItemHtml(template, item, subcategoryName, scoreEntry) {
     // Product schema：只在真的有真實評分資料時才加 aggregateRating。
     // 沒有評分的品項不能捏造星等，寧可不輸出 schema 也不要塞假資料——
     // 這條規則跟 CSR 那邊是同一條，不要只改一邊。
-    let productSchemaTag = '<script type="application/ld+json" id="schema-jsonld"></script>';
+    // 沒有評分時整個標籤拿掉（空的 ld+json 是無效 JSON）。前端備援程式有 if (schemaEl) 判斷，拿掉不會出錯。
+    let productSchemaTag = '';
     if (scoreEntry && scoreEntry.composite != null && scoreEntry.mentions) {
         const productSchema = {
             '@context': 'https://schema.org',
@@ -207,6 +208,12 @@ module.exports = async (req, res) => {
 
         if (!hit) {
             // 查無此商品：回 404，讓 Google 正確判斷這不是一個真實頁面（避免軟 404
+            // ⚠️ 這個 404 是這條路徑唯一的防線：送出去的是「未改寫的原始範本」，
+            // 裡面的 canonical 仍指向 board-landing.html、og:url 仍指向首頁。回 404 時
+            // Google 直接丟棄整頁、不採信 canonical，所以沒差；但若日後有人把這裡改成
+            // 回 200（例如覺得 404 體驗不好），這批不存在的網址就會變成「宣告自己是
+            // board-landing.html 複本」的可索引頁面，比沒改之前更糟。要改成 200 的話，
+            // canonical / og:url 必須一併改成指向自己或整個拿掉。
             // 變成「已檢索但未建立索引」的雜訊）。頁面內容仍照舊由 CSR 補上
             // 「找不到此商品」那一整組畫面，使用者看到的東西不變。
             res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=60, stale-while-revalidate=600');

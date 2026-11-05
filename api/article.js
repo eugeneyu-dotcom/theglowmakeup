@@ -59,6 +59,25 @@ function renderArticleHtml(template, article) {
         mainEntityOfPage: canonical,
     });
 
+    // 麵包屑：跟 article.template.html 裡 CSR 那段是同一套邏輯（活動類走「活動快訊」，
+    // 其他走「保養專欄 > 分類」）。原本只有 CSR 補，原始 HTML 裡這個標籤是空的（無效 JSON）。
+    const SITE = 'https://www.theglowmakeup.org';
+    const crumbs = [['首頁', `${SITE}/`]];
+    if (article.category === '活動') {
+        crumbs.push(['活動快訊', `${SITE}/skincare-blog.html?category=${encodeURIComponent('活動')}`]);
+    } else {
+        crumbs.push(['保養專欄', `${SITE}/skincare-blog.html`]);
+        if (article.category) {
+            crumbs.push([article.category, `${SITE}/skincare-blog.html?category=${encodeURIComponent(article.category)}`]);
+        }
+    }
+    crumbs.push([article.title, canonical]);
+    const breadcrumbSchema = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: crumbs.map((c, i) => ({ '@type': 'ListItem', position: i + 1, name: c[0], item: c[1] })),
+    });
+
     // 跟 script.js 裡 CSR 產生的 article-root innerHTML 保持完全同一份樣板，
     // 避免 SSR 版跟之後 client-side 重新渲染的畫面對不上而閃爍/跳動
     const articleBodyHtml = `
@@ -105,6 +124,10 @@ function renderArticleHtml(template, article) {
         .replace(
             '<script type="application/ld+json" id="schema-jsonld"></script>',
             `<script type="application/ld+json" id="schema-jsonld">${schema}</script>`
+        )
+        .replace(
+            '<script type="application/ld+json" id="breadcrumb-jsonld"></script>',
+            `<script type="application/ld+json" id="breadcrumb-jsonld">${breadcrumbSchema}</script>`
         )
         .replace(
             '<div class="text-gray-400 text-sm">載入中...</div>',
