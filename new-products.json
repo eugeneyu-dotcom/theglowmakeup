@@ -10,7 +10,19 @@
       "image": "assets/new-products/dior.jpg",
       "source_url": "https://www.dior.com/zh_tw/beauty/products/%E8%BF%AA%E5%A5%A7%E9%87%91%E7%B7%BB%E9%9B%99%E9%A0%AD%E5%94%87%E9%87%89-Y0000440.html",
       "source_label": "DIOR 官網",
-      "verified_date": "2026-11-03"
+      "verified_date": "2026-11-06",
+      "detail": {
+        "price": "NT$1,800（官網）",
+        "spec": "雙頭設計：持色唇露＋透明唇蜜；全新 10 款限量色",
+        "features": [
+          "一端「持色唇露」：輕盈液態質地、持久顯色，霧面色澤揉合細閃，打造柔霧星光妝效",
+          "另一端「透明唇蜜」：含保濕滋養成分，疊擦在唇露上形成晶透護膜，打造閃耀釉光妝效",
+          "色選從玫瑰裸色到經典正紅，為聖誕限量"
+        ],
+        "how_to": "①持色唇露均勻塗抹雙唇　②靜置 1 分鐘等待乾燥　③輕抿雙唇，呈現柔霧星光　④疊擦透明唇蜜，呈現閃耀釉光",
+        "note": "官網現在標示 10 款限量色，上方重點句寫的 6 色為 11/03 的記錄，色數以官網為準。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "brand": "CHANEL",
@@ -40,7 +52,18 @@
       "image": "assets/new-products/bobbibrown.jpg",
       "source_url": "https://www.bobbibrown.com.tw/product/2321/148107/makeup/serum-silk-foundation",
       "source_label": "Bobbi Brown 官網",
-      "verified_date": "2026-09-10"
+      "verified_date": "2026-11-06",
+      "detail": {
+        "price": "NT$2,900（30ml，官網）",
+        "spec": "30ml；中等遮瑕，可層層疊擦提升遮瑕度",
+        "features": [
+          "是粉底液，卻有精華般輕盈質地，澎潤服貼",
+          "蘊含至少 84% 具保濕及／或肌膚調理功效的成分（含水）",
+          "蓮花精萃、三重煥色鎖光科技、原生透光科技，主打透亮膚色與原生光采"
+        ],
+        "note": "「24 小時持妝透亮」為官方臨床測試宣稱（30 位女性使用一次後測試）。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "brand": "YSL",
@@ -50,7 +73,16 @@
       "image": "assets/new-products/ysl.jpg",
       "source_url": "https://www.yslbeauty.com.tw/product/%E5%94%87%E8%86%8F/%E6%83%85%E6%8C%91%E8%A3%B8%E5%90%BB%E7%85%99%E9%9C%A7%E6%8C%81%E8%89%B2%E5%94%87%E8%90%83/WW-51595YSL.html",
       "source_label": "YSL Beauty 官網",
-      "verified_date": "2026-09-10"
+      "verified_date": "2026-11-06",
+      "detail": {
+        "price": "NT$1,650（官網）",
+        "spec": "共 8 色（#1、#7、#510、#520、#530、#610、#44、#540）",
+        "features": [
+          "官方主打「徹夜肆吻、奢潤無痕」",
+          "官網指定唇彩可享客製化刻字服務（官網獨家）"
+        ],
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "brand": "植村秀",

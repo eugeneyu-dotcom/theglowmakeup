@@ -139,7 +139,7 @@ async function renderNewProducts() {
     const grid = document.getElementById('new-products-grid');
     if (!grid) return;
     try {
-        const res = await fetch('new-products.json?v=7');
+        const res = await fetch('new-products.json?v=8');
         const data = await res.json();
         const products = data.products || [];
         if (products.length === 0) {
@@ -280,25 +280,48 @@ function escHtml(s) {
     return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
+// 最新情報「本月新品」卡片的展開區：點卡片（或「商品詳細資料」按鈕）就地展開／收合，不再直接跳到外站。
+// 內容：完整重點句＋有填的 detail 欄位（price、spec、features[]、how_to）＋官網按鈕＋核對日。
+// detail 欄位可選，沒有就只顯示重點句與官網連結，缺的欄位直接留白（不寫「整理中」）。
+function newProductDetailBlock(p) {
+    const d = p.detail || {};
+    const row = (label, val) => val ? `<div class="mt-2"><span class="font-black text-[#2d2d2d]">${label}</span>　${escHtml(val)}</div>` : '';
+    const feats = (d.features || []).length
+        ? `<ul class="mt-2 list-disc pl-4 space-y-1">${d.features.map(f => `<li>${escHtml(f)}</li>`).join('')}</ul>` : '';
+    return `<details class="mt-3 text-xs text-gray-600 leading-relaxed">
+        <summary class="cursor-pointer font-black text-[#e0708a] select-none inline-block px-3 py-1.5 rounded-full bg-[#fff3f6]">商品詳細資料 ▾</summary>
+        ${p.highlight ? `<p class="mt-3">${escHtml(p.highlight)}</p>` : ''}
+        ${row('價格', d.price)}${row('規格', d.spec)}${feats}${row('使用方式', d.how_to)}
+        <a href="${escHtml(p.source_url)}" target="_blank" rel="noopener" class="inline-block mt-3 font-black text-[#f2a7b5] hover:text-[#d88a99]">前往${escHtml(p.source_label || '官網')}看更多 ➔</a>
+        ${p.verified_date ? `<p class="mt-2 text-[11px] text-gray-400">資料核對日 ${escHtml(p.verified_date)}，價格與規格以官網為準。</p>` : ''}
+    </details>`;
+}
+
 async function renderNewsNewProducts() {
     const section = document.getElementById('news-new-products-section');
     const grid = document.getElementById('news-new-products');
     if (!section || !grid) return;
     try {
-        const res = await fetch('new-products.json?v=7');
+        const res = await fetch('new-products.json?v=8');
         const data = await res.json();
         const products = (data.products || []).slice(0, 6);
         if (products.length === 0) { section.remove(); return; }
         grid.innerHTML = products.map((p, i) => `
-            <a href="${escHtml(p.source_url)}" target="_blank" rel="noopener" class="bg-white rounded-2xl overflow-hidden border border-[#f2a7b5]/15 shadow-sm hover:shadow-lg transition-all group flex flex-col">
+            <div data-np-card class="bg-white rounded-2xl overflow-hidden border border-[#f2a7b5]/15 shadow-sm hover:shadow-lg transition-all group flex flex-col self-start cursor-pointer">
                 ${newProductImageBlock(p, i)}
                 <div class="p-3 md:p-5 flex flex-col flex-grow">
                     <span class="${BRAND_BADGE_COLORS[i % BRAND_BADGE_COLORS.length]} text-white text-[10px] font-black px-3 py-1 rounded-full self-start mb-2 tracking-wide">${escHtml(p.brand)}</span>
                     <h3 class="font-black text-sm md:text-base leading-snug mb-1 group-hover:text-[#f2a7b5] transition-colors line-clamp-2">${escHtml(p.name)}</h3>
-                    <p class="hidden md:block text-xs text-gray-500 leading-relaxed line-clamp-2 flex-grow">${escHtml(p.highlight || '')}</p>
-                    <span class="text-[11px] font-bold text-[#f2a7b5] mt-3">查看${escHtml(p.source_label || '官網')} ➔</span>
+                    <p class="hidden md:block text-xs text-gray-500 leading-relaxed line-clamp-2">${escHtml(p.highlight || '')}</p>
+                    ${newProductDetailBlock(p)}
                 </div>
-            </a>`).join('');
+            </div>`).join('');
+        // 點卡片任何位置都能展開／收合；點 summary 與卡片內連結由瀏覽器自己處理，避免連點兩次抵銷
+        grid.querySelectorAll('[data-np-card]').forEach(card => card.addEventListener('click', e => {
+            if (e.target.closest('summary') || e.target.closest('a')) return;
+            const det = card.querySelector('details');
+            if (det) det.open = !det.open;
+        }));
     } catch (err) {
         console.error('new-products.json 載入失敗', err);
         section.remove();
