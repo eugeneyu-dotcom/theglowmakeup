@@ -453,7 +453,19 @@
       "verified_date": "2026-11-04",
       "section": "日本品牌",
       "slug": "ettusais-duo-eyeshadow",
-      "official_url": "https://www.ettusais.co.jp/"
+      "official_url": "https://www.ettusais.co.jp/",
+      "detail": {
+        "price": "NT$480（屈臣氏原價；活動價另計）",
+        "spec": "3.8g；日本製；屈臣氏頁面為 24 號色",
+        "features": [
+          "絲緞光澤（Silk Color）搭配柔霧質感（Cashmere Color）的雙色設計，兩個步驟完成自然放大雙眼的眼妝",
+          "粉體細緻滑順、均勻貼合眼皮，不易飛粉，顯色度佳但不過於濃重",
+          "官方表示配方添加親膚金色珠光粒子，可自然融入亞洲膚色",
+          "添加角鯊烷與荷荷巴油等保養成分，採無香料設計"
+        ],
+        "note": "資料取自屈臣氏商品頁，價格依通路活動變動，以通路頁為準。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "drug",
@@ -729,7 +741,18 @@
       "source_label": "康是美",
       "verified_date": "2026-11-04",
       "slug": "visee-nenmaku-fake-rouge-lipstick",
-      "official_url": "https://www.kose.com.tw/"
+      "official_url": "https://www.kose.com.tw/",
+      "detail": {
+        "price": "NT$380（康是美網購標價，353 號色）",
+        "spec": "康是美頁面為 353 號色",
+        "features": [
+          "輕盈服貼，水光渲染雙唇，持久不易掉色",
+          "黏膜色唇膏，添加凝光鎖吻成分",
+          "添加玻尿酸鈉、角鯊烷、乳油木果脂等潤澤美容液成分"
+        ],
+        "note": "資料取自康是美網購商品頁，價格依通路活動變動，以通路頁為準。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "drug",
@@ -869,7 +892,20 @@
       "source_url": "https://wp.shiseido.com.tw/products/majolica-majorca-戀愛魔鏡-超現實激長睫毛膏升級版",
       "source_label": "品牌官網",
       "verified_date": "2026-11-04",
-      "slug": "majolica-majorca-lash-expander"
+      "slug": "majolica-majorca-lash-expander",
+      "detail": {
+        "price": "NT$370（品牌官網原價；活動價另計）",
+        "spec": "官網頁面為 VI751 月光紫",
+        "features": [
+          "經典梳型刷：特製雙面弧形設計，深入刷提細小睫毛，根根分明、不結塊",
+          "防水捲翹固定技術：抗汗、防油、防淚水，全天持久捲翹",
+          "超輕滑順膏體，重複塗刷也不結塊",
+          "升級「LLL 纖維」長纖維配方，主打超越真睫的延展度"
+        ],
+        "how_to": "由睫毛根部向上刷提、均勻延展；用梳形刷面重疊塗刷可加強濃密感。建議以溫水加洗面乳卸除。",
+        "note": "資料取自品牌官網商品頁，價格依活動變動，以官網為準。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "drug",
@@ -930,7 +966,19 @@
       "source_url": "https://www.watsons.com.tw/all-brands/b/156182/excel",
       "source_label": "屈臣氏",
       "verified_date": "2026-11-04",
-      "slug": "excel-skinny-rich-shadow"
+      "slug": "excel-skinny-rich-shadow",
+      "detail": {
+        "price": "NT$470（屈臣氏標價，01 清映裸棕）",
+        "spec": "4.5g；屈臣氏頁面為 01 清映裸棕（明亮中性色調）",
+        "features": [
+          "人氣熱銷的裸色深邃眼影全新升級，主打親膚裸棕色調",
+          "雙重珠光增添光澤與立體感；服貼油脂、緊密貼合，長效不暗沉",
+          "可輕鬆畫出漂亮的漸層感，打造清透自然的中性裸棕眼妝"
+        ],
+        "how_to": "以眼影棒由左上至右下 Z 字取色，輕抹眼皮，打造自然漸層深邃眼妝。",
+        "note": "資料取自屈臣氏商品頁，價格依通路活動變動，以通路頁為準。屈臣氏頁面標示為廠商直送商品。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -1175,7 +1223,13 @@
       "source_url": "https://global.oliveyoung.com/product/detail?prdtNo=GA240825404",
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
-      "slug": "lummir-melting-fit-shine-balm"
+      "slug": "lummir-melting-fit-shine-balm",
+      "detail": {
+        "price": "NT$620（Olive Young 全球站台灣顯示價；活動價另計）",
+        "spec": "共 4 款選項",
+        "note": "資料取自 Olive Young 全球站商品頁，價格依匯率與活動變動，以通路頁為準。",
+        "verified_date": "2026-11-06"
+      }
     }
   ]
 }
