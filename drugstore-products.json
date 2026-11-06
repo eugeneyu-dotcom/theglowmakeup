@@ -719,19 +719,6 @@
     },
     {
       "group": "drug",
-      "section": "韓國品牌",
-      "brand": "16brand",
-      "name": "迷你雜誌彩妝盤 8.5g",
-      "highlight": "一手可拿的迷你彩妝盤，一盤可當眼影、眉粉、眼線、腮紅、修容與打亮使用。",
-      "image": "assets/drugstore/16brand-mini-magazine-palette.webp",
-      "source_url": "https://www.cosme.net.tw/products/102805",
-      "source_label": "@cosme",
-      "verified_date": "2026-11-04",
-      "slug": "16brand-mini-magazine-palette",
-      "official_url": "https://16brand.com/"
-    },
-    {
-      "group": "drug",
       "section": "日本品牌",
       "brand": "Visée",
       "name": "光誘恆吻唇膏 N",
