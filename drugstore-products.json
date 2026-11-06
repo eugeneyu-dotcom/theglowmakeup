@@ -12,7 +12,8 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "section": "熱門彩妝品牌",
-      "slug": "romand-juicy-lasting-tint"
+      "slug": "romand-juicy-lasting-tint",
+      "official_url": "https://en.romand.co.kr/"
     },
     {
       "group": "olive",
@@ -130,7 +131,8 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "section": "熱門彩妝品牌",
-      "slug": "banilaco-prime-primer-finish-powder"
+      "slug": "banilaco-prime-primer-finish-powder",
+      "official_url": "https://www.banilaco.com/"
     },
     {
       "group": "olive",
@@ -245,7 +247,8 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "section": "保養品牌",
-      "slug": "aestura-atobarrier-365-cream"
+      "slug": "aestura-atobarrier-365-cream",
+      "official_url": "https://www.aestura.com/"
     },
     {
       "group": "olive",
@@ -280,7 +283,8 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "section": "保養品牌",
-      "slug": "dalba-waterfull-tone-up-sun"
+      "slug": "dalba-waterfull-tone-up-sun",
+      "official_url": "https://dalba.com/"
     },
     {
       "group": "olive",
@@ -565,7 +569,8 @@
       "source_url": "https://www.momoshop.com.tw/goods/GoodsDetail.jsp?i_code=13850253",
       "source_label": "momo",
       "verified_date": "2026-11-04",
-      "slug": "missha-glow-tension-cushion"
+      "slug": "missha-glow-tension-cushion",
+      "official_url": "https://missha.com/"
     },
     {
       "group": "drug",
@@ -577,7 +582,8 @@
       "source_url": "https://www.cosme.net.tw/products/102805",
       "source_label": "@cosme",
       "verified_date": "2026-11-04",
-      "slug": "16brand-mini-magazine-palette"
+      "slug": "16brand-mini-magazine-palette",
+      "official_url": "https://16brand.com/"
     },
     {
       "group": "drug",
@@ -589,7 +595,8 @@
       "source_url": "https://shop.cosmed.com.tw/SalePage/Index/11727708",
       "source_label": "康是美",
       "verified_date": "2026-11-04",
-      "slug": "visee-nenmaku-fake-rouge-lipstick"
+      "slug": "visee-nenmaku-fake-rouge-lipstick",
+      "official_url": "https://www.kose.com.tw/"
     },
     {
       "group": "drug",
@@ -629,7 +636,8 @@
         "note": "資料來自 momo 商品頁（色號任選，兼具防曬）。",
         "verified_date": "2026-11-06"
       },
-      "slug": "za-whitening-makeup-base"
+      "slug": "za-whitening-makeup-base",
+      "official_url": "https://za-cosmetics.com.tw/"
     },
     {
       "group": "drug",
@@ -810,7 +818,8 @@
       "source_url": "https://global.oliveyoung.com/product/detail?prdtNo=GA260136627",
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
-      "slug": "bbia-last-velvet-tint"
+      "slug": "bbia-last-velvet-tint",
+      "official_url": "https://bbia.co.kr/"
     },
     {
       "group": "olive",
@@ -834,7 +843,8 @@
       "source_url": "https://global.oliveyoung.com/product/detail?prdtNo=GA230619448",
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
-      "slug": "holikaholika-my-fave-piece-eye-shadow"
+      "slug": "holikaholika-my-fave-piece-eye-shadow",
+      "official_url": "https://holikaholika.com/"
     },
     {
       "group": "olive",
@@ -858,7 +868,8 @@
       "source_url": "https://global.oliveyoung.com/product/detail?prdtNo=GA250127772",
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
-      "slug": "espoir-be-glow-foundation"
+      "slug": "espoir-be-glow-foundation",
+      "official_url": "https://www.espoir.com/"
     },
     {
       "group": "olive",
@@ -870,7 +881,8 @@
       "source_url": "https://global.oliveyoung.com/product/detail?prdtNo=GA240121736",
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
-      "slug": "toocoolforschool-smudging-under-liner"
+      "slug": "toocoolforschool-smudging-under-liner",
+      "official_url": "https://toocoolforschool.com/"
     },
     {
       "group": "olive",
@@ -882,7 +894,8 @@
       "source_url": "https://global.oliveyoung.com/product/detail?prdtNo=GA210004856",
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
-      "slug": "hince-true-dimension-radiance-balm"
+      "slug": "hince-true-dimension-radiance-balm",
+      "official_url": "https://hince.co.kr/"
     },
     {
       "group": "olive",
@@ -894,7 +907,8 @@
       "source_url": "https://global.oliveyoung.com/product/detail?prdtNo=GA210004842",
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
-      "slug": "dasique-shadow-palette"
+      "slug": "dasique-shadow-palette",
+      "official_url": "https://dasique.com/"
     },
     {
       "group": "olive",
@@ -919,7 +933,8 @@
       "source_url": "https://global.oliveyoung.com/product/detail?prdtNo=GA251135415",
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
-      "slug": "amuse-jel-fit-gloss"
+      "slug": "amuse-jel-fit-gloss",
+      "official_url": "https://amusemakeup.com/"
     },
     {
       "group": "olive",
@@ -931,7 +946,8 @@
       "source_url": "https://global.oliveyoung.com/product/detail?prdtNo=GA220213637",
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
-      "slug": "3ce-multi-eye-color-palette"
+      "slug": "3ce-multi-eye-color-palette",
+      "official_url": "https://www.3cecosmetics.com/"
     },
     {
       "group": "olive",
