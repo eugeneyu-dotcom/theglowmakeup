@@ -139,7 +139,7 @@ async function renderNewProducts() {
     const grid = document.getElementById('new-products-grid');
     if (!grid) return;
     try {
-        const res = await fetch('new-products.json?v=9');
+        const res = await fetch('new-products.json?v=10');
         const data = await res.json();
         const products = data.products || [];
         if (products.length === 0) {
@@ -302,7 +302,7 @@ async function renderNewsNewProducts() {
     const grid = document.getElementById('news-new-products');
     if (!section || !grid) return;
     try {
-        const res = await fetch('new-products.json?v=9');
+        const res = await fetch('new-products.json?v=10');
         const data = await res.json();
         const products = (data.products || []).slice(0, 6);
         if (products.length === 0) { section.remove(); return; }
@@ -489,7 +489,7 @@ async function renderDrugstore() {
     if (!list || !filters) return;
     let products = [];
     try {
-        const res = await fetch('drugstore-products.json?v=11');
+        const res = await fetch('drugstore-products.json?v=12');
         products = (await res.json()).products || [];
     } catch (err) {
         console.error('drugstore-products.json 載入失敗', err);

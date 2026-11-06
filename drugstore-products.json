@@ -48,7 +48,19 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "section": "熱門彩妝品牌",
-      "slug": "fwee-pudding-pot"
+      "slug": "fwee-pudding-pot",
+      "official_url": "https://fwee.us/products/pudding-pot",
+      "detail": {
+        "price": "US$15.99 起（官網美國站）",
+        "spec": "Blurry Pudding Pot，共 35 個色號選項",
+        "features": [
+          "唇頰兩用：一罐同時用在唇和臉頰，打造協調的氣色",
+          "蓬鬆布丁質地，柔焦、平滑的霧面效果",
+          "高顯色、持久不易褪"
+        ],
+        "note": "資料取自品牌官網商品頁（美國站英文頁），重點為中文整理。價格為官網美國站標價（美元），台灣售價以通路為準。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -60,7 +72,19 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "section": "熱門彩妝品牌",
-      "slug": "deardahlia-petal-drop-liquid-blush"
+      "slug": "deardahlia-petal-drop-liquid-blush",
+      "official_url": "https://deardahlia.com/products/petal-drop-liquid-blush",
+      "detail": {
+        "price": "US$27.00 起（官網美國站）",
+        "spec": "共 15 個色號選項（含 Mute Haze 新色系列）",
+        "features": [
+          "液態腮紅，色彩輕柔暈開，呈現自然透亮、清新的薄透頰妝",
+          "Mute Haze 新色系列走柔和霧調色彩",
+          "添加大理花（Dahlia Variabilis）花萃取，調理肌膚"
+        ],
+        "note": "資料取自品牌官網商品頁（美國站英文頁），重點為中文整理。價格為官網美國站標價（美元），台灣售價以通路為準。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -84,7 +108,17 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "section": "熱門彩妝品牌",
-      "slug": "jungsaemmool-nuder-cushion"
+      "slug": "jungsaemmool-nuder-cushion",
+      "official_url": "https://www.jungsaemmool.us/products/jungsaemmool-essential-skin-nuder-longwear-cushion",
+      "detail": {
+        "price": "US$45.00 起（含補充蕊，官網美國站）",
+        "spec": "SPF 50；補充蕊 0.98 fl oz；色號含 17N Fair Light、19W Light、21W Medium 等",
+        "features": [
+          "官網商品名為 Essential Skin Nuder Longwear Cushion，主打持妝氣墊粉底，SPF 50"
+        ],
+        "note": "資料取自品牌官網商品頁（美國站英文頁），重點為中文整理。價格為官網美國站標價（美元），台灣售價以通路為準。官網商品頁的說明文字無法抓取，這裡只整理到商品名、價格與規格。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -258,7 +292,20 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "section": "保養品牌",
-      "slug": "skin1004-hyalu-cica-sun-serum"
+      "slug": "skin1004-hyalu-cica-sun-serum",
+      "official_url": "https://www.skin1004.com/products/hyalu-cica-water-fit-sun-serum-uv",
+      "detail": {
+        "price": "US$17.10 起（50ml，官網）",
+        "spec": "50ml／雙入組（50ml x 2）",
+        "features": [
+          "輕盈的精華質地防曬，保濕並舒緩肌膚，清爽、無白殘",
+          "新配方添加泛醇與米、燕麥、大豆萃取，幫助維持保濕與舒適",
+          "主要成分：積雪草萃取、玻尿酸",
+          "官網標示適用乾性、中性肌"
+        ],
+        "note": "資料取自品牌官網商品頁（英文），重點為中文整理；官網現用名稱為 Hyalu-Cica Water-Fit Sun Serum UV（新配方）。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
