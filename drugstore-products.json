@@ -13,7 +13,12 @@
       "verified_date": "2026-11-04",
       "section": "熱門彩妝品牌",
       "slug": "romand-juicy-lasting-tint",
-      "official_url": "https://en.romand.co.kr/"
+      "official_url": "https://en.romand.co.kr/",
+      "detail": {
+        "spec": "共 38 色（單品／組合）",
+        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -26,7 +31,12 @@
       "verified_date": "2026-11-04",
       "section": "熱門彩妝品牌",
       "slug": "peripera-ink-mood-glowy-tint",
-      "official_url": "https://m.clubclio-tw.com/"
+      "official_url": "https://m.clubclio-tw.com/",
+      "detail": {
+        "spec": "共 18 色",
+        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -39,7 +49,12 @@
       "verified_date": "2026-11-04",
       "section": "熱門彩妝品牌",
       "slug": "colorgram-nude-blur-tint",
-      "official_url": "https://colorgramco.com/"
+      "official_url": "https://colorgramco.com/",
+      "detail": {
+        "spec": "共 29 色（單品／組合）",
+        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -100,7 +115,12 @@
       "verified_date": "2026-11-04",
       "section": "熱門彩妝品牌",
       "slug": "clio-kill-cover-founwear-cushion",
-      "official_url": "https://m.clubclio-tw.com/"
+      "official_url": "https://m.clubclio-tw.com/",
+      "detail": {
+        "spec": "The Original 版（含補充蕊組合）",
+        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -135,7 +155,12 @@
       "verified_date": "2026-11-04",
       "section": "熱門彩妝品牌",
       "slug": "banilaco-prime-primer-finish-powder",
-      "official_url": "https://www.banilaco.com/"
+      "official_url": "https://www.banilaco.com/",
+      "detail": {
+        "spec": "12g",
+        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -147,7 +172,12 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "section": "熱門彩妝品牌",
-      "slug": "wakemake-soft-blurring-eye-palette"
+      "slug": "wakemake-soft-blurring-eye-palette",
+      "detail": {
+        "spec": "Olive Young 頁面為 Sanrio 聯名版，共 27 個選項",
+        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -251,7 +281,12 @@
       "verified_date": "2026-11-04",
       "section": "保養品牌",
       "slug": "aestura-atobarrier-365-cream",
-      "official_url": "https://www.aestura.com/"
+      "official_url": "https://www.aestura.com/",
+      "detail": {
+        "spec": "80ml",
+        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -287,7 +322,12 @@
       "verified_date": "2026-11-04",
       "section": "保養品牌",
       "slug": "dalba-waterfull-tone-up-sun",
-      "official_url": "https://dalba.com/"
+      "official_url": "https://dalba.com/",
+      "detail": {
+        "spec": "50mL",
+        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -394,7 +434,13 @@
       "verified_date": "2026-11-04",
       "section": "日本品牌",
       "slug": "kate-tokyo-light-foundation",
-      "official_url": "https://www.kate-global.net/tw/"
+      "official_url": "https://www.kate-global.net/tw/",
+      "detail": {
+        "price": "NT$520（屈臣氏標價，色號 01；活動價另計）",
+        "spec": "25ml；屈臣氏頁面為 01 色",
+        "note": "資料取自屈臣氏商品頁，價格依通路活動變動，以通路頁為準。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "drug",
@@ -420,7 +466,17 @@
       "verified_date": "2026-11-04",
       "section": "韓國品牌",
       "slug": "ponyeffect-sun-primer",
-      "official_url": "https://tw.memebox.com/SalePage/Index/9957889"
+      "official_url": "https://tw.memebox.com/SalePage/Index/9957889",
+      "detail": {
+        "spec": "SPF50+／PA++++",
+        "features": [
+          "All-in-One 多功能妝前乳：防曬、妝前打底、飾底乳一瓶搞定",
+          "水感清爽不黏膩，長效鎖水科技幫助底妝更服貼",
+          "去暗沉、提亮顯嫩白，打造長效水潤肌底"
+        ],
+        "note": "資料取自 MEMEBOX 台灣商品頁。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "drug",
@@ -457,7 +513,17 @@
       "verified_date": "2026-11-04",
       "section": "韓國品牌",
       "slug": "immeme-qq-lip-jelly",
-      "official_url": "https://tw.memebox.com/SalePage/Index/11680542"
+      "official_url": "https://tw.memebox.com/SalePage/Index/11680542",
+      "detail": {
+        "spec": "全系列 5 色",
+        "features": [
+          "全新「唇凍」質地，一次擁有光澤、輕盈與顯色",
+          "5 色皆注入冰涼 Q 潤能量，打造豐盈嘟嘟唇",
+          "Q 彈氣墊筆頭，精準控量、貼合唇型"
+        ],
+        "note": "資料取自 MEMEBOX 台灣商品頁。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -494,7 +560,18 @@
       "source_label": "momo",
       "verified_date": "2026-11-04",
       "slug": "solone-long-lasting-eyeliner",
-      "official_url": "https://www.soloneshop.com.tw/"
+      "official_url": "https://www.soloneshop.com.tw/",
+      "detail": {
+        "spec": "01 黑色、02 淺棕色、03 咖啡色",
+        "features": [
+          "眼線膠質地，筆觸絲滑",
+          "防水、顯色、耐油、抗暈染",
+          "好卸不殘留"
+        ],
+        "how_to": "上眼後請稍等幾秒，待眼線乾透。",
+        "note": "資料取自 momo 商品頁。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "drug",
@@ -507,7 +584,16 @@
       "source_label": "momo",
       "verified_date": "2026-11-04",
       "slug": "1028-flying-volume-waterproof-mascara",
-      "official_url": "https://www.1028loveu.com.tw/"
+      "official_url": "https://www.1028loveu.com.tw/",
+      "detail": {
+        "features": [
+          "獨創細纖弧刷頭",
+          "極淨捲翹、全日抗暈",
+          "一刷輕盈，綻放淨濃"
+        ],
+        "note": "資料取自 momo 商品頁。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "drug",
@@ -520,7 +606,16 @@
       "source_label": "momo",
       "verified_date": "2026-11-04",
       "slug": "heme-six-color-eyeshadow-palette",
-      "official_url": "https://www.hemecosmetics.com.tw/"
+      "official_url": "https://www.hemecosmetics.com.tw/",
+      "detail": {
+        "spec": "9g；六色眼影盤，內附眼影刷",
+        "features": [
+          "清冷柔和妝感，輕鬆疊擦出自然漸層",
+          "粉體細緻服貼，好暈染"
+        ],
+        "note": "資料取自 momo 商品頁。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "drug",
@@ -533,7 +628,16 @@
       "source_label": "momo",
       "verified_date": "2026-11-04",
       "slug": "fresho2-super-hydrating-lip-balm-cube",
-      "official_url": "https://www.fresho2.com.tw/"
+      "official_url": "https://www.fresho2.com.tw/",
+      "detail": {
+        "features": [
+          "pH 值感應變色，還原原生紅潤唇色",
+          "唇色清透、保濕滋潤不反乾",
+          "質地滑順、清爽不黏膩"
+        ],
+        "note": "資料取自 momo 商品頁。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "drug",
@@ -568,7 +672,16 @@
       "source_url": "https://www.momoshop.com.tw/goods/GoodsDetail.jsp?i_code=15462570",
       "source_label": "momo",
       "verified_date": "2026-11-04",
-      "slug": "vdl-color-correcting-primer"
+      "slug": "vdl-color-correcting-primer",
+      "detail": {
+        "spec": "SPF20／PA++；30ml（momo 頁面為 02 粉色）",
+        "features": [
+          "質地輕薄，平滑肌膚紋理",
+          "讓妝容更服貼、好上妝"
+        ],
+        "note": "資料取自 momo 商品頁。momo 頁標示為官方直營。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "drug",
@@ -581,7 +694,16 @@
       "source_label": "momo",
       "verified_date": "2026-11-04",
       "slug": "missha-glow-tension-cushion",
-      "official_url": "https://missha.com/"
+      "official_url": "https://missha.com/",
+      "detail": {
+        "spec": "15g；SPF50+／PA+++",
+        "features": [
+          "添加綠茶、鼠尾草葉及蓮花根萃取",
+          "保濕效果升級"
+        ],
+        "note": "資料取自 momo 商品頁。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "drug",
@@ -821,7 +943,12 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "slug": "muzigaemansion-moodwear-blur-lipstick",
-      "official_url": "https://muzigae-mansion.com/"
+      "official_url": "https://muzigae-mansion.com/",
+      "detail": {
+        "spec": "共 8 色",
+        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -834,7 +961,12 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "slug": "bbia-last-velvet-tint",
-      "official_url": "https://bbia.co.kr/"
+      "official_url": "https://bbia.co.kr/",
+      "detail": {
+        "spec": "共 25 色",
+        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -847,7 +979,12 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "slug": "lilybyred-luv-beam-cheek-balm",
-      "official_url": "https://lilybyred.co.kr/"
+      "official_url": "https://lilybyred.co.kr/",
+      "detail": {
+        "spec": "共 19 色（單品／組合）",
+        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -860,7 +997,12 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "slug": "holikaholika-my-fave-piece-eye-shadow",
-      "official_url": "https://holikaholika.com/"
+      "official_url": "https://holikaholika.com/",
+      "detail": {
+        "spec": "提供 Shimmer／Matte／Shade／Geltail 多種質地",
+        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -873,7 +1015,12 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "slug": "sonatural-all-day-tight-setting-fixx",
-      "official_url": "https://www.sonatural.tw/"
+      "official_url": "https://www.sonatural.tw/",
+      "detail": {
+        "spec": "75ml（無氣體噴頭版）",
+        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -886,7 +1033,12 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "slug": "espoir-be-glow-foundation",
-      "official_url": "https://www.espoir.com/"
+      "official_url": "https://www.espoir.com/",
+      "detail": {
+        "spec": "30g；共 10 色",
+        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -899,7 +1051,12 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "slug": "toocoolforschool-smudging-under-liner",
-      "official_url": "https://toocoolforschool.com/"
+      "official_url": "https://toocoolforschool.com/",
+      "detail": {
+        "spec": "共 14 色（單品／組合）",
+        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -912,7 +1069,12 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "slug": "hince-true-dimension-radiance-balm",
-      "official_url": "https://hince.co.kr/"
+      "official_url": "https://hince.co.kr/",
+      "detail": {
+        "spec": "共 12 色（單品／組合）",
+        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -925,7 +1087,12 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "slug": "dasique-shadow-palette",
-      "official_url": "https://dasique.com/"
+      "official_url": "https://dasique.com/",
+      "detail": {
+        "spec": "共 27 色（單品／組合）",
+        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -938,7 +1105,12 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "slug": "hera-silky-stay-24h-foundation",
-      "official_url": "https://int.hera.com/products/silky-stay-24h-longwear-foundation"
+      "official_url": "https://int.hera.com/products/silky-stay-24h-longwear-foundation",
+      "detail": {
+        "spec": "共 9 個色號",
+        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -951,7 +1123,12 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "slug": "amuse-jel-fit-gloss",
-      "official_url": "https://amusemakeup.com/"
+      "official_url": "https://amusemakeup.com/",
+      "detail": {
+        "spec": "共 13 色",
+        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -964,7 +1141,12 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "slug": "3ce-multi-eye-color-palette",
-      "official_url": "https://www.3cecosmetics.com/"
+      "official_url": "https://www.3cecosmetics.com/",
+      "detail": {
+        "spec": "共 14 色",
+        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -976,7 +1158,12 @@
       "source_url": "https://global.oliveyoung.com/product/detail?prdtNo=GA250933462",
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
-      "slug": "glint-too-shiny-highlighter"
+      "slug": "glint-too-shiny-highlighter",
+      "detail": {
+        "spec": "共 2 色",
+        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",

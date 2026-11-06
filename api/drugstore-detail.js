@@ -7,7 +7,7 @@
 // 資料源是 drugstore-products.json（開架目錄，沒有評分）。頁面全部在伺服端寫好，不依賴前端 JS 補內容；
 // script.js 只負責導覽列。
 //
-// 索引規則（避免 59 頁薄內容）：只有 `detail`（價格／規格／特色／使用方式）有資料的商品才可被索引，
+// 索引規則（避免 59 頁薄內容）：只有 `detail` 有「特色或價格」的商品才可被索引（只有規格／色數不算），
 // 只有一句重點的商品頁輸出 noindex,follow，也不進 sitemap。補完 detail 後會自動轉為可索引。
 //
 // 任何一步出錯都回 500 以外的安全頁：找不到商品回 404；其他例外回首頁式的簡單錯誤頁。
@@ -31,7 +31,8 @@ function readFile(file) {
 
 function hasDetail(p) {
     const d = p && p.detail;
-    return !!(d && ((d.features && d.features.length) || d.price || d.spec || d.how_to));
+    // 只有 spec（色數／容量）而沒有特色或價格的頁面仍太薄，維持 noindex
+    return !!(d && ((d.features && d.features.length) || d.price));
 }
 
 function absoluteImage(raw) {
