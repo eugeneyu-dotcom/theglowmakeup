@@ -139,7 +139,7 @@ async function renderNewProducts() {
     const grid = document.getElementById('new-products-grid');
     if (!grid) return;
     try {
-        const res = await fetch('new-products.json?v=8');
+        const res = await fetch('new-products.json?v=9');
         const data = await res.json();
         const products = data.products || [];
         if (products.length === 0) {
@@ -302,7 +302,7 @@ async function renderNewsNewProducts() {
     const grid = document.getElementById('news-new-products');
     if (!section || !grid) return;
     try {
-        const res = await fetch('new-products.json?v=8');
+        const res = await fetch('new-products.json?v=9');
         const data = await res.json();
         const products = (data.products || []).slice(0, 6);
         if (products.length === 0) { section.remove(); return; }
