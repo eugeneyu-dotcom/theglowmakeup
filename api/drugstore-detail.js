@@ -94,20 +94,20 @@ function buildMain(p, all) {
     const noteHtml = notes.length ? `<p class="text-xs text-gray-400 leading-relaxed border-t border-gray-100 pt-4">${notes.join('<br>')}</p>` : '';
 
     // 還沒有詳細資料（features/價格/規格/使用方式）的商品：只放目錄裡真實有的基本資訊，
-    // 並明講「整理中」，不寫樣板優勢或適用人群湊版面。補完 detail 後會自動換成完整版。
+    // 缺的欄位直接留白（不寫「整理中」說明），也不寫樣板優勢或適用人群湊版面。補完 detail 後會自動換成完整版。
     const hasFull = !!(feats || infoBlock);
     const basic = [infoRow('品牌', p.brand), infoRow('分類', `${GROUP_LABEL[p.group] || ''} / ${p.section}`), infoRow('資料來源', p.source_label)].join('');
     const basicBlock = `<div>
                         <h3 class="font-black text-lg text-[#2d2d2d] mb-3 flex items-center gap-2"><span class="text-[#f2a7b5]">📋</span> 商品基本資訊 / Basic Info</h3>
                         <dl>${basic}</dl>
-                        <p class="mt-4 text-sm text-gray-500 font-bold leading-relaxed">價格、規格與使用方式整理中，可先前往${escapeHtml(linkLabel)}查看最新資訊。</p>
                     </div>`;
+    // 資料沒補齊的欄位直接留白，不寫「整理中」之類的說明（使用者 2026-11-06 指定）
     const panelSub = hasFull
         ? `整理自${escapeHtml(p.source_label || '來源頁')}的商品說明，價格、規格與使用方式一次看。`
-        : '這款的完整商品說明整理中，先提供目錄上確認過的基本資訊。';
+        : '';
     const panel = `<div class="bg-white rounded-[32px] p-8 md:p-12 shadow-sm border border-[#f2a7b5]/10">
                     <h2 class="text-2xl font-black text-[#2d2d2d] mb-1.5">商品特色與資訊</h2>
-                    <p class="text-sm text-gray-500 mb-6">${panelSub}</p>
+                    ${panelSub ? `<p class="text-sm text-gray-500 mb-6">${panelSub}</p>` : '<div class="mb-6"></div>'}
                     <div class="relative p-0.5 rounded-[24px] bg-gradient-to-tr from-[#f2a7b5] via-[#d88a99] to-[#d4af37] shadow-md">
                         <div class="bg-white rounded-[22px] p-6 space-y-6">
                     ${hasFull ? feats + infoBlock : basicBlock}${noteHtml}

@@ -120,7 +120,18 @@
       "source_label": "品牌官網",
       "verified_date": "2026-11-04",
       "section": "保養品牌",
-      "slug": "roundlab-dokdo-toner"
+      "slug": "roundlab-dokdo-toner",
+      "detail": {
+        "price": "US$4.20 起（50ml，官網美國站）",
+        "spec": "50／100／200／500ml；質地水感、無香",
+        "features": [
+          "去除老廢角質的同時補足水分，改善並平滑膚質",
+          "官方標示連續三年獲韓國化妝水類票選第一",
+          "官方標示適用敏感、乾性、中性、混合、油性與痘痘肌"
+        ],
+        "note": "資料取自品牌官網商品頁（美國站英文頁），重點為中文整理。價格為官網美國站標價（美元），台灣售價以通路為準。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -132,7 +143,17 @@
       "source_label": "品牌官網",
       "verified_date": "2026-11-04",
       "section": "保養品牌",
-      "slug": "anua-heartleaf-77-toner"
+      "slug": "anua-heartleaf-77-toner",
+      "detail": {
+        "price": "US$23.00 起（250ml，官網美國站）",
+        "spec": "250／500ml",
+        "features": [
+          "添加魚腥草萃取，舒緩刺激並保濕",
+          "官網標示為 Amazon 熱銷第一的化妝水"
+        ],
+        "note": "資料取自品牌官網商品頁（美國站英文頁），重點為中文整理。價格為官網美國站標價（美元），台灣售價以通路為準。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -144,7 +165,18 @@
       "source_label": "品牌官網",
       "verified_date": "2026-11-04",
       "section": "保養品牌",
-      "slug": "torriden-dive-in-serum"
+      "slug": "torriden-dive-in-serum",
+      "detail": {
+        "price": "US$24.00（單瓶，官網美國站）",
+        "spec": "單瓶／雙入組",
+        "features": [
+          "5D 多重低分子玻尿酸，從表層到深層補水",
+          "官方標示可持續保濕 48 小時",
+          "配方溫和，敏感肌也適用"
+        ],
+        "note": "資料取自品牌官網商品頁（美國站英文頁），重點為中文整理。價格為官網美國站標價（美元），台灣售價以通路為準。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -156,7 +188,18 @@
       "source_label": "品牌官網",
       "verified_date": "2026-11-04",
       "section": "保養品牌",
-      "slug": "cosrx-6-peptide-booster-serum"
+      "slug": "cosrx-6-peptide-booster-serum",
+      "detail": {
+        "price": "US$25.00 起（50mL，官網美國站）",
+        "spec": "50mL／150mL",
+        "features": [
+          "六種胜肽配方，針對細紋、膚質不均與緊實度流失",
+          "質地輕盈像化妝水，吸收快",
+          "官網標示適用所有膚質，改善毛孔外觀、讓肌膚更有彈性"
+        ],
+        "note": "資料取自品牌官網商品頁（美國站英文頁），重點為中文整理。價格為官網美國站標價（美元），台灣售價以通路為準。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -180,7 +223,18 @@
       "source_label": "品牌官網",
       "verified_date": "2026-11-04",
       "section": "保養品牌",
-      "slug": "roundlab-birch-sunscreen"
+      "slug": "roundlab-birch-sunscreen",
+      "detail": {
+        "price": "US$17.49（官網美國站）",
+        "spec": "SPF 50",
+        "features": [
+          "含白樺樹汁與玻尿酸，保護同時保濕",
+          "官方標示無白殘、像乳液般的膚感、適合打底在妝前",
+          "清爽快吸收、不油膩，呈柔潤光澤"
+        ],
+        "note": "資料取自品牌官網商品頁（美國站英文頁），重點為中文整理。價格為官網美國站標價（美元），台灣售價以通路為準。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -216,7 +270,18 @@
       "source_label": "品牌官網",
       "verified_date": "2026-11-04",
       "section": "保養品牌",
-      "slug": "torriden-dive-in-mask"
+      "slug": "torriden-dive-in-mask",
+      "detail": {
+        "price": "US$33.00（官網美國站）",
+        "features": [
+          "5D 多重低分子玻尿酸，補水並舒緩",
+          "水感精華，層層補水",
+          "配方溫和，敏感肌也適用",
+          "柔軟面膜布服貼，幫助吸收"
+        ],
+        "note": "資料取自品牌官網商品頁（美國站英文頁），重點為中文整理。價格為官網美國站標價（美元），台灣售價以通路為準。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -228,7 +293,19 @@
       "source_label": "品牌官網",
       "verified_date": "2026-11-04",
       "section": "保養品牌",
-      "slug": "mediheal-madecassoside-mask"
+      "slug": "mediheal-madecassoside-mask",
+      "detail": {
+        "price": "US$22.00 起（4 片，官網美國站）",
+        "spec": "4 片／10 片",
+        "features": [
+          "針對反覆痘痘與脆弱肌膚的舒緩面膜",
+          "淡化暗沉斑點與痘後痕跡",
+          "玻尿酸補水，膚感柔潤",
+          "微脂體技術幫助成分快速吸收"
+        ],
+        "note": "資料取自品牌官網商品頁（美國站英文頁），重點為中文整理。價格為官網美國站標價（美元），台灣售價以通路為準。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "olive",
@@ -240,7 +317,17 @@
       "source_label": "品牌官網",
       "verified_date": "2026-11-04",
       "section": "保養品牌",
-      "slug": "biodance-bio-collagen-mask"
+      "slug": "biodance-bio-collagen-mask",
+      "detail": {
+        "price": "US$19.00 起（4 片，官網美國站）",
+        "spec": "4／8／16 片",
+        "features": [
+          "寡聚玻尿酸，快速補水並滲透到較深層",
+          "超低分子膠原蛋白，修飾毛孔、提升彈性、淡化細紋外觀"
+        ],
+        "note": "資料取自品牌官網商品頁（美國站英文頁），重點為中文整理。價格為官網美國站標價（美元），台灣售價以通路為準。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "drug",
@@ -324,7 +411,19 @@
       "source_label": "品牌官網",
       "verified_date": "2026-11-04",
       "section": "熱門彩妝品牌",
-      "slug": "fwee-3d-crystal-gloss"
+      "slug": "fwee-3d-crystal-gloss",
+      "detail": {
+        "price": "NT$432 起（品牌官網）",
+        "spec": "17 色／5.3g；產地韓國",
+        "features": [
+          "韓國首創 3D 立體豐潤光澤",
+          "30%、70% 雙濃度自由切換，可調整色彩濃度",
+          "高分子凝膠配方，幫助維持唇妝光澤，柔滑不黏膩",
+          "斜角刷頭貼合唇形，精準放大立體光澤"
+        ],
+        "note": "資料取自品牌官網商品頁。",
+        "verified_date": "2026-11-06"
+      }
     },
     {
       "group": "drug",
