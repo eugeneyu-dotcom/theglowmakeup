@@ -98,6 +98,16 @@ def main():
                      max(sub_dates) if sub_dates else None))
         urls.extend(item_urls)
 
+    # 開架美妝商品頁：只收「有詳細資料」的（api/drugstore-detail.js 對只有一句重點的頁面輸出 noindex）
+    try:
+        ds = json.load(open(os.path.join(BASE, "drugstore-products.json"), encoding="utf-8")).get("products", [])
+    except OSError:
+        ds = []
+    for p in ds:
+        d = p.get("detail") or {}
+        if p.get("slug") and (d.get("features") or d.get("price") or d.get("spec") or d.get("how_to")):
+            urls.append((f"{SITE_URL}/drugstore-detail.html?p={quote(p['slug'])}", d.get("verified_date")))
+
     lines = ['<?xml version="1.0" encoding="UTF-8"?>',
              '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for u, lastmod in urls:

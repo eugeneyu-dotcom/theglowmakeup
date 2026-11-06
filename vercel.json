@@ -2,11 +2,12 @@
   "rewrites": [
     { "source": "/article.html", "destination": "/api/article" },
     { "source": "/item-detail.html", "destination": "/api/item-detail" },
-    { "source": "/detail.html", "destination": "/api/detail" }
+    { "source": "/detail.html", "destination": "/api/detail" },
+    { "source": "/drugstore-detail.html", "destination": "/api/drugstore-detail" }
   ],
   "headers": [
     {
-      "source": "/(article|item-detail|detail).template.html",
+      "source": "/(article|item-detail|detail|drugstore-detail).template.html",
       "headers": [{ "key": "X-Robots-Tag", "value": "noindex" }]
     }
   ],
@@ -19,6 +20,9 @@
     },
     "api/detail.js": {
       "includeFiles": "{detail.template.html,site-data.json}"
+    },
+    "api/drugstore-detail.js": {
+      "includeFiles": "{drugstore-detail.template.html,drugstore-products.json}"
     }
   }
 }

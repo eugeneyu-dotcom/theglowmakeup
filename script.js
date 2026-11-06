@@ -466,7 +466,7 @@ async function renderDrugstore() {
     if (!list || !filters) return;
     let products = [];
     try {
-        const res = await fetch('drugstore-products.json?v=6');
+        const res = await fetch('drugstore-products.json?v=8');
         products = (await res.json()).products || [];
     } catch (err) {
         console.error('drugstore-products.json 載入失敗', err);
@@ -510,7 +510,7 @@ async function renderDrugstore() {
                 <h2 class="text-2xl font-black mb-6 italic border-l-8 border-[#f2a7b5] pl-4">${escHtml(g.en)} / <span class="text-[#f2a7b5] text-lg not-italic">${escHtml(sec)}</span></h2>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
                     ${items.map((p, i) => `
-                    <div class="bg-white rounded-2xl overflow-hidden border border-[#f2a7b5]/15 shadow-sm flex flex-col">
+                    <a href="drugstore-detail.html?p=${encodeURIComponent(p.slug)}" class="bg-white rounded-2xl overflow-hidden border border-[#f2a7b5]/15 shadow-sm hover:shadow-md transition-shadow flex flex-col">
                         ${newProductImageBlock(p, i)}
                         <div class="p-3 md:p-5 flex flex-col flex-grow">
                             <div class="mb-2">
@@ -519,7 +519,7 @@ async function renderDrugstore() {
                             <h3 class="font-black text-sm md:text-base leading-snug mb-1 line-clamp-2">${escHtml(p.name)}</h3>
                             <p class="hidden md:block text-xs text-gray-500 leading-relaxed line-clamp-3">${escHtml(p.highlight || '')}</p>
                         </div>
-                    </div>`).join('')}
+                    </a>`).join('')}
                 </div>
             </section>`;
             });

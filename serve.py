@@ -8,7 +8,7 @@
 放行清單：
   - 根目錄的 .html/.htm/.css/.js/.map/.ico 與常見圖片、字型檔
   - 根目錄的 site-data.json、scores-data.json、articles.json、new-products.json、
-    ingredients-data.json、ingredient_warnings.json、voices-pool.json（僅這幾個 JSON）
+    ingredients-data.json、ingredient_warnings.json、voices-pool.json、drugstore-products.json（僅這幾個 JSON）
   - assets/ 底下的圖片、字型
 
 擋掉：.env、任何 dotfile/dotdir、*.py、其他 *.json（routed/cleaned/standardized/
@@ -20,6 +20,7 @@
 import http.server
 import os
 import posixpath
+import subprocess
 import sys
 from urllib.parse import unquote
 
@@ -30,7 +31,7 @@ PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8777
 SAFE_EXT = {".html", ".htm", ".css", ".js", ".map", ".ico",
             ".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp",
             ".woff", ".woff2", ".ttf"}
-ALLOW_JSON = {"site-data.json", "scores-data.json", "articles.json", "new-products.json", "ingredients-data.json", "ingredient_warnings.json", "voices-pool.json"}   # 可對外的前端資料 JSON
+ALLOW_JSON = {"site-data.json", "scores-data.json", "articles.json", "new-products.json", "ingredients-data.json", "ingredient_warnings.json", "voices-pool.json", "drugstore-products.json"}   # 可對外的前端資料 JSON
 ALLOW_DIRS = {"assets"}                                # 唯一可對外的子資料夾
 ALLOW_ROOT_FILES = {"robots.txt", "sitemap.xml"}       # 無副檔名白名單、根目錄放行的特例檔
 
@@ -75,6 +76,20 @@ class Handler(http.server.SimpleHTTPRequestHandler):
         # 閘門，真正決定開哪個檔的是 SimpleHTTPRequestHandler.send_head() 讀的 self.path。
         head = self.path.split("?", 1)[0].split("#", 1)[0]
         key = posixpath.normpath(unquote(head)).lstrip("/")
+        if key == "drugstore-detail.html":
+            # 開架商品頁是純伺服端渲染（沒有 CSR 備援）：本機用 node 呼叫跟正式站同一支 renderPage()
+            from urllib.parse import parse_qs
+            slug = (parse_qs(self.path.partition("?")[2].split("#")[0]).get("p") or [""])[0]
+            out = subprocess.run(
+                ["node", "-e", "const h=require('./api/drugstore-detail.js').renderPage(process.argv[1]);process.stdout.write(h||'')", slug],
+                cwd=ROOT, capture_output=True, timeout=20)
+            body = out.stdout or "<!doctype html><title>找不到商品</title><p>找不到這個商品</p>".encode("utf-8")
+            self.send_response(200 if out.stdout else 404)
+            self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.send_header("Content-Length", str(len(body)))
+            self.end_headers()
+            import io
+            return io.BytesIO(body)
         if key in LOCAL_ALIAS:
             self.path = "/" + LOCAL_ALIAS[key] + self.path[len(head):]
         if self._gate() is None:
