@@ -155,11 +155,17 @@
       "verified_date": "2026-11-04",
       "section": "熱門彩妝品牌",
       "slug": "banilaco-prime-primer-finish-powder",
-      "official_url": "https://www.banilaco.com/",
+      "official_url": "https://banila.com/product/detail.html?product_no=1164&cate_no=203&display_group=1",
       "detail": {
-        "spec": "12g",
-        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
-        "verified_date": "2026-11-06"
+        "price": "₩22,000（官網韓國站）",
+        "spec": "12g（另有 5g 隨身版）；適用所有膚質",
+        "features": [
+          "官方主打「像加了模糊濾鏡」：柔化毛孔與膚質、控油定妝",
+          "附粉撲、散粉質地，適合全臉或特別容易出油的部位使用"
+        ],
+        "how_to": "將粉撲貼著容器出粉口輕搖取適量，輕輕按壓在全臉或容易出油的部位。",
+        "note": "資料取自品牌韓國官網商品頁（韓文頁），重點為中文整理；價格為韓元標價，台灣售價以通路為準。",
+        "verified_date": "2026-11-17"
       }
     },
     {
@@ -281,11 +287,17 @@
       "verified_date": "2026-11-04",
       "section": "保養品牌",
       "slug": "aestura-atobarrier-365-cream",
-      "official_url": "https://www.aestura.com/",
+      "official_url": "https://int.aestura.com/products/atobarrier365-cream",
       "detail": {
-        "spec": "80ml",
-        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
-        "verified_date": "2026-11-06"
+        "spec": "80ml／45ml",
+        "features": [
+          "高密度神經醯胺膠囊：長鏈與連結型神經醯胺做成膠囊，補足敏感肌常缺乏的脂質，強化肌膚屏障",
+          "官方標示 120 小時保濕；臨床測試中塗抹後表層與深層保濕度明顯提升",
+          "通過皮膚科 48 小時斑貼測試、非致粉刺性測試，適合乾燥敏感肌"
+        ],
+        "how_to": "早晚在化妝水、精華之後取適量，輕輕推開並按壓至吸收。",
+        "note": "資料取自品牌國際官網商品頁（英文頁），重點為中文整理；臨床數據為品牌自行標示。",
+        "verified_date": "2026-11-17"
       }
     },
     {
@@ -1142,9 +1154,15 @@
       "slug": "hera-silky-stay-24h-foundation",
       "official_url": "https://int.hera.com/products/silky-stay-24h-longwear-foundation",
       "detail": {
-        "spec": "共 9 個色號",
-        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
-        "verified_date": "2026-11-06"
+        "spec": "30g；SPF20／PA++；官網標示 40 色，國際站列 13 個色號",
+        "features": [
+          "柔滑緞面質感：自然霧面妝效，修飾毛孔與不平整膚況",
+          "控油貼合配方，長時間維持自然遮瑕",
+          "色號依 4,500 多位受試者的膚色研究開發，呈現貼近真實膚色的顯色"
+        ],
+        "how_to": "先用 HERA 防曬妝前打底，取少量從臉部中央向外推開，需要時分層加強遮瑕。",
+        "note": "資料取自品牌國際官網商品頁（英文頁），重點為中文整理。",
+        "verified_date": "2026-11-17"
       }
     },
     {
