@@ -1160,7 +1160,7 @@ async function getSiteData() {
     if (!siteDataPromise) {
         siteDataPromise = (async () => {
             try {
-                const response = await fetch('site-data.json?v=43');
+                const response = await fetch('site-data.json?v=44');
                 siteDataCache = await response.json();
                 return siteDataCache;
             } catch (err) {
@@ -1178,7 +1178,7 @@ async function getScoresData() {
     if (!scoresDataPromise) {
         scoresDataPromise = (async () => {
             try {
-                const response = await fetch('scores-data.json?v=47');
+                const response = await fetch('scores-data.json?v=48');
                 scoresDataCache = await response.json();
                 return scoresDataCache;
             } catch (err) {
