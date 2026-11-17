@@ -1062,11 +1062,16 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "slug": "sonatural-all-day-tight-setting-fixx",
-      "official_url": "https://www.sonatural.tw/",
+      "official_url": "https://www.sonatural.tw/products/fixx%E5%85%A8%E6%97%A5%E5%AE%8C%E7%BE%8E%E5%AE%9A%E5%A6%9D%E5%99%B4%E9%9C%A7",
       "detail": {
-        "spec": "75ml（無氣體噴頭版）",
-        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
-        "verified_date": "2026-11-06"
+        "spec": "75ml（無氣體噴頭版）；官網另有 35ml 隨身瓶、120ml、250ml",
+        "features": [
+          "微米級細緻水霧，主打定妝後不毀妝、不厚重",
+          "官方標示強效定妝，戴口罩、騎車時底妝不易位移",
+          "長效控油，維持妝感不暗沉；35ml 迷你尺寸方便外出補妝"
+        ],
+        "note": "資料取自品牌台灣官網商品頁，重點為中文整理；「韓國蟬聯 9 年冠軍」等為品牌自述，價格依規格與檔期不同，以官網為準。",
+        "verified_date": "2026-11-17"
       }
     },
     {
@@ -1134,11 +1139,18 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "slug": "dasique-shadow-palette",
-      "official_url": "https://dasique.com/",
+      "official_url": "https://dasique.com/products/eye-shadow-palette-berry-smoothie",
       "detail": {
-        "spec": "共 27 色（單品／組合）",
-        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
-        "verified_date": "2026-11-06"
+        "price": "US$31.20（官網美國站，單盤 18 色款）",
+        "spec": "共 27 色（單品／組合）；各盤色數與色系不同",
+        "features": [
+          "絲絨般細緻質地，好推勻、可層層疊加顯色",
+          "同盤包含打底、過渡與珠光色，另有不同顆粒大小的亮粉增加光澤",
+          "輕薄、不易卡紋"
+        ],
+        "how_to": "先用淺色鋪滿眼皮，再將深色往眼尾暈染，最後把亮粉點在眼皮中央或內眼角。",
+        "note": "資料取自品牌官網美國站其中一款眼影盤（Berry Smoothie）商品頁，重點為中文整理；價格為美元標價，各盤色數與台灣售價以通路為準。",
+        "verified_date": "2026-11-17"
       }
     },
     {
@@ -1194,11 +1206,18 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "slug": "3ce-multi-eye-color-palette",
-      "official_url": "https://www.3cecosmetics.com/",
+      "official_url": "https://www.3cecosmetics.com/all-products/eyes/eyeshadow/3ce-multi-eye-color-palette-the-textile",
       "detail": {
-        "spec": "共 14 色",
-        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
-        "verified_date": "2026-11-06"
+        "price": "₩43,000（官網韓國站，The Textile 版）",
+        "spec": "8g；The Textile 版 9 色同色系搭配",
+        "features": [
+          "質地細緻柔軟、落粉少，好推開",
+          "顯色均勻、可層層疊加，從日常淡妝到夜晚眼妝都能用",
+          "持妝時間長"
+        ],
+        "how_to": "取適量塗在眼周並輕輕暈開。",
+        "note": "資料取自品牌官網商品頁（The Textile 版，英文頁），重點為中文整理；系列另有其他版本，色數與價格以官網為準。",
+        "verified_date": "2026-11-17"
       }
     },
     {
