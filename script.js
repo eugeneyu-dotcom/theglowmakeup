@@ -472,7 +472,7 @@ const DRUGSTORE_MENU = [
     { group: 'olive', name: 'Olive Young', en: 'Olive Young', sections: ['熱門彩妝品牌', '保養品牌', '頭髮保養品牌'] }
 ];
 window.drugstoreState = (() => {
-    const st = { group: 'all', section: 'all' };
+    const st = { group: 'all', section: 'all', open: {} };
     try {
         const q = new URLSearchParams(location.search);
         const sec = q.get('section'), grp = q.get('group');
@@ -528,11 +528,10 @@ async function renderDrugstore() {
                 const items = products.filter(p => p.group === g.group && p.section === sec);
                 if (items.length === 0) return;
                 n += items.length;
-                blocks += `
-            <section class="mb-14">
-                <h2 class="text-2xl font-black mb-6 italic border-l-8 border-[#f2a7b5] pl-4">${escHtml(g.en)} / <span class="text-[#f2a7b5] text-lg not-italic">${escHtml(sec)}</span></h2>
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                    ${items.map((p, i) => `
+                const brandOrder = [];
+                items.forEach(p => { if (!brandOrder.includes(p.brand)) brandOrder.push(p.brand); });
+                brandOrder.sort((a, b) => a.localeCompare(b));
+                const cardHtml = (p, i) => `
                     <a href="drugstore-detail.html?p=${encodeURIComponent(p.slug)}" class="bg-white rounded-2xl overflow-hidden border border-[#f2a7b5]/15 shadow-sm hover:shadow-md transition-shadow flex flex-col">
                         ${newProductImageBlock(p, i)}
                         <div class="p-3 md:p-5 flex flex-col flex-grow">
@@ -542,12 +541,35 @@ async function renderDrugstore() {
                             <h3 class="font-black text-sm md:text-base leading-snug mb-1 line-clamp-2">${escHtml(p.name)}</h3>
                             <p class="hidden md:block text-xs text-gray-500 leading-relaxed line-clamp-3">${escHtml(p.highlight || '')}</p>
                         </div>
-                    </a>`).join('')}
-                </div>
+                    </a>`;
+                // 品牌分區：每個品牌最多先顯示 5 款，超過 5 款才出現「查看全部」展開該品牌
+                const LIMIT = 5;
+                const brandBlocks = brandOrder.map(br => {
+                    const its = items.filter(p => p.brand === br);
+                    const key = `${g.group}|${sec}|${br}`;
+                    const expanded = !!st.open[key];
+                    const shown = expanded ? its : its.slice(0, LIMIT);
+                    const more = its.length > LIMIT;
+                    return `
+                <div class="mb-10">
+                    <div class="flex items-center justify-between border-b border-[#f2a7b5]/30 pb-2 mb-4">
+                        <h3 class="text-lg font-black text-[#2d2d2d]">${escHtml(br)} <span class="text-xs text-gray-400 font-bold">${its.length} 款</span></h3>
+                        ${more ? `<button type="button" data-brand-toggle="${escHtml(key)}" class="text-sm font-black text-[#f2a7b5] hover:underline">${expanded ? '收合' : `查看全部（${its.length}）`}</button>` : ''}
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-5">${shown.map((p, i) => cardHtml(p, i)).join('')}</div>
+                </div>`;
+                }).join('');
+                blocks += `
+            <section class="mb-14">
+                <h2 class="text-2xl font-black mb-6 italic border-l-8 border-[#f2a7b5] pl-4">${escHtml(g.en)} / <span class="text-[#f2a7b5] text-lg not-italic">${escHtml(sec)}</span></h2>
+                ${brandBlocks}
             </section>`;
             });
         });
         list.innerHTML = blocks || '<div class="text-center text-gray-400 text-sm py-12">這個分類商品整理中，敬請期待</div>';
+        list.querySelectorAll('button[data-brand-toggle]').forEach(b => b.addEventListener('click', () => {
+            const k = b.dataset.brandToggle; st.open[k] = !st.open[k]; draw();
+        }));
     };
     draw();
 }
