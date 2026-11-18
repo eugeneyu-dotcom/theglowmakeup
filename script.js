@@ -489,7 +489,7 @@ async function renderDrugstore() {
     if (!list || !filters) return;
     let products = [];
     try {
-        const res = await fetch('drugstore-products.json?v=23');
+        const res = await fetch('drugstore-products.json?v=24');
         products = (await res.json()).products || [];
     } catch (err) {
         console.error('drugstore-products.json 載入失敗', err);

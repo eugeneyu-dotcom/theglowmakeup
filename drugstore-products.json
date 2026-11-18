@@ -13,11 +13,18 @@
       "verified_date": "2026-11-04",
       "section": "熱門彩妝品牌",
       "slug": "romand-juicy-lasting-tint",
-      "official_url": "https://en.romand.co.kr/",
+      "official_url": "https://romandbeauty.com/products/the-juicy-lasting-tint",
       "detail": {
-        "spec": "共 38 色（單品／組合）",
-        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
-        "verified_date": "2026-11-06"
+        "price": "US$12～15（官網美國站）",
+        "spec": "共 38 色（單品／組合）；官網美國站目前列 23 個色號",
+        "features": [
+          "以糖葫蘆為靈感的玻璃光澤：高亮水光、雙層上釉感",
+          "色號靈感來自當季水果，也有由原版熱門色調和出的新色",
+          "輕盈不黏膩，顯色與光澤持久不易褪"
+        ],
+        "how_to": "從唇部內側開始塗抹，往外暈開到想要的濃度；輕輕推開可加強並加快光澤感。",
+        "note": "資料取自品牌官網美國站商品頁（英文頁），重點為中文整理；價格為美元標價，台灣售價以通路為準。",
+        "verified_date": "2026-11-18"
       }
     },
     {
@@ -990,11 +997,18 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "slug": "muzigaemansion-moodwear-blur-lipstick",
-      "official_url": "https://muzigae-mansion.com/",
+      "official_url": "https://muzigae-mansion.us/products/moodwear-blur-prime",
       "detail": {
-        "spec": "共 8 色",
-        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
-        "verified_date": "2026-11-06"
+        "price": "US$23（官網美國站）",
+        "spec": "共 8 色；4g",
+        "features": [
+          "柔霧絲絨質地，帶有類似濾鏡的柔焦暈染效果",
+          "可層疊的輕盈配方，貼唇不乾澀，主打純素",
+          "含保濕成分，使唇紋看起來更平滑"
+        ],
+        "how_to": "旋開蓋子直接塗抹可得完整顯色，或用指腹輕點暈染成朦朧效果；可疊擦加深，也能混搭不同色號。",
+        "note": "資料取自品牌官網美國站其中一色（001 Prime）商品頁，重點為中文整理；價格為美元標價，台灣售價以通路為準。",
+        "verified_date": "2026-11-18"
       }
     },
     {
@@ -1188,11 +1202,17 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "slug": "amuse-jel-fit-gloss",
-      "official_url": "https://amusemakeup.com/",
+      "official_url": "https://amuseseoulmakeup.com/products/jel-fit-gloss",
       "detail": {
-        "spec": "共 13 色",
-        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
-        "verified_date": "2026-11-06"
+        "spec": "3.8g；官網國際站列 10 色（目錄標示共 13 色）",
+        "features": [
+          "高顯色的玻璃光澤唇蜜，唇部看起來更飽滿、平滑",
+          "軟嫩果凍質地，帶來豐盈光澤與量感，不黏膩",
+          "添加多肽複合物、植物性膠原蛋白與 Cica PDRN 等保養成分，主打純素、皮膚科測試、低敏"
+        ],
+        "how_to": "單擦呈現飽滿光澤，也可疊在喜歡的口紅上增加層次與立體感。",
+        "note": "資料取自品牌國際官網商品頁（英文頁），重點為中文整理；色數依官網國際站與各地通路不同，以實際銷售頁為準。",
+        "verified_date": "2026-11-18"
       }
     },
     {
