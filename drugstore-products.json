@@ -1058,11 +1058,17 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "slug": "holikaholika-my-fave-piece-eye-shadow",
-      "official_url": "https://holikaholika.com/",
+      "official_url": "https://holikaholika.com/products/for-inventory-integration-with-tiktok-shop-my-fave-piece-eye-shadow-beam-glitz",
       "detail": {
-        "spec": "提供 Shimmer／Matte／Shade／Geltail 多種質地",
-        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
-        "verified_date": "2026-11-06"
+        "price": "US$9.99（官網美國站，單色）",
+        "spec": "提供 Shimmer／Matte／Shade／Geltail 多種質地；官網標示超過 100 色",
+        "features": [
+          "單色眼影自由組合：不買固定眼影盤，依喜好挑選單色拼出專屬配色",
+          "色彩選擇多：包含霧面、珠光、亮片與柔和大地色",
+          "主打質地細緻、顯色度高"
+        ],
+        "note": "資料取自品牌官網美國站商品頁（英文頁），重點為中文整理；價格為美元標價，色數與台灣售價以通路為準。",
+        "verified_date": "2026-11-18"
       }
     },
     {
@@ -1135,11 +1141,17 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "slug": "hince-true-dimension-radiance-balm",
-      "official_url": "https://hince.co.kr/",
+      "official_url": "https://hince.co.kr/product/%ED%8A%B8%EB%A3%A8-%EB%94%94%EB%A9%98%EC%85%98-%EB%9E%98%EB%94%94%EC%96%B8%EC%8A%A4-%EB%B0%A4/776/category/287/display/1/",
       "detail": {
-        "spec": "共 12 色（單品／組合）",
-        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
-        "verified_date": "2026-11-06"
+        "price": "₩23,200（官網韓國站優惠價）",
+        "spec": "共 12 色（單品／組合）；官網列 12 個選項",
+        "features": [
+          "棒狀多用途膏：可當高光、腮紅使用，營造水光感的自然光澤",
+          "以「速光腮紅」「水光腮紅」為官方主打，色號如 Shelly Pink、Odd Rose",
+          "偏保濕的膏狀質地，可疊擦調整光澤與色澤濃度"
+        ],
+        "note": "資料取自品牌韓國官網商品頁（韓文頁，詳細說明多為圖片），重點為中文整理；價格為韓元標價，台灣售價以通路為準。",
+        "verified_date": "2026-11-18"
       }
     },
     {
