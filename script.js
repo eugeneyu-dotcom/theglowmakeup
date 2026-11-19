@@ -230,14 +230,11 @@ async function renderWeeklyNews() {
         return;
     }
 
-    const MIN_SHOWN = 5;
+    const MAX_SHOWN = 5;   // 最新情報最多顯示 5 篇（2026-11-19 使用者指定）
     const esc = s => String(s || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
-    // getArticles() 已依日期由新到舊排序（同一天維持 articles.json 原順序）
-    const monthKey = dated[0].date.slice(0, 7);
-    const inMonth = dated.filter(a => a.date.startsWith(monthKey));
-    const filler = dated.filter(a => !a.date.startsWith(monthKey)).slice(0, Math.max(0, MIN_SHOWN - inMonth.length));
-    const shown = inMonth.concat(filler);
+    // getArticles() 已依日期由新到舊排序（同一天維持 articles.json 原順序），直接取最新 5 篇
+    const shown = dated.slice(0, MAX_SHOWN);
 
     const [lead, ...rest] = shown;
     const side = rest.slice(0, 4);
