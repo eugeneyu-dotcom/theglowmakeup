@@ -790,3 +790,8 @@ body.mobile-nav-open {
 .article-body h3 strong {
     font-weight: inherit;
 }
+
+/* 開架美妝大選單：分區標題是連結，「查看全部」用主色強調 */
+a.mega-category-title { text-decoration: none; }
+a.mega-category-title:hover { color: var(--primary); }
+.mega-subcategory.mega-more { color: var(--primary); font-weight: 700; margin-top: 4px; }

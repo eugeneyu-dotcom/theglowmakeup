@@ -1783,6 +1783,18 @@ async function initNav() {
 
         navContainer.innerHTML = '';
 
+        // 開架美妝大選單需要各分區的品牌清單（來自 drugstore-products.json），在這裡先載入
+        const drugstoreBrandsBySection = {};
+        try {
+            const dres = await fetch('drugstore-products.json?v=29');
+            const ddata = await dres.json();
+            (ddata.products || []).forEach(p => {
+                const k = `${p.group}|${p.section}`;
+                (drugstoreBrandsBySection[k] = drugstoreBrandsBySection[k] || []);
+                if (!drugstoreBrandsBySection[k].includes(p.brand)) drugstoreBrandsBySection[k].push(p.brand);
+            });
+        } catch (e) { console.warn('開架選單品牌清單載入失敗，只顯示分區標題', e); }
+
         data.targets.forEach(target => {
             if (!target.hasDropdown) {
                 const a = document.createElement('a');
@@ -1819,27 +1831,73 @@ async function initNav() {
                 parent.appendChild(menu);
                 navContainer.appendChild(parent);
             } else if (target.drugstoreMenu) {
-                // 開架美妝：「藥妝開架品牌」（依產地）與「Olive Young」（依品類）兩組簡單下拉
+                // 開架美妝：跟專櫃美妝同款的大型選單。左欄＝「藥妝開架品牌」「Olive Young」兩大類，
+                // 右欄＝各分區標題（連到該分區）＋該分區前幾個品牌，品牌清單來自 drugstore-products.json
                 const parent = document.createElement('div');
-                parent.className = 'dropdown-parent simple-dropdown h-full flex items-center';
+                parent.className = 'dropdown-parent h-full flex items-center';
 
                 const a = document.createElement('a');
                 a.href = 'drugstore-beauty.html';
                 a.className = 'nav-link hover:text-[#f2a7b5] h-full flex items-center';
                 a.innerHTML = `${target.name} &#x25BE;`;
 
-                const menu = document.createElement('div');
-                menu.className = 'dropdown-menu';
-                menu.innerHTML = `
-                    <a href="drugstore-beauty.html" class="dropdown-item">全部開架美妝</a>
-                    ${target.drugstoreMenu.map(g => `
-                        <a href="drugstore-beauty.html?group=${g.group}" class="dropdown-item" style="color:var(--primary);font-weight:800">${g.name}</a>
-                        ${g.sections.map(sec => `<a href="drugstore-beauty.html?section=${encodeURIComponent(sec)}" class="dropdown-item" style="padding-left:40px;font-weight:600">${sec}</a>`).join('')}
-                    `).join('')}
-                `;
+                const megaMenu = document.createElement('div');
+                megaMenu.className = 'mega-menu';
+                const inner = document.createElement('div');
+                inner.className = 'mega-menu-inner';
+                const typesContainer = document.createElement('div');
+                typesContainer.className = 'mega-types';
+                const contentContainer = document.createElement('div');
+                contentContainer.className = 'mega-content';
 
+                const NAV_BRAND_LIMIT = 6;
+                const renderDrugstoreCols = (g) => {
+                    contentContainer.innerHTML = '';
+                    g.sections.forEach(sec => {
+                        const col = document.createElement('div');
+                        col.className = 'mega-category';
+                        const secUrl = `drugstore-beauty.html?section=${encodeURIComponent(sec)}`;
+                        const title = document.createElement('a');
+                        title.href = secUrl;
+                        title.className = 'mega-category-title';
+                        title.textContent = sec;
+                        col.appendChild(title);
+                        const brands = (drugstoreBrandsBySection[`${g.group}|${sec}`] || []);
+                        brands.slice(0, NAV_BRAND_LIMIT).forEach(br => {
+                            const el = document.createElement('a');
+                            el.href = secUrl;
+                            el.className = 'mega-subcategory block';
+                            el.textContent = br;
+                            col.appendChild(el);
+                        });
+                        const more = document.createElement('a');
+                        more.href = secUrl;
+                        more.className = 'mega-subcategory block mega-more';
+                        more.textContent = brands.length > NAV_BRAND_LIMIT ? `查看全部 ${brands.length} 個品牌 →` : '查看全部 →';
+                        col.appendChild(more);
+                        contentContainer.appendChild(col);
+                    });
+                };
+
+                target.drugstoreMenu.forEach((g, index) => {
+                    const typeEl = document.createElement('div');
+                    typeEl.className = 'mega-type-item';
+                    typeEl.textContent = g.name;
+                    if (index === 0) typeEl.classList.add('active');
+                    typeEl.addEventListener('mouseenter', () => {
+                        typesContainer.querySelectorAll('.mega-type-item').forEach(el => el.classList.remove('active'));
+                        typeEl.classList.add('active');
+                        renderDrugstoreCols(g);
+                    });
+                    typesContainer.appendChild(typeEl);
+                    if (index === 0) renderDrugstoreCols(g);
+                });
+
+                inner.appendChild(typesContainer);
+                inner.appendChild(contentContainer);
+                megaMenu.appendChild(inner);
                 parent.appendChild(a);
-                parent.appendChild(menu);
+                parent.appendChild(megaMenu);
                 navContainer.appendChild(parent);
             } else if (target.articleCategories) {
                 // 美妝文章專欄：簡單 3 項分類下拉（保養/清潔/化妝），跟商品目錄的大型 mega-menu 分開處理
