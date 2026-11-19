@@ -13,14 +13,14 @@
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Glow Makeup | 保養專欄</title>
+    <title>Glow Makeup | 美妝文章專欄</title>
     <link rel="canonical" id="canonical-link" href="https://www.theglowmakeup.org/skincare-blog.html">
     <meta property="og:url" id="og-url" content="https://www.theglowmakeup.org/">
     <script id="canonical-early">/* 在 HTML 解析當下就把 canonical 指向自己，不等 JSON 載入；避免 Googlebot 讀到指向列表頁的錯誤 canonical */
     (function(){try{var v=new URLSearchParams(location.search).get('id');if(v){var u='https://www.theglowmakeup.org/article.html?id='+encodeURIComponent(v);document.getElementById("canonical-link").href=u;var o=document.getElementById("og-url");if(o)o.setAttribute("content",u);}}catch(e){}})();</script>
-    <meta name="description" id="meta-description" content="Glow Makeup 保養專欄：美妝知識與實用技巧分享。">
-    <meta property="og:title" id="og-title" content="Glow Makeup | 保養專欄">
-    <meta property="og:description" id="og-description" content="Glow Makeup 保養專欄：美妝知識與實用技巧分享。">
+    <meta name="description" id="meta-description" content="Glow Makeup 美妝文章專欄：美妝知識與實用技巧分享。">
+    <meta property="og:title" id="og-title" content="Glow Makeup | 美妝文章專欄">
+    <meta property="og:description" id="og-description" content="Glow Makeup 美妝文章專欄：美妝知識與實用技巧分享。">
     <meta property="og:type" content="article">
     <meta property="og:image" id="og-image" content="">
     <script type="application/ld+json" id="schema-jsonld"></script>
@@ -70,7 +70,7 @@
     <main class="w-[92%] md:w-3/4 mx-auto px-4 py-12">
         <div class="mb-8">
             <a href="skincare-blog.html" class="inline-flex items-center gap-2 text-base font-bold text-gray-500 hover:text-[#f2a7b5] transition-colors group">
-                <span class="group-hover:-translate-x-1 transition-transform">&#10094;</span> 返回保養專欄
+                <span class="group-hover:-translate-x-1 transition-transform">&#10094;</span> 返回美妝文章專欄
             </a>
         </div>
 
@@ -94,7 +94,7 @@
         <p class="text-gray-400 text-sm">© 2026 美妝生活誌 - 妳的最美應援團</p>
     </footer>
 
-    <script src="script.js?v=224"></script>
+    <script src="script.js?v=225"></script>
     <script>
         function formatDate(d) {
             return (d || '').replace(/-/g, '.');
@@ -136,10 +136,10 @@
                     author: { '@type': 'Organization', name: 'Glow Makeup' },
                     publisher: { '@type': 'Organization', name: 'Glow Makeup' },
                     mainEntityOfPage: `https://www.theglowmakeup.org/article.html?id=${encodeURIComponent(article.id)}`,
-                    isPartOf: { '@type': 'Blog', name: '保養專欄', '@id': 'https://www.theglowmakeup.org/skincare-blog.html' },
+                    isPartOf: { '@type': 'Blog', name: '美妝文章專欄', '@id': 'https://www.theglowmakeup.org/skincare-blog.html' },
                 });
             }
-            (function(){var el=document.getElementById('breadcrumb-jsonld');if(!el)return;var isEvent=article.category==='活動';var L=[['首頁','https://www.theglowmakeup.org/']];if(isEvent){L.push(['活動快訊','https://www.theglowmakeup.org/skincare-blog.html?category='+encodeURIComponent('活動')]);}else{L.push(['保養專欄','https://www.theglowmakeup.org/skincare-blog.html']);if(article.category){L.push([article.category,'https://www.theglowmakeup.org/skincare-blog.html?category='+encodeURIComponent(article.category)]);}}L.push([article.title,'https://www.theglowmakeup.org/article.html?id='+encodeURIComponent(article.id)]);el.textContent=JSON.stringify({'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:L.map(function(x,i){return {'@type':'ListItem',position:i+1,name:x[0],item:x[1]};})});})();
+            (function(){var el=document.getElementById('breadcrumb-jsonld');if(!el)return;var isEvent=article.category==='活動';var L=[['首頁','https://www.theglowmakeup.org/']];if(isEvent){L.push(['活動快訊','https://www.theglowmakeup.org/skincare-blog.html?category='+encodeURIComponent('活動')]);}else{L.push(['美妝文章專欄','https://www.theglowmakeup.org/skincare-blog.html']);if(article.category){L.push([article.category,'https://www.theglowmakeup.org/skincare-blog.html?category='+encodeURIComponent(article.category)]);}}L.push([article.title,'https://www.theglowmakeup.org/article.html?id='+encodeURIComponent(article.id)]);el.textContent=JSON.stringify({'@context':'https://schema.org','@type':'BreadcrumbList',itemListElement:L.map(function(x,i){return {'@type':'ListItem',position:i+1,name:x[0],item:x[1]};})});})();
 
 
             // ---- 社群分享列（文章結尾）----
@@ -170,7 +170,7 @@
                 </div>`;
             root.innerHTML = `
                 <article class="bg-white rounded-[32px] p-8 md:p-12 shadow-sm border border-[#f2a7b5]/10">
-                    <span class="bg-[#f2a7b5] text-white px-4 py-1 rounded-full text-xs font-bold tracking-widest">${article.tag ? '#' + article.tag : '保養專欄'}</span>
+                    <span class="bg-[#f2a7b5] text-white px-4 py-1 rounded-full text-xs font-bold tracking-widest">${article.tag ? '#' + article.tag : '美妝文章專欄'}</span>
                     <h1 class="text-2xl md:text-4xl font-black text-[#2d2d2d] leading-tight mt-4 mb-2">${article.title}</h1>
                     <p class="text-sm text-gray-400 font-bold mb-8">${formatDate(article.date)}</p>
                     <img src="${article.image}" alt="${article.title}" class="w-full rounded-3xl mb-8 object-cover max-h-[420px]" onerror="this.src=window.IMG_FALLBACK">

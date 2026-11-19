@@ -20,7 +20,7 @@ document.addEventListener('error', function (e) {
     }
 }, true);
 
-// 1. Slider Logic —— 首頁大圖輪播＝保養專欄最新文章（資料來源 articles.json）
+// 1. Slider Logic —— 首頁大圖輪播＝美妝文章專欄最新文章（資料來源 articles.json）
 let currentSlide = 0;
 let sliderInterval;
 
@@ -29,7 +29,7 @@ const MAX_SLIDES = 5;
 
 let articlesCache = null;
 
-// 取保養專欄文章，依日期由新到舊
+// 取美妝文章專欄文章，依日期由新到舊
 // 快取的是「進行中的請求」而不只是結果：頁面上好幾個區塊同時呼叫時共用同一次下載，
 // 不然每個都會各抓一份（articles.json 1.2MB、scores-data.json 0.7MB 都被重複下載過）。
 let articlesPromise = null;
@@ -38,7 +38,7 @@ async function getArticles() {
     if (!articlesPromise) {
         articlesPromise = (async () => {
             try {
-                const res = await fetch('articles.json?v=171');
+                const res = await fetch('articles.json?v=172');
                 const data = await res.json();
                 articlesCache = (data.articles || []).slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
             } catch (err) {
@@ -66,7 +66,7 @@ async function initSlider() {
     const restArticles = allArticles.filter(a => !a.pinned);
     const articles = [...pinnedArticles, ...restArticles].slice(0, MAX_SLIDES);
     if (articles.length === 0) {
-        track.innerHTML = '<div class="slide shrink-0 flex items-center justify-center bg-[#fdeef1]"><p class="font-black text-[#e6a0ad]">保養專欄尚無文章</p></div>';
+        track.innerHTML = '<div class="slide shrink-0 flex items-center justify-center bg-[#fdeef1]"><p class="font-black text-[#e6a0ad]">美妝文章專欄尚無文章</p></div>';
         return;
     }
 
@@ -74,7 +74,7 @@ async function initSlider() {
         <a href="${a.url || 'skincare-blog.html'}" class="slide shrink-0 block" style="background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)), url('${a.image}')">
             <div class="absolute inset-0 flex items-center justify-center text-center px-4">
                 <div class="max-w-4xl">
-                    <span class="${SLIDE_TAG_COLORS[i % SLIDE_TAG_COLORS.length]} text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-widest mb-4 inline-block">${a.category === '活動' ? '活動快訊' : '保養專欄'}${a.tag ? ' · #' + a.tag : ''}</span>
+                    <span class="${SLIDE_TAG_COLORS[i % SLIDE_TAG_COLORS.length]} text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-widest mb-4 inline-block">${a.category === '活動' ? '活動快訊' : '美妝文章專欄'}${a.tag ? ' · #' + a.tag : ''}</span>
                     <h2 class="text-3xl md:text-5xl font-black text-white drop-shadow-lg">${a.title}</h2>
                     <p class="text-white/80 text-sm font-bold mt-3 drop-shadow">${formatArticleDate(a.date)}</p>
                 </div>
@@ -104,7 +104,7 @@ async function renderMarquee() {
     if (!el) return;
     const articles = (await getArticles()).slice(0, 4);
     if (articles.length === 0) {
-        el.innerHTML = '<span class="mx-4 text-gray-300">保養專欄尚無文章</span>';
+        el.innerHTML = '<span class="mx-4 text-gray-300">美妝文章專欄尚無文章</span>';
         return;
     }
     el.innerHTML = articles.map((a, i) => `
@@ -189,7 +189,7 @@ async function renderLatestArticlesSection() {
     if (!grid) return;
     const articles = (await getArticles()).slice(0, 8);
     if (articles.length === 0) {
-        grid.innerHTML = '<div class="text-gray-400 text-sm">保養專欄尚無文章</div>';
+        grid.innerHTML = '<div class="text-gray-400 text-sm">美妝文章專欄尚無文章</div>';
         return;
     }
     grid.innerHTML = articles.map(a => `
@@ -199,7 +199,7 @@ async function renderLatestArticlesSection() {
             </div>
             <div class="mb-3">
                 <a href="${a.url || 'skincare-blog.html'}" class="inline-block px-3 py-1 bg-[#f2a7b5]/10 text-[#f2a7b5] text-[11px] font-black rounded-full uppercase tracking-widest hover:bg-[#f2a7b5] hover:text-white transition-colors">
-                    ${a.tag ? '#' + a.tag : '保養專欄'}
+                    ${a.tag ? '#' + a.tag : '美妝文章專欄'}
                 </a>
             </div>
             <h3 class="text-xl font-black mb-4 leading-tight group-hover:text-[#f2a7b5] transition-colors cursor-pointer" onclick="location.href='${a.url || 'skincare-blog.html'}'">${a.title}</h3>
@@ -217,7 +217,7 @@ function scrollArticleCarousel(direction) {
 }
 
 // 最新情報（news.html）：顯示「最新一個月」的文章；該月不足 5 篇時，用更早的最新文章補到 5 篇，避免月初版面太空。
-// 版面＝一張主推大卡＋右側 4 張小卡；超過 5 篇的部分排在下方兩欄。刻意不放分類篩選與往期列表（使用者指定），跟保養專欄的列表區隔。
+// 版面＝一張主推大卡＋右側 4 張小卡；超過 5 篇的部分排在下方兩欄。刻意不放分類篩選與往期列表（使用者指定），跟美妝文章專欄的列表區隔。
 // 「最新一個月」以 articles.json 裡日期最新那篇所在的月份為準：月初還沒有新文章時，仍顯示上個月，不會空版。
 async function renderWeeklyNews() {
     const root = document.getElementById('weekly-news');
@@ -574,10 +574,10 @@ async function renderDrugstore() {
     draw();
 }
 
-// 保養專欄分類/標籤篩選狀態。category: undefined=尚未從網址初始化, null=全部文章；tag: null=不篩選標籤
+// 美妝文章專欄分類/標籤篩選狀態。category: undefined=尚未從網址初始化, null=全部文章；tag: null=不篩選標籤
 window.blogFilterState = { category: undefined, tag: undefined };
 
-// 保養專欄列表（與首頁輪播同一份 articles.json，確保「輪播＝專欄最新文章」不會不同步）
+// 美妝文章專欄列表（與首頁輪播同一份 articles.json，確保「輪播＝專欄最新文章」不會不同步）
 // （news.html 已改用 renderWeeklyNews()，不再共用這個 function）
 async function renderSkincareArticles() {
     const list = document.getElementById('skincare-article-list');
@@ -600,29 +600,29 @@ async function renderSkincareArticles() {
             window.blogFilterState.category = params.get('category') || null;
         }
 
-        // 「活動快訊」跟保養專欄共用這個列表頁模板，但不該掛著「Skincare Column /
-        // 保養專欄」的標題，所以篩到 category=活動 時換成活動快訊自己的標題。
+        // 「活動快訊」跟美妝文章專欄共用這個列表頁模板，但不該掛著「Skincare Column /
+        // 美妝文章專欄」的標題，所以篩到 category=活動 時換成活動快訊自己的標題。
         //
         // 分類頁籤原本在這個情況下會一起隱藏，理由是「改用下面的 tag-filters 在
         // 週年慶/母親節/Olive Young促銷之間切換就好」。但那批標籤從來沒長出來——
         // 5 篇活動文章全部都是 #週年慶，標籤排只會浮一顆沒有作用的按鈕出來，
         // 結果是進到活動快訊之後畫面上完全沒有任何可以切回其他分類的東西，
-        // 只能走上方選單或改網址。頁籤現在一律顯示，活動快訊跟保養專欄一樣可以
+        // 只能走上方選單或改網址。頁籤現在一律顯示，活動快訊跟美妝文章專欄一樣可以
         // 直接在分類之間互相切換。
         const heading = document.getElementById('blog-page-heading');
         const isEventCategory = window.blogFilterState.category === '活動';
         if (heading) {
             heading.innerHTML = isEventCategory
                 ? 'Event Center / <span class="text-[#f2a7b5] text-2xl not-italic">活動快訊</span>'
-                : 'Skincare Column / <span class="text-[#f2a7b5] text-2xl not-italic">保養專欄</span>';
+                : 'Beauty Column / <span class="text-[#f2a7b5] text-2xl not-italic">美妝文章專欄</span>';
         }
         // 畫面標題換了，瀏覽器分頁標題與 meta 也要跟著換；原本只換 H1，分頁標題仍是
-        // 「保養專欄 | Glow Makeup」，跟畫面對不上。canonical 一併指向自己：不然這一頁
-        // 對外宣告自己是保養專欄列表的複本，換了標題也不會被 Google 採用。
+        // 「美妝文章專欄 | Glow Makeup」，跟畫面對不上。canonical 一併指向自己：不然這一頁
+        // 對外宣告自己是美妝文章專欄列表的複本，換了標題也不會被 Google 採用。
         if (isEventCategory) {
             const eventUrl = 'https://www.theglowmakeup.org/skincare-blog.html?category=' + encodeURIComponent('活動');
             const eventTitle = '活動快訊 | Glow Makeup';
-            const eventDesc = 'Glow Makeup 活動快訊：百貨週年慶與檔期優惠整理，活動時間與內容一次看。';
+            const eventDesc = 'Glow Makeup 網羅百貨週年慶、母親節檔期、Olive Young、屈臣氏、康是美與寶雅優惠資訊。第一時間掌握「最新美妝優惠活動」，優惠折扣不錯過！';
             document.title = eventTitle;
             const setMeta = (sel, attr, val) => { const el = document.querySelector(sel); if (el) el.setAttribute(attr, val); };
             setMeta('meta[name="description"]', 'content', eventDesc);
@@ -726,9 +726,9 @@ window.setBlogTag = function (tag) {
     const turningOff = window.blogFilterState.tag === tag;
     window.blogFilterState.tag = turningOff ? null : tag;
 
-    // 「活動快訊」是獨立的目的地頁（有自己的 Event Center 標題），不是保養專欄底下的
+    // 「活動快訊」是獨立的目的地頁（有自己的 Event Center 標題），不是美妝文章專欄底下的
     // 一個篩選結果。所以在別的分類（例如「全部文章」）點到只屬於活動的標籤時，要連分類
-    // 一起切成「活動」，直接把人帶到活動快訊那一頁，而不是停在「保養專欄」的標題底下
+    // 一起切成「活動」，直接把人帶到活動快訊那一頁，而不是停在「美妝文章專欄」的標題底下
     // 顯示一批活動文章。
     //
     // 只對活動這樣做：目前只有它有自己的頁面識別。其他分類的標籤維持原地篩選，否則
@@ -1182,7 +1182,7 @@ async function getSiteData() {
     if (!siteDataPromise) {
         siteDataPromise = (async () => {
             try {
-                const response = await fetch('site-data.json?v=45');
+                const response = await fetch('site-data.json?v=46');
                 siteDataCache = await response.json();
                 return siteDataCache;
             } catch (err) {
@@ -1791,7 +1791,7 @@ async function initNav() {
                 const a = document.createElement('a');
                 if (target.name === '最新情報') a.href = 'news.html';
                 else if (target.name === '開架美妝') a.href = 'drugstore-beauty.html';
-                else if (target.name === '保養專欄') a.href = 'skincare-blog.html';
+                else if (target.name === '美妝文章專欄') a.href = 'skincare-blog.html';
                 else a.href = '#';
 
                 a.className = 'nav-link hover:text-[#f2a7b5] h-full flex items-center';
@@ -1799,7 +1799,7 @@ async function initNav() {
                 navContainer.appendChild(a);
             } else if (target.tagCategories) {
                 // 活動快訊這類「同一個 category、用 tag 細分」的下拉選單：父層連結跟子項目都停在
-                // 同一個 category 底下，不會像保養專欄的父層連結那樣導去不分類的全部文章
+                // 同一個 category 底下，不會像美妝文章專欄的父層連結那樣導去不分類的全部文章
                 const parent = document.createElement('div');
                 parent.className = 'dropdown-parent simple-dropdown h-full flex items-center';
 
@@ -1845,7 +1845,7 @@ async function initNav() {
                 parent.appendChild(menu);
                 navContainer.appendChild(parent);
             } else if (target.articleCategories) {
-                // 保養專欄：簡單 3 項分類下拉（保養/清潔/化妝），跟商品目錄的大型 mega-menu 分開處理
+                // 美妝文章專欄：簡單 3 項分類下拉（保養/清潔/化妝），跟商品目錄的大型 mega-menu 分開處理
                 const parent = document.createElement('div');
                 parent.className = 'dropdown-parent simple-dropdown h-full flex items-center';
 
@@ -1946,7 +1946,7 @@ function renderMobileNav(data, scoredSubcats) {
             const a = document.createElement('a');
             if (target.name === '最新情報') a.href = 'news.html';
             else if (target.name === '開架美妝') a.href = 'drugstore-beauty.html';
-            else if (target.name === '保養專欄') a.href = 'skincare-blog.html';
+            else if (target.name === '美妝文章專欄') a.href = 'skincare-blog.html';
             else a.href = '#';
             a.className = 'mobile-nav-link';
             a.textContent = target.name;
@@ -2134,7 +2134,7 @@ async function buildSearchIndex() {
     }
     const arts = (articles || []).map(a => ({
         type: 'article',
-        name: a.title, brand: a.category || '保養專欄', subcat: a.tag || '',
+        name: a.title, brand: a.category || '美妝文章專欄', subcat: a.tag || '',
         image: a.image,
         url: `article.html?id=${encodeURIComponent(a.id)}`,
         hay: normalizeSearchText(`${a.title} ${a.category} ${a.tag} ${(a.concerns || []).join(' ')} ${a.excerpt}`),
