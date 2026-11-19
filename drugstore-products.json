@@ -134,11 +134,18 @@
       "verified_date": "2026-11-04",
       "section": "熱門彩妝品牌",
       "slug": "clio-kill-cover-founwear-cushion",
-      "official_url": "https://m.clubclio-tw.com/",
       "detail": {
-        "spec": "The Original 版（含補充蕊組合）",
-        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
-        "verified_date": "2026-11-06"
+        "price": "NT$1,011（Olive Young Global 台灣站標價，The Original 含替換蕊款）",
+        "spec": "The Original（含替換蕊）；多色可選",
+        "features": [
+          "頁面標示能維持 24 小時不脫妝，呈現輕盈的緞面光滑妝感、修飾膚質",
+          "遮瑕粉體包覆肌膚、搭配薄薄附著的油分，輕薄卻能精準遮蓋瑕疵",
+          "服貼度與持久度佳，層疊上去仍自然，整天不用擔心暗沉",
+          "多種色號可依膚色與膚況挑選"
+        ],
+        "how_to": "將適量粉底擠在粉撲上，輕拍在臉部。",
+        "note": "資料取自 Olive Young Global 商品頁（英文頁），重點為中文整理；價格為通路標價，台灣售價以通路為準。此頁為 The Original 款，其他版本（如 The New、聯名限定）配方與色號可能不同。",
+        "verified_date": "2026-11-19"
       }
     },
     {
