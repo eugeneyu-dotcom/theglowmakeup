@@ -90,22 +90,14 @@ function renderArticleHtml(template, article) {
                 </article>`;
 
     return template
-        .replace(
-            '<title>Glow Makeup | 保養專欄</title>',
-            `<title>${escapeHtml(title)}</title>`
-        )
-        .replace(
-            'id="meta-description" content="Glow Makeup 保養專欄：美妝知識與實用技巧分享。">',
-            `id="meta-description" content="${escapeHtml(desc)}">`
-        )
-        .replace(
-            'id="og-title" content="Glow Makeup | 保養專欄">',
-            `id="og-title" content="${escapeHtml(title)}">`
-        )
-        .replace(
-            'id="og-description" content="Glow Makeup 保養專欄：美妝知識與實用技巧分享。">',
-            `id="og-description" content="${escapeHtml(desc)}">`
-        )
+        // title / description / og:title / og:description 一律用「id 或標籤＋任意舊內容」的正規式替換，
+        // 不比對舊文字本身。2026-11-19 欄位改名（保養專欄→美妝文章專欄）時，原本逐字比對舊字串的寫法
+        // 全部對不上，78 篇文章頁的原始 HTML 退回共用預設標題與描述（靜默失敗，沒有任何錯誤）。
+        // 用函式當替換值，避免標題/描述裡的 $ 被當成特殊字元。
+        .replace(/<title>[^<]*<\/title>/, () => `<title>${escapeHtml(title)}</title>`)
+        .replace(/(id="meta-description" content=")[^"]*(">)/, (m, a, b) => `${a}${escapeHtml(desc)}${b}`)
+        .replace(/(id="og-title" content=")[^"]*(">)/, (m, a, b) => `${a}${escapeHtml(title)}${b}`)
+        .replace(/(id="og-description" content=")[^"]*(">)/, (m, a, b) => `${a}${escapeHtml(desc)}${b}`)
         .replace(
             'id="og-image" content="">',
             `id="og-image" content="${escapeHtml(image)}">`
