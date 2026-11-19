@@ -134,19 +134,11 @@ function newProductImageBlock(p, i) {
         </div>`;
 }
 const NEW_PRODUCTS_MOBILE_VISIBLE = 6;
+const NEW_PRODUCTS_DRUG_WINDOW_MONTHS = 3;
 
-async function renderNewProducts() {
-    const grid = document.getElementById('new-products-grid');
-    if (!grid) return;
-    try {
-        const res = await fetch('new-products.json?v=10');
-        const data = await res.json();
-        const products = data.products || [];
-        if (products.length === 0) {
-            grid.innerHTML = '<div class="text-gray-400 text-sm">新品資訊整理中</div>';
-            return;
-        }
-        grid.innerHTML = products.map((p, i) => `
+// 新品快報分兩排：專櫃（group 省略或 'counter'）、開架（group='drug'）。開架目前沒有資料時整排隱藏，不顯示空區塊
+function newProductCardsHtml(products) {
+    return products.map((p, i) => `
             <a href="${p.source_url}" target="_blank" rel="noopener" class="bg-[#fff9f5] rounded-2xl md:rounded-3xl overflow-hidden border border-[#f2a7b5]/10 hover:shadow-md hover:border-[#f2a7b5]/30 transition-all group flex flex-col${i >= NEW_PRODUCTS_MOBILE_VISIBLE ? ' new-product-extra' : ''}">
                 ${newProductImageBlock(p, i)}
                 <div class="p-3 md:p-5 flex flex-col flex-grow">
@@ -157,24 +149,62 @@ async function renderNewProducts() {
                 </div>
             </a>
         `).join('');
-        const toggleBtn = document.getElementById('new-products-toggle-btn');
-        if (toggleBtn) {
-            if (products.length <= NEW_PRODUCTS_MOBILE_VISIBLE) {
-                toggleBtn.parentElement.classList.add('hidden');
-            } else {
-                toggleBtn.textContent = `查看全部 ${products.length} 個新品 ➔`;
-                toggleBtn.dataset.collapsedLabel = toggleBtn.textContent;
-            }
+}
+
+function fillNewProductsRow(prefix, products) {
+    const row = document.getElementById(`${prefix}-row`);
+    const grid = document.getElementById(`${prefix}-grid`);
+    if (!grid) return;
+    if (products.length === 0) {
+        if (row) row.classList.add('hidden');
+        return;
+    }
+    if (row) row.classList.remove('hidden');
+    grid.innerHTML = newProductCardsHtml(products);
+    const countEl = document.getElementById(`${prefix}-count`);
+    if (countEl) countEl.textContent = `${products.length} 款`;
+    const toggleBtn = document.getElementById(`${prefix}-toggle-btn`);
+    if (toggleBtn) {
+        if (products.length <= NEW_PRODUCTS_MOBILE_VISIBLE) {
+            toggleBtn.parentElement.classList.add('hidden');
+        } else {
+            toggleBtn.parentElement.classList.remove('hidden');
+            toggleBtn.textContent = `查看全部 ${products.length} 個新品 ➔`;
+            toggleBtn.dataset.collapsedLabel = toggleBtn.textContent;
         }
+    }
+}
+
+async function renderNewProducts() {
+    const grid = document.getElementById('new-products-grid');
+    if (!grid) return;
+    try {
+        const res = await fetch('new-products.json?v=13');
+        const data = await res.json();
+        const products = data.products || [];
+        if (products.length === 0) {
+            grid.innerHTML = '<div class="text-gray-400 text-sm">新品資訊整理中</div>';
+            return;
+        }
+        fillNewProductsRow('new-products', products.filter(p => (p.group || 'counter') === 'counter'));
+        // 開架新品只顯示 launch_ym（Olive Young 商品編號推估的登錄年月）在近 N 個月內的；過期自動隱藏
+        const now = new Date();
+        const nowIdx = now.getFullYear() * 12 + now.getMonth();
+        const isRecentDrug = p => {
+            const m = /^(\d{4})-(\d{2})$/.exec(p.launch_ym || '');
+            return !!m && nowIdx - (parseInt(m[1], 10) * 12 + parseInt(m[2], 10) - 1) <= NEW_PRODUCTS_DRUG_WINDOW_MONTHS;
+        };
+        fillNewProductsRow('new-products-drug', products.filter(p => p.group === 'drug' && isRecentDrug(p)));
     } catch (err) {
         console.error('new-products.json 載入失敗', err);
         grid.innerHTML = '<div class="text-gray-400 text-sm">新品資訊載入失敗</div>';
     }
 }
 
-function toggleNewProductsExpand() {
-    const grid = document.getElementById('new-products-grid');
-    const btn = document.getElementById('new-products-toggle-btn');
+function toggleNewProductsExpand(prefix) {
+    prefix = prefix || 'new-products';
+    const grid = document.getElementById(`${prefix}-grid`);
+    const btn = document.getElementById(`${prefix}-toggle-btn`);
     if (!grid || !btn) return;
     const collapsed = grid.classList.toggle('np-collapsed');
     btn.textContent = collapsed ? btn.dataset.collapsedLabel : '收起 ➔';
@@ -299,9 +329,10 @@ async function renderNewsNewProducts() {
     const grid = document.getElementById('news-new-products');
     if (!section || !grid) return;
     try {
-        const res = await fetch('new-products.json?v=10');
+        const res = await fetch('new-products.json?v=13');
         const data = await res.json();
-        const products = (data.products || []).slice(0, 6);
+        // 最新情報頁的「本月新品」維持只放專櫃新品（開架另在首頁新品快報呈現）
+        const products = (data.products || []).filter(p => (p.group || 'counter') === 'counter').slice(0, 6);
         if (products.length === 0) { section.remove(); return; }
         grid.innerHTML = products.map((p, i) => `
             <div data-np-card class="bg-white rounded-2xl overflow-hidden border border-[#f2a7b5]/15 shadow-sm hover:shadow-lg transition-all group flex flex-col self-start cursor-pointer">
