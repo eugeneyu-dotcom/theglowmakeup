@@ -26,7 +26,7 @@
     <link rel="icon" type="image/png" href="/favicon-192.png" sizes="192x192">
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="styles.css?v=69">
+    <link rel="stylesheet" href="styles.css?v=70">
 </head>
 <body class="bg-[#fff9f5] text-[#2d2d2d] selection:bg-[#f2a7b5] selection:text-white">
 
@@ -99,13 +99,13 @@
         </section>
 
         <!-- 3. 美妝新品快報（專櫃品牌官網與開架通路新品，資料來源見 new-products.json） -->
-        <section class="py-20 bg-white">
+        <section class="py-20 bg-[#fff9f5]">
             <div class="max-w-7xl mx-auto px-4">
                 <h2 class="text-3xl font-black mb-2 italic">New Arrivals / <span class="text-[#f2a7b5] text-lg not-italic">美妝新品快報</span></h2>
                 <p class="text-sm text-gray-400 font-bold mb-10">專櫃品牌官網與 Olive Young 公告的最新品項，人工整理更新</p>
 
-                <div id="new-products-row" class="mb-12">
-                    <h3 class="text-xl font-black border-l-4 border-[#2d2d2d] pl-3 mb-5">專櫃美妝 <span id="new-products-count" class="text-xs text-gray-400 font-bold"></span></h3>
+                <div id="new-products-row" class="mb-10">
+                    <h3 class="inline-flex items-center gap-2 bg-[#2d2d2d] text-white text-sm font-black px-4 py-1.5 rounded-full mb-5">專櫃美妝 <span id="new-products-count" class="text-[11px] font-bold opacity-70"></span></h3>
                     <div class="np-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 md:gap-5 np-collapsed" id="new-products-grid">
                         <div class="text-gray-400 text-sm">載入中...</div>
                     </div>
@@ -114,8 +114,8 @@
                     </div>
                 </div>
 
-                <div id="new-products-drug-row" class="hidden">
-                    <h3 class="text-xl font-black border-l-4 border-[#f2a7b5] pl-3 mb-5">Olive Young 新品 <span id="new-products-drug-count" class="text-xs text-gray-400 font-bold"></span></h3>
+                <div id="new-products-drug-row" class="hidden pt-10 border-t border-dashed border-[#f2a7b5]/50">
+                    <h3 class="inline-flex items-center gap-2 bg-[#f2a7b5] text-white text-sm font-black px-4 py-1.5 rounded-full mb-5">Olive Young 新品 <span id="new-products-drug-count" class="text-[11px] font-bold opacity-80"></span></h3>
                     <div class="np-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 md:gap-5 np-collapsed" id="new-products-drug-grid"></div>
                     <div class="text-center mt-6">
                         <button onclick="toggleNewProductsExpand('new-products-drug')" id="new-products-drug-toggle-btn" class="px-6 py-2 rounded-full border-2 border-[#f2a7b5] text-[#f2a7b5] font-bold text-sm hover:bg-[#f2a7b5] hover:text-white transition-all"></button>
@@ -192,7 +192,8 @@
         </section>
 
         <!-- 5. Homepage Quiz: Beauty Help -->
-        <section class="max-w-5xl mx-auto px-4 py-20">
+        <section class="bg-white">
+          <div class="max-w-5xl mx-auto px-4 py-20">
             <div class="home-quiz-container text-center">
                 <h2 class="text-3xl font-black mb-4">今天需要什麼美妝協助嗎？</h2>
                 <p class="text-gray-400 mb-12">告訴我們妳的困擾，讓 Glow Makeup 幫妳導航！</p>
@@ -244,6 +245,7 @@
                     </div>
                 </div>
             </div>
+          </div>
         </section>
 
         <!-- 6. 排行榜（依產品類別分頁籤，各類別 Top10） -->
@@ -294,6 +296,6 @@
         <p class="text-gray-400 text-sm">© 2026 美妝生活誌 - 妳的最美應援團</p>
     </footer>
 
-    <script src="script.js?v=243"></script>
+    <script src="script.js?v=244"></script>
 </body>
 </html>

@@ -139,7 +139,7 @@ const NEW_PRODUCTS_DRUG_WINDOW_MONTHS = 3;
 // 新品快報分兩排：專櫃（group 省略或 'counter'）、開架（group='drug'）。開架目前沒有資料時整排隱藏，不顯示空區塊
 function newProductCardsHtml(products) {
     return products.map((p, i) => `
-            <a href="${p.source_url}" target="_blank" rel="noopener" class="bg-[#fff9f5] rounded-2xl md:rounded-3xl overflow-hidden border border-[#f2a7b5]/10 hover:shadow-md hover:border-[#f2a7b5]/30 transition-all group flex flex-col${i >= NEW_PRODUCTS_MOBILE_VISIBLE ? ' new-product-extra' : ''}">
+            <a href="${p.source_url}" target="_blank" rel="noopener" class="bg-white rounded-2xl md:rounded-3xl overflow-hidden border border-[#f2a7b5]/20 shadow-sm hover:shadow-md hover:border-[#f2a7b5]/40 transition-all group flex flex-col${i >= NEW_PRODUCTS_MOBILE_VISIBLE ? ' new-product-extra' : ''}">
                 ${newProductImageBlock(p, i)}
                 <div class="p-3 md:p-5 flex flex-col flex-grow">
                     <span class="${BRAND_BADGE_COLORS[i % BRAND_BADGE_COLORS.length]} text-white text-[9px] md:text-[10px] font-black px-2.5 md:px-3 py-1 rounded-full self-start mb-2 md:mb-3 tracking-wide">${p.brand}</span>

@@ -179,11 +179,15 @@ nav {
 
 /* Home Quiz Specifics */
 .home-quiz-container {
-    background: white;
+    /* 淡粉色底＋粉色外框：跟上下奶油色、白色區塊明顯區隔，又不會太搶 */
+    background: #ffeeea;
     border-radius: 40px;
     padding: 60px;
-    box-shadow: 0 30px 60px rgba(242, 167, 181, 0.1);
-    border: 1px solid rgba(242, 167, 181, 0.1);
+    box-shadow: 0 20px 40px rgba(242, 167, 181, 0.12);
+    border: 2px solid rgba(242, 167, 181, 0.5);
+}
+.home-quiz-container .option-card {
+    background: #fff;
 }
 
 /* 選中的問卷卡片：用 !important 蓋掉卡片本身的 border-gray-100，
