@@ -569,7 +569,7 @@ async function renderDrugstore() {
             });
         });
         // 品牌跳轉列：黏在頁首下方，點品牌平滑捲到該品牌；品牌太多時預設只顯示一排，可展開全部
-        const JUMP_COLLAPSED = 12;
+        const JUMP_COLLAPSED = window.matchMedia('(max-width: 767px)').matches ? 8 : 12;
         let jumpBar = '';
         if (jumpBrands.length > 1) {
             const showAll = !!st.jumpOpen || jumpBrands.length <= JUMP_COLLAPSED;
@@ -1355,17 +1355,36 @@ async function renderBoardBrands(container, filters) {
     const byBrand = {};
     pool.forEach(e => { (byBrand[e.brand] = byBrand[e.brand] || []).push(e); });
     const brands = Object.keys(byBrand).sort((a, b) => byBrand[b].length - byBrand[a].length);
-    let current = 'all', expanded = false;
+    let current = 'all', expanded = false, brandsOpen = false;
     try { const b = new URLSearchParams(location.search).get('brand'); if (byBrand[b]) current = b; } catch (e) {}
 
+    // 品牌按鈕：跟開架美妝頁同款的黏性標籤列（含款數）；品牌多時預設只顯示前 12 個，可展開全部
+    filters.className = 'ds-jump-bar';
     const draw = () => {
-        filters.innerHTML = ['all', ...brands].map(key => {
-            const on = current === key;
-            return `<button type="button" data-brand="${escHtml(key)}" class="px-5 py-2 rounded-full text-sm font-black transition-colors ${on ? 'bg-[#f2a7b5] text-white' : 'bg-white text-gray-500 border border-[#f2a7b5]/30 hover:text-[#f2a7b5]'}">${key === 'all' ? '全部品牌' : escHtml(key)}</button>`;
-        }).join('');
-        filters.querySelectorAll('button').forEach(btn => btn.addEventListener('click', () => {
+        const BRAND_CHIPS_COLLAPSED = window.matchMedia('(max-width: 767px)').matches ? 8 : 12;
+        let shownBrands = brands;
+        if (brands.length > BRAND_CHIPS_COLLAPSED && !brandsOpen) {
+            shownBrands = brands.slice(0, BRAND_CHIPS_COLLAPSED);
+            // 目前選中的品牌若排在後面，也要顯示出來，不然看不出選了誰
+            if (current !== 'all' && !shownBrands.includes(current)) shownBrands = [...shownBrands, current];
+        }
+        const chip = (key, label, count) => `<button type="button" data-brand="${escHtml(key)}" class="ds-jump-chip ${current === key ? 'active' : ''}">${escHtml(label)}${count != null ? `<span class="ds-jump-count">${count}</span>` : ''}</button>`;
+        const toggle = brands.length > BRAND_CHIPS_COLLAPSED
+            ? `<button type="button" data-brand-toggle-all class="ds-jump-chip ds-jump-toggle">${brandsOpen ? '收合 ▲' : `展開全部 ${brands.length} 個品牌 ▼`}</button>` : '';
+        filters.innerHTML = `<div class="ds-jump-inner"><span class="ds-jump-label">選擇品牌</span>`
+            + chip('all', '全部品牌', null)
+            + shownBrands.map(b => chip(b, b, byBrand[b].length)).join('')
+            + toggle + `</div>`;
+        filters.querySelectorAll('button[data-brand]').forEach(btn => btn.addEventListener('click', () => {
             current = btn.dataset.brand; expanded = false; draw();
+            // 手機版標籤列很高、商品在螢幕下方：切換品牌後自動捲到商品區開頭，不然會以為點了沒反應
+            if (window.matchMedia('(max-width: 767px)').matches) {
+                container.style.scrollMarginTop = '90px';
+                container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }));
+        const tg = filters.querySelector('[data-brand-toggle-all]');
+        if (tg) tg.addEventListener('click', () => { brandsOpen = !brandsOpen; draw(); });
 
         if (current === 'all') {
             container.className = 'grid grid-cols-1 md:grid-cols-2 gap-8';
@@ -2085,6 +2104,14 @@ function renderMobileNav(data, scoredSubcats) {
             const menuTypes = fromContext === 'review'
                 ? filterTypesByScoredSubcats(target.types, scoredSubcats)
                 : target.types;
+
+            // 桌機版點父層連結會進首頁（專櫃＝board-landing、精選評比＝review-landing），手機版父層只負責展開，
+            // 所以要在子選單最上面補一個「全部」連結，不然手機完全進不了這兩個頁面
+            const landingLink = document.createElement('a');
+            landingLink.href = fromContext === 'review' ? 'review-landing.html' : 'board-landing.html';
+            landingLink.className = 'mobile-nav-sub-item';
+            landingLink.textContent = `全部${target.name}`;
+            submenu.appendChild(landingLink);
 
             menuTypes.forEach(type => {
                 const typeLabel = document.createElement('div');

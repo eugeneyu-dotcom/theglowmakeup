@@ -820,9 +820,9 @@ a.mega-category-title:hover { color: var(--primary); }
 .ds-jump-count { font-size: 0.7rem; opacity: 0.7; }
 .ds-jump-toggle { background: transparent; border-style: dashed; color: var(--primary); }
 @media (max-width: 767px) {
-    .ds-jump-bar { top: 72px; }
-    .ds-jump-inner { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
-    .ds-jump-chip { flex-shrink: 0; }
-    .ds-jump-label { flex-shrink: 0; }
-    .ds-brand-block { scroll-margin-top: 150px; }
+    /* 手機版：標籤改成自動換行並預設收合，不用橫向滑動（橫滑沒有可見提示，會讓人以為只有前兩三個品牌）；
+       也不再黏頂，避免展開後整排標籤佔掉半個螢幕 */
+    .ds-jump-bar { position: static; }
+    .ds-jump-label { flex-basis: 100%; }
+    .ds-brand-block { scroll-margin-top: 110px; }
 }
