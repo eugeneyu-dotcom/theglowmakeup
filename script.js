@@ -1205,6 +1205,7 @@ function showResult(category, value, tag) {
     if (resultTitle) resultTitle.innerText = '分析中...';
     if (resultText) resultText.innerHTML = '';
 
+    trackEvent('quiz_result', { category: category, value: value, tag: tag });
     HOME_QUIZ_CONFIG[category].buildResult(value, tag).then(({ title, html }) => {
         if (resultTitle) resultTitle.innerText = title;
         if (resultText) resultText.innerHTML = html;
@@ -2386,6 +2387,16 @@ function initSearch() {
                 articles: pick(idx.articles, SEARCH_MAX_ARTICLES),
             });
             input.setAttribute('aria-expanded', panel.classList.contains('is-open') ? 'true' : 'false');
+            // 搜尋追蹤：停止輸入 1.2 秒後才送一次，同一個字不重複送（避免每打一個字就算一次搜尋）
+            const term = input.value.trim();
+            const n = panel.querySelectorAll('.search-result').length;
+            clearTimeout(window.__searchTrackTimer);
+            window.__searchTrackTimer = setTimeout(() => {
+                if (!term || term === window.__lastSearchTracked) return;
+                window.__lastSearchTracked = term;
+                trackEvent('search', { search_term: term, result_count: n });
+                if (n === 0) trackEvent('search_no_result', { search_term: term });
+            }, 1200);
         };
 
         input.addEventListener('input', () => {
@@ -2406,3 +2417,188 @@ function initSearch() {
         });
     });
 }
+
+
+// ===== GA4 點擊追蹤（集中管理）=====
+// 所有「使用者互動」事件都在這裡用一個 document 層級的委派監聽處理，不需要每個功能各自加 onclick。
+// gtag 只在正式網域送資料（各頁 head 的 ga-disable 開關），本機預覽與測試網址不會送。
+// 命名規則：事件名稱 snake_case；參數字串一律截到 100 字（GA4 上限）。
+// 事件清單（新增時請一併更新 SEO 異動記錄與這裡）：
+//   nav_click / nav_menu_toggle            導覽選單（桌機、開架大選單、手機）
+//   quiz_option_click / quiz_next / quiz_back / quiz_reset / quiz_result   首頁問卷
+//   filter_click / brand_chip_click / brand_chip_toggle / brand_expand   開架與專櫃的篩選、品牌標籤
+//   search / search_no_result / search_result_click                     站內搜尋
+//   battle_category_click / battle_picker_open / battle_picker_filter / battle_select   殘酷擂台
+//   ranking_tab_click / ranking_item_click                              熱門榜單
+//   tab_scroll                                                           分頁籤左右箭頭
+//   product_outbound_click                                               商品頁的官網／通路連結
+//   related_article_click / article_link_click / article_share_click    文章頁
+//   new_product_click                                                    首頁新品快報（在 fillNewProductsRow）
+function trackEvent(name, params) {
+    try {
+        if (typeof gtag !== 'function') return;
+        const clean = {};
+        Object.keys(params || {}).forEach(k => {
+            let v = params[k];
+            if (v === undefined || v === null || v === '') return;
+            if (typeof v === 'string') v = v.replace(/\s+/g, ' ').trim().slice(0, 100);
+            clean[k] = v;
+        });
+        gtag('event', name, clean);
+    } catch (e) { /* 追蹤失敗不能影響頁面功能 */ }
+}
+
+function trackPageType() {
+    const p = location.pathname.replace(/\/+$/, '');
+    if (p === '' || p === '/index.html') return 'home';
+    const m = p.match(/([^/]+?)(?:\.html)?$/);
+    return m ? m[1] : p;
+}
+
+function trackText(el) {
+    if (!el) return '';
+    const first = el.firstChild && el.firstChild.nodeType === 3 ? el.firstChild.textContent : el.textContent;
+    return (first || '').replace(/[▾▾]/g, '').replace(/\s+/g, ' ').trim();
+}
+
+function trackLinkDomain(href) {
+    try { return new URL(href, location.href).hostname; } catch (e) { return ''; }
+}
+
+document.addEventListener('click', (ev) => {
+    const t = ev.target;
+    if (!(t instanceof Element)) return;
+    const page = trackPageType();
+    let el;
+
+    // ---- 導覽選單 ----
+    if ((el = t.closest('#desktop-nav a'))) {
+        const parent = el.closest('.dropdown-parent');
+        const inMenu = !!el.closest('.mega-menu, .dropdown-menu');
+        const top = parent ? trackText(parent.querySelector(':scope > a')) : trackText(el);
+        trackEvent('nav_click', { area: 'desktop', level: inMenu ? 'menu_item' : 'top', menu: top, label: trackText(el), destination: el.getAttribute('href'), page: page });
+        return;
+    }
+    if ((el = t.closest('#mobile-nav-list a'))) {
+        const sub = el.closest('.mobile-nav-submenu');
+        const top = sub && sub.previousElementSibling ? trackText(sub.previousElementSibling.querySelector('span')) : trackText(el);
+        trackEvent('nav_click', { area: 'mobile', level: sub ? 'menu_item' : 'top', menu: top, label: trackText(el), destination: el.getAttribute('href'), page: page });
+        return;
+    }
+    if ((el = t.closest('.mobile-nav-parent'))) {
+        trackEvent('nav_click', { area: 'mobile', level: 'expand', menu: trackText(el.querySelector('span')), label: trackText(el.querySelector('span')), page: page });
+        return;
+    }
+    if (t.closest('#mobileMenuToggle')) { trackEvent('nav_menu_toggle', { area: 'mobile', page: page }); return; }
+
+    // ---- 首頁問卷 ----
+    if (t.closest('#quiz-flow') || t.closest('.home-quiz-container')) {
+        const stepEl = t.closest('.quiz-step');
+        const step = stepEl ? (stepEl.dataset.step || 'result') : '';
+        if ((el = t.closest('.option-card'))) {
+            const h = el.querySelector('h1,h2,h3,h4,h5,h6');
+            trackEvent('quiz_option_click', { step: step, option: el.dataset.value || (h ? h.innerText : '') });
+            return;
+        }
+        if ((el = t.closest('button[onclick]'))) {
+            const oc = el.getAttribute('onclick') || '';
+            if (/^nextStep/.test(oc)) {
+                const sel = stepEl && stepEl.querySelector('.option-card.selected');
+                const h = sel && sel.querySelector('h1,h2,h3,h4,h5,h6');
+                trackEvent('quiz_next', { step: step, has_selection: !!sel, option: sel ? (sel.dataset.value || (h ? h.innerText : '')) : '' });
+            } else if (/^quizBack/.test(oc)) trackEvent('quiz_back', { step: step });
+            else if (/^resetQuiz/.test(oc)) trackEvent('quiz_reset', {});
+            return;
+        }
+    }
+
+    // ---- 開架美妝頁篩選與品牌標籤 ----
+    if ((el = t.closest('#drugstore-filters button'))) {
+        const isGroup = el.hasAttribute('data-group');
+        trackEvent('filter_click', { page: 'drugstore', filter: isGroup ? 'group' : 'section', value: isGroup ? el.dataset.group : el.dataset.section });
+        return;
+    }
+    if ((el = t.closest('a[data-jump]'))) {
+        trackEvent('brand_chip_click', { page: 'drugstore', action: 'jump', brand: trackText(el) });
+        return;
+    }
+    if (t.closest('[data-jump-toggle]')) { trackEvent('brand_chip_toggle', { page: 'drugstore' }); return; }
+    if ((el = t.closest('button[data-brand-toggle]'))) {
+        trackEvent('brand_expand', { page: 'drugstore', brand: (el.dataset.brandToggle || '').split('|').pop() });
+        return;
+    }
+
+    // ---- 專櫃美妝頁品牌標籤 ----
+    if ((el = t.closest('#board-brand-filters button[data-brand]'))) {
+        trackEvent('brand_chip_click', { page: 'board', action: 'switch', brand: el.dataset.brand });
+        return;
+    }
+    if (t.closest('#board-brand-filters [data-brand-toggle-all]')) { trackEvent('brand_chip_toggle', { page: 'board' }); return; }
+    if (t.closest('#board-brand-more')) { trackEvent('brand_expand', { page: 'board' }); return; }
+
+    // ---- 站內搜尋結果 ----
+    if ((el = t.closest('.search-result'))) {
+        const box = el.closest('.search-container');
+        const input = box && box.querySelector('.search-input');
+        const rows = Array.from(el.parentElement.querySelectorAll('.search-result'));
+        const group = (function () { let p = el.previousElementSibling; while (p && !p.classList.contains('search-group')) p = p.previousElementSibling; return p ? p.innerText : ''; })();
+        const nameEl = el.querySelector('.search-result-name');
+        trackEvent('search_result_click', { search_term: input ? input.value : '', result_type: group, name: nameEl ? nameEl.innerText : '', position: rows.indexOf(el) + 1, destination: el.getAttribute('href') });
+        return;
+    }
+
+    // ---- 殘酷擂台 ----
+    if ((el = t.closest('.battle-btn'))) { trackEvent('battle_category_click', { subcat: el.dataset.subcat }); return; }
+    if ((el = t.closest('[onclick^="openBattlePicker"]'))) {
+        trackEvent('battle_picker_open', { side: /left/.test(el.getAttribute('onclick')) ? 'left' : 'right', subcat: (typeof battleState !== 'undefined' ? battleState.subcat : '') });
+        return;
+    }
+    if ((el = t.closest('#battle-picker-brands button'))) { trackEvent('battle_picker_filter', { brand: el.dataset.brand, subcat: (typeof battleState !== 'undefined' ? battleState.subcat : '') }); return; }
+    if ((el = t.closest('#battle-picker-grid button[data-key]'))) {
+        trackEvent('battle_select', { side: (typeof battlePicker !== 'undefined' ? battlePicker.side : ''), subcat: (typeof battleState !== 'undefined' ? battleState.subcat : ''), item: el.dataset.key, disabled: el.getAttribute('aria-disabled') === 'true' });
+        return;
+    }
+
+    // ---- 熱門榜單 ----
+    if ((el = t.closest('.ranking-tab-btn'))) { trackEvent('ranking_tab_click', { subcat: el.dataset.subcat }); return; }
+    if ((el = t.closest('#rankings-grid a'))) {
+        const cards = Array.from(el.parentElement.children);
+        const brandEl = el.querySelector('p');
+        const nameEl = el.querySelector('h3');
+        trackEvent('ranking_item_click', { subcat: window.__currentRankingSubcat, rank: cards.indexOf(el) + 1, brand: brandEl ? brandEl.innerText : '', item_name: nameEl ? nameEl.innerText : '', destination: el.getAttribute('href') });
+        return;
+    }
+
+    // ---- 分頁籤左右箭頭（擂台、榜單）----
+    if ((el = t.closest('button[onclick^="scrollBattleTabs"], button[onclick^="scrollRankingTabs"]'))) {
+        trackEvent('tab_scroll', { area: /Battle/.test(el.getAttribute('onclick')) ? 'battle' : 'ranking' });
+        return;
+    }
+
+    // ---- 商品頁：官網／通路／外部連結 ----
+    if (/^(drugstore-detail|item-detail)$/.test(page) || /\/(drugstore-detail|item-detail)/.test(location.pathname)) {
+        if ((el = t.closest('main a[target="_blank"], main a[href^="http"]'))) {
+            const titleEl = document.querySelector('main h1');
+            trackEvent('product_outbound_click', { page: page.replace(/\.html$/, ''), product: titleEl ? titleEl.innerText : '', label: trackText(el), link_domain: trackLinkDomain(el.href), destination: el.href });
+            return;
+        }
+    }
+
+    // ---- 文章頁：延伸閱讀、內文連結、分享 ----
+    if (document.getElementById('more-grid') || document.querySelector('.article-body')) {
+        if ((el = t.closest('#more-grid a'))) {
+            const cards = Array.from(document.querySelectorAll('#more-grid a'));
+            trackEvent('related_article_click', { position: cards.indexOf(el) + 1, destination: el.getAttribute('href'), from_article: location.search || location.pathname });
+            return;
+        }
+        if ((el = t.closest('a[aria-label^="分享"]'))) {
+            trackEvent('article_share_click', { platform: trackLinkDomain(el.href).replace(/^www\./, '') });
+            return;
+        }
+        if ((el = t.closest('.article-body a[href]'))) {
+            const domain = trackLinkDomain(el.href);
+            trackEvent('article_link_click', { link_type: domain === location.hostname ? 'internal' : 'external', link_domain: domain, label: trackText(el), destination: el.href, from_article: location.search || location.pathname });
+            return;
+        }
+    }
+}, true);
