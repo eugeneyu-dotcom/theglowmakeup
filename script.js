@@ -520,6 +520,7 @@ async function renderDrugstore() {
 
         let blocks = '';
         let n = 0;
+        const jumpBrands = [];
         DRUGSTORE_MENU.filter(g => st.group === 'all' || st.group === g.group).forEach(g => {
             g.sections.filter(sec => st.section === 'all' || st.section === sec).forEach(sec => {
                 const items = products.filter(p => p.group === g.group && p.section === sec);
@@ -547,23 +548,63 @@ async function renderDrugstore() {
                     const expanded = !!st.open[key];
                     const shown = expanded ? its : its.slice(0, LIMIT);
                     const more = its.length > LIMIT;
+                    const anchor = `ds-brand-${jumpBrands.length}`;
+                    jumpBrands.push({ id: anchor, name: br, count: its.length });
+                    // 3 款以上的品牌佔滿整列（5 欄）；1～2 款的品牌兩兩並排（半寬、2 欄），避免一個品牌一整列右邊全空
+                    const wide = shown.length >= 3;
                     return `
-                <div class="mb-10">
+                <div id="${anchor}" class="ds-brand-block ${wide ? 'md:col-span-2' : ''}">
                     <div class="flex items-center justify-between border-b border-[#f2a7b5]/30 pb-2 mb-4">
                         <h3 class="text-lg font-black text-[#2d2d2d]">${escHtml(br)} <span class="text-xs text-gray-400 font-bold">${its.length} 款</span></h3>
                         ${more ? `<button type="button" data-brand-toggle="${escHtml(key)}" class="text-sm font-black text-[#f2a7b5] hover:underline">${expanded ? '收合' : `查看全部（${its.length}）`}</button>` : ''}
                     </div>
-                    <div class="grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-5">${shown.map((p, i) => cardHtml(p, i)).join('')}</div>
+                    <div class="grid grid-cols-2 ${wide ? 'md:grid-cols-5' : ''} gap-4 md:gap-5">${shown.map((p, i) => cardHtml(p, i)).join('')}</div>
                 </div>`;
                 }).join('');
                 blocks += `
             <section class="mb-14">
                 <h2 class="text-2xl font-black mb-6 italic border-l-8 border-[#f2a7b5] pl-4">${escHtml(g.en)} / <span class="text-[#f2a7b5] text-lg not-italic">${escHtml(sec)}</span></h2>
-                ${brandBlocks}
+                <div class="ds-brand-grid">${brandBlocks}</div>
             </section>`;
             });
         });
-        list.innerHTML = blocks || '<div class="text-center text-gray-400 text-sm py-12">這個分類商品整理中，敬請期待</div>';
+        // 品牌跳轉列：黏在頁首下方，點品牌平滑捲到該品牌；品牌太多時預設只顯示一排，可展開全部
+        const JUMP_COLLAPSED = 12;
+        let jumpBar = '';
+        if (jumpBrands.length > 1) {
+            const showAll = !!st.jumpOpen || jumpBrands.length <= JUMP_COLLAPSED;
+            const chips = (showAll ? jumpBrands : jumpBrands.slice(0, JUMP_COLLAPSED)).map(b =>
+                `<a href="#${b.id}" data-jump="${b.id}" class="ds-jump-chip">${escHtml(b.name)}<span class="ds-jump-count">${b.count}</span></a>`).join('');
+            const toggle = jumpBrands.length > JUMP_COLLAPSED
+                ? `<button type="button" data-jump-toggle class="ds-jump-chip ds-jump-toggle">${showAll ? '收合 ▲' : `展開全部 ${jumpBrands.length} 個品牌 ▼`}</button>` : '';
+            jumpBar = `<div class="ds-jump-bar"><div class="ds-jump-inner"><span class="ds-jump-label">快速找品牌</span>${chips}${toggle}</div></div>`;
+        }
+        list.innerHTML = jumpBar + (blocks || '<div class="text-center text-gray-400 text-sm py-12">這個分類商品整理中，敬請期待</div>');
+        const jt = list.querySelector('[data-jump-toggle]');
+        if (jt) jt.addEventListener('click', () => { st.jumpOpen = !st.jumpOpen; draw(); });
+        list.querySelectorAll('a[data-jump]').forEach(a => a.addEventListener('click', e => {
+            e.preventDefault();
+            const el = document.getElementById(a.dataset.jump);
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // 同一排並排的兩個品牌，捲動後只會亮較右邊那個，所以點擊後先鎖定在被點的品牌約 1.2 秒
+            window.__dsJumpLock = Date.now() + 1200;
+            list.querySelectorAll('a[data-jump]').forEach(x => x.classList.toggle('active', x === a));
+        }));
+        // 捲動時標示目前所在的品牌
+        if (window.__dsJumpScroll) window.removeEventListener('scroll', window.__dsJumpScroll);
+        if (jumpBrands.length > 1) {
+            window.__dsJumpScroll = () => {
+                if (Date.now() < (window.__dsJumpLock || 0)) return;
+                let cur = null;
+                for (const b of jumpBrands) {
+                    const el = document.getElementById(b.id);
+                    if (el && el.getBoundingClientRect().top <= 240) cur = b.id;
+                }
+                list.querySelectorAll('a[data-jump]').forEach(a => a.classList.toggle('active', a.dataset.jump === cur));
+            };
+            window.addEventListener('scroll', window.__dsJumpScroll, { passive: true });
+            window.__dsJumpScroll();
+        }
         list.querySelectorAll('button[data-brand-toggle]').forEach(b => b.addEventListener('click', () => {
             const k = b.dataset.brandToggle; st.open[k] = !st.open[k]; draw();
         }));

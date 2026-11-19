@@ -795,3 +795,34 @@ body.mobile-nav-open {
 a.mega-category-title { text-decoration: none; }
 a.mega-category-title:hover { color: var(--primary); }
 .mega-subcategory.mega-more { color: var(--primary); font-weight: 700; margin-top: 4px; }
+
+/* 開架美妝：品牌快速跳轉列＋品牌區塊兩欄並排 */
+.ds-brand-grid { display: grid; grid-template-columns: 1fr; gap: 0 40px; }
+.ds-brand-block { margin-bottom: 40px; scroll-margin-top: 240px; }
+@media (min-width: 768px) {
+    .ds-brand-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-flow: dense; }
+}
+.ds-jump-bar {
+    position: sticky; top: 96px; z-index: 40;
+    margin: 0 -8px 28px; padding: 10px 8px;
+    background: rgba(255, 249, 247, 0.96); backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(242, 167, 181, 0.25);
+}
+.ds-jump-inner { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.ds-jump-label { font-size: 0.75rem; font-weight: 900; color: var(--text-light); margin-right: 4px; }
+.ds-jump-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 12px; border-radius: 999px; font-size: 0.8rem; font-weight: 800;
+    background: #fff; color: var(--text-light); border: 1px solid rgba(242, 167, 181, 0.35);
+    transition: all 0.2s ease; cursor: pointer;
+}
+.ds-jump-chip:hover, .ds-jump-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+.ds-jump-count { font-size: 0.7rem; opacity: 0.7; }
+.ds-jump-toggle { background: transparent; border-style: dashed; color: var(--primary); }
+@media (max-width: 767px) {
+    .ds-jump-bar { top: 72px; }
+    .ds-jump-inner { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; }
+    .ds-jump-chip { flex-shrink: 0; }
+    .ds-jump-label { flex-shrink: 0; }
+    .ds-brand-block { scroll-margin-top: 150px; }
+}
