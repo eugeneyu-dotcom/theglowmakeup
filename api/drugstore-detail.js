@@ -162,7 +162,7 @@ function renderPage(slug) {
     if (!p) return null;
     const fullName = `${p.brand} ${p.name}`;
     const indexable = hasDetail(p);
-    const title = `${fullName} | 開架美妝 | Glow Makeup`;
+    const title = `${fullName} | Glow Makeup`;
     const first = (p.detail && p.detail.features && p.detail.features[0]) || '';
     const descRaw = `${fullName}：${p.highlight || ''}${first ? '；' + first : ''}`.replace(/\s+/g, ' ');
     const desc = descRaw.length > 150 ? descRaw.slice(0, 147) + '…' : descRaw;
