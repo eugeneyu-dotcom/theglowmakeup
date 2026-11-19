@@ -62,11 +62,17 @@
       "verified_date": "2026-11-04",
       "section": "熱門彩妝品牌",
       "slug": "colorgram-nude-blur-tint",
-      "official_url": "https://colorgramco.com/",
       "detail": {
-        "spec": "共 29 色（單品／組合）",
-        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
-        "verified_date": "2026-11-06"
+        "price": "約 NT$157 起（Olive Young Global 台灣站標價，依色號與組合不同）",
+        "spec": "共 29 款選項；18 款裸色系",
+        "features": [
+          "從基礎裸色到淡奶裸色共 18 款，「起司米色」裸調適合暖膚色",
+          "輕盈質地好推開、貼唇舒適，持久不厚重",
+          "柔霧模糊的霧面唇妝"
+        ],
+        "how_to": "取適量以唇釉刷頭，從唇內側往外輕輕塗抹。",
+        "note": "資料取自 Olive Young Global 商品頁（英文頁），重點為中文整理；價格為通路標價，台灣售價以通路為準。",
+        "verified_date": "2026-11-19"
       }
     },
     {
@@ -193,9 +199,17 @@
       "section": "熱門彩妝品牌",
       "slug": "wakemake-soft-blurring-eye-palette",
       "detail": {
-        "spec": "Olive Young 頁面為 Sanrio 聯名版，共 27 個選項",
-        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
-        "verified_date": "2026-11-06"
+        "price": "約 NT$889 起（Olive Young Global 台灣站標價，依色號與版本不同）",
+        "spec": "共 27 款選項（單盤／組合）",
+        "features": [
+          "頁面標示為 Olive Young 人氣第一的色彩彩妝，上市即爆紅",
+          "主打顯色佳、持久、色號與亮片選擇多",
+          "同盤搭配濕式與烘焙質地亮片，打造多層次閃耀感",
+          "依個人色彩設計，兼顧明度與飽和度的漸層配色"
+        ],
+        "how_to": "用指尖或眼影刷塗抹在眼周。",
+        "note": "資料取自 Olive Young Global 商品頁（英文頁），重點為中文整理；價格為通路標價，台灣售價以通路為準。 部分文案取自頁面上的特別版（Sanrio／Black Hush）說明，配色與款式以各通路為準。",
+        "verified_date": "2026-11-19"
       }
     },
     {
@@ -347,11 +361,16 @@
       "verified_date": "2026-11-04",
       "section": "保養品牌",
       "slug": "dalba-waterfull-tone-up-sun",
-      "official_url": "https://dalba.com/",
+      "official_url": "https://dalba.jp/products/waterfull-toneup-suncream-pink",
       "detail": {
-        "spec": "50mL",
-        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
-        "verified_date": "2026-11-06"
+        "spec": "50mL（另有 35mL）；日本官網另有粉紅、米色、紫色、藍色等色調款",
+        "features": [
+          "帶粉色調的防曬乳，自然提亮膚色、營造血色感與光澤感，可當防曬隔離底妝",
+          "含保濕成分、質地好推開，使用後不乾澀",
+          "SPF50+ PA++++，採用混合型防曬劑；官方標示不含氧化鋅、低刺激並通過純素認證"
+        ],
+        "note": "資料取自品牌日本官網粉紅款商品頁（日文頁），重點為中文整理；各國通路色款與規格可能不同，台灣售價以通路為準。",
+        "verified_date": "2026-11-19"
       }
     },
     {
@@ -1028,11 +1047,18 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "slug": "bbia-last-velvet-tint",
-      "official_url": "https://bbia.co.kr/",
+      "official_url": "https://www.bbia.co.kr/goods/goods_view.php?goodsNo=1000000135",
       "detail": {
-        "spec": "共 25 色",
-        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
-        "verified_date": "2026-11-06"
+        "price": "₩14,000（官網韓國站原價；活動價 ₩10,900）",
+        "spec": "5g；適用所有膚質",
+        "features": [
+          "提供「濕潤 Velvet（一次上色就鮮明）」與「柔霧 Velvet（清透乾淨）」兩種雙配方質地",
+          "色號依咖啡情境概念（CAFÉ;IN 版）分系列推出，可依當天心情選色",
+          "官方提醒：因質地特性，表面可能出現氣泡或色素帶、油水分離，用棒子攪拌或按壓出膏後即可正常使用"
+        ],
+        "how_to": "取適量，柔和地塗抹在嘴唇上。",
+        "note": "資料取自品牌韓國官網商品頁（韓文頁；質地說明與商品資訊為圖片），重點為中文整理；價格為韓元標價，台灣售價以通路為準。",
+        "verified_date": "2026-11-19"
       }
     },
     {
@@ -1046,11 +1072,17 @@
       "source_label": "Olive Young",
       "verified_date": "2026-11-04",
       "slug": "lilybyred-luv-beam-cheek-balm",
-      "official_url": "https://lilybyred.co.kr/",
+      "official_url": "https://lilybyred.co.kr/product/%EB%A6%B4%EB%A6%AC%EB%B0%94%EC%9D%B4%EB%A0%88%EB%93%9C-%EB%9F%AC%EB%B8%8C%EB%B9%94-%EC%B9%98%ED%81%AC%EB%B0%A4/29/category/1/display/2/",
       "detail": {
-        "spec": "共 19 色（單品／組合）",
-        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
-        "verified_date": "2026-11-06"
+        "price": "₩13,000（官網韓國站原價；活動價 ₩9,300）",
+        "spec": "共 19 色（含新色）；愛心造型腮紅膏",
+        "features": [
+          "官方三大賣點：「兩頰自然透出的濕潤內光感」、「像原本就有的好氣色」、「不結塊、不黏膩的清爽服貼」",
+          "霜狀（Cheek Balm）質地，可輕拍暈染在臉頰",
+          "色號以 01 清初、02 純粹、03 感性等命名，涵蓋粉、珊瑚、莓果到棕色系"
+        ],
+        "note": "資料取自品牌韓國官網商品頁（韓文頁，商品說明為圖片），重點為中文整理；價格為韓元標價，台灣售價以通路為準。",
+        "verified_date": "2026-11-19"
       }
     },
     {
@@ -1113,9 +1145,16 @@
       "slug": "espoir-be-glow-foundation",
       "official_url": "https://www.espoir.com/",
       "detail": {
-        "spec": "30g；共 10 色",
-        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
-        "verified_date": "2026-11-06"
+        "price": "NT$983（Olive Young Global 台灣站標價）",
+        "spec": "30g；共 10 色；SPF27 PA++",
+        "features": [
+          "頁面標示經臨床證實的 24 小時持續保濕與光澤感，主打自然透亮的光澤底妝",
+          "輕盈油分讓粉底服貼、質地像第二層肌膚般輕薄",
+          "含 espoir 自家「Triple Volume Complex」（多重玻尿酸、膠原蛋白與胜肽），提升彈性與保濕"
+        ],
+        "how_to": "取適量，順著肌膚紋理輕輕推開。",
+        "note": "資料取自 Olive Young Global 商品頁（英文頁），重點為中文整理；價格為通路標價，台灣售價以通路為準。",
+        "verified_date": "2026-11-19"
       }
     },
     {
@@ -1131,9 +1170,16 @@
       "slug": "toocoolforschool-smudging-under-liner",
       "official_url": "https://toocoolforschool.com/",
       "detail": {
-        "spec": "共 14 色（單品／組合）",
-        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
-        "verified_date": "2026-11-06"
+        "price": "約 NT$304 起（Olive Young Global 台灣站標價）",
+        "spec": "共 14 色；2mm 細芯筆＋暈染刷頭雙頭設計",
+        "features": [
+          "專為下眼瞼三角區設計，淡色陰影讓眼睛看起來更大、更有神",
+          "2mm 細筆芯好畫臥蠶與下眼影，暈染刷頭可柔化線條",
+          "順滑不易結塊，暈染柔和、定著力強"
+        ],
+        "how_to": "①選擇符合膚色的色號，輕輕畫在眼角與下三角區；②用刷頭暈開；③在臥蠶位置與水線中段到眼尾描繪；④再用刷頭暈染臥蠶與水線。",
+        "note": "資料取自 Olive Young Global 商品頁（英文頁），重點為中文整理；價格為通路標價，台灣售價以通路為準。 筆芯僅 2mm，旋出太多容易斷，建議每次只旋出一點。",
+        "verified_date": "2026-11-19"
       }
     },
     {
@@ -1270,9 +1316,16 @@
       "verified_date": "2026-11-04",
       "slug": "glint-too-shiny-highlighter",
       "detail": {
-        "spec": "共 2 色",
-        "note": "資料取自 Olive Young 商品頁（品名標示的色數與容量）。",
-        "verified_date": "2026-11-06"
+        "price": "NT$718（Olive Young Global 台灣站標價）",
+        "spec": "共 2 色；果凍質地打亮",
+        "features": [
+          "輕盈 Q 彈的果凍質地，服貼、不厚重、不易結塊",
+          "呈現通透有存在感的光澤",
+          "兩色可依想要的風格選擇"
+        ],
+        "how_to": "取適量，用手指或刷具輕輕點拍在想打亮的部位。",
+        "note": "資料取自 Olive Young Global 商品頁（英文頁），重點為中文整理；價格為通路標價，台灣售價以通路為準。",
+        "verified_date": "2026-11-19"
       }
     },
     {
