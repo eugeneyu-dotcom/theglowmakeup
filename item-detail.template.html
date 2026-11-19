@@ -199,7 +199,7 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="script.js?v=226"></script>
+    <script src="script.js?v=227"></script>
     <script>
         // Global State & Setup
         window.selectedSkinVal = 'fair';
@@ -456,7 +456,7 @@
 
             try {
                 await Promise.all([loadScoresData(), loadIngredientsData()]);
-                const response = await fetch('site-data.json?v=46');
+                const response = await fetch('site-data.json?v=47');
                 const data = await response.json();
 
                 let targetItem = null;

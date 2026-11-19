@@ -38,7 +38,7 @@ async function getArticles() {
     if (!articlesPromise) {
         articlesPromise = (async () => {
             try {
-                const res = await fetch('articles.json?v=172');
+                const res = await fetch('articles.json?v=173');
                 const data = await res.json();
                 articlesCache = (data.articles || []).slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
             } catch (err) {
@@ -1182,7 +1182,7 @@ async function getSiteData() {
     if (!siteDataPromise) {
         siteDataPromise = (async () => {
             try {
-                const response = await fetch('site-data.json?v=46');
+                const response = await fetch('site-data.json?v=47');
                 siteDataCache = await response.json();
                 return siteDataCache;
             } catch (err) {
