@@ -139,7 +139,7 @@ const NEW_PRODUCTS_DRUG_WINDOW_MONTHS = 3;
 // 新品快報分兩排：專櫃（group 省略或 'counter'）、開架（group='drug'）。開架目前沒有資料時整排隱藏，不顯示空區塊
 function newProductCardsHtml(products) {
     return products.map((p, i) => `
-            <a href="${p.source_url}" target="_blank" rel="noopener" class="bg-white rounded-2xl md:rounded-3xl overflow-hidden border border-[#f2a7b5]/20 shadow-sm hover:shadow-md hover:border-[#f2a7b5]/40 transition-all group flex flex-col${i >= NEW_PRODUCTS_MOBILE_VISIBLE ? ' new-product-extra' : ''}">
+            <a href="${p.source_url}" target="_blank" rel="noopener" data-np-brand="${escHtml(p.brand)}" data-np-name="${escHtml(p.name)}" data-np-pos="${i + 1}" class="bg-white rounded-2xl md:rounded-3xl overflow-hidden border border-[#f2a7b5]/20 shadow-sm hover:shadow-md hover:border-[#f2a7b5]/40 transition-all group flex flex-col${i >= NEW_PRODUCTS_MOBILE_VISIBLE ? ' new-product-extra' : ''}">
                 ${newProductImageBlock(p, i)}
                 <div class="p-3 md:p-5 flex flex-col flex-grow">
                     <span class="${BRAND_BADGE_COLORS[i % BRAND_BADGE_COLORS.length]} text-white text-[9px] md:text-[10px] font-black px-2.5 md:px-3 py-1 rounded-full self-start mb-2 md:mb-3 tracking-wide">${p.brand}</span>
@@ -161,6 +161,19 @@ function fillNewProductsRow(prefix, products) {
     }
     if (row) row.classList.remove('hidden');
     grid.innerHTML = newProductCardsHtml(products);
+    // 點擊追蹤：新品快報每張卡片都會送 GA4 事件 new_product_click（記錄哪一排、品牌、商品、第幾張）。
+    // gtag 只在正式網域啟用（index.html 的 ga-disable 開關），本機預覽不會送資料。
+    const rowName = prefix === 'new-products-drug' ? 'olive_young' : 'counter';
+    grid.querySelectorAll('a[data-np-brand]').forEach(a => a.addEventListener('click', () => {
+        if (typeof gtag !== 'function') return;
+        gtag('event', 'new_product_click', {
+            row: rowName,
+            brand: a.dataset.npBrand,
+            item_name: a.dataset.npName,
+            position: parseInt(a.dataset.npPos, 10),
+            destination: a.href
+        });
+    }));
     const countEl = document.getElementById(`${prefix}-count`);
     if (countEl) countEl.textContent = `${products.length} 款`;
     const toggleBtn = document.getElementById(`${prefix}-toggle-btn`);
