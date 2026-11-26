@@ -58,6 +58,11 @@ function readOptionalJson(file) {
     try { return JSON.parse(readFile(file)); } catch (e) { return null; }
 }
 
+function mapEntry(slug) {
+    const map = readOptionalJson('drugstore-score-map.json');
+    return (map && map.map && map.map[slug]) || null;
+}
+
 function findScoreEntry(slug) {
     const scores = readOptionalJson('drugstore-scores.json');
     if (!scores) return null;
@@ -86,6 +91,14 @@ function platformBadge(platform) {
     return `<span class="text-[10px] font-black px-2 py-0.5 rounded-full ${cls}">${escapeHtml(platform)}</span>`;
 }
 
+// 同類熱門單品卡片的評分列（比照專櫃：★ 分數 ＋ 提及則數；沒有分數就寫尚無評分資料）
+function relatedRating(slug) {
+    const e = findScoreEntry(slug);
+    return (e && e.composite != null)
+        ? `<span class="text-[#d4af37] text-sm font-black">★ ${Number(e.composite).toFixed(1)}</span>${e.mentions ? `<span class="text-xs text-gray-400">(${escapeHtml(e.mentions)} 則)</span>` : ''}`
+        : '<span class="text-xs font-bold text-gray-300">尚無評分資料</span>';
+}
+
 function buildScoreSections(entry) {
     if (!entry || entry.composite == null) return '';
     const g = gradeOf(entry.composite);
@@ -97,12 +110,6 @@ function buildScoreSections(entry) {
                                 <div class="flex items-center gap-1"><span class="text-lg font-black" style="color:${c}">${Number(v).toFixed(1)}</span><span class="text-xs font-bold text-gray-400">/ 5.0</span></div>
                             </div>`;
     }).join('');
-    const summary = entry.reviewSummary
-        ? `<div class="mb-6 p-6 bg-[#fdf6e6] rounded-3xl border border-[#d4af37]/20">
-                                <h3 class="text-xs font-black text-[#b8912e] uppercase tracking-wider mb-2">💬 網友評價匯總 / Community Verdict</h3>
-                                <p class="text-base text-gray-700 leading-relaxed font-bold">${escapeHtml(entry.reviewSummary)}</p>
-                            </div>`
-        : '';
     const scoreCard = `<div class="bg-white rounded-[32px] p-8 md:p-12 shadow-sm border border-[#f2a7b5]/10">
                     <div class="flex items-center gap-3 mb-6 border-b border-gray-100 pb-5">
                         <span class="text-3xl">⭐</span>
@@ -111,7 +118,6 @@ function buildScoreSections(entry) {
                             <p class="text-sm text-gray-500 font-bold">彙整 Threads、Google、小紅書的真實使用心得，已排除業配與不相關貼文</p>
                         </div>
                     </div>
-                    ${summary}
                     <div class="flex items-end gap-4 mb-6">
                         <span class="text-6xl font-black leading-none" style="color:${g.color}">${Number(entry.composite).toFixed(1)}</span>
                         <div class="pb-1"><div class="text-xs font-bold text-gray-400">/ 5.0 綜合評分</div><div class="text-base font-black" style="color:${g.color}">${escapeHtml(g.label)}</div></div>
@@ -168,13 +174,16 @@ function buildMain(p, all, scoreEntry) {
         ? `<img src="${escapeHtml(p.image)}" alt="${escapeHtml(p.brand + ' ' + p.name)}" class="max-w-full max-h-[450px] object-contain rounded-2xl group-hover:scale-105 transition-transform duration-500">`
         : `<div class="text-4xl font-black text-[#f2a7b5]">${escapeHtml(p.brand)}</div>`;
 
-    const tags = [p.section, GROUP_LABEL[p.group] || '', p.source_label || ''].filter(Boolean);
-    const tagHtml = tags.map((t) => `<span class="px-3 py-1 bg-[#f2a7b5]/10 text-[#e0708a] text-xs font-black rounded-full">#${escapeHtml(t)}</span>`).join('');
+    // hashtag：#通路 #子分類 #大類（使用者 2026-11-26 指定，例如 #Olive Young #化妝水 #保養）。
+    // 子分類與大類取自 Items.csv（透過 drugstore-score-map.json）；Items.csv 還沒收錄的商品只放通路。
+    const me = mapEntry(p.slug);
+    const tags = [GROUP_LABEL[p.group] || '', me && me.subcat, me && me.type].filter(Boolean);
+    const tagHtml = tags.map((t) => `<span class="px-3.5 py-1.5 bg-[#f2a7b5]/10 text-[#f2a7b5] border border-[#f2a7b5]/20 text-xs font-black rounded-full select-none">#${escapeHtml(t)}</span>`).join('');
 
     // 連結優先序（使用者 2026-11-06 指定）：品牌自家網站（official_url）> 其他通路頁（source_url）。
     // official_url 要先開頁面核對過才可填，查不到就留空、退回通路頁，不猜網址。
     const linkUrl = p.official_url || p.source_url;
-    const linkLabel = p.official_url ? '品牌官網' : (p.source_label || '來源頁');
+    const linkLabel = '官方';
     const source = linkUrl
         ? `<div class="mb-8">
                                 <a href="${escapeHtml(linkUrl)}" target="_blank" rel="nofollow noopener noreferrer" class="inline-block px-9 py-4 bg-[#f2a7b5] text-white font-black rounded-full hover:bg-[#d88a99] transition-all hover:-translate-y-0.5 shadow-[0_6px_20px_rgba(242,167,181,0.3)] text-center text-base tracking-wider">前往${escapeHtml(linkLabel)}看更多</a>
@@ -224,6 +233,13 @@ function buildMain(p, all, scoreEntry) {
                             </div>
                         </div>`;
 
+    // 網友評價匯總（有人工／agent 彙整過才顯示，比照專櫃商品頁：放在「產品特點」下方、金色底）
+    const summaryBlock = (scoreEntry && scoreEntry.reviewSummary)
+        ? `<div class="mb-8 p-6 bg-[#fdf6e6] rounded-3xl border border-[#d4af37]/20">
+                                <h2 class="text-xs font-black text-[#b8912e] uppercase tracking-wider mb-2">💬 網友評價匯總 / Community Verdict</h2>
+                                <p class="text-base text-gray-700 leading-relaxed font-bold">${escapeHtml(scoreEntry.reviewSummary)}</p>
+                            </div>`
+        : '';
     const related = all.filter((x) => x.slug !== p.slug && x.group === p.group && x.section === p.section).slice(0, 6);
     const relatedHtml = related.length
         ? `<section>
@@ -232,15 +248,16 @@ function buildMain(p, all, scoreEntry) {
                         <a href="drugstore-detail.html?p=${encodeURIComponent(x.slug)}" class="bg-white p-6 rounded-2xl border border-gray-100 hover:border-[#f2a7b5] hover:shadow-lg transition-all group block">
                             <div class="aspect-square bg-gray-50 rounded-xl mb-4 p-4 overflow-hidden flex items-center justify-center">${x.image ? `<img src="${escapeHtml(x.image)}" alt="${escapeHtml(x.brand + ' ' + x.name)}" loading="lazy" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">` : ''}</div>
                             <h3 class="font-bold text-lg mb-1 group-hover:text-[#f2a7b5] transition-colors">${escapeHtml(x.name)}</h3>
-                            <p class="text-sm text-gray-500">${escapeHtml(x.brand)}</p>
+                            <p class="text-sm text-gray-500 mb-3">${escapeHtml(x.brand)}</p>
+                            <div class="flex items-center gap-2">${relatedRating(x.slug)}</div>
                         </a>`).join('')}
                     </div>
                 </section>`
         : '';
 
     return `        <div class="mb-8">
-            <a href="${escapeHtml(secUrl)}" class="inline-flex items-center gap-2 text-base font-bold text-gray-500 hover:text-[#f2a7b5] transition-colors group">
-                <span class="group-hover:-translate-x-1 transition-transform">&#10094;</span> 返回${escapeHtml(p.section)}
+            <a href="${escapeHtml(secUrl)}" onclick="if(history.length>1){history.back();return false;}" class="inline-flex items-center gap-2 text-base font-bold text-gray-500 hover:text-[#f2a7b5] transition-colors group">
+                <span class="group-hover:-translate-x-1 transition-transform">&#10094;</span> 返回上一頁
             </a>
         </div>
         <div class="w-full flex flex-col gap-12">
@@ -255,6 +272,7 @@ function buildMain(p, all, scoreEntry) {
                                 <h2 class="text-xs font-black text-gray-400 uppercase tracking-wider mb-2">✦ 產品特點 / Product Features</h2>
                                 <p class="text-base text-gray-700 leading-relaxed font-bold">${escapeHtml(p.highlight || '')}</p>
                             </div>
+                            ${summaryBlock}
                             ${source}
                             ${panel}
                         </div>

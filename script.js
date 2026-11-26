@@ -504,8 +504,8 @@ async function renderNewsVoicesFromScores() {
 }
 
 // 開架美妝（drugstore-beauty.html）：Olive Young 韓系＋台灣藥妝通路的商品目錄，資料來自 drugstore-products.json。
-// 第一版沒有評分與心得（開架品牌尚未跑評論管線），只放品牌、品名、重點；卡片不外連（2026-11-04 使用者決定，等接上評分、做出站內商品頁再連站內）。
-// source_url 仍保留在 JSON 裡，之後做站內頁時可用。
+// 卡片連到站內商品頁（drugstore-detail.html）；有真實綜合分的商品在卡片上顯示分數（2026-11-26），
+// 分數來自 drugstore-score-summary.json（slug → 綜合分，build_scores_data.py 產生），沒有分數的商品不顯示。
 // 分類（2026-11-04 使用者定案）：藥妝開架品牌依品牌產地分，Olive Young 依品類分。
 // 沒有商品的分類不顯示（台灣品牌、頭髮保養品牌待補）。site-data.json 的 drugstoreMenu 是導覽列下拉，兩邊要同步。
 const DRUGSTORE_MENU = [
@@ -529,12 +529,21 @@ async function renderDrugstore() {
     const filters = document.getElementById('drugstore-filters');
     if (!list || !filters) return;
     let products = [];
+    let dsScores = {};
     try {
         const res = await fetch('drugstore-products.json?v=29');
         products = (await res.json()).products || [];
     } catch (err) {
         console.error('drugstore-products.json 載入失敗', err);
     }
+    // 評分摘要載入失敗不影響列表（只是不顯示分數）
+    try {
+        const sres = await fetch('drugstore-score-summary.json?v=1');
+        if (sres.ok) dsScores = await sres.json();
+    } catch (err) {
+        console.warn('drugstore-score-summary.json 載入失敗', err);
+    }
+    const dsScoreColor = (s) => s >= 4.5 ? '#d4af37' : s >= 4.0 ? '#f2a7b5' : s >= 3.5 ? '#6b7280' : s >= 3.0 ? '#e29547' : '#e05a47';
     if (products.length === 0) {
         filters.innerHTML = '';
         list.innerHTML = '<div class="text-center text-gray-400 text-sm py-12">商品整理中，敬請期待</div>';
@@ -577,8 +586,9 @@ async function renderDrugstore() {
                     <a href="drugstore-detail.html?p=${encodeURIComponent(p.slug)}" class="bg-white rounded-2xl overflow-hidden border border-[#f2a7b5]/15 shadow-sm hover:shadow-md transition-shadow flex flex-col">
                         ${newProductImageBlock(p, i)}
                         <div class="p-3 md:p-5 flex flex-col flex-grow">
-                            <div class="mb-2">
+                            <div class="mb-2 flex items-center justify-between gap-2">
                                 <span class="${BRAND_BADGE_COLORS[i % BRAND_BADGE_COLORS.length]} text-white text-[10px] font-black px-3 py-1 rounded-full tracking-wide">${escHtml(p.brand)}</span>
+                                ${typeof dsScores[p.slug] === 'number' ? `<span class="text-sm font-black whitespace-nowrap" style="color:${dsScoreColor(dsScores[p.slug])}" title="網友綜合評分">★ ${dsScores[p.slug].toFixed(1)}</span>` : ''}
                             </div>
                             <h3 class="font-black text-sm md:text-base leading-snug mb-1 line-clamp-2">${escHtml(p.name)}</h3>
                             <p class="hidden md:block text-xs text-gray-500 leading-relaxed line-clamp-3">${escHtml(p.highlight || '')}</p>

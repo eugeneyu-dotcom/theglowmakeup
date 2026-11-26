@@ -27,6 +27,8 @@ OUT = os.path.join(BASE, "scores-data.json")
 # DS_MAP 是商品頁 slug → 「品牌||品項」的對應表。
 DS_OUT = os.path.join(BASE, "drugstore-scores.json")
 DS_MAP = os.path.join(BASE, "drugstore-score-map.json")
+# 開架列表頁只需要「slug → 綜合分」，另存一份很小的摘要檔，避免列表頁去載入帶心得全文的 drugstore-scores.json。
+DS_SUM = os.path.join(BASE, "drugstore-score-summary.json")
 # score_reviews.py --compute 累積下來的「評論層級 LLM 標記」（以評論 url 為鍵）。
 # Threads/Google 的評論沒有 item_id（只有小紅書會經過路由），過去因此完全進不了
 # 心得卡片候選池；但它們的 search_keyword 就是爬蟲當初鎖定的品項，可以精準回推。
@@ -468,6 +470,9 @@ def main():
         json.dump(out, f, ensure_ascii=False, indent=1)
     with open(DS_OUT, "w", encoding="utf-8") as f:
         json.dump(out_ds, f, ensure_ascii=False, indent=1)
+    with open(DS_SUM, "w", encoding="utf-8") as f:
+        json.dump({v["slug"]: v["composite"] for v in out_ds.values() if v.get("slug")},
+                  f, ensure_ascii=False, indent=1, sort_keys=True)
     n_test = sum(1 for v in out.values() if v.get("testimonials"))
     print(f"✅ drugstore-scores.json：{len(out_ds)} 個開架品項有真實綜合分，其中 "
           f"{sum(1 for v in out_ds.values() if v.get('testimonials'))} 個附上代表評論")

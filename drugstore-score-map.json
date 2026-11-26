@@ -1,153 +1,227 @@
 {
- "_comment": "開架商品頁 slug（drugstore-products.json）→ Items.csv 的 Brand＋台灣官網商品名（也就是 drugstore-scores.json 的 key「brand||name」）。兩邊商品名寫法不同（如 The Juicy Lasting Tint／果汁水光唇釉），所以用這張表對應。_unmapped＝目錄有、但 Items.csv 還沒收錄的 slug（尚無評分）。新增開架品項進 Items.csv 後，要在這裡補一筆。",
+ "_comment": "開架商品頁 slug（drugstore-products.json）→ Items.csv 的 Brand＋台灣官網商品名（也就是 drugstore-scores.json 的 key「brand||name」）。兩邊商品名寫法不同（如 The Juicy Lasting Tint／果汁水光唇釉），所以用這張表對應。_unmapped＝目錄有、但 Items.csv 還沒收錄的 slug（尚無評分）。新增開架品項進 Items.csv 後，要在這裡補一筆。 type／subcat＝Items.csv 的 Types／Subcategories，商品頁 hashtag 用（#通路 #子分類 #大類）。",
  "map": {
   "romand-juicy-lasting-tint": {
    "brand": "rom&nd",
-   "name": "果汁水光唇釉"
+   "name": "果汁水光唇釉",
+   "type": "彩妝",
+   "subcat": "唇釉"
   },
   "peripera-ink-mood-glowy-tint": {
    "brand": "peripera",
-   "name": "Ink Mood Glowy Tint"
+   "name": "Ink Mood Glowy Tint",
+   "type": "彩妝",
+   "subcat": "唇釉"
   },
   "colorgram-nude-blur-tint": {
    "brand": "Colorgram",
-   "name": "Nude Blur Tint"
+   "name": "Nude Blur Tint",
+   "type": "彩妝",
+   "subcat": "唇釉"
   },
   "fwee-pudding-pot": {
    "brand": "fwee",
-   "name": "Lip & Cheek Blurry Pudding Pot"
+   "name": "Lip & Cheek Blurry Pudding Pot",
+   "type": "彩妝",
+   "subcat": "腮紅"
   },
   "deardahlia-petal-drop-liquid-blush": {
    "brand": "Dear Dahlia",
-   "name": "Petal Drop Liquid Blush"
+   "name": "Petal Drop Liquid Blush",
+   "type": "彩妝",
+   "subcat": "腮紅"
   },
   "clio-kill-cover-founwear-cushion": {
    "brand": "CLIO",
-   "name": "Kill Cover Founwear Cushion"
+   "name": "Kill Cover Founwear Cushion",
+   "type": "彩妝",
+   "subcat": "氣墊粉餅"
   },
   "jungsaemmool-nuder-cushion": {
    "brand": "JUNGSAEMMOOL",
-   "name": "Essential Skin Nuder Cushion"
+   "name": "Essential Skin Nuder Cushion",
+   "type": "彩妝",
+   "subcat": "氣墊粉餅"
   },
   "banilaco-prime-primer-finish-powder": {
    "brand": "Banila Co",
-   "name": "Prime Primer Finish Powder"
+   "name": "Prime Primer Finish Powder",
+   "type": "彩妝",
+   "subcat": "蜜粉"
   },
   "roundlab-dokdo-toner": {
    "brand": "ROUND LAB",
-   "name": "1025 Dokdo Toner"
+   "name": "1025 Dokdo Toner",
+   "type": "保養",
+   "subcat": "化妝水"
   },
   "anua-heartleaf-77-toner": {
    "brand": "Anua",
-   "name": "Heartleaf 77% Soothing Toner"
+   "name": "Heartleaf 77% Soothing Toner",
+   "type": "保養",
+   "subcat": "化妝水"
   },
   "torriden-dive-in-serum": {
    "brand": "Torriden",
-   "name": "Dive-In Low Molecular Hyaluronic Acid Serum"
+   "name": "Dive-In Low Molecular Hyaluronic Acid Serum",
+   "type": "保養",
+   "subcat": "精華液"
   },
   "cosrx-6-peptide-booster-serum": {
    "brand": "COSRX",
-   "name": "The 6 Peptide Skin Booster Serum"
+   "name": "The 6 Peptide Skin Booster Serum",
+   "type": "保養",
+   "subcat": "精華液"
   },
   "aestura-atobarrier-365-cream": {
    "brand": "AESTURA",
-   "name": "Atobarrier 365 Cream"
+   "name": "Atobarrier 365 Cream",
+   "type": "保養",
+   "subcat": "面霜"
   },
   "roundlab-birch-sunscreen": {
    "brand": "ROUND LAB",
-   "name": "Birch Juice Moisturizing Sunscreen"
+   "name": "Birch Juice Moisturizing Sunscreen",
+   "type": "彩妝",
+   "subcat": "防曬乳"
   },
   "dalba-waterfull-tone-up-sun": {
    "brand": "d'Alba",
-   "name": "Waterfull Tone-Up Sun Cream"
+   "name": "Waterfull Tone-Up Sun Cream",
+   "type": "彩妝",
+   "subcat": "防曬乳"
   },
   "skin1004-hyalu-cica-sun-serum": {
    "brand": "SKIN1004",
-   "name": "Madagascar Centella Hyalu-Cica Water-Fit Sun Serum"
+   "name": "Madagascar Centella Hyalu-Cica Water-Fit Sun Serum",
+   "type": "彩妝",
+   "subcat": "防曬乳"
   },
   "torriden-dive-in-mask": {
    "brand": "Torriden",
-   "name": "Dive-in Low Molecular Hyaluronic Acid Mask"
+   "name": "Dive-in Low Molecular Hyaluronic Acid Mask",
+   "type": "保養",
+   "subcat": "面膜"
   },
   "mediheal-madecassoside-mask": {
    "brand": "MEDIHEAL",
-   "name": "Madecassoside Essential Mask Blemish Repair"
+   "name": "Madecassoside Essential Mask Blemish Repair",
+   "type": "保養",
+   "subcat": "面膜"
   },
   "biodance-bio-collagen-mask": {
    "brand": "Biodance",
-   "name": "Bio-Collagen Real Deep Mask"
+   "name": "Bio-Collagen Real Deep Mask",
+   "type": "保養",
+   "subcat": "面膜"
   },
   "kate-tokyo-light-foundation": {
    "brand": "KATE",
-   "name": "極輕感持久粉底液"
+   "name": "極輕感持久粉底液",
+   "type": "彩妝",
+   "subcat": "粉底液"
   },
   "maybelline-superstay-vinyl-ink": {
    "brand": "Maybelline",
-   "name": "超持久水光鎖吻唇釉"
+   "name": "超持久水光鎖吻唇釉",
+   "type": "彩妝",
+   "subcat": "唇釉"
   },
   "fwee-3d-crystal-gloss": {
    "brand": "fwee",
-   "name": "3D Voluming Gloss"
+   "name": "3D Voluming Gloss",
+   "type": "彩妝",
+   "subcat": "唇蜜"
   },
   "1028-flying-volume-waterproof-mascara": {
    "brand": "1028",
-   "name": "飛激濃瞬翹防水睫毛膏"
+   "name": "飛激濃瞬翹防水睫毛膏",
+   "type": "彩妝",
+   "subcat": "睫毛膏"
   },
   "heme-six-color-eyeshadow-palette": {
    "brand": "heme",
-   "name": "六色眼影盤"
+   "name": "六色眼影盤",
+   "type": "彩妝",
+   "subcat": "眼影/眼影盤"
   },
   "integrate-care-base-ex": {
    "brand": "INTEGRATE",
-   "name": "長效控油美肌持妝乳EX"
+   "name": "長效控油美肌持妝乳EX",
+   "type": "彩妝",
+   "subcat": "妝前乳"
   },
   "canmake-marshmallow-finish-powder": {
    "brand": "CANMAKE",
-   "name": "新棉花糖蜜粉餅"
+   "name": "新棉花糖蜜粉餅",
+   "type": "彩妝",
+   "subcat": "蜜粉"
   },
   "majolica-majorca-lash-expander": {
    "brand": "MAJOLICA MAJORCA",
-   "name": "超現實激長睫毛膏(升級版)"
+   "name": "超現實激長睫毛膏(升級版)",
+   "type": "彩妝",
+   "subcat": "睫毛膏"
   },
   "kissme-heroine-mascara": {
    "brand": "KISSME",
-   "name": "超！持久立挺翹長防水睫毛膏N"
+   "name": "超！持久立挺翹長防水睫毛膏N",
+   "type": "彩妝",
+   "subcat": "睫毛膏"
   },
   "muzigaemansion-moodwear-blur-lipstick": {
    "brand": "Muzigae Mansion",
-   "name": "Moodwear Blur Lipstick"
+   "name": "Moodwear Blur Lipstick",
+   "type": "彩妝",
+   "subcat": "唇膏"
   },
   "bbia-last-velvet-tint": {
    "brand": "BBIA",
-   "name": "Last Velvet Tint"
+   "name": "Last Velvet Tint",
+   "type": "彩妝",
+   "subcat": "唇釉"
   },
   "lilybyred-luv-beam-cheek-balm": {
    "brand": "lilybyred",
-   "name": "Luv Beam Cheek Balm"
+   "name": "Luv Beam Cheek Balm",
+   "type": "彩妝",
+   "subcat": "腮紅"
   },
   "sonatural-all-day-tight-setting-fixx": {
    "brand": "so natural",
-   "name": "All Day Tight Makeup Setting Fixx"
+   "name": "All Day Tight Makeup Setting Fixx",
+   "type": "彩妝",
+   "subcat": "定妝噴霧"
   },
   "toocoolforschool-smudging-under-liner": {
    "brand": "Too Cool For School",
-   "name": "Artclass Smudging Under Liner"
+   "name": "Artclass Smudging Under Liner",
+   "type": "彩妝",
+   "subcat": "眼線筆"
   },
   "hince-true-dimension-radiance-balm": {
    "brand": "hince",
-   "name": "True Dimension Radiance Balm"
+   "name": "True Dimension Radiance Balm",
+   "type": "彩妝",
+   "subcat": "打亮/修容"
   },
   "hera-silky-stay-24h-foundation": {
    "brand": "HERA",
-   "name": "Silky Stay 24H Longwear Foundation"
+   "name": "Silky Stay 24H Longwear Foundation",
+   "type": "彩妝",
+   "subcat": "粉底液"
   },
   "amuse-jel-fit-gloss": {
    "brand": "AMUSE",
-   "name": "Jel-Fit Gloss"
+   "name": "Jel-Fit Gloss",
+   "type": "彩妝",
+   "subcat": "唇蜜"
   },
   "3ce-multi-eye-color-palette": {
    "brand": "3CE",
-   "name": "Multi Eye Color Palette"
+   "name": "Multi Eye Color Palette",
+   "type": "彩妝",
+   "subcat": "眼影/眼影盤"
   }
  },
  "_unmapped": [

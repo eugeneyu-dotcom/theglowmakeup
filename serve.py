@@ -31,7 +31,7 @@ PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8777
 SAFE_EXT = {".html", ".htm", ".css", ".js", ".map", ".ico",
             ".png", ".jpg", ".jpeg", ".gif", ".svg", ".webp",
             ".woff", ".woff2", ".ttf"}
-ALLOW_JSON = {"site-data.json", "scores-data.json", "articles.json", "new-products.json", "ingredients-data.json", "ingredient_warnings.json", "voices-pool.json", "drugstore-products.json"}   # 可對外的前端資料 JSON
+ALLOW_JSON = {"site-data.json", "scores-data.json", "articles.json", "new-products.json", "ingredients-data.json", "ingredient_warnings.json", "voices-pool.json", "drugstore-products.json", "drugstore-score-summary.json"}   # 可對外的前端資料 JSON
 ALLOW_DIRS = {"assets"}                                # 唯一可對外的子資料夾
 ALLOW_ROOT_FILES = {"robots.txt", "sitemap.xml"}       # 無副檔名白名單、根目錄放行的特例檔
 
