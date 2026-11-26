@@ -199,7 +199,7 @@
     </footer>
 
     <!-- Scripts -->
-    <script src="script.js?v=250"></script>
+    <script src="script.js?v=251"></script>
     <script>
         // Global State & Setup
         window.selectedSkinVal = 'fair';
@@ -353,7 +353,7 @@
         window.SCORES_DATA = {};
         async function loadScoresData() {
             try {
-                const res = await fetch('scores-data.json?v=49');
+                const res = await fetch('scores-data.json?v=50');
                 window.SCORES_DATA = await res.json();
             } catch (e) {
                 console.error('scores-data.json 載入失敗', e);
@@ -456,7 +456,7 @@
 
             try {
                 await Promise.all([loadScoresData(), loadIngredientsData()]);
-                const response = await fetch('site-data.json?v=47');
+                const response = await fetch('site-data.json?v=48');
                 const data = await response.json();
 
                 let targetItem = null;
