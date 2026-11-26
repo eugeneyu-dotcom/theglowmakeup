@@ -22,7 +22,7 @@
       "includeFiles": "{detail.template.html,site-data.json}"
     },
     "api/drugstore-detail.js": {
-      "includeFiles": "{drugstore-detail.template.html,drugstore-products.json}"
+      "includeFiles": "{drugstore-detail.template.html,drugstore-products.json,drugstore-scores.json,drugstore-score-map.json}"
     }
   }
 }

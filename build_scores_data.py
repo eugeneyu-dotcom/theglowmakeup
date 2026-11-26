@@ -22,6 +22,11 @@ AI = os.path.join(BASE, "csv", "AI_Scores.csv")
 ITEMS = os.path.join(BASE, "csv", "Items.csv")
 ROUTED = os.path.join(BASE, "routed_reviews.json")
 OUT = os.path.join(BASE, "scores-data.json")
+# 開架／Olive Young 通路（Items.csv 的 Channel 欄非空）的評分與心得另存一份，專櫃的 scores-data.json 完全不收，
+# 避免混進專櫃榜單、擂台、精選評比。結構與 scores-data.json 相同，另帶 channel 欄；
+# DS_MAP 是商品頁 slug → 「品牌||品項」的對應表。
+DS_OUT = os.path.join(BASE, "drugstore-scores.json")
+DS_MAP = os.path.join(BASE, "drugstore-score-map.json")
 # score_reviews.py --compute 累積下來的「評論層級 LLM 標記」（以評論 url 為鍵）。
 # Threads/Google 的評論沒有 item_id（只有小紅書會經過路由），過去因此完全進不了
 # 心得卡片候選池；但它們的 search_keyword 就是爬蟲當初鎖定的品項，可以精準回推。
@@ -308,14 +313,22 @@ def pick_testimonials(reviews, n=3, keep_non_xhs=2):
     # 這批候選在 main() 已經過 annotation_allows_testimonial 明確放行
     # （必須被 LLM 標記為 product_match=match 且非業配），數量極少、
     # 品質有背書，沒有理由因為排序規則被丟掉。
+    # 2026-11-26：頁面要同時看得到小紅書／Threads／Google 三個社群。
+    # 先讓每個尚未出現的社群（Threads、Google）各拿一則最高排名的，名額還有剩才補同社群的。
+    shown_plats = {c["platform"] for c in out}
     n_other = 0
-    for r in ranked:
-        if n_other >= keep_non_xhs:
-            break
-        if "小紅書" in (r.get("platform") or ""):
-            continue
-        if take(r):
-            n_other += 1
+    for want_new in (True, False):
+        for r in ranked:
+            if n_other >= keep_non_xhs:
+                break
+            if "小紅書" in (r.get("platform") or ""):
+                continue
+            lab = platform_label(r.get("platform"))
+            if want_new and lab in shown_plats:
+                continue
+            if take(r):
+                n_other += 1
+                shown_plats.add(lab)
     return out
 
 
@@ -327,12 +340,13 @@ def main():
     # （2026-07-28 資料遺失事故：面膜/面霜 rebuild 把粉底液 9 個品項的 reviewSummary 全洗掉）。
     # 修正：重建前先讀舊 scores-data.json，把 reviewSummary 原樣帶過去。
     old_summaries = {}
-    if os.path.exists(OUT):
-        with open(OUT, encoding="utf-8") as f:
-            old_data = json.load(f)
-        for k, v in old_data.items():
-            if v.get("reviewSummary"):
-                old_summaries[k] = v["reviewSummary"]
+    for _path in (OUT, DS_OUT):
+        if os.path.exists(_path):
+            with open(_path, encoding="utf-8") as f:
+                old_data = json.load(f)
+            for k, v in old_data.items():
+                if v.get("reviewSummary"):
+                    old_summaries[k] = v["reviewSummary"]
 
     # 分組 routed 評論 by item_id
     with open(ROUTED, encoding="utf-8") as f:
@@ -358,6 +372,16 @@ def main():
     with open(AI, encoding="utf-8") as f:
         rows = list(csv.DictReader(f))
 
+    # 開架／Olive Young 通路品項（Items.csv 的「Channel（通路）」欄）暫不進前台：
+    # 前台榜單、擂台、精選評比都掛在「專櫃美妝」底下，開架評分尚未跟專櫃分開、
+    # 且樣本目前偏少，直接寫進 scores-data.json 會混進專櫃榜單（2026-11-19 使用者決定先保留不上線）。
+    # 要放行時，改這裡或清掉該品項的 Channel 欄。
+    with open(ITEMS, encoding="utf-8") as f:
+        held = {(r.get("Brand", "").strip(), (r.get("Items（台灣官網商品名）") or "").strip()):
+                (r.get("Channel（通路）") or "").strip()
+                for r in csv.DictReader(f)
+                if (r.get("Channel（通路）") or "").strip()}
+
     data = {}
     for r in rows:
         brand = r.get("Brand", "").strip()
@@ -372,6 +396,7 @@ def main():
             "subcat": r.get("Subcategories", "").strip(),
             "composite": None, "indicators": {}, "mentions": 0,
             "testimonial": None, "testimonials": [],
+            **({"channel": held[(brand, name)]} if (brand, name) in held else {}),
             **({"reviewSummary": old_summaries[key]} if key in old_summaries else {}),
         })
         try:
@@ -428,8 +453,24 @@ def main():
                 n_test += 1
         out[key] = e
 
+    # 專櫃／開架分流：有 channel 的進 drugstore-scores.json，其餘進 scores-data.json
+    out_ds = {k: v for k, v in out.items() if v.get("channel")}
+    out = {k: v for k, v in out.items() if not v.get("channel")}
+    slug_by_key = {}
+    if os.path.exists(DS_MAP):
+        with open(DS_MAP, encoding="utf-8") as f:
+            for slug, v in json.load(f).get("map", {}).items():
+                slug_by_key[f"{v['brand']}||{v['name']}"] = slug
+    for k, v in out_ds.items():
+        if k in slug_by_key:
+            v["slug"] = slug_by_key[k]
     with open(OUT, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=1)
+    with open(DS_OUT, "w", encoding="utf-8") as f:
+        json.dump(out_ds, f, ensure_ascii=False, indent=1)
+    n_test = sum(1 for v in out.values() if v.get("testimonials"))
+    print(f"✅ drugstore-scores.json：{len(out_ds)} 個開架品項有真實綜合分，其中 "
+          f"{sum(1 for v in out_ds.values() if v.get('testimonials'))} 個附上代表評論")
     print(f"✅ scores-data.json：{len(out)} 個品項有真實綜合分，其中 {n_test} 個附上代表評論")
     if n_extra:
         print(f"   ↳ 其中 {n_extra} 則來自 Threads/Google（{n_extra_items} 個品項），"

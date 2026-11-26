@@ -50,10 +50,118 @@ function infoRow(label, value) {
 
 const GROUP_LABEL = { drug: '藥妝開架', olive: 'Olive Young' };
 
+// ===== 評分與網友心得（2026-11-26）=====
+// 資料來自 drugstore-scores.json（build_scores_data.py 依 Items.csv 的 Channel 欄分流輸出，
+// 專櫃的 scores-data.json 完全不含開架品項）。商品頁 slug → 「品牌||品項」靠 drugstore-score-map.json 對應。
+// 沒有分數（有效評論不足 5 則）的商品不顯示這兩個區塊，也不寫樣板文字。
+function readOptionalJson(file) {
+    try { return JSON.parse(readFile(file)); } catch (e) { return null; }
+}
+
+function findScoreEntry(slug) {
+    const scores = readOptionalJson('drugstore-scores.json');
+    if (!scores) return null;
+    const map = readOptionalJson('drugstore-score-map.json');
+    const m = map && map.map && map.map[slug];
+    if (m) {
+        const hit = scores[`${m.brand}||${m.name}`];
+        if (hit) return hit;
+    }
+    return Object.values(scores).find((v) => v && v.slug === slug) || null;
+}
+
+// 依 CLAUDE.md 評分分級（台灣使用者直覺版）
+function gradeOf(score) {
+    if (score >= 4.5) return { label: '優秀', color: '#d4af37' };
+    if (score >= 4.0) return { label: '不錯，可以用', color: '#f2a7b5' };
+    if (score >= 3.5) return { label: '普通，特定人群可用', color: '#6b7280' };
+    if (score >= 3.0) return { label: '負面評價居多', color: '#e29547' };
+    return { label: '幾乎只有負面', color: '#e05a47' };
+}
+
+function platformBadge(platform) {
+    const cls = platform === '小紅書' ? 'bg-[#fde2e4] text-[#e05a47]'
+        : platform === 'Threads' ? 'bg-[#2d2d2d] text-white'
+        : 'bg-blue-50 text-blue-500';
+    return `<span class="text-[10px] font-black px-2 py-0.5 rounded-full ${cls}">${escapeHtml(platform)}</span>`;
+}
+
+function buildScoreSections(entry) {
+    if (!entry || entry.composite == null) return '';
+    const g = gradeOf(entry.composite);
+    const inds = Object.entries(entry.indicators || {}).filter(([, v]) => v != null);
+    const indRows = inds.map(([name, v]) => {
+        const c = gradeOf(v).color;
+        return `<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 py-2 border-b border-[#f2a7b5]/5 last:border-b-0">
+                                <span class="text-base font-bold text-[#2d2d2d]">${escapeHtml(name)}</span>
+                                <div class="flex items-center gap-1"><span class="text-lg font-black" style="color:${c}">${Number(v).toFixed(1)}</span><span class="text-xs font-bold text-gray-400">/ 5.0</span></div>
+                            </div>`;
+    }).join('');
+    const summary = entry.reviewSummary
+        ? `<div class="mb-6 p-6 bg-[#fdf6e6] rounded-3xl border border-[#d4af37]/20">
+                                <h3 class="text-xs font-black text-[#b8912e] uppercase tracking-wider mb-2">💬 網友評價匯總 / Community Verdict</h3>
+                                <p class="text-base text-gray-700 leading-relaxed font-bold">${escapeHtml(entry.reviewSummary)}</p>
+                            </div>`
+        : '';
+    const scoreCard = `<div class="bg-white rounded-[32px] p-8 md:p-12 shadow-sm border border-[#f2a7b5]/10">
+                    <div class="flex items-center gap-3 mb-6 border-b border-gray-100 pb-5">
+                        <span class="text-3xl">⭐</span>
+                        <div>
+                            <h2 class="text-2xl md:text-3xl font-black text-[#2d2d2d] italic">網友綜合評鑑分數 <span class="text-[#f2a7b5] not-italic text-lg">Netizen Rating</span></h2>
+                            <p class="text-sm text-gray-500 font-bold">彙整 Threads、Google、小紅書的真實使用心得，已排除業配與不相關貼文</p>
+                        </div>
+                    </div>
+                    ${summary}
+                    <div class="flex items-end gap-4 mb-6">
+                        <span class="text-6xl font-black leading-none" style="color:${g.color}">${Number(entry.composite).toFixed(1)}</span>
+                        <div class="pb-1"><div class="text-xs font-bold text-gray-400">/ 5.0 綜合評分</div><div class="text-base font-black" style="color:${g.color}">${escapeHtml(g.label)}</div></div>
+                    </div>
+                    ${indRows ? `<div class="space-y-1">${indRows}</div>` : ''}
+                    <p class="text-xs text-gray-400 leading-relaxed border-t border-gray-100 pt-4 mt-6">分數由社群心得統計而來，各指標的評論量不同；開架商品與專櫃商品的價位與族群不同，分數不宜直接跨類比較。</p>
+                </div>`;
+    const ts = (entry.testimonials || []).filter((t) => t && t.text);
+    const tmCard = ts.length
+        ? `<div class="bg-white rounded-[32px] p-8 md:p-12 shadow-sm border border-[#f2a7b5]/10">
+                    <div class="flex items-center gap-3 mb-8 border-b border-gray-100 pb-5">
+                        <span class="text-3xl">💬</span>
+                        <div>
+                            <h2 class="text-2xl md:text-3xl font-black text-[#2d2d2d] italic">真實網友心得 <span class="text-[#f2a7b5] not-italic text-lg">User Testimonials</span></h2>
+                            <p class="text-sm text-gray-500 font-bold">精選小紅書、Threads、Google 的真實評論，帳號已馬賽克保護隱私</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">${ts.map((t) => `
+                        <div class="bg-[#fff9f5] rounded-2xl p-5 border border-[#f2a7b5]/10">
+                            <div class="flex items-center gap-2 mb-2.5">
+                                ${platformBadge(t.platform)}
+                                <span class="text-xs font-bold text-gray-500">@${escapeHtml(t.author || '網友')}</span>
+                                ${t.likes ? `<span class="text-[10px] text-gray-400 font-bold ml-auto whitespace-nowrap">👍 ${escapeHtml(Number(t.likes).toLocaleString('en-US'))}</span>` : ''}
+                            </div>
+                            <p class="tm-text text-sm text-gray-600 leading-relaxed" style="display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;">「${escapeHtml(t.text)}」</p>
+                            <button type="button" class="tm-toggle hidden mt-2 text-xs font-black text-[#f2a7b5] hover:underline">展開全文 ▾</button>
+                        </div>`).join('')}
+                    </div>
+                </div>
+                <script>
+                (function(){
+                  document.querySelectorAll('.tm-text').forEach(function(p){
+                    var b=p.parentElement.querySelector('.tm-toggle'); if(!b) return;
+                    function check(){ if(p.dataset.open==='1') return; if(p.scrollHeight-p.clientHeight>2) b.classList.remove('hidden'); }
+                    b.addEventListener('click',function(){
+                      if(p.dataset.open==='1'){p.dataset.open='0';p.style.display='-webkit-box';p.style.webkitLineClamp='4';b.textContent='展開全文 ▾';}
+                      else{p.dataset.open='1';p.style.webkitLineClamp='';p.style.display='block';b.textContent='收合 ▴';}
+                    });
+                    check(); window.addEventListener('load',check); setTimeout(check,600);
+                  });
+                })();
+                </script>`
+        : '';
+    return scoreCard + tmCard;
+}
+
 // 版型比照專櫃商品頁（item-detail.template.html）：返回連結、大卡片（左圖右文）、
 // 「特色介紹」漸層邊框卡、同類熱門單品。專櫃頁有、但開架沒有資料的區塊（適用人群、評分、成分、網友心得）
 // 一律不顯示，不寫樣板文字湊版面。
-function buildMain(p, all) {
+function buildMain(p, all, scoreEntry) {
     const d = p.detail || {};
     const secUrl = `drugstore-beauty.html?section=${encodeURIComponent(p.section)}`;
     const img = p.image
@@ -152,6 +260,7 @@ function buildMain(p, all) {
                         </div>
                     </div>
                 </div>
+                ${buildScoreSections(scoreEntry)}
                 ${relatedHtml}
         </div>`;
 }
@@ -185,7 +294,7 @@ function renderPage(slug) {
         '{{CANONICAL}}': escapeHtml(canonical),
         '{{OGIMAGE}}': escapeHtml(absoluteImage(p.image)),
         '{{JSONLD}}': `<script type="application/ld+json" id="breadcrumb-jsonld">${breadcrumb}</script>`,
-        '{{MAIN}}': buildMain(p, data.products || []),
+        '{{MAIN}}': buildMain(p, data.products || [], findScoreEntry(p.slug)),
     };
     for (const [k, v] of Object.entries(rep)) {
         if (!html.includes(k)) throw new Error(`drugstore-detail 範本找不到 ${k}`);

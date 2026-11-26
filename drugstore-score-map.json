@@ -1,0 +1,176 @@
+{
+ "_comment": "開架商品頁 slug（drugstore-products.json）→ Items.csv 的 Brand＋台灣官網商品名（也就是 drugstore-scores.json 的 key「brand||name」）。兩邊商品名寫法不同（如 The Juicy Lasting Tint／果汁水光唇釉），所以用這張表對應。_unmapped＝目錄有、但 Items.csv 還沒收錄的 slug（尚無評分）。新增開架品項進 Items.csv 後，要在這裡補一筆。",
+ "map": {
+  "romand-juicy-lasting-tint": {
+   "brand": "rom&nd",
+   "name": "果汁水光唇釉"
+  },
+  "peripera-ink-mood-glowy-tint": {
+   "brand": "peripera",
+   "name": "Ink Mood Glowy Tint"
+  },
+  "colorgram-nude-blur-tint": {
+   "brand": "Colorgram",
+   "name": "Nude Blur Tint"
+  },
+  "fwee-pudding-pot": {
+   "brand": "fwee",
+   "name": "Lip & Cheek Blurry Pudding Pot"
+  },
+  "deardahlia-petal-drop-liquid-blush": {
+   "brand": "Dear Dahlia",
+   "name": "Petal Drop Liquid Blush"
+  },
+  "clio-kill-cover-founwear-cushion": {
+   "brand": "CLIO",
+   "name": "Kill Cover Founwear Cushion"
+  },
+  "jungsaemmool-nuder-cushion": {
+   "brand": "JUNGSAEMMOOL",
+   "name": "Essential Skin Nuder Cushion"
+  },
+  "banilaco-prime-primer-finish-powder": {
+   "brand": "Banila Co",
+   "name": "Prime Primer Finish Powder"
+  },
+  "roundlab-dokdo-toner": {
+   "brand": "ROUND LAB",
+   "name": "1025 Dokdo Toner"
+  },
+  "anua-heartleaf-77-toner": {
+   "brand": "Anua",
+   "name": "Heartleaf 77% Soothing Toner"
+  },
+  "torriden-dive-in-serum": {
+   "brand": "Torriden",
+   "name": "Dive-In Low Molecular Hyaluronic Acid Serum"
+  },
+  "cosrx-6-peptide-booster-serum": {
+   "brand": "COSRX",
+   "name": "The 6 Peptide Skin Booster Serum"
+  },
+  "aestura-atobarrier-365-cream": {
+   "brand": "AESTURA",
+   "name": "Atobarrier 365 Cream"
+  },
+  "roundlab-birch-sunscreen": {
+   "brand": "ROUND LAB",
+   "name": "Birch Juice Moisturizing Sunscreen"
+  },
+  "dalba-waterfull-tone-up-sun": {
+   "brand": "d'Alba",
+   "name": "Waterfull Tone-Up Sun Cream"
+  },
+  "skin1004-hyalu-cica-sun-serum": {
+   "brand": "SKIN1004",
+   "name": "Madagascar Centella Hyalu-Cica Water-Fit Sun Serum"
+  },
+  "torriden-dive-in-mask": {
+   "brand": "Torriden",
+   "name": "Dive-in Low Molecular Hyaluronic Acid Mask"
+  },
+  "mediheal-madecassoside-mask": {
+   "brand": "MEDIHEAL",
+   "name": "Madecassoside Essential Mask Blemish Repair"
+  },
+  "biodance-bio-collagen-mask": {
+   "brand": "Biodance",
+   "name": "Bio-Collagen Real Deep Mask"
+  },
+  "kate-tokyo-light-foundation": {
+   "brand": "KATE",
+   "name": "極輕感持久粉底液"
+  },
+  "maybelline-superstay-vinyl-ink": {
+   "brand": "Maybelline",
+   "name": "超持久水光鎖吻唇釉"
+  },
+  "fwee-3d-crystal-gloss": {
+   "brand": "fwee",
+   "name": "3D Voluming Gloss"
+  },
+  "1028-flying-volume-waterproof-mascara": {
+   "brand": "1028",
+   "name": "飛激濃瞬翹防水睫毛膏"
+  },
+  "heme-six-color-eyeshadow-palette": {
+   "brand": "heme",
+   "name": "六色眼影盤"
+  },
+  "integrate-care-base-ex": {
+   "brand": "INTEGRATE",
+   "name": "長效控油美肌持妝乳EX"
+  },
+  "canmake-marshmallow-finish-powder": {
+   "brand": "CANMAKE",
+   "name": "新棉花糖蜜粉餅"
+  },
+  "majolica-majorca-lash-expander": {
+   "brand": "MAJOLICA MAJORCA",
+   "name": "超現實激長睫毛膏(升級版)"
+  },
+  "kissme-heroine-mascara": {
+   "brand": "KISSME",
+   "name": "超！持久立挺翹長防水睫毛膏N"
+  },
+  "muzigaemansion-moodwear-blur-lipstick": {
+   "brand": "Muzigae Mansion",
+   "name": "Moodwear Blur Lipstick"
+  },
+  "bbia-last-velvet-tint": {
+   "brand": "BBIA",
+   "name": "Last Velvet Tint"
+  },
+  "lilybyred-luv-beam-cheek-balm": {
+   "brand": "lilybyred",
+   "name": "Luv Beam Cheek Balm"
+  },
+  "sonatural-all-day-tight-setting-fixx": {
+   "brand": "so natural",
+   "name": "All Day Tight Makeup Setting Fixx"
+  },
+  "toocoolforschool-smudging-under-liner": {
+   "brand": "Too Cool For School",
+   "name": "Artclass Smudging Under Liner"
+  },
+  "hince-true-dimension-radiance-balm": {
+   "brand": "hince",
+   "name": "True Dimension Radiance Balm"
+  },
+  "hera-silky-stay-24h-foundation": {
+   "brand": "HERA",
+   "name": "Silky Stay 24H Longwear Foundation"
+  },
+  "amuse-jel-fit-gloss": {
+   "brand": "AMUSE",
+   "name": "Jel-Fit Gloss"
+  },
+  "3ce-multi-eye-color-palette": {
+   "brand": "3CE",
+   "name": "Multi Eye Color Palette"
+  }
+ },
+ "_unmapped": [
+  "wakemake-soft-blurring-eye-palette",
+  "ettusais-duo-eyeshadow",
+  "ponyeffect-sun-primer",
+  "immeme-qq-lip-jelly",
+  "solone-long-lasting-eyeliner",
+  "fresho2-super-hydrating-lip-balm-cube",
+  "loreal-paris-micellar-water-moisturizing",
+  "vdl-color-correcting-primer",
+  "missha-glow-tension-cushion",
+  "visee-nenmaku-fake-rouge-lipstick",
+  "opera-lip-tint-n",
+  "za-whitening-makeup-base",
+  "media-luxe-eyebrow-powder",
+  "sofina-ip-base-care-serum",
+  "cezanne-make-keep-base",
+  "excel-skinny-rich-shadow",
+  "holikaholika-my-fave-piece-eye-shadow",
+  "espoir-be-glow-foundation",
+  "dasique-shadow-palette",
+  "glint-too-shiny-highlighter",
+  "lummir-melting-fit-shine-balm"
+ ]
+}
