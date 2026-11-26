@@ -2444,6 +2444,7 @@ function initSearch() {
 //   product_outbound_click                                               商品頁的官網／通路連結
 //   related_article_click / article_link_click / article_share_click    文章頁
 //   new_product_click                                                    首頁新品快報（在 fillNewProductsRow）
+//   latest_article_click                                                 首頁最新文章輪播（單篇卡片；參數 block／position／label／destination／page）
 function trackEvent(name, params) {
     try {
         if (typeof gtag !== 'function') return;
@@ -2579,9 +2580,21 @@ document.addEventListener('click', (ev) => {
         return;
     }
 
-    // ---- 分頁籤左右箭頭（擂台、榜單）----
-    if ((el = t.closest('button[onclick^="scrollBattleTabs"], button[onclick^="scrollRankingTabs"]'))) {
-        trackEvent('tab_scroll', { area: /Battle/.test(el.getAttribute('onclick')) ? 'battle' : 'ranking' });
+    // ---- 首頁「最新文章」輪播：點卡片（圖片／標籤／標題）算「單篇文章」，帶區塊與位置，區塊總數用 block 加總 ----
+    if ((el = t.closest('#latest-articles-grid .article-card'))) {
+        const cards = Array.from(document.querySelectorAll('#latest-articles-grid .article-card'));
+        const titleEl = el.querySelector('h3');
+        const linkEl = el.querySelector('a[href]');
+        const clickable = el.querySelector('[onclick]');
+        const m = clickable && /location\.href='([^']*)'/.exec(clickable.getAttribute('onclick') || '');
+        trackEvent('latest_article_click', { block: 'latest_articles', position: cards.indexOf(el) + 1, label: titleEl ? titleEl.innerText : '', destination: linkEl ? linkEl.getAttribute('href') : (m ? m[1] : ''), page: page });
+        return;
+    }
+
+    // ---- 分頁籤左右箭頭（擂台、榜單、最新文章）----
+    if ((el = t.closest('button[onclick^="scrollBattleTabs"], button[onclick^="scrollRankingTabs"], button[onclick^="scrollArticleCarousel"]'))) {
+        const oc = el.getAttribute('onclick') || '';
+        trackEvent('tab_scroll', { area: /Battle/.test(oc) ? 'battle' : (/Article/.test(oc) ? 'latest_articles' : 'ranking') });
         return;
     }
 
