@@ -2445,6 +2445,8 @@ function initSearch() {
 //   related_article_click / article_link_click / article_share_click    文章頁
 //   new_product_click                                                    首頁新品快報（在 fillNewProductsRow）
 //   latest_article_click                                                 首頁最新文章輪播（單篇卡片；參數 block／position／label／destination／page）
+//   card_click                                                           內容頁卡片（最新情報／活動快訊／文章專欄／專櫃美妝／開架美妝／精選評比；單張卡片，參數 block／page／item_type／label／position／destination）
+//   quiz_result_click                                                    首頁問卷結果裡被點的商品／文章連結（問卷是引導式連結，不是表單）
 function trackEvent(name, params) {
     try {
         if (typeof gtag !== 'function') return;
@@ -2470,6 +2472,16 @@ function trackText(el) {
     if (!el) return '';
     const first = el.firstChild && el.firstChild.nodeType === 3 ? el.firstChild.textContent : el.textContent;
     return (first || '').replace(/[▾▾]/g, '').replace(/\s+/g, ' ').trim();
+}
+
+// 連結類型：給 card_click／quiz_result_click 用，判斷點的是商品、文章還是分類頁
+function trackDestType(href) {
+    const h = String(href || '');
+    if (/^https?:\/\//.test(h) && !/theglowmakeup\.org/.test(h)) return 'external';
+    if (/(^|\/)(item-detail|drugstore-detail)\.html/.test(h)) return 'product';
+    if (/(^|\/)article\.html/.test(h)) return 'article';
+    if (/(^|\/)detail\.html/.test(h)) return 'category';
+    return 'other';
 }
 
 function trackLinkDomain(href) {
@@ -2519,6 +2531,11 @@ document.addEventListener('click', (ev) => {
                 trackEvent('quiz_next', { step: step, has_selection: !!sel, option: sel ? (sel.dataset.value || (h ? h.innerText : '')) : '' });
             } else if (/^quizBack/.test(oc)) trackEvent('quiz_back', { step: step });
             else if (/^resetQuiz/.test(oc)) trackEvent('quiz_reset', {});
+            return;
+        }
+        // 問卷是引導式連結（不收集表單）：結果區塊裡被點的商品／文章連結，才是這個互動區塊真正的成果
+        if ((el = t.closest('#result-text a[href]'))) {
+            trackEvent('quiz_result_click', { destination: el.getAttribute('href'), label: trackText(el), link_type: trackDestType(el.getAttribute('href')) });
             return;
         }
     }
@@ -2589,6 +2606,31 @@ document.addEventListener('click', (ev) => {
         const m = clickable && /location\.href='([^']*)'/.exec(clickable.getAttribute('onclick') || '');
         trackEvent('latest_article_click', { block: 'latest_articles', position: cards.indexOf(el) + 1, label: titleEl ? titleEl.innerText : '', destination: linkEl ? linkEl.getAttribute('href') : (m ? m[1] : ''), page: page });
         return;
+    }
+
+    // ---- 內容頁卡片：點「單一卡片」（文章／商品／分類）算一次點擊，帶區塊與位置；區塊總數用 block 加總 ----
+    // 涵蓋頁面：最新情報、活動快訊、美妝文章專欄、專櫃美妝、開架美妝、精選評比
+    if ((el = t.closest('#weekly-news, #news-new-products, #news-voices, #skincare-article-list, #board-spotlight-grid, #review-spotlight-grid, #drugstore-list'))) {
+        const host = el;
+        const clickable = t.closest('a[href]') || t.closest('[onclick*="location.href"]');
+        if (clickable && host.contains(clickable)) {
+            const destOf = (n) => {
+                const mm = /location\.href='([^']*)'/.exec(n.getAttribute('onclick') || '');
+                return n.matches('a[href]') ? n.getAttribute('href') : (mm ? mm[1] : '');
+            };
+            const dest = destOf(clickable);
+            if (dest && dest !== '#') {
+                const dests = [];
+                host.querySelectorAll('a[href], [onclick*="location.href"]').forEach(n => { const d = destOf(n); if (d && d !== '#' && dests.indexOf(d) < 0) dests.push(d); });
+                const BLOCKS = { 'weekly-news': 'news_articles', 'news-new-products': 'news_new_products', 'news-voices': 'news_voices', 'skincare-article-list': 'article_list', 'board-spotlight-grid': 'board_spotlight', 'review-spotlight-grid': 'review_spotlight', 'drugstore-list': 'drugstore_products' };
+                const card = clickable.closest('article, .article-card, [class*="rounded"]') || clickable;
+                const titleEl = card.querySelector('h1,h2,h3,h4') || (clickable.matches('h1,h2,h3,h4') ? clickable : null);
+                const cat = new URLSearchParams(location.search).get('category');
+                const pageName = (page === 'skincare-blog' && cat === '活動') ? 'events' : page;
+                trackEvent('card_click', { block: BLOCKS[host.id] || host.id, page: pageName, item_type: trackDestType(dest), label: titleEl ? titleEl.innerText : trackText(clickable), position: dests.indexOf(dest) + 1, destination: dest });
+                return;
+            }
+        }
     }
 
     // ---- 分頁籤左右箭頭（擂台、榜單、最新文章）----
