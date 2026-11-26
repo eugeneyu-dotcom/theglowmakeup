@@ -1,6 +1,6 @@
 {
   "_comment": "開架美妝（drugstore-beauty.html）商品目錄。第一版無評分；每款的連結與圖片皆於 verified_date 當天開啟核對。分類（2026-11-04 依使用者定案）：group=drug「藥妝開架品牌」依品牌產地分 section=台灣品牌/歐美品牌/日本品牌/韓國品牌；group=olive「Olive Young」依品類分 section=熱門彩妝品牌/保養品牌/頭髮保養品牌。目前頭髮保養品牌尚無商品。圖片取自品牌官網或通路商品頁，存放於 assets/drugstore/。image 為 null 時前台顯示品牌色塊。rom&nd 圖取自品牌官網 romand.co.kr；Jung Saem Mool 官網無法連線，圖取自 YesStyle 同品商品頁。",
-  "_last_updated": "2026-11-04",
+  "_last_updated": "2026-11-26",
   "products": [
     {
       "group": "olive",
@@ -1351,6 +1351,52 @@
         "spec": "共 4 款選項",
         "note": "資料取自 Olive Young 全球站商品頁，價格依匯率與活動變動，以通路頁為準。",
         "verified_date": "2026-11-06"
+      }
+    },
+    {
+      "group": "olive",
+      "brand": "Anua",
+      "name": "Heartleaf Pore Control Cleansing Oil",
+      "highlight": "含魚腥草萃取的卸妝油，主打深層卸妝、舒緩並維持毛孔舒適，品牌標示可用於痘痘肌膚（200ml）。",
+      "image": "assets/drugstore/anua-heartleaf-pore-cleansing-oil.webp",
+      "source_url": "https://global.oliveyoung.com/product/detail?prdtNo=GA221016518",
+      "source_label": "Olive Young",
+      "verified_date": "2026-11-26",
+      "section": "保養品牌",
+      "slug": "anua-heartleaf-pore-cleansing-oil",
+      "detail": {
+        "spec": "200ml／350ml",
+        "features": [
+          "含魚腥草萃取，主打舒緩與保濕，品牌標示敏感性肌膚也能使用",
+          "品牌標示通過痘痘肌膚適用性人體試驗（20 名 21–39 歲男女，Maridiem 皮膚科學研究所，2022 年 7–8 月）",
+          "人體使用測試（品牌自行標示）：連續使用 4 週後，皮脂量與肌膚油脂含量下降；受試者表示洗後清爽無殘留、溫和不刺激"
+        ],
+        "note": "資料取自 Olive Young Global 商品頁（英文頁），重點為中文整理；試驗數據為品牌自行標示。台灣售價以通路為準。",
+        "verified_date": "2026-11-26"
+      }
+    },
+    {
+      "group": "olive",
+      "brand": "Beauty of Joseon",
+      "name": "Relief Sun : Rice + Probiotics (SPF50+ PA++++)",
+      "highlight": "含米萃取、乳霜質地的 SPF50+ PA++++ 防曬，主打補水不黏膩、無白殘，可作為妝前保養最後一步。",
+      "image": "assets/drugstore/beautyofjoseon-relief-sun-rice-probiotics.webp",
+      "source_url": "https://beautyofjoseon.com/products/relief-sun-rice-probiotics",
+      "source_label": "品牌官網",
+      "verified_date": "2026-11-26",
+      "section": "保養品牌",
+      "slug": "beautyofjoseon-relief-sun",
+      "detail": {
+        "price": "US$26.00（50ml，官網）",
+        "spec": "50ml／SPF50+ PA++++",
+        "features": [
+          "米萃取帶來舒適保濕：質地像乳霜般輕盈，推開不黏膩，肌膚看起來水潤透亮、不留白殘",
+          "官網標示無香料、不含酒精、非致粉刺性",
+          "臨床測試（品牌自行標示）：24 小時保濕效果（22 人）；48 小時測試顯示不致敏、敏感肌可用（32 人）"
+        ],
+        "how_to": "作為早晨保養的最後一步，均勻取足量塗抹於會曬到太陽的部位；至少每 2 小時補擦一次。",
+        "note": "品牌官網目前列為「Relief Sun : Rice + Niacinamide」新配方（含菸鹼醯胺），本站評分來自網友對 Rice + Probiotics 版本的心得，兩版配方不同；資料取自品牌官網商品頁（英文頁），重點為中文整理，價格為官網標價（美元），台灣售價以通路為準。",
+        "verified_date": "2026-11-26"
       }
     }
   ]

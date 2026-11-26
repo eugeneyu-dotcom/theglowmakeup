@@ -531,14 +531,14 @@ async function renderDrugstore() {
     let products = [];
     let dsScores = {};
     try {
-        const res = await fetch('drugstore-products.json?v=29');
+        const res = await fetch('drugstore-products.json?v=30');
         products = (await res.json()).products || [];
     } catch (err) {
         console.error('drugstore-products.json 載入失敗', err);
     }
     // 評分摘要載入失敗不影響列表（只是不顯示分數）
     try {
-        const sres = await fetch('drugstore-score-summary.json?v=1');
+        const sres = await fetch('drugstore-score-summary.json?v=2');
         if (sres.ok) dsScores = await sres.json();
     } catch (err) {
         console.warn('drugstore-score-summary.json 載入失敗', err);
@@ -1901,7 +1901,7 @@ async function initNav() {
         // 開架美妝大選單需要各分區的品牌清單（來自 drugstore-products.json），在這裡先載入
         const drugstoreBrandsBySection = {};
         try {
-            const dres = await fetch('drugstore-products.json?v=29');
+            const dres = await fetch('drugstore-products.json?v=30');
             const ddata = await dres.json();
             (ddata.products || []).forEach(p => {
                 const k = `${p.group}|${p.section}`;

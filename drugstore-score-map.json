@@ -222,29 +222,145 @@
    "name": "Multi Eye Color Palette",
    "type": "彩妝",
    "subcat": "眼影/眼影盤"
+  },
+  "anua-heartleaf-pore-cleansing-oil": {
+   "brand": "Anua",
+   "name": "Heartleaf Pore Control Cleansing Oil",
+   "type": "保養",
+   "subcat": "卸妝油"
+  },
+  "beautyofjoseon-relief-sun": {
+   "brand": "Beauty of Joseon",
+   "name": "Relief Sun Rice+Probiotics",
+   "type": "彩妝",
+   "subcat": "防曬乳"
+  },
+  "wakemake-soft-blurring-eye-palette": {
+   "brand": "Wakemake",
+   "name": "Soft Blurring Eye Palette",
+   "type": "彩妝",
+   "subcat": "眼影/眼影盤"
+  },
+  "ettusais-duo-eyeshadow": {
+   "brand": "ettusais",
+   "name": "微暮絲絨雙色眼影",
+   "type": "彩妝",
+   "subcat": "眼影/眼影盤"
+  },
+  "ponyeffect-sun-primer": {
+   "brand": "PONY EFFECT",
+   "name": "水透嫩妝前防護乳",
+   "type": "彩妝",
+   "subcat": "妝前乳"
+  },
+  "immeme-qq-lip-jelly": {
+   "brand": "i'm meme",
+   "name": "QQ 光波唇凍",
+   "type": "彩妝",
+   "subcat": "唇蜜"
+  },
+  "solone-long-lasting-eyeliner": {
+   "brand": "Solone",
+   "name": "持久眼線筆",
+   "type": "彩妝",
+   "subcat": "眼線筆"
+  },
+  "fresho2-super-hydrating-lip-balm-cube": {
+   "brand": "FreshO2",
+   "name": "超補水護唇小方糖",
+   "type": "彩妝",
+   "subcat": "護唇膏"
+  },
+  "loreal-paris-micellar-water-moisturizing": {
+   "brand": "L'OREAL Paris",
+   "name": "三合一卸妝潔顏水(保濕型)",
+   "type": "保養",
+   "subcat": "卸妝水"
+  },
+  "vdl-color-correcting-primer": {
+   "brand": "VDL",
+   "name": "美肌超能力飾底乳 SPF20 PA++",
+   "type": "彩妝",
+   "subcat": "妝前乳"
+  },
+  "missha-glow-tension-cushion": {
+   "brand": "MISSHA",
+   "name": "輕透裸光保濕氣墊粉餅",
+   "type": "彩妝",
+   "subcat": "氣墊粉餅"
+  },
+  "visee-nenmaku-fake-rouge-lipstick": {
+   "brand": "Visée",
+   "name": "光誘恆吻唇膏 N",
+   "type": "彩妝",
+   "subcat": "唇膏"
+  },
+  "opera-lip-tint-n": {
+   "brand": "OPERA",
+   "name": "渲漾水色唇膏N",
+   "type": "彩妝",
+   "subcat": "唇膏"
+  },
+  "za-whitening-makeup-base": {
+   "brand": "Za",
+   "name": "美白隔離霜",
+   "type": "彩妝",
+   "subcat": "妝前乳"
+  },
+  "media-luxe-eyebrow-powder": {
+   "brand": "media",
+   "name": "自然柔和眉彩餅",
+   "type": "彩妝",
+   "subcat": "眉筆"
+  },
+  "sofina-ip-base-care-serum": {
+   "brand": "SOFINA",
+   "name": "iP土台美容液",
+   "type": "保養",
+   "subcat": "精華液"
+  },
+  "cezanne-make-keep-base": {
+   "brand": "CEZANNE",
+   "name": "長效控油妝前隔離乳",
+   "type": "彩妝",
+   "subcat": "妝前乳"
+  },
+  "excel-skinny-rich-shadow": {
+   "brand": "excel",
+   "name": "裸色深邃眼影N",
+   "type": "彩妝",
+   "subcat": "眼影/眼影盤"
+  },
+  "holikaholika-my-fave-piece-eye-shadow": {
+   "brand": "Holika Holika",
+   "name": "My Fave Piece Eye Shadow",
+   "type": "彩妝",
+   "subcat": "眼影/眼影盤"
+  },
+  "espoir-be-glow-foundation": {
+   "brand": "espoir",
+   "name": "Be Glow Foundation",
+   "type": "彩妝",
+   "subcat": "粉底液"
+  },
+  "dasique-shadow-palette": {
+   "brand": "dasique",
+   "name": "Shadow Palette",
+   "type": "彩妝",
+   "subcat": "眼影/眼影盤"
+  },
+  "glint-too-shiny-highlighter": {
+   "brand": "Glint",
+   "name": "Too Shiny Highlighter",
+   "type": "彩妝",
+   "subcat": "打亮/修容"
+  },
+  "lummir-melting-fit-shine-balm": {
+   "brand": "LUMMIR",
+   "name": "Melting Fit Shine Balm",
+   "type": "彩妝",
+   "subcat": "唇膏"
   }
  },
- "_unmapped": [
-  "wakemake-soft-blurring-eye-palette",
-  "ettusais-duo-eyeshadow",
-  "ponyeffect-sun-primer",
-  "immeme-qq-lip-jelly",
-  "solone-long-lasting-eyeliner",
-  "fresho2-super-hydrating-lip-balm-cube",
-  "loreal-paris-micellar-water-moisturizing",
-  "vdl-color-correcting-primer",
-  "missha-glow-tension-cushion",
-  "visee-nenmaku-fake-rouge-lipstick",
-  "opera-lip-tint-n",
-  "za-whitening-makeup-base",
-  "media-luxe-eyebrow-powder",
-  "sofina-ip-base-care-serum",
-  "cezanne-make-keep-base",
-  "excel-skinny-rich-shadow",
-  "holikaholika-my-fave-piece-eye-shadow",
-  "espoir-be-glow-foundation",
-  "dasique-shadow-palette",
-  "glint-too-shiny-highlighter",
-  "lummir-melting-fit-shine-balm"
- ]
+ "_unmapped": []
 }

@@ -219,7 +219,8 @@
     "text": "看到這款防曬霜在社交媒體上到處可見。 我知道韓國人其實不太使用BoJ。 想知道這款防曬霜是否真的值得這麼受推崇…"
    }
   ],
-  "channel": "Olive Young"
+  "channel": "Olive Young",
+  "slug": "beautyofjoseon-relief-sun"
  },
  "AESTURA||Atobarrier 365 Cream": {
   "brand": "AESTURA",
@@ -803,5 +804,57 @@
   ],
   "channel": "藥妝開架",
   "slug": "maybelline-superstay-vinyl-ink"
+ },
+ "dasique||Shadow Palette": {
+  "brand": "dasique",
+  "name": "Shadow Palette",
+  "subcat": "眼影/眼影盤",
+  "composite": 4.2,
+  "indicators": {
+   "粉質細緻度": 4.94,
+   "顯色度": 2.91,
+   "配色實用性": 4.71
+  },
+  "mentions": 7,
+  "testimonial": {
+   "platform": "Threads",
+   "author": "mm***",
+   "likes": 24,
+   "text": "不專業彩妝分享 韓國挖到寶的dasique眼影 溫柔的大地色很適合日常用 最喜歡他們家的亮片認真閃亮的那種 最最最重要粉質細不容易飛粉‎ദ്ദിᵔ.˛.ᵔ₎"
+  },
+  "testimonials": [
+   {
+    "platform": "Threads",
+    "author": "mm***",
+    "likes": 24,
+    "text": "不專業彩妝分享 韓國挖到寶的dasique眼影 溫柔的大地色很適合日常用 最喜歡他們家的亮片認真閃亮的那種 最最最重要粉質細不容易飛粉‎ദ്ദിᵔ.˛.ᵔ₎"
+   },
+   {
+    "platform": "Google",
+    "author": "Go***",
+    "likes": 0,
+    "text": "dasique 九宮格眼影盤，最新4篇香港推薦心得評價，並有功效、用法、價錢、優惠等資訊。網友評價：使用產品#29 Mauve bear粉紫小熊眼影盤。 產品屬冷色系，同時擁有粉紅…"
+   },
+   {
+    "platform": "Google",
+    "author": "Go***",
+    "likes": 0,
+    "text": "終於來分享Dasique啦～這次給大家滿滿的五盤全試色！ . 粉質細緻，顯色度中等 適合日常妝不用怕失手. 尤其是從外包裝到眼影本體都很精緻."
+   },
+   {
+    "platform": "Google",
+    "author": "Go***",
+    "likes": 0,
+    "text": "去年才真正用到dasique家的眼影盤，結果不到半年就鐵盤了 你們就知道我使用頻率多高！！ 總結了新手真的很適合用他們家眼影的原因①九宮格都幫你配好了②…"
+   },
+   {
+    "platform": "Google",
+    "author": "Go***",
+    "likes": 0,
+    "text": "Dasique Shadow Palette 15號Beige Knit 好不顯色唷！ Dasique Shadow Palette 24號Muted Nuts 發色度很不錯#九宮格眼影盤可能要看不同色號還是有不同…"
+   }
+  ],
+  "channel": "Olive Young",
+  "slug": "dasique-shadow-palette"
  }
 }
