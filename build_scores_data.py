@@ -384,6 +384,14 @@ def main():
                 for r in csv.DictReader(f)
                 if (r.get("Channel（通路）") or "").strip()}
 
+    # 暫不上線清單：已有綜合分、但使用者決定先保留的品項（csv/hold_publish.json，格式為 ["品牌||品項", ...]）。
+    # 放行時把該品項從清單移除再重跑本腳本即可。
+    hold_publish = set()
+    _hold_path = os.path.join(BASE, "csv", "hold_publish.json")
+    if os.path.exists(_hold_path):
+        with open(_hold_path, encoding="utf-8") as f:
+            hold_publish = set(json.load(f).get("items", []))
+
     data = {}
     for r in rows:
         brand = r.get("Brand", "").strip()
@@ -393,6 +401,8 @@ def main():
         if not brand or not name or not score:
             continue
         key = f"{brand}||{name}"
+        if key in hold_publish:        # 已算出分數但使用者決定暫不上線（見 csv/hold_publish.json）
+            continue
         entry = data.setdefault(key, {
             "brand": brand, "name": name,
             "subcat": r.get("Subcategories", "").strip(),

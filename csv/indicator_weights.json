@@ -561,58 +561,58 @@
   },
   "唇膏": {
     "修飾唇紋效果": {
-      "importance": 0.0763,
-      "raw_importance_last_run": 0.0455,
-      "mentions_last_run": 1,
-      "last_updated": "2026-11-26 16:33:26"
+      "importance": 0.0693,
+      "raw_importance_last_run": 0.1333,
+      "mentions_last_run": 4,
+      "last_updated": "2026-11-27 16:01:44"
     },
     "卸除難易度": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-11-26 16:33:26"
+      "last_updated": "2026-11-27 16:01:44"
     },
     "顯色度": {
-      "importance": 0.0803,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-11-26 16:33:26"
+      "importance": 0.062,
+      "raw_importance_last_run": 0.0667,
+      "mentions_last_run": 2,
+      "last_updated": "2026-11-27 16:01:44"
     },
     "持妝力": {
-      "importance": 0.0899,
-      "raw_importance_last_run": 0.0909,
-      "mentions_last_run": 2,
-      "last_updated": "2026-11-26 16:33:26"
+      "importance": 0.0316,
+      "raw_importance_last_run": 0.0333,
+      "mentions_last_run": 1,
+      "last_updated": "2026-11-27 16:01:44"
     },
     "質地觸感": {
-      "importance": 0.0822,
-      "raw_importance_last_run": 0.0455,
-      "mentions_last_run": 1,
-      "last_updated": "2026-11-26 16:33:26"
+      "importance": 0.2558,
+      "raw_importance_last_run": 0.4667,
+      "mentions_last_run": 14,
+      "last_updated": "2026-11-27 16:01:44"
     },
     "保濕不拔乾": {
-      "importance": 0.1649,
-      "raw_importance_last_run": 0.2273,
-      "mentions_last_run": 5,
-      "last_updated": "2026-11-26 16:33:26"
+      "importance": 0.171,
+      "raw_importance_last_run": 0.2667,
+      "mentions_last_run": 8,
+      "last_updated": "2026-11-27 16:01:44"
     },
     "防沾染": {
       "importance": 0.0,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-11-26 16:33:26"
+      "last_updated": "2026-11-27 16:01:44"
     },
     "沾杯程度": {
-      "importance": 0.0543,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-11-26 16:33:26"
+      "importance": 0.023,
+      "raw_importance_last_run": 0.0333,
+      "mentions_last_run": 1,
+      "last_updated": "2026-11-27 16:01:44"
     },
     "塗抹均勻度": {
-      "importance": 0.0069,
+      "importance": 0.0017,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-11-26 16:33:26"
+      "last_updated": "2026-11-27 16:01:44"
     }
   },
   "唇蜜": {

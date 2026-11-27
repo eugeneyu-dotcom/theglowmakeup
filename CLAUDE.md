@@ -20,6 +20,13 @@
 | 已有真實綜合分的品項 | 215 個（`scores-data.json`），涵蓋 43 個子分類 |
 | 總商品數 | 430 個 |
 
+**Items.csv 的「空位」不是待補商品（2026-11-26 與使用者確認）**：專櫃部分是「12 品牌 × 44 子分類」的格子（原規劃 430 格），其中 **141 列商品名稱欄是空的**
+（只有品牌、分類、ID，ID 21～430；保養 46／工具 46／香氛 27／彩妝 22）。這是「**官網目前沒有該類商品**」的格子（使用者 2026-11-26 看截圖確認，例如 ID 21 植村秀／ID 22 資生堂 的氣墊粉餅），
+從第一個 commit 起就是空的，**不要補商品、不要跑評論、不要算進缺口**。
+- 標 `Update This Time=yes` 前先確認 `Items（台灣官網商品名）` 非空——`scrape_threads.py` 會略過沒有商品名的列（2026-11-26 誤標 68 個空位，爬蟲只處理 1 款就結束）。
+- 算「專櫃缺口」要用有商品名稱的列：專櫃 452 列 = 311 有名稱＋141 空位；311 款中 259 款有分數，**真正沒分數的是 52 款**（保養 6／彩妝 16／工具 17／香氛 13）。
+- 開架／Olive Young 品項由 `Channel（通路）` 欄標記，評分另存 `drugstore-scores.json`，不進 `scores-data.json`。
+
 > 這個表格會持續過時，數字僅供參考量級；要看當下實際狀態，直接讀
 > `scores-data.json`（`len()`）或 `csv/AI_Scores.csv` 的 `Subcategories` 欄位去重數量最準。
 
@@ -73,7 +80,7 @@ Glow Up/
 ├── CLAUDE.md                   ← 本檔案
 ├── SKILL_商品評比.md            ← 評分方法論（必讀）
 ├── csv/
-│   ├── Items.csv               ← 430 個品項清單，含 "Update This Time" 旗標欄
+│   ├── Items.csv               ← 品項清單（專櫃 12 品牌×44 子分類格子＋開架／Olive Young 品項，見下方「Items.csv 的空位」），含 "Update This Time" 旗標欄
 │   ├── Indicator.csv           ← 各子分類的評估指標
 │   ├── AI_Scores.csv           ← Claude 評分輸出（含 Variant 欄）
 │   ├── AI_Scores_gemini_backup.csv ← Gemini 舊版備份，供比對
