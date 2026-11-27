@@ -8,7 +8,15 @@ import datetime
 import json
 import os
 import re
-from urllib.parse import quote
+from urllib.parse import quote as _quote
+
+
+def quote(value):
+    """跟前端/API 的 encodeURIComponent 同一套編碼：'/'、'+' 等都編碼，!*'() 不編碼。
+    之前用 Python 預設 quote（'/' 不編碼、'\'' 會編碼），商品名含「SPF25/PA++」或 J'adore 的頁面，
+    sitemap 網址跟頁面 canonical 就對不上（13 頁）。"""
+    return _quote(value, safe="!*'()")
+
 from xml.sax.saxutils import escape
 
 BASE = os.path.dirname(os.path.abspath(__file__))
@@ -18,6 +26,7 @@ SITE_URL = "https://www.theglowmakeup.org"  # 正式網域：實測 apex（無 w
 STATIC_PAGES = [
     "news.html", "skincare-blog.html",
     "board-landing.html", "review-landing.html", "review-base.html", "drugstore-beauty.html",
+    "about.html",
 ]
 
 

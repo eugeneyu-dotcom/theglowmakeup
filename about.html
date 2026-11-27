@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4457489716490556" crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-0X15DLCVLR"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      // 只在正式網域送資料，本機預覽與 vercel 預覽網址不進 GA4（官方停用開關）
+      if (!/^(www\.)?theglowmakeup\.org$/.test(location.hostname)) window['ga-disable-G-0X15DLCVLR'] = true;
+      gtag('js', new Date());
+      gtag('config', 'G-0X15DLCVLR');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>關於我們 | Glow Makeup</title>
+    <meta name="description" content="Glow Makeup 彙整公開社群平台上的美妝評論，用 AI 評分整理成可比較的評比與心得摘要。">
+    <link rel="canonical" href="https://www.theglowmakeup.org/about.html">
+    <meta property="og:title" content="關於我們 | Glow Makeup">
+    <meta property="og:description" content="Glow Makeup 彙整公開社群平台上的美妝評論，用 AI 評分整理成可比較的評比與心得摘要。">
+    <meta property="og:image" content="https://www.theglowmakeup.org/assets/hero-bg.jpg">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="/favicon.ico" sizes="48x48">
+    <link rel="icon" type="image/png" href="/favicon-192.png" sizes="192x192">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css?v=70">
+</head>
+<body class="bg-[#fff9f5] text-[#2d2d2d] selection:bg-[#f2a7b5] selection:text-white">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#f2a7b5]/10 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 w-full h-full flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <a href="/" class="brand-logo text-3xl font-black tracking-tighter text-[#f2a7b5] italic">Glow Makeup.</a>
+            </div>
+
+            <nav id="desktop-nav" class="hidden lg:flex items-center gap-8 text-xl font-bold h-full">
+                <!-- Dynamically populated from site-data.json -->
+            </nav>
+
+            <div class="flex items-center gap-6">
+                <div class="search-container">
+                    <span>&#x1F50D;</span>
+                    <input type="text" placeholder="搜尋美妝情報..." class="search-input">
+                </div>
+                <button id="mobileMenuToggle" class="lg:hidden flex flex-col justify-center items-center w-9 h-9 gap-1.5 shrink-0" aria-label="開啟選單" aria-expanded="false">
+                    <span class="block w-6 h-0.5 bg-[#2d2d2d]"></span>
+                    <span class="block w-6 h-0.5 bg-[#2d2d2d]"></span>
+                    <span class="block w-6 h-0.5 bg-[#2d2d2d]"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div id="mobileNavOverlay" class="mobile-nav-overlay"></div>
+    <aside id="mobileNav" class="mobile-nav" aria-hidden="true">
+        <div class="mobile-nav-header">
+            <span class="mobile-nav-title">選單</span>
+            <button id="mobileMenuClose" class="mobile-nav-close" aria-label="關閉選單">&times;</button>
+        </div>
+        <nav id="mobile-nav-list" class="mobile-nav-list">
+            <!-- Dynamically populated from site-data.json -->
+        </nav>
+    </aside>
+
+    <main class="max-w-3xl mx-auto px-4 py-16">
+        <div class="mb-10">
+            <a href="javascript:history.back()" class="inline-flex items-center gap-2 text-base font-bold text-gray-500 hover:text-[#f2a7b5] transition-colors group">
+                <span class="group-hover:-translate-x-1 transition-transform">&#10094;</span> 返回上一頁
+            </a>
+        </div>
+
+        <h1 class="text-3xl md:text-4xl font-black mb-10">關於我們</h1>
+
+        <div class="space-y-10 text-gray-700 leading-relaxed">
+            <section>
+                <h2 class="text-xl font-black text-[#2d2d2d] mb-3">Glow Makeup 是什麼</h2>
+                <p>Glow Makeup（美妝生活誌）是一個整理美妝評價的網站。我們彙整 Threads、Google、小紅書等公開社群平台上的使用者評論，用 AI 逐項指標評分，整理成可以互相比較的評比與心得摘要，幫助你在購買彩妝與保養品前，快速看懂網友真正的使用感受。</p>
+            </section>
+            <section>
+                <h2 class="text-xl font-black text-[#2d2d2d] mb-3">評分怎麼來</h2>
+                <p>我們先蒐集公開貼文，過濾業配與廣告內容，再確認每則評論講的是哪一款商品。AI 負責理解語意，包括情緒與可信度，分數則由程式依固定規則計算，所以同樣的資料會得到同樣的結果。網站上的「真實網友心得」都來自真實公開貼文，引用的帳號一律經過馬賽克處理。</p>
+            </section>
+            <section>
+                <h2 class="text-xl font-black text-[#2d2d2d] mb-3">保養專欄與商品評比</h2>
+                <p>除了商品評分，我們也撰寫保養與彩妝專欄文章，整理成分、挑選方式與熱門商品的比較。內容以公開資料與網友評價為基礎，僅供參考，不構成醫療建議；肌膚狀況特殊時，請諮詢專業醫師。</p>
+            </section>
+            <section>
+                <h2 class="text-xl font-black text-[#2d2d2d] mb-3">網站經營與廣告</h2>
+                <p>本站內容由我們獨立整理，評分不受品牌影響。網站使用 Google AdSense 刊登廣告，詳細說明請見<a href="privacy-policy.html" class="text-[#f2a7b5] font-bold hover:underline">安全政策</a>。</p>
+            </section>
+            <section>
+                <h2 class="text-xl font-black text-[#2d2d2d] mb-3">聯絡我們</h2>
+                <p>歡迎來信指正資料或提出建議，請點頁尾的「聯絡我們」按鈕寄信給我們。</p>
+            </section>
+        </div>
+    </main>
+
+    <footer class="bg-white border-t border-[#f2a7b5]/10 py-16 text-center">
+        <div class="brand-logo text-3xl font-black tracking-tighter text-[#f2a7b5] italic mb-4">Glow Makeup.</div>
+        <div class="flex justify-center items-center gap-6 mb-6">
+            <button onclick="location.href='mailto:maggiechang@maxora.ai'" class="px-6 py-2 bg-[#f2a7b5] text-white font-bold rounded-full hover:bg-[#d88a99] transition-colors shadow-sm">聯絡我們</button>
+            <a href="about.html" class="text-gray-500 font-bold hover:text-[#f2a7b5] transition-colors">關於我們</a>
+            <a href="privacy-policy.html" class="text-gray-500 font-bold hover:text-[#f2a7b5] transition-colors">安全政策</a>
+        </div>
+        <p class="text-gray-400 text-sm">© 2026 美妝生活誌 - 妳的最美應援團</p>
+    </footer>
+
+    <script src="script.js?v=257"></script>
+</body>
+</html>
