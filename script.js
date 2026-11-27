@@ -1293,7 +1293,7 @@ async function getScoresData() {
     if (!scoresDataPromise) {
         scoresDataPromise = (async () => {
             try {
-                const response = await fetch('scores-data.json?v=50');
+                const response = await fetch('scores-data.json?v=51');
                 scoresDataCache = await response.json();
                 return scoresDataCache;
             } catch (err) {

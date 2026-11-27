@@ -837,40 +837,40 @@
   },
   "卸妝油": {
     "卸妝力": {
-      "importance": 0.0001,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "importance": 0.1501,
+      "raw_importance_last_run": 0.5,
+      "mentions_last_run": 1,
+      "last_updated": "2026-11-27 16:24:56"
     },
     "乳化速度": {
-      "importance": 0.0001,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "importance": 0.1501,
+      "raw_importance_last_run": 0.5,
+      "mentions_last_run": 1,
+      "last_updated": "2026-11-27 16:24:56"
     },
     "毛孔清潔度": {
       "importance": 0.0001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "last_updated": "2026-11-27 16:24:56"
     },
     "殘妝溶解力": {
       "importance": 0.0001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "last_updated": "2026-11-27 16:24:56"
     },
     "溫和不熏眼": {
-      "importance": 0.0001,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "importance": 0.1501,
+      "raw_importance_last_run": 0.5,
+      "mentions_last_run": 1,
+      "last_updated": "2026-11-27 16:24:56"
     },
     "致痘風險": {
       "importance": 0.0001,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-09-22 18:05:33"
+      "last_updated": "2026-11-27 16:24:56"
     }
   },
   "卸妝膏": {
@@ -1171,46 +1171,46 @@
   },
   "精華液": {
     "吸收滲透力": {
-      "importance": 0.1093,
-      "raw_importance_last_run": 0.1,
-      "mentions_last_run": 1,
-      "last_updated": "2026-11-26 16:33:26"
+      "importance": 0.1265,
+      "raw_importance_last_run": 0.1667,
+      "mentions_last_run": 7,
+      "last_updated": "2026-11-27 16:24:56"
     },
     "清爽度": {
-      "importance": 0.0915,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-11-26 16:33:26"
+      "importance": 0.1069,
+      "raw_importance_last_run": 0.1429,
+      "mentions_last_run": 6,
+      "last_updated": "2026-11-27 16:24:56"
     },
     "膚況穩定度": {
-      "importance": 0.0101,
+      "importance": 0.0071,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-11-26 16:33:26"
+      "last_updated": "2026-11-27 16:24:56"
     },
     "致痘風險": {
-      "importance": 0.002,
+      "importance": 0.0014,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-11-26 16:33:26"
+      "last_updated": "2026-11-27 16:24:56"
     },
     "成分配方": {
-      "importance": 0.0615,
-      "raw_importance_last_run": 0.0,
-      "mentions_last_run": 0,
-      "last_updated": "2026-11-26 16:33:26"
+      "importance": 0.0502,
+      "raw_importance_last_run": 0.0238,
+      "mentions_last_run": 1,
+      "last_updated": "2026-11-27 16:24:56"
     },
     "功效顯著度": {
-      "importance": 0.1044,
-      "raw_importance_last_run": 0.2,
-      "mentions_last_run": 2,
-      "last_updated": "2026-11-26 16:33:26"
+      "importance": 0.1302,
+      "raw_importance_last_run": 0.1905,
+      "mentions_last_run": 8,
+      "last_updated": "2026-11-27 16:24:56"
     },
     "修復改善": {
-      "importance": 0.0227,
+      "importance": 0.0159,
       "raw_importance_last_run": 0.0,
       "mentions_last_run": 0,
-      "last_updated": "2026-11-26 16:33:26"
+      "last_updated": "2026-11-27 16:24:56"
     }
   },
   "眼霜": {
